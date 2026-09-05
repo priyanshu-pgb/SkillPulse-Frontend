@@ -1,0 +1,20 @@
+{
+  "name": "skillpulse-frontend",
+  "version": "1.0.0",
+  "description": "Field Atlas / SkillPulse — Standalone Web Client (HTML5, Vanilla CSS3 & JS, Chart.js, Lucide Icons)",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve -s . -l 3000",
+    "start": "npx serve -s . -l 3000",
+    "preview": "npx serve -s . -l 5000"
+  },
+  "keywords": [
+    "skillpulse",
+    "fieldatlas",
+    "frontend",
+    "vanilla-js",
+    "outcomes-tracker"
+  ],
+  "author": "priyanshu-pgb",
+  "license": "MIT"
+}

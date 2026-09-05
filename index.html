@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Field Atlas — Skilling Outcomes Platform</title>
+  
+  <!-- Modern Typography: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Core Application Stylesheets -->
+  <link rel="stylesheet" href="css/field-atlas.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--color-parchment); padding: 1.5rem;">
+  
+  <div style="max-width: 460px; width: 100%; text-align: center;">
+    <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 1.25rem; box-shadow: 0 4px 14px rgba(14, 129, 118, 0.35);">
+      <i data-lucide="compass" style="width: 34px; height: 34px;"></i>
+    </div>
+    
+    <h1 style="font-size: 2rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em; margin-bottom: 0.5rem;">Field Atlas</h1>
+    <p style="font-size: 0.95rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.75rem;">Skilling Outcomes Intelligence Platform</p>
+    
+    <div id="loading-state" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+      <div style="display: inline-block; width: 32px; height: 32px; border: 3px solid var(--color-border-light); border-top-color: var(--color-teal); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 1rem;"></div>
+      <p style="color: var(--color-text-secondary); font-size: 0.9rem; font-weight: 500;">Connecting to Field Atlas Engine...</p>
+    </div>
+
+    <div id="fallback-actions" style="display: none; margin-top: 1.5rem; gap: 0.75rem; justify-content: center;">
+      <a href="login.html" class="btn btn-primary" style="padding: 0.65rem 1.5rem; text-decoration: none;">Sign In</a>
+      <a href="register.html" class="btn btn-outline" style="padding: 0.65rem 1.5rem; text-decoration: none;">Create Account</a>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- Core JavaScript Libraries -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/i18n.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      try {
+        const res = await FieldAtlasAPI.getCurrentUser();
+        if (res && res.user) {
+          if (res.user.role === 'trainee') {
+            window.location.href = 'trainee-dashboard.html';
+          } else {
+            window.location.href = 'trainer-dashboard.html';
+          }
+          return;
+        }
+      } catch (err) {
+        // Not authenticated or server reachable
+      }
+
+      // If not logged in, redirect to login page after short pause
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 400);
+
+      // Fallback display if redirect is blocked
+      setTimeout(() => {
+        const loadingState = document.getElementById('loading-state');
+        if (loadingState) loadingState.style.display = 'none';
+        const fallback = document.getElementById('fallback-actions');
+        if (fallback) fallback.style.display = 'flex';
+      }, 2000);
+    });
+  </script>
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</body>
+</html>
