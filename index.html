@@ -3,86 +3,693 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Field Atlas — Skilling Outcomes Platform</title>
-  
-  <!-- Modern Typography: Plus Jakarta Sans -->
+  <title>SkillPulse — Skilling Outcomes Intelligence Platform</title>
+  <meta name="description" content="SkillPulse by Field Atlas — India's consent-aware skilling outcomes intelligence platform. Track verified placements, skill certifications, and employment outcomes.">
+
+  <!-- Modern Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  
+
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Core Application Stylesheets -->
+  <!-- Core Stylesheets -->
   <link rel="stylesheet" href="css/field-atlas.css">
   <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--color-parchment); padding: 1.5rem;">
-  
-  <div style="max-width: 460px; width: 100%; text-align: center;">
-    <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 1.25rem; box-shadow: 0 4px 14px rgba(14, 129, 118, 0.35);">
-      <i data-lucide="compass" style="width: 34px; height: 34px;"></i>
-    </div>
-    
-    <h1 style="font-size: 2rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em; margin-bottom: 0.5rem;">Field Atlas</h1>
-    <p style="font-size: 0.95rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.75rem;">Skilling Outcomes Intelligence Platform</p>
-    
-    <div id="loading-state" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
-      <div style="display: inline-block; width: 32px; height: 32px; border: 3px solid var(--color-border-light); border-top-color: var(--color-teal); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 1rem;"></div>
-      <p style="color: var(--color-text-secondary); font-size: 0.9rem; font-weight: 500;">Connecting to Field Atlas Engine...</p>
-    </div>
+  <link rel="stylesheet" href="css/watermark.css">
 
-    <div id="fallback-actions" style="display: none; margin-top: 1.5rem; gap: 0.75rem; justify-content: center;">
-      <a href="login.html" class="btn btn-primary" style="padding: 0.65rem 1.5rem; text-decoration: none;">Sign In</a>
-      <a href="register.html" class="btn btn-outline" style="padding: 0.65rem 1.5rem; text-decoration: none;">Create Account</a>
+  <style>
+    /* Landing page specific styles */
+    .landing-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow 0.3s ease;
+    }
+    .landing-nav.scrolled {
+      box-shadow: 0 4px 20px rgba(30, 39, 73, 0.08);
+    }
+    .landing-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .landing-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .landing-brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--color-teal), #18A89B);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 2px 8px rgba(14, 129, 118, 0.3);
+    }
+    .landing-brand-text {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--color-deep-indigo);
+      letter-spacing: -0.02em;
+    }
+    .landing-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--color-text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+    .btn-ghost:hover {
+      background: var(--color-surface-hover);
+      color: var(--color-deep-indigo);
+    }
+
+    /* Hero Section */
+    .landing-hero {
+      padding: 8rem 1.5rem 5rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--color-parchment) 0%, #E8F5F3 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -150px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(14, 129, 118, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .landing-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -200px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(30, 39, 73, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(14, 129, 118, 0.1);
+      color: var(--color-teal);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(14, 129, 118, 0.15);
+    }
+    .landing-hero h1 {
+      font-size: 3.25rem;
+      font-weight: 800;
+      color: var(--color-deep-indigo);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+    .landing-hero h1 span {
+      background: linear-gradient(135deg, var(--color-teal), #18A89B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .landing-hero p {
+      font-size: 1.15rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-landing-primary {
+      background: linear-gradient(135deg, var(--color-teal), #0A9B8E);
+      color: white;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(14, 129, 118, 0.3);
+      transition: all 0.25s ease;
+    }
+    .btn-landing-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(14, 129, 118, 0.4);
+    }
+    .btn-landing-secondary {
+      background: var(--color-surface);
+      color: var(--color-deep-indigo);
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 1rem;
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-landing-secondary:hover {
+      border-color: var(--color-teal);
+      background: var(--color-teal-light);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      background: var(--color-deep-indigo);
+      padding: 3rem 1.5rem;
+    }
+    .stats-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-item h3 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.35rem;
+    }
+    .stat-item p {
+      font-size: 0.85rem;
+      color: #94A3B8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 5rem 1.5rem;
+      background: var(--color-parchment);
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header .eyebrow {
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .section-header h2 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-header p {
+      font-size: 1rem;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-teal), var(--color-ochre));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(14, 129, 118, 0.2);
+    }
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* How It Works */
+    .how-section {
+      padding: 5rem 1.5rem;
+      background: var(--color-surface);
+    }
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+    }
+    .how-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-teal), var(--color-ochre), var(--color-coral), var(--color-indigo-blue));
+      z-index: 1;
+      border-radius: 2px;
+    }
+    .how-step {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .how-step-num {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin: 0 auto 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+    .how-step h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .how-step p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* Demo Credentials Section */
+    .demo-section {
+      padding: 4rem 1.5rem;
+      background: linear-gradient(135deg, #1E2749 0%, #2A3660 100%);
+    }
+    .demo-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .demo-inner h2 {
+      color: #FFFFFF;
+      font-size: 1.75rem;
+      margin-bottom: 0.6rem;
+    }
+    .demo-inner > p {
+      color: #94A3B8;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .demo-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .demo-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
+    .demo-card-role {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #38BDF8;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .demo-card-email {
+      font-size: 0.85rem;
+      color: #FFFFFF;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+      word-break: break-all;
+    }
+    .demo-card-id {
+      font-size: 0.8rem;
+      color: #94A3B8;
+      font-family: var(--font-mono);
+    }
+    .demo-password {
+      color: #94A3B8;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .demo-password code {
+      background: rgba(255, 255, 255, 0.12);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      color: #38BDF8;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .landing-footer {
+      padding: 2.5rem 1.5rem;
+      background: var(--color-parchment);
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .landing-footer p {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+    .landing-footer a {
+      color: var(--color-teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .landing-hero h1 { font-size: 2.25rem; }
+      .landing-hero p { font-size: 1rem; }
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .features-grid { grid-template-columns: 1fr; }
+      .how-steps { grid-template-columns: repeat(2, 1fr); }
+      .how-steps::before { display: none; }
+      .demo-cards { grid-template-columns: 1fr; }
+      .hero-cta-group { flex-direction: column; align-items: stretch; }
+    }
+    @media (max-width: 480px) {
+      .landing-hero { padding: 6rem 1rem 3rem; }
+      .landing-hero h1 { font-size: 1.85rem; }
+      .stats-bar-inner { grid-template-columns: 1fr; }
+      .how-steps { grid-template-columns: 1fr; }
+      .landing-nav-inner { padding: 0.75rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════ TOP NAVIGATION ═══════════════════════════ -->
+  <nav class="landing-nav" id="landing-nav">
+    <div class="landing-nav-inner">
+      <a href="/" class="landing-brand">
+        <div class="landing-brand-icon">
+          <i data-lucide="compass" style="width: 22px; height: 22px;"></i>
+        </div>
+        <span class="landing-brand-text">SkillPulse</span>
+      </a>
+      <div class="landing-nav-actions">
+        <a href="login.html" class="btn-ghost">Sign In</a>
+        <a href="register.html" class="btn-landing-primary" style="padding: 0.55rem 1.25rem; font-size: 0.9rem; box-shadow: none;">
+          Sign Up <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
     </div>
-  </div>
+  </nav>
+
+  <!-- ═══════════════════════════ HERO SECTION ═══════════════════════════ -->
+  <section class="landing-hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+        Good Outcomes · National Workspace
+      </div>
+      <h1>Track Real <span>Skilling Outcomes</span> That Matter</h1>
+      <p>India's consent-aware platform for verified placements, skill certifications, and employment outcome intelligence. From enrollment to employment — every milestone tracked.</p>
+      <div class="hero-cta-group">
+        <a href="login.html" class="btn-landing-primary">
+          <i data-lucide="log-in" style="width: 18px; height: 18px;"></i>
+          Get Started
+        </a>
+        <a href="#features" class="btn-landing-secondary">
+          <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i>
+          Explore Features
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ STATS BAR ═══════════════════════════ -->
+  <section class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <h3>1,247</h3>
+        <p>Trainees Tracked</p>
+      </div>
+      <div class="stat-item">
+        <h3>893</h3>
+        <p>Verified Outcomes</p>
+      </div>
+      <div class="stat-item">
+        <h3>71.6%</h3>
+        <p>Placement Rate</p>
+      </div>
+      <div class="stat-item">
+        <h3>₹18.5K</h3>
+        <p>Avg. Monthly Wage</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FEATURES ═══════════════════════════ -->
+  <section class="features-section" id="features">
+    <div class="features-inner">
+      <div class="section-header">
+        <span class="eyebrow">Platform Capabilities</span>
+        <h2>Everything You Need for Skilling Excellence</h2>
+        <p>A unified platform connecting trainers, trainees, and outcome verifiers across India's skill ecosystem.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background: var(--color-teal-light); color: var(--color-teal);">
+            <i data-lucide="bar-chart-3" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Outcome Intelligence</h3>
+          <p>Real-time dashboards showing placement rates, wage trends, and certification stats with drill-down analytics by sector and district.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: var(--color-ochre-light); color: var(--color-ochre);">
+            <i data-lucide="shield-check" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Verified Placements</h3>
+          <p>Every placement is verified through multi-layer validation — employer confirmation, wage slip uploads, and automated 90-day check-ins.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: var(--color-coral-light); color: var(--color-coral);">
+            <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Trainee Lifecycle</h3>
+          <p>Track every learner from enrollment through training, assessment, certification, and post-placement — one unified timeline.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: #EEF2FF; color: var(--color-indigo-blue);">
+            <i data-lucide="message-square" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Follow-Up Outreach</h3>
+          <p>Automated WhatsApp, SMS, and call-based follow-ups with prioritized queues and multilingual message templates.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: var(--color-teal-light); color: var(--color-teal);">
+            <i data-lucide="award" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>Digital Certificates</h3>
+          <p>Issue verifiable digital certificates with unique QR codes. Third parties can validate authenticity instantly online.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: var(--color-ochre-light); color: var(--color-ochre);">
+            <i data-lucide="globe" style="width: 24px; height: 24px;"></i>
+          </div>
+          <h3>11 Indian Languages</h3>
+          <p>Full interface localization in Hindi, Marathi, Bengali, Tamil, Telugu, Kannada, Gujarati, Punjabi, Malayalam, and Urdu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ HOW IT WORKS ═══════════════════════════ -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="section-header">
+        <span class="eyebrow">The Outcome Route</span>
+        <h2>From Enrollment to Employment</h2>
+        <p>Every trainee's journey through India's skilling ecosystem, tracked and verified at each milestone.</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step-num" style="background: var(--color-teal);">1</div>
+          <h4>Enrolled</h4>
+          <p>Trainee registers and is assigned to a course, batch, and training provider.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num" style="background: var(--color-ochre);">2</div>
+          <h4>Trained</h4>
+          <p>Completes curriculum modules with attendance and competency tracking.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num" style="background: var(--color-coral);">3</div>
+          <h4>Certified</h4>
+          <p>Passes assessment, receives a verified digital certificate with QR code.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num" style="background: var(--color-indigo-blue);">4</div>
+          <h4>Placed</h4>
+          <p>Employer-verified placement with wage tracking and 90-day follow-ups.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ DEMO CREDENTIALS ═══════════════════════════ -->
+  <section class="demo-section">
+    <div class="demo-inner">
+      <h2>Try the Live Demo</h2>
+      <p>Explore the platform instantly with pre-configured demo accounts. No sign-up required.</p>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card-role">Trainer</div>
+          <div class="demo-card-email">trainer@fieldatlas.in</div>
+          <div class="demo-card-id">FA-TR-1001</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-role">Trainee</div>
+          <div class="demo-card-email">trainee@fieldatlas.in</div>
+          <div class="demo-card-id">FA-24-0182</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-role">Admin</div>
+          <div class="demo-card-email">admin@fieldatlas.in</div>
+          <div class="demo-card-id">FA-AD-0001</div>
+        </div>
+      </div>
+      <p class="demo-password">Password for all accounts: <code>Atlas@2026!</code></p>
+      <a href="login.html" class="btn-landing-primary">
+        <i data-lucide="log-in" style="width: 18px; height: 18px;"></i>
+        Sign In Now
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="landing-footer">
+    <p>
+      <i data-lucide="shield-check" style="width: 14px; height: 14px; vertical-align: middle; color: var(--color-teal);"></i>
+      Consent-aware by design · No raw Aadhaar stored · Built for India's National Skill Ecosystem
+    </p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+      &copy; 2026 <a href="#">Field Atlas</a> — SkillPulse Platform
+    </p>
+  </footer>
+
+  <!-- Watermark -->
+  <div class="watermark">#crafted by team Synkro</div>
 
   <div id="toast-container"></div>
 
-  <!-- Core JavaScript Libraries -->
+  <!-- Scripts (no backend needed) -->
   <script src="js/config.js"></script>
+  <script src="js/mock-auth.js"></script>
+  <script src="js/mock-data.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/i18n.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', async function() {
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.lucide) lucide.createIcons();
 
-      try {
-        const res = await FieldAtlasAPI.getCurrentUser();
-        if (res && res.user) {
-          if (res.user.role === 'trainee') {
-            window.location.href = 'trainee-dashboard.html';
-          } else {
-            window.location.href = 'trainer-dashboard.html';
+      // Navbar scroll effect
+      const nav = document.getElementById('landing-nav');
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-          return;
-        }
-      } catch (err) {
-        // Not authenticated or server reachable
-      }
-
-      // If not logged in, redirect to login page after short pause
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 400);
-
-      // Fallback display if redirect is blocked
-      setTimeout(() => {
-        const loadingState = document.getElementById('loading-state');
-        if (loadingState) loadingState.style.display = 'none';
-        const fallback = document.getElementById('fallback-actions');
-        if (fallback) fallback.style.display = 'flex';
-      }, 2000);
+        });
+      });
     });
   </script>
-  <style>
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
 </body>
 </html>

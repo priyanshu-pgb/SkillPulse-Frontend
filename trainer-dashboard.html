@@ -1,1134 +1,615 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Field Atlas — Trainer Operations & Outcomes Dashboard</title>
-  
-  <!-- Modern Typography: Plus Jakarta Sans -->
+  <title>Trainer Dashboard — Field Atlas</title>
+  <meta name="description" content="Field Atlas Trainer Dashboard — Monitor skilling outcomes, manage trainees, and track placement verification.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Core Application Stylesheets -->
   <link rel="stylesheet" href="css/field-atlas.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/watermark.css">
 </head>
 <body>
-<div class="app-container">
-  
-  <!-- Mobile Sidebar Backdrop Overlay -->
-  <div class="mobile-backdrop" id="mobile-backdrop"></div>
+  <div class="app-container">
 
-  <!-- Main Fixed / Drawer Sidebar -->
-  <aside class="sidebar" id="app-sidebar">
-    <div class="sidebar-header">
-      <a href="/" class="brand-badge">
-        <div class="brand-logo-icon">
-          <i data-lucide="compass" style="width: 22px; height: 22px;"></i>
-        </div>
-        <div class="brand-text-wrap">
-          <span class="brand-title" data-i18n="brand_name">Field Atlas</span>
-          <span class="brand-subtitle">Outcomes Platform</span>
-        </div>
-      </a>
-    </div>
-
-    <nav class="sidebar-nav">
-      <div class="nav-group-label">Programme Operations</div>
-      <a class="nav-link active" data-tab="overview">
-        <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i>
-        <span data-i18n="nav_overview">Overview</span>
-      </a>
-      <a class="nav-link" data-tab="courses">
-        <i data-lucide="book-open" style="width: 18px; height: 18px;"></i>
-        <span>Courses</span>
-      </a>
-      <a class="nav-link" data-tab="followups">
-        <i data-lucide="phone-call" style="width: 18px; height: 18px;"></i>
-        <span data-i18n="nav_followups">Follow-ups</span>
-      </a>
-      <a class="nav-link" data-tab="trainees">
-        <i data-lucide="users" style="width: 18px; height: 18px;"></i>
-        <span data-i18n="nav_trainees">Trainees</span>
-      </a>
-      <a class="nav-link" data-tab="providers">
-        <i data-lucide="building-2" style="width: 18px; height: 18px;"></i>
-        <span data-i18n="nav_providers">Providers</span>
-      </a>
-      <a class="nav-link" data-tab="reports">
-        <i data-lucide="file-bar-chart" style="width: 18px; height: 18px;"></i>
-        <span data-i18n="nav_reports">Reports</span>
-      </a>
-
-      <div class="nav-group-label" style="margin-top: 1.5rem;">Account</div>
-      <a class="nav-link" href="profile.html">
-        <i data-lucide="user" style="width: 18px; height: 18px;"></i>
-        <span data-i18n="nav_profile">Profile & Settings</span>
-      </a>
-      <a class="nav-link btn-logout" href="#logout" style="color: #F87171;">
-        <i data-lucide="log-out" style="width: 18px; height: 18px;"></i>
-        <span data-i18n="nav_logout">Sign out</span>
-      </a>
-    </nav>
-
-    <!-- Sidebar Footer with User Details -->
-    <div class="sidebar-footer">
-      <div class="user-quick-profile">
-        <div class="avatar-sm">
-                    <img src="images/avatar-placeholder.png" alt="Profile Photo" id="header-avatar-img" class="avatar-photo" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-border-light); display: none;">
-          <div class="avatar-circle" id="header-avatar-fallback">FA</div>
-        </div>
-        <div class="user-profile-info">
-          <div class="user-profile-name">{{ user.full_name|default:"Trainer" }}</div>
-          <div class="user-profile-role">
-            <i data-lucide="award" style="width: 12px; height: 12px;"></i>
-            <span>{{ user.role|title }} Â· {{ user.provider|default:"Saksham" }}</span>
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="brand-badge">
+          <div class="brand-logo-icon">
+            <i data-lucide="compass" style="width: 20px; height: 20px;"></i>
           </div>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main Viewport Content Area -->
-  <div class="main-wrapper">
-    
-    <!-- Top Sticky Header -->
-    <header class="top-header">
-      <div class="header-left">
-        <button class="mobile-drawer-toggle" id="mobile-drawer-toggle" aria-label="Toggle navigation menu">
-          <i data-lucide="menu" style="width: 22px; height: 22px;"></i>
-        </button>
-        <div class="header-breadcrumb">
-          <span style="color: var(--color-teal); font-weight: 700;">Good Outcomes</span>
-          <span style="color: var(--color-border); font-size: 1.2rem;">/</span>
-          <span id="header-active-view-name">Overview</span>
-        </div>
-      </div>
-
-      <div class="header-right">
-        <!-- Multi-Language Selector Dropdown -->
-        <div class="lang-selector-wrap">
-          <select class="lang-select" aria-label="Select Interface Language">
-            <option value="en">English</option>
-            <option value="hi">à¤¹à¤¿à¤¨à¥à¤¦à¥€ (Hindi)</option>
-            <option value="mr">à¤®à¤°à¤¾à¤ à¥€ (Marathi)</option>
-            <option value="bn">à¦¬à¦¾à¦‚à¦²à¦¾ (Bengali)</option>
-            <option value="ta">à®¤à®®à®¿à®´à¯ (Tamil)</option>
-            <option value="te">à°¤à±†à°²à±à°—à± (Telugu)</option>
-            <option value="kn">à²•à²¨à³à²¨à²¡ (Kannada)</option>
-            <option value="gu">àª—à«àªœàª°àª¾àª¤à«€ (Gujarati)</option>
-            <option value="pa">à¨ªà©°à¨œà¨¾à¨¬à©€ (Punjabi)</option>
-            <option value="ml">à´®à´²à´¯à´¾à´³à´‚ (Malayalam)</option>
-            <option value="ur">Ø§Ø±Ø¯Ùˆ (Urdu)</option>
-          </select>
-          <i data-lucide="globe" class="lang-icon" style="width: 15px; height: 15px;"></i>
-        </div>
-
-        <!-- Notifications Bell -->
-        <div class="notification-dropdown-wrap" style="position: relative;">
-          <button id="notification-bell-btn" class="icon-btn" aria-label="View notifications" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-            <i data-lucide="bell" style="width: 18px; height: 18px; color: var(--color-text);"></i>
-            <span id="notification-badge" class="notif-badge" style="display: none; position: absolute; top: -2px; right: -2px; background: #EF4444; color: white; border-radius: 10px; font-size: 0.65rem; font-weight: 700; padding: 1px 5px; min-width: 16px; text-align: center;">0</span>
-          </button>
-          
-          <div id="notification-popover" class="notification-popover" style="display: none; position: absolute; right: 0; top: 46px; width: 340px; max-width: 90vw; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 1000; overflow: hidden;">
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--color-border); background: var(--color-bg);">
-              <span style="font-weight: 700; font-size: 0.9rem; color: var(--color-text);">Notifications</span>
-              <button id="notif-mark-all-btn" style="background: none; border: none; font-size: 0.75rem; color: var(--color-teal); font-weight: 600; cursor: pointer;">Mark all read</button>
-            </div>
-            <div id="notification-list" style="max-height: 320px; overflow-y: auto; padding: 8px 0;">
-              <div style="padding: 16px; text-align: center; color: var(--color-text-muted); font-size: 0.85rem;">No notifications yet.</div>
-            </div>
-          </div>
-        </div>
-
-        <a href="profile.html" style="text-decoration: none;" title="Edit profile">
-          <div class="avatar-sm" style="background-color: var(--color-teal); cursor: pointer;">
-            {{ user.full_name|slice:":1"|upper }}
+          <div class="brand-text-wrap">
+            <span class="brand-title">Field Atlas</span>
+            <span class="brand-subtitle">SkillPulse</span>
           </div>
         </a>
       </div>
-    </header>
 
-    <main class="content-body">
-      
-      <!-- ============================================== -->
-      <!-- VIEW 1: OVERVIEW -->
-      <!-- ============================================== -->
-      <section class="tab-view-panel" id="view-overview">
-        
-        <!-- Hero Card -->
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">Main</div>
+        <a class="nav-link active" data-tab="overview" onclick="switchView('overview')">
+          <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> Overview
+        </a>
+        <a class="nav-link" data-tab="courses" onclick="switchView('courses')">
+          <i data-lucide="book-open" style="width: 18px; height: 18px;"></i> Courses
+        </a>
+        <a class="nav-link" data-tab="followups" onclick="switchView('followups')">
+          <i data-lucide="message-square" style="width: 18px; height: 18px;"></i> Follow-ups
+        </a>
+
+        <div class="nav-group-label">Data</div>
+        <a class="nav-link" data-tab="trainees" onclick="switchView('trainees')">
+          <i data-lucide="users" style="width: 18px; height: 18px;"></i> Trainees
+        </a>
+        <a class="nav-link" data-tab="providers" onclick="switchView('providers')">
+          <i data-lucide="building-2" style="width: 18px; height: 18px;"></i> Providers
+        </a>
+        <a class="nav-link" data-tab="reports" onclick="switchView('reports')">
+          <i data-lucide="file-text" style="width: 18px; height: 18px;"></i> Reports
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-quick-profile">
+          <div class="avatar-sm" id="sidebar-avatar">AS</div>
+          <div class="user-profile-info">
+            <div class="user-profile-name" id="sidebar-user-name">Arjun Sharma</div>
+            <div class="user-profile-role">
+              <i data-lucide="shield-check" style="width: 12px; height: 12px;"></i>
+              <span>Trainer</span>
+            </div>
+          </div>
+        </div>
+        <a href="profile.html" class="nav-link" style="margin-bottom: 0; padding: 0.5rem 1rem;">
+          <i data-lucide="settings" style="width: 16px; height: 16px;"></i> Settings
+        </a>
+        <a class="nav-link btn-logout" style="margin-bottom: 0; padding: 0.5rem 1rem; cursor: pointer;">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i> Sign Out
+        </a>
+      </div>
+    </aside>
+
+    <!-- Mobile sidebar backdrop -->
+    <div class="mobile-backdrop" id="mobile-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <div class="main-wrapper">
+
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-drawer-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+            <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+          </button>
+          <div class="header-breadcrumb">
+            <i data-lucide="layout-dashboard" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
+            <span id="header-active-view-name">Overview</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="lang-selector-wrap">
+            <select class="lang-select" aria-label="Choose Language">
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="mr">मराठी</option>
+              <option value="bn">বাংলা</option>
+              <option value="ta">தமிழ்</option>
+              <option value="te">తెలుగు</option>
+            </select>
+            <i data-lucide="globe" class="lang-icon" style="width: 16px; height: 16px;"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- ════════════ OVERVIEW TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-overview">
+
+        <!-- Hero / Welcome Card -->
         <div class="hero-card">
           <div class="hero-content">
-            <span class="eyebrow" data-i18n="hero_eyebrow">Programme pulse / Q3 2026</span>
-            <h1 class="hero-title" data-i18n="hero_title">The work after training matters.</h1>
-            <p class="hero-description" data-i18n="hero_desc">See the journey from training to lasting work.</p>
+            <span class="eyebrow">Programme Pulse</span>
+            <h1 class="hero-title" id="hero-greeting">Good afternoon, Arjun</h1>
+            <p class="hero-description">Your skilling programme has <strong id="hero-verified-count">893</strong> verified outcomes across <strong>6 active courses</strong>. Placement rate is trending up.</p>
             <div class="hero-actions">
-              <button class="btn btn-primary btn-download-impact-csv">
-                <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-                <span data-i18n="btn_export_brief">Export impact brief</span>
+              <button class="btn btn-primary" onclick="switchView('trainees')">
+                <i data-lucide="users" style="width: 16px; height: 16px;"></i> View Trainees
               </button>
-              <button class="btn btn-secondary" onclick="FieldAtlasAPI.openModal('modal-methodology')">
-                <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
-                <span data-i18n="btn_view_methodology">View methodology</span>
+              <button class="btn btn-secondary" onclick="switchView('reports')">
+                <i data-lucide="download" style="width: 16px; height: 16px;"></i> Download Report
               </button>
             </div>
             <div class="hero-privacy-note">
-              <i data-lucide="shield-check" style="width: 14px; height: 14px; color: #38BDF8;"></i>
-              <span data-i18n="privacy_note">Consent-aware by design Â· No raw Aadhaar stored</span>
+              <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i>
+              <span>Consent-aware by design · No raw Aadhaar stored</span>
             </div>
           </div>
         </div>
 
         <!-- Outcome Route Timeline -->
         <div class="route-timeline-card">
-          <div class="route-timeline-title">Outcome Route Pipeline (Enrolled â†’ Retained)</div>
-          <div class="route-steps-grid">
-            <div class="route-step-item active">
-              <div class="route-step-circle">1</div>
-              <div class="route-step-label" data-i18n="route_enrolled">Enrolled</div>
-              <div class="route-step-count">8.4k</div>
-            </div>
-            <div class="route-step-item active">
-              <div class="route-step-circle">2</div>
-              <div class="route-step-label" data-i18n="route_trained">Trained</div>
-              <div class="route-step-count">7.8k</div>
-            </div>
-            <div class="route-step-item active">
-              <div class="route-step-circle">3</div>
-              <div class="route-step-label" data-i18n="route_certified">Certified</div>
-              <div class="route-step-count">6.9k</div>
-            </div>
-            <div class="route-step-item active">
-              <div class="route-step-circle">4</div>
-              <div class="route-step-label" data-i18n="route_placed">Placed</div>
-              <div class="route-step-count">5.4k</div>
-            </div>
-            <div class="route-step-item active">
-              <div class="route-step-circle">5</div>
-              <div class="route-step-label" data-i18n="route_retained">Retained</div>
-              <div class="route-step-count">3.7k</div>
-            </div>
+          <div class="route-timeline-title">Outcome Route — National Pipeline</div>
+          <div class="route-steps-grid" id="route-steps-grid">
+            <!-- Rendered by JS -->
           </div>
         </div>
 
-        <!-- 4 Metric KPI Cards -->
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-title" data-i18n="metric_active">Active trainees</span>
-              <div class="metric-icon-wrap" style="background: rgba(14, 129, 118, 0.1); color: var(--color-teal);">
-                <i data-lucide="users" style="width: 20px; height: 20px;"></i>
-              </div>
-            </div>
-            <div class="metric-value" id="metric-active-trainees">8,420</div>
-            <div class="metric-subtext">
-              <span class="badge-growth">â†‘ +8.4%</span>
-              <span style="color: var(--color-text-muted);">vs previous quarter</span>
-            </div>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-title" data-i18n="metric_retention">12-month retention</span>
-              <div class="metric-icon-wrap" style="background: rgba(73, 97, 139, 0.1); color: var(--color-indigo-blue);">
-                <i data-lucide="check-circle-2" style="width: 20px; height: 20px;"></i>
-              </div>
-            </div>
-            <div class="metric-value" id="metric-retention-rate">68.4%</div>
-            <div class="metric-subtext">
-              <span class="badge-growth">â†‘ +5.2 pts</span>
-              <span style="color: var(--color-text-muted);">sustained employment</span>
-            </div>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-title" data-i18n="metric_wage">Median wage</span>
-              <div class="metric-icon-wrap" style="background: rgba(214, 149, 65, 0.1); color: var(--color-ochre);">
-                <i data-lucide="indian-rupee" style="width: 20px; height: 20px;"></i>
-              </div>
-            </div>
-            <div class="metric-value" id="metric-median-wage">â‚¹15,800</div>
-            <div class="metric-subtext">
-              <span class="badge-growth">â†‘ +12.1%</span>
-              <span style="color: var(--color-text-muted);">post-training progression</span>
-            </div>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-title" data-i18n="metric_followup">Needs human follow-up</span>
-              <div class="metric-icon-wrap" style="background: rgba(213, 111, 88, 0.1); color: var(--color-coral);">
-                <i data-lucide="alert-circle" style="width: 20px; height: 20px;"></i>
-              </div>
-            </div>
-            <div class="metric-value" id="metric-urgent-followups">124</div>
-            <div class="metric-subtext">
-              <span class="badge-urgent">Assisted queue</span>
-              <span style="color: var(--color-text-muted);">pending actions</span>
-            </div>
-          </div>
+        <!-- KPI Metrics Grid -->
+        <div class="metrics-grid" id="metrics-grid">
+          <!-- Rendered by JS -->
         </div>
 
-        <!-- Charts Grid 1: Wage Progression & Conversion Funnel -->
+        <!-- Charts -->
         <div class="charts-grid">
           <div class="chart-card">
             <div class="chart-card-header">
-              <div>
-                <div class="chart-card-title" data-i18n="chart_wage_title">Wage progression curve</div>
-                <div style="font-size: 0.8rem; color: var(--color-text-muted);" data-i18n="chart_wage_sub">Realized earnings vs baseline floor</div>
+              <div class="chart-card-title">Monthly Outcomes</div>
+              <div class="chart-legend-wrap">
+                <div class="legend-item"><div class="legend-dot" style="background: var(--color-teal);"></div> Certified</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--color-ochre);"></div> Placed</div>
               </div>
             </div>
-            <div class="chart-container">
-              <canvas id="wageProgressionCanvas"></canvas>
-            </div>
+            <div class="chart-container"><canvas id="chart-monthly-outcomes"></canvas></div>
           </div>
-
           <div class="chart-card">
             <div class="chart-card-header">
-              <div>
-                <div class="chart-card-title" data-i18n="chart_funnel_title">Cohort conversion funnel</div>
-                <div style="font-size: 0.8rem; color: var(--color-text-muted);" data-i18n="chart_funnel_sub">End-to-end completion & placement efficiency</div>
-              </div>
+              <div class="chart-card-title">Sector Distribution</div>
             </div>
-            <div class="chart-container">
-              <canvas id="funnelConversionCanvas"></canvas>
-            </div>
+            <div class="chart-container"><canvas id="chart-sector-dist"></canvas></div>
           </div>
         </div>
 
-        <!-- Charts Grid 2: Provider Pulse Leaderboard & Non-Placement Donut -->
-        <div class="charts-grid">
-          <div class="chart-card">
-            <div class="chart-card-header">
-              <div>
-                <div class="chart-card-title" data-i18n="chart_providers_title">Provider pulse leaderboard</div>
-                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Placement & retention rates by district hub</div>
-              </div>
-            </div>
-            <div class="chart-container">
-              <canvas id="providerPulseCanvas"></canvas>
-            </div>
+        <!-- Provider Pulse -->
+        <div class="provider-pulse-card">
+          <div class="chart-card-header">
+            <div class="chart-card-title">Provider Pulse</div>
+            <button class="btn btn-outline btn-sm" onclick="switchView('providers')">View All</button>
           </div>
-
-          <div class="chart-card">
-            <div class="chart-card-header">
-              <div>
-                <div class="chart-card-title" data-i18n="chart_diagnostics_title">Non-placement diagnostics</div>
-                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Root cause breakdown for participants not placed</div>
-              </div>
-            </div>
-            <div class="chart-container">
-              <canvas id="nonPlacementCanvas"></canvas>
-            </div>
+          <div class="provider-list-grid" id="provider-list-grid">
+            <!-- Rendered by JS -->
           </div>
         </div>
-      </section>
+      </main>
 
-      <!-- ============================================== -->
-      <!-- VIEW: COURSES & PROGRAMME MANAGEMENT -->
-      <!-- ============================================== -->
-      <section class="tab-view-panel" id="view-courses" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-deep-indigo);">Courses & Outcomes Lifecycle</h2>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">Publish courses, review learner applications, issue verifiable certificates, and track post-training employment.</p>
-          </div>
-          <div style="display: flex; gap: 0.75rem;">
-            <button class="btn btn-primary" id="btn-open-create-course" style="display: flex; align-items: center; gap: 0.5rem;">
-              <i data-lucide="plus-circle" style="width: 16px; height: 16px;"></i>
-              <span>Create New Course</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Filter & Search Toolbar -->
-        <div class="search-filter-card" style="margin-bottom: 1.5rem;">
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between; width: 100%;">
-            <div style="display: flex; gap: 0.75rem; flex: 1; min-width: 280px; align-items: center; flex-wrap: wrap;">
-              <div class="search-input-wrap" style="flex: 1; min-width: 200px;">
-                <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
-                <input type="text" id="courses-search-input" class="search-input" placeholder="Search by course title, code, sector...">
-              </div>
-              <select id="courses-status-filter" class="form-control" style="width: auto; min-width: 130px; height: 38px; font-size: 0.85rem;">
-                <option value="">All Statuses</option>
-                <option value="published">Published</option>
-                <option value="draft">Draft</option>
-                <option value="closed">Closed</option>
-                <option value="archived">Archived</option>
-              </select>
-            </div>
-            <div id="courses-count-indicator" style="font-size: 0.85rem; color: var(--color-text-muted); font-weight: 600;">
-              Loading courses...
-            </div>
-          </div>
-        </div>
-
-        <!-- Courses Cards Grid -->
-        <div id="courses-grid-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
-          <!-- Dynamically populated via JavaScript -->
-        </div>
-      </section>
-
-      <!-- ============================================== -->
-      <!-- VIEW 2: FOLLOW-UPS -->
-      <!-- ============================================== -->
-      <section class="tab-view-panel" id="view-followups" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-deep-indigo);" data-i18n="followup_heading">Small calls. Long-term signal.</h2>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);" data-i18n="followup_summary">124 people need help Â· 86 three-month Â· 38 twelve-month Â· 72% resolved</p>
-          </div>
-          <div style="display: flex; gap: 0.75rem;">
-            <button class="btn btn-outline btn-seed-demo-trigger">
-              <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i>
-              <span data-i18n="btn_seed_demo">Seed demo data</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Follow-up Layout: Queue + Outreach Simulator -->
-        <div class="followup-layout">
-          
-          <!-- Queue Priority List -->
-          <div class="followup-queue-card">
-            <div class="queue-header">
-              <strong style="font-size: 0.95rem; color: var(--color-deep-indigo);">Priority Assistance Queue</strong>
-              <span class="badge badge-ochre">Live Queue</span>
-            </div>
-            <div class="queue-items-list" id="followup-queue-list">
-              <!-- Dynamically rendered items -->
-            </div>
-          </div>
-
-          <!-- Outreach Simulator & Message Preview Shell -->
-          <div class="simulator-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <div>
-                <strong style="font-size: 1.05rem; color: var(--color-deep-indigo);" id="preview-trainee-name">Select Participant</strong>
-                <div style="font-size: 0.75rem; color: var(--color-text-muted);" id="preview-trainee-course">Select a row to preview outreach context</div>
-              </div>
-              <span class="badge badge-neutral" id="preview-trainee-id">FA-ID</span>
-            </div>
-
-            <!-- Channel Selector Tabs -->
-            <div class="simulator-tabs">
-              <button class="simulator-tab-btn active" data-channel="whatsapp">
-                <i data-lucide="message-square" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> WhatsApp Preview
-              </button>
-              <button class="simulator-tab-btn" data-channel="sms">
-                <i data-lucide="smartphone" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> SMS Preview
-              </button>
-            </div>
-
-            <!-- Simulated Phone Device Preview -->
-            <div class="phone-preview-shell">
-              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);">
-                <div class="avatar-sm" style="background: var(--color-teal); width: 28px; height: 28px; font-size: 0.75rem;">FA</div>
-                <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-deep-indigo);">Field Atlas Outreach Bot (Demo)</div>
-              </div>
-
-              <div class="message-bubble" id="simulator-message-text">
-                Namaste, this is Field Atlas checking in on your employment progress. Could you please share your current work status?
-              </div>
-
-              <div style="margin-top: 1.5rem;">
-                <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-bottom: 0.4rem;">Simulated Learner Response Options:</div>
-                <div class="simulator-response-actions">
-                  <span class="badge badge-teal" style="cursor: pointer;">âœ“ I am working</span>
-                  <span class="badge badge-ochre" style="cursor: pointer;">ðŸ’¼ Own work / Enterprise</span>
-                  <span class="badge badge-coral" style="cursor: pointer;">ðŸ†˜ Need help</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Consent & Dispatch Status Bar -->
-            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-              <div id="simulator-status-note" style="font-size: 0.8rem;">
-                <span style="color: var(--color-teal);">âœ“ Consent verified active. Safe to contact.</span>
-              </div>
-              <div style="display: flex; gap: 0.5rem;">
-                <button class="btn btn-outline" id="btn-open-reschedule" style="display: none;">
-                  <i data-lucide="calendar" style="width: 16px; height: 16px;"></i>
-                  <span>Reschedule</span>
-                </button>
-                <button class="btn btn-primary" id="btn-dispatch-followup">
-                  <i data-lucide="send" style="width: 16px; height: 16px;"></i>
-                  <span data-i18n="btn_send_now">Send outreach</span>
-                </button>
-              </div>
-            </div>
-
-            <div style="margin-top: 0.75rem; font-size: 0.725rem; color: var(--color-text-muted);">
-              Note: Outreach actions are executed within the simulated sandbox framework. No live carrier SMS or WhatsApp messages are dispatched without external gateway binding.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================================== -->
-      <!-- VIEW 3: TRAINEES -->
-      <!-- ============================================== -->
-      <section class="tab-view-panel" id="view-trainees" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-deep-indigo);" data-i18n="nav_trainees">Trainees Directory</h2>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">Search, filter, enroll, and manage consent for all programme participants.</p>
-          </div>
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <button class="btn btn-primary" onclick="FieldAtlasAPI.openModal('modal-new-trainee')">
-              <i data-lucide="user-plus" style="width: 16px; height: 16px;"></i>
-              <span data-i18n="btn_new_trainee">New trainee</span>
-            </button>
-            <button class="btn btn-outline btn-seed-demo-trigger">
-              <i data-lucide="database" style="width: 16px; height: 16px;"></i>
-              <span data-i18n="btn_seed_demo">Seed demo data</span>
-            </button>
-            <button class="btn btn-outline btn-download-impact-csv">
-              <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-              <span data-i18n="btn_export_csv">Export CSV</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Table Card with Search & Filters -->
+      <!-- ════════════ COURSES TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-courses" style="display: none;">
+        <h2 style="margin-bottom: 1.5rem;">Active Courses</h2>
         <div class="table-card">
-          <div class="table-toolbar">
-            <div class="table-search-wrap">
-              <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
-              <input type="text" id="trainee-search-input" class="search-input" placeholder="Search by name, Field Atlas ID, or course..." data-i18n-placeholder="search_placeholder">
-            </div>
-
-            <div class="filter-group">
-              <select class="filter-select" id="filter-provider">
-                <option value="" data-i18n="filter_all_providers">All Providers</option>
-                <option value="Saksham">Saksham</option>
-                <option value="Jan Disha">Jan Disha</option>
-                <option value="Udaan">Udaan</option>
-                <option value="Navjeevan">Navjeevan</option>
-              </select>
-
-              <select class="filter-select" id="filter-stage">
-                <option value="" data-i18n="filter_all_stages">All Stages</option>
-                <option value="enrolled">Enrolled</option>
-                <option value="trained">Trained</option>
-                <option value="certified">Certified</option>
-                <option value="placed">Placed</option>
-                <option value="retained">Retained</option>
-                <option value="follow_up_due">Follow-up Due</option>
-              </select>
-
-              <select class="filter-select" id="filter-consent">
-                <option value="" data-i18n="filter_all_consents">All Consents</option>
-                <option value="active">Active Consent</option>
-                <option value="withdrawn">Consent Withdrawn</option>
-              </select>
-            </div>
-          </div>
-
           <div class="table-responsive">
             <table class="data-table">
               <thead>
                 <tr>
-                  <th data-i18n="th_learner">Learner</th>
-                  <th data-i18n="th_stage">Current stage</th>
-                  <th data-i18n="th_provider">Provider</th>
-                  <th data-i18n="th_signal">Employer signal</th>
-                  <th data-i18n="th_wage">Wage</th>
-                  <th data-i18n="trainee_consent_label">Consent</th>
-                  <th data-i18n="th_actions">Actions</th>
+                  <th>Course Name</th>
+                  <th>Sector</th>
+                  <th>Duration</th>
+                  <th>Enrolled</th>
+                  <th>Certified</th>
+                  <th>Status</th>
                 </tr>
               </thead>
-              <tbody id="trainees-table-body">
-                <!-- Dynamically populated rows -->
+              <tbody id="courses-table-body">
+                <!-- Rendered by JS -->
               </tbody>
             </table>
           </div>
         </div>
-      </section>
+      </main>
 
-      <!-- ============================================== -->
-      <!-- VIEW 4: PROVIDERS -->
-      <!-- ============================================== -->
-      <section class="tab-view-panel" id="view-providers" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-deep-indigo);" data-i18n="nav_providers">Training Providers Benchmark</h2>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">Comparative placement, retention, and employer verification across regional partners.</p>
-          </div>
-          <button class="btn btn-outline btn-download-provider-csv">
-            <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-            <span>Export Provider CSV</span>
-          </button>
-        </div>
-
-        <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr);">
-          <div class="metric-card">
-            <div class="metric-title">Placement Leadership</div>
-            <div class="metric-value">78%</div>
-            <div class="metric-subtext">Saksham (Pune) leads Q3 cohort</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-title">12-Month Sustained Retention</div>
-            <div class="metric-value">69%</div>
-            <div class="metric-subtext">Verified formal sector contracts</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-title">Employer Validation Rate</div>
-            <div class="metric-value">75%</div>
-            <div class="metric-subtext">Confirmed via third-party payroll signal</div>
-          </div>
-        </div>
-
-        <div class="charts-grid" style="grid-template-columns: 1.5fr 1fr;">
-          <div class="chart-card">
-            <div class="chart-card-header">
-              <div class="chart-card-title">Placement & Retention Comparison</div>
+      <!-- ════════════ FOLLOW-UPS TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-followups" style="display: none;">
+        <h2 style="margin-bottom: 1.5rem;">Follow-Up Queue</h2>
+        <div class="followup-layout">
+          <div class="followup-queue-card">
+            <div class="queue-header">
+              <h3 style="font-size: 1rem;">Pending Actions</h3>
+              <span class="badge badge-coral" id="followup-count">4 pending</span>
             </div>
-            <div class="chart-container">
-              <canvas id="providerComparisonCanvas"></canvas>
+            <div class="queue-items-list" id="followup-queue-list">
+              <!-- Rendered by JS -->
             </div>
           </div>
-
-          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-            <div class="provider-pulse-item" style="background: var(--color-surface); padding: 1.5rem; border-radius: var(--radius-lg);">
-              <div class="eyebrow" style="color: var(--color-teal); margin-bottom: 0.4rem;">District Insight</div>
-              <h3 style="font-size: 1.15rem; color: var(--color-deep-indigo); margin-bottom: 0.5rem;">"West Maharashtra is retaining talent longer."</h3>
-              <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5;">
-                Solar installer and accounting cohorts in Pune report 69% 12-month retention, outpacing eastern hubs where migration shifts talent into informal trades.
-              </p>
+          <div class="simulator-card">
+            <div class="simulator-tabs">
+              <button class="simulator-tab-btn active" data-channel="whatsapp">WhatsApp</button>
+              <button class="simulator-tab-btn" data-channel="sms">SMS</button>
+              <button class="simulator-tab-btn" data-channel="call">Call Script</button>
             </div>
-
-            <div class="provider-pulse-item" style="background: var(--color-surface); padding: 1.5rem; border-radius: var(--radius-lg);">
-              <div class="eyebrow" style="color: var(--color-ochre); margin-bottom: 0.4rem;">Employer Verification</div>
-              <h3 style="font-size: 1.15rem; color: var(--color-deep-indigo); margin-bottom: 0.5rem;">75% Validation Level</h3>
-              <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5;">
-                Three out of four placed learners have their employment confirmed directly by employer verification or documented bank wage credit.
-              </p>
+            <div class="phone-preview-shell">
+              <div class="message-bubble" id="simulator-message">
+                Select a follow-up item from the queue to preview the outreach message.
+              </div>
+              <div class="simulator-response-actions" id="simulator-actions" style="display: none;">
+                <button class="btn btn-primary btn-sm">Send Message</button>
+                <button class="btn btn-outline btn-sm">Mark Resolved</button>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </main>
 
-      <!-- ============================================== -->
-      <!-- VIEW 5: REPORTS -->
-      <!-- ============================================== -->
-      <section class="tab-view-panel" id="view-reports" style="display: none;">
-        <div style="margin-bottom: 1.5rem;">
-          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-deep-indigo);" data-i18n="nav_reports">Evidence & Governance Reports</h2>
-          <p style="font-size: 0.875rem; color: var(--color-text-muted);">Download audit-logged outcome briefs and partner performance CSV files.</p>
-        </div>
-
-        <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr);">
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-title">Quarterly Impact Brief</span>
-              <i data-lucide="file-check" style="width: 20px; height: 20px; color: var(--color-teal);"></i>
+      <!-- ════════════ TRAINEES TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-trainees" style="display: none;">
+        <h2 style="margin-bottom: 1.5rem;">Trainee Registry</h2>
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="table-search-wrap">
+              <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
+              <input type="text" class="search-input" id="trainee-search" placeholder="Search by name, email, or ID...">
             </div>
-            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0.5rem 0 1.25rem;">
-              Full cohort trajectory, completion-to-wage multipliers, and gender progression metrics for Q3 2026.
-            </p>
-            <button class="btn btn-primary btn-sm btn-download-impact-csv" style="width: 100%;">
-              <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download Impact CSV
-            </button>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-title">Provider Benchmark Report</span>
-              <i data-lucide="bar-chart-2" style="width: 20px; height: 20px; color: var(--color-indigo-blue);"></i>
+            <div class="filter-group">
+              <select class="filter-select" id="filter-stage">
+                <option value="">All Stages</option>
+                <option value="Training">Training</option>
+                <option value="Assessment">Assessment</option>
+                <option value="Certified">Certified</option>
+                <option value="Placed">Placed</option>
+              </select>
+              <select class="filter-select" id="filter-status">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+                <option value="verified">Verified</option>
+              </select>
             </div>
-            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0.5rem 0 1.25rem;">
-              Provider retention curves, employer validation rates, and geographic diagnostics.
-            </p>
-            <button class="btn btn-outline btn-sm btn-download-provider-csv" style="width: 100%;">
-              <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download Provider CSV
-            </button>
           </div>
-
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-title">Diagnostics & Non-Placement</span>
-              <i data-lucide="pie-chart" style="width: 20px; height: 20px; color: var(--color-coral);"></i>
-            </div>
-            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0.5rem 0 1.25rem;">
-              Granular analysis of skill mismatch, relocation hurdles, and wage floor friction.
-            </p>
-            <button class="btn btn-outline btn-sm btn-download-impact-csv" style="width: 100%;">
-              <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download Diagnostics CSV
-            </button>
-          </div>
-        </div>
-
-        <div style="margin-top: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
-          <h3 style="font-size: 1.1rem; color: var(--color-deep-indigo); margin-bottom: 0.5rem;">Data Privacy & Governance Compliance</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.6;">
-            All CSV and analytical exports strictly respect individual participant consent. Trainees who have withdrawn consent have their unified IDs truncated and sensitive personal identifiers masked. Every report generation event is timestamped and recorded in the system audit log.
-          </p>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- Mobile Bottom Navigation -->
-    <nav class="mobile-bottom-nav">
-      <div class="bottom-nav-inner">
-        <a class="bottom-nav-item active" data-tab="overview">
-          <i data-lucide="layout-dashboard" style="width: 20px; height: 20px;"></i>
-          <span data-i18n="nav_overview">Overview</span>
-        </a>
-        <a class="bottom-nav-item" data-tab="followups">
-          <i data-lucide="phone-call" style="width: 20px; height: 20px;"></i>
-          <span data-i18n="nav_followups">Follow-ups</span>
-        </a>
-        <a class="bottom-nav-item" data-tab="trainees">
-          <i data-lucide="users" style="width: 20px; height: 20px;"></i>
-          <span data-i18n="nav_trainees">Trainees</span>
-        </a>
-        <a class="bottom-nav-item" data-tab="providers">
-          <i data-lucide="building-2" style="width: 20px; height: 20px;"></i>
-          <span data-i18n="nav_providers">Providers</span>
-        </a>
-        <a class="bottom-nav-item" href="profile.html">
-          <i data-lucide="user" style="width: 20px; height: 20px;"></i>
-          <span data-i18n="nav_profile">Profile</span>
-        </a>
-      </div>
-    </nav>
-
-  </div>
-</div>
-
-<!-- ============================================== -->
-<!-- MODAL 1: NEW TRAINEE CREATION FORM -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-new-trainee">
-  <div class="modal-dialog">
-    <div class="modal-header">
-      <h3 class="modal-title">Register New Trainee</h3>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-new-trainee')">&times;</button>
-    </div>
-    <form id="form-new-trainee">
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label" for="new-trainee-name">Learner Full Name</label>
-          <input type="text" id="new-trainee-name" class="form-control" placeholder="e.g. Meenakshi Sundaram" required>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-id">Unified ID</label>
-            <input type="text" id="new-trainee-id" class="form-control" placeholder="e.g. FA-24-0350" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-course">Course</label>
-            <input type="text" id="new-trainee-course" class="form-control" placeholder="e.g. Solar PV Installer" required>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Course</th>
+                  <th>Stage</th>
+                  <th>Provider</th>
+                  <th>Wage</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="trainees-table-body">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
           </div>
         </div>
+      </main>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-provider">Provider</label>
-            <input type="text" id="new-trainee-provider" class="form-control" placeholder="e.g. Saksham" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-stage">Initial Stage</label>
-            <select id="new-trainee-stage" class="form-control" required>
-              <option value="enrolled">Enrolled</option>
-              <option value="trained">Trained</option>
-              <option value="certified">Certified</option>
-              <option value="placed">Placed</option>
-              <option value="retained">Retained</option>
-              <option value="follow_up_due">Follow-up Due</option>
-            </select>
+      <!-- ════════════ PROVIDERS TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-providers" style="display: none;">
+        <h2 style="margin-bottom: 1.5rem;">Provider Performance</h2>
+        <div class="provider-list-grid" id="providers-full-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </main>
+
+      <!-- ════════════ REPORTS TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-reports" style="display: none;">
+        <h2 style="margin-bottom: 1.5rem;">Reports & Exports</h2>
+        <div style="display: grid; gap: 1rem; max-width: 600px;">
+          <div class="metric-card" id="reports-list">
+            <!-- Rendered by JS -->
           </div>
         </div>
+      </main>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-district">District</label>
-            <input type="text" id="new-trainee-district" class="form-control" placeholder="e.g. Pune" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-state">State</label>
-            <input type="text" id="new-trainee-state" class="form-control" placeholder="e.g. Maharashtra" required>
-          </div>
-        </div>
+    </div><!-- /main-wrapper -->
+  </div><!-- /app-container -->
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-gender">Gender</label>
-            <select id="new-trainee-gender" class="form-control">
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-              <option value="other">Other</option>
-              <option value="prefer_not_to_say">Prefer Not to Say</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="new-trainee-age">Age Band</label>
-            <select id="new-trainee-age" class="form-control">
-              <option value="18-24">18â€“24 years</option>
-              <option value="25-30">25â€“30 years</option>
-              <option value="31+">31+ years</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" onclick="FieldAtlasAPI.closeModal('modal-new-trainee')" data-i18n="cancel">Cancel</button>
-        <button type="submit" class="btn btn-primary">Enroll Trainee</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ============================================== -->
-<!-- MODAL 2: EDIT TRAINEE MODAL -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-edit-trainee">
-  <div class="modal-dialog">
-    <div class="modal-header">
-      <h3 class="modal-title">Edit Trainee Details</h3>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-edit-trainee')">&times;</button>
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav">
+    <div class="bottom-nav-inner">
+      <a class="bottom-nav-item active" data-tab="overview" onclick="switchView('overview')">
+        <i data-lucide="layout-dashboard" style="width: 20px; height: 20px;"></i>
+        <span>Overview</span>
+      </a>
+      <a class="bottom-nav-item" data-tab="courses" onclick="switchView('courses')">
+        <i data-lucide="book-open" style="width: 20px; height: 20px;"></i>
+        <span>Courses</span>
+      </a>
+      <a class="bottom-nav-item" data-tab="trainees" onclick="switchView('trainees')">
+        <i data-lucide="users" style="width: 20px; height: 20px;"></i>
+        <span>Trainees</span>
+      </a>
+      <a class="bottom-nav-item" data-tab="followups" onclick="switchView('followups')">
+        <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
+        <span>Follow-ups</span>
+      </a>
+      <a class="bottom-nav-item" data-tab="providers" onclick="switchView('providers')">
+        <i data-lucide="building-2" style="width: 20px; height: 20px;"></i>
+        <span>Providers</span>
+      </a>
     </div>
-    <form id="form-edit-trainee">
-      <input type="hidden" id="edit-trainee-id">
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label" for="edit-trainee-name">Full Name</label>
-          <input type="text" id="edit-trainee-name" class="form-control" required>
-        </div>
+  </nav>
 
-        <div class="form-group">
-          <label class="form-label" for="edit-trainee-course">Course</label>
-          <input type="text" id="edit-trainee-course" class="form-control" required>
-        </div>
+  <!-- Watermark -->
+  <div class="watermark">#crafted by team Synkro</div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-          <div class="form-group">
-            <label class="form-label" for="edit-trainee-provider">Provider</label>
-            <input type="text" id="edit-trainee-provider" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="edit-trainee-stage">Outcome Stage</label>
-            <select id="edit-trainee-stage" class="form-control" required>
-              <option value="enrolled">Enrolled</option>
-              <option value="trained">Trained</option>
-              <option value="certified">Certified</option>
-              <option value="placed">Placed</option>
-              <option value="retained">Retained</option>
-              <option value="follow_up_due">Follow-up Due</option>
-            </select>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-          <div class="form-group">
-            <label class="form-label" for="edit-trainee-district">District</label>
-            <input type="text" id="edit-trainee-district" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="edit-trainee-state">State</label>
-            <input type="text" id="edit-trainee-state" class="form-control" required>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" onclick="FieldAtlasAPI.closeModal('modal-edit-trainee')" data-i18n="cancel">Cancel</button>
-        <button type="submit" class="btn btn-primary" data-i18n="save_changes">Save Changes</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ============================================== -->
-<!-- MODAL 3: METHODOLOGY & TRUST FRAMEWORK -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-methodology">
-  <div class="modal-dialog" style="max-width: 650px;">
-    <div class="modal-header">
-      <h3 class="modal-title">Field Atlas Outcome Methodology</h3>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-methodology')">&times;</button>
-    </div>
-    <div class="modal-body" style="line-height: 1.6; font-size: 0.9rem; color: var(--color-deep-indigo);">
-      <h4 style="color: var(--color-teal); margin-bottom: 0.5rem;">Longitudinal Signal Tracking (3, 6, 12 Months)</h4>
-      <p style="margin-bottom: 1rem;">
-        Vocational skilling outcomes are assessed post-certification through proactive check-ins conducted at month 3, 6, and 12. These follow-ups verify employment continuity, real wage growth, and workplace safety.
-      </p>
-
-      <h4 style="color: var(--color-teal); margin-bottom: 0.5rem;">Consent-First Civic Cartography</h4>
-      <p style="margin-bottom: 1rem;">
-        Field Atlas operates on strict participant consent. Learners retain full autonomy over their data and can grant or withdraw consent at any time. When consent is withdrawn, learner contact information is instantly purged from active follow-up queues and masked in administrative exports.
-      </p>
-
-      <h4 style="color: var(--color-teal); margin-bottom: 0.5rem;">Aadhaar-Free Unified Identification</h4>
-      <p>
-        To prevent unnecessary data accumulation and safeguard participant privacy, Field Atlas uses pseudonymous Unified IDs (e.g. FA-24-0182). Raw Aadhaar numbers, biometric data, or sensitive government credentials are never stored.
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" onclick="FieldAtlasAPI.closeModal('modal-methodology')">Understood</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================== -->
-<!-- MODAL 4: RESCHEDULE FOLLOW-UP MODAL -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-reschedule-followup">
-  <div class="modal-dialog">
-    <div class="modal-header">
-      <h3 class="modal-title">Reschedule Follow-Up</h3>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-reschedule-followup')">&times;</button>
-    </div>
-    <form id="form-reschedule-followup">
-      <input type="hidden" id="reschedule-followup-id">
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label">Participant</label>
-          <div id="reschedule-trainee-name" style="font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.5rem;"></div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="reschedule-contact-date">Next Contact Date</label>
-          <input type="date" id="reschedule-contact-date" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="reschedule-trainer-notes">Trainer Notes</label>
-          <textarea id="reschedule-trainer-notes" class="form-control" rows="3" placeholder="Add context or notes for rescheduling..." required></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" onclick="FieldAtlasAPI.closeModal('modal-reschedule-followup')">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save & Reschedule</button>
-      </div>
-    </form>
-  </div>
-<!-- ============================================== -->
-<!-- MODAL: COURSE CREATE / EDIT -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-course-form">
-  <div class="modal-dialog" style="max-width: 600px;">
-    <div class="modal-header">
-      <h3 class="modal-title" id="course-form-modal-title">Create New Course Offering</h3>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-course-form')">&times;</button>
-    </div>
-    <form id="form-course-upsert">
-      <input type="hidden" id="course-form-id">
-      <div class="modal-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div class="form-group" style="grid-column: span 2;">
-            <label class="form-label" for="course-input-title">Course Title *</label>
-            <input type="text" id="course-input-title" class="form-control" placeholder="e.g. Solar PV Rooftop Technician" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-code">Course Code *</label>
-            <input type="text" id="course-input-code" class="form-control" placeholder="e.g. CRS-SOLAR-101" required style="font-family: var(--font-mono); text-transform: uppercase;">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-category">Sector / Category *</label>
-            <select id="course-input-category" class="form-control" required>
-              <option value="Renewable Energy">Renewable Energy</option>
-              <option value="Information Technology">Information Technology</option>
-              <option value="Electrical & Electronics">Electrical & Electronics</option>
-              <option value="Healthcare">Healthcare</option>
-              <option value="Automotive">Automotive</option>
-              <option value="Apparel & Textiles">Apparel & Textiles</option>
-              <option value="Vocational Skills">Vocational Skills</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-duration">Duration (Weeks) *</label>
-            <input type="number" id="course-input-duration" class="form-control" value="8" min="1" max="104" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-capacity">Student Capacity *</label>
-            <input type="number" id="course-input-capacity" class="form-control" value="30" min="1" max="500" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-start-date">Start Date *</label>
-            <input type="date" id="course-input-start-date" class="form-control" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-end-date">End Date *</label>
-            <input type="date" id="course-input-end-date" class="form-control" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-district">District Hub</label>
-            <input type="text" id="course-input-district" class="form-control" placeholder="e.g. Pune">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-state">State</label>
-            <input type="text" id="course-input-state" class="form-control" placeholder="e.g. Maharashtra">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-status">Publication Status</label>
-            <select id="course-input-status" class="form-control">
-              <option value="draft">Draft (Private)</option>
-              <option value="published">Published (Open to Learners)</option>
-              <option value="closed">Closed (No New Applications)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="course-input-language">Instruction Language</label>
-            <input type="text" id="course-input-language" class="form-control" value="English / Hindi">
-          </div>
-
-          <div class="form-group" style="grid-column: span 2;">
-            <label class="form-label" for="course-input-description">Course Description & Learning Outcomes</label>
-            <textarea id="course-input-description" class="form-control" rows="3" placeholder="Brief outline of competencies, curriculum, and hands-on modules..."></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" onclick="FieldAtlasAPI.closeModal('modal-course-form')">Cancel</button>
-        <button type="submit" class="btn btn-primary" id="btn-save-course">Save Course Offering</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ============================================== -->
-<!-- MODAL: COURSE APPLICATIONS REVIEW -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-course-applications">
-  <div class="modal-dialog" style="max-width: 700px;">
-    <div class="modal-header">
-      <div>
-        <h3 class="modal-title">Trainee Course Applications</h3>
-        <div style="font-size: 0.8rem; color: var(--color-text-muted);" id="modal-applications-course-title"></div>
-      </div>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-course-applications')">&times;</button>
-    </div>
-    <div class="modal-body" style="max-height: 480px; overflow-y: auto; padding: 1rem 1.5rem;">
-      <div id="course-applications-list">
-        <!-- Dynamically populated via JavaScript -->
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline" onclick="FieldAtlasAPI.closeModal('modal-course-applications')">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================== -->
-<!-- MODAL: COURSE ROSTER, PROGRESS & CERTIFICATES -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-course-roster">
-  <div class="modal-dialog" style="max-width: 820px;">
-    <div class="modal-header">
-      <div>
-        <h3 class="modal-title">Enrolled Learner Roster & Outcomes</h3>
-        <div style="font-size: 0.8rem; color: var(--color-text-muted);" id="modal-roster-course-title"></div>
-      </div>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-course-roster')">&times;</button>
-    </div>
-    <div class="modal-body" style="max-height: 520px; overflow-y: auto; padding: 1rem 1.5rem;">
-      <div id="course-roster-list">
-        <!-- Dynamically populated via JavaScript -->
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline" onclick="FieldAtlasAPI.closeModal('modal-course-roster')">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================== -->
-<!-- MODAL: COURSE ANALYTICS & OUTCOMES BREAKDOWN -->
-<!-- ============================================== -->
-<div class="modal-overlay" id="modal-course-analytics">
-  <div class="modal-dialog" style="max-width: 640px;">
-    <div class="modal-header">
-      <div>
-        <h3 class="modal-title">Course Analytics & Outcomes Pulse</h3>
-        <div style="font-size: 0.8rem; color: var(--color-text-muted);" id="modal-analytics-course-title"></div>
-      </div>
-      <button class="modal-close-btn" onclick="FieldAtlasAPI.closeModal('modal-course-analytics')">&times;</button>
-    </div>
-    <div class="modal-body" style="padding: 1.5rem;" id="modal-analytics-content">
-      <!-- Dynamically populated via JavaScript -->
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline" onclick="FieldAtlasAPI.closeModal('modal-course-analytics')">Done</button>
-    </div>
-  </div>
-</div>
-
-{% endblock %}
-
-{% block extra_js %}
-<script src="/static/js/charts.js"></script>
-<script src="/static/js/auth.js"></script>
-<script src="/static/js/trainer-dashboard.js"></script>
   <div id="toast-container"></div>
 
-  <!-- Core JavaScript Libraries -->
+  <!-- Scripts -->
   <script src="js/config.js"></script>
+  <script src="js/mock-auth.js"></script>
+  <script src="js/mock-data.js"></script>
   <script src="js/api.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/notifications.js"></script>
-  <script src="js/charts.js"></script>
   <script src="js/auth.js"></script>
-  <script src="js/trainer-dashboard.js"></script>
+
   <script>
+  (function() {
+    'use strict';
+
+    // ═══ Sidebar Toggle ═══
+    window.toggleSidebar = function() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('mobile-backdrop').classList.toggle('active');
+    };
+
+    // ═══ View Switcher ═══
+    window.switchView = function(tabId) {
+      document.querySelectorAll('.nav-link[data-tab]').forEach(l => l.classList.toggle('active', l.getAttribute('data-tab') === tabId));
+      document.querySelectorAll('.bottom-nav-item[data-tab]').forEach(l => l.classList.toggle('active', l.getAttribute('data-tab') === tabId));
+      document.querySelectorAll('.tab-view-panel').forEach(p => p.style.display = (p.id === 'view-' + tabId) ? 'block' : 'none');
+      const breadcrumb = document.getElementById('header-active-view-name');
+      if (breadcrumb) breadcrumb.textContent = tabId.charAt(0).toUpperCase() + tabId.slice(1);
+      // trigger load
+      if (tabId === 'overview') loadOverview();
+      if (tabId === 'courses') loadCourses();
+      if (tabId === 'followups') loadFollowUps();
+      if (tabId === 'trainees') loadTrainees();
+      if (tabId === 'providers') loadProviders();
+      if (tabId === 'reports') loadReports();
+    };
+
+    // ═══ Auth Check ═══
     document.addEventListener('DOMContentLoaded', async function() {
-      if (window.lucide) {
-        lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
+
+      // Check session
+      const session = window.FieldAtlasMockAuth ? window.FieldAtlasMockAuth.getSession() : null;
+      if (session) {
+        const initials = (session.full_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        document.getElementById('sidebar-avatar').textContent = initials;
+        document.getElementById('sidebar-user-name').textContent = session.full_name || 'User';
+        const heroGreeting = document.getElementById('hero-greeting');
+        const hour = new Date().getHours();
+        const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+        if (heroGreeting) heroGreeting.textContent = greeting + ', ' + (session.full_name || 'Trainer').split(' ')[0];
       }
 
-      // Check user authentication
-      try {
-        const res = await FieldAtlasAPI.getCurrentUser();
-        if (res && res.user) {
-          if (res.user.role === 'trainee') {
-            window.location.href = 'trainee-dashboard.html';
-            return;
-          }
-          const avatarFallback = document.getElementById('header-avatar-fallback');
-          const avatarImg = document.getElementById('header-avatar-img');
-          if (res.user.profile_photo_url && avatarImg) {
-            avatarImg.src = res.user.profile_photo_url;
-            avatarImg.style.display = 'block';
-            if (avatarFallback) avatarFallback.style.display = 'none';
-          } else if (avatarFallback && res.user.full_name) {
-            const initials = res.user.full_name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
-            avatarFallback.textContent = initials || 'TR';
-          }
-        }
-      } catch (err) {
-        window.location.href = 'login.html';
-      }
-
-      // Handle sign out
-      document.querySelectorAll('.btn-logout').forEach(btn => {
-        btn.addEventListener('click', async function(e) {
-          e.preventDefault();
-          try {
-            await FieldAtlasAPI.logout();
-          } catch(e) {}
-          window.location.href = 'login.html';
-        });
-      });
+      loadOverview();
     });
+
+    // ═══ Load Overview ═══
+    async function loadOverview() {
+      try {
+        const data = await FieldAtlasAPI.get('/api/trainer/dashboard/');
+        renderOverview(data);
+      } catch (e) { console.warn('Overview load error:', e); }
+    }
+
+    function renderOverview(data) {
+      // Route Steps
+      const stepsGrid = document.getElementById('route-steps-grid');
+      if (stepsGrid && data.route_stages) {
+        stepsGrid.innerHTML = data.route_stages.map((s, i) => `
+          <div class="route-step-item ${i <= (data.current_stage_active || 2) ? 'active' : ''}">
+            <div class="route-step-circle">
+              <i data-lucide="${['user-plus','book-open','clipboard-check','award','briefcase'][i] || 'circle'}" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="route-step-label">${s.label}</div>
+            <div class="route-step-count">${Number(s.count).toLocaleString('en-IN')}</div>
+          </div>
+        `).join('');
+        if (window.lucide) lucide.createIcons();
+      }
+
+      // Metrics
+      const metricsGrid = document.getElementById('metrics-grid');
+      if (metricsGrid && data.metrics) {
+        const m = data.metrics;
+        const cards = [
+          { title: 'Total Trainees', value: Number(m.total_trainees.value).toLocaleString('en-IN'), growth: m.total_trainees.growth, icon: 'users', bg: 'var(--color-teal-light)', color: 'var(--color-teal)' },
+          { title: 'Verified Outcomes', value: Number(m.verified_outcomes.value).toLocaleString('en-IN'), growth: m.verified_outcomes.growth, icon: 'shield-check', bg: 'var(--color-ochre-light)', color: 'var(--color-ochre)' },
+          { title: 'Placement Rate', value: m.placement_rate.value + '%', growth: m.placement_rate.growth, icon: 'trending-up', bg: 'var(--color-coral-light)', color: 'var(--color-coral)' },
+          { title: 'Avg. Monthly Wage', value: '₹' + Number(m.avg_wage.value).toLocaleString('en-IN'), growth: m.avg_wage.growth, icon: 'indian-rupee', bg: '#EEF2FF', color: 'var(--color-indigo-blue)' },
+        ];
+        metricsGrid.innerHTML = cards.map(c => `
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-title">${c.title}</div>
+              <div class="metric-icon-wrap" style="background: ${c.bg}; color: ${c.color};">
+                <i data-lucide="${c.icon}" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value">${c.value}</div>
+            <div class="metric-subtext">
+              <span class="badge-growth">${c.growth}</span>
+              <span style="color: var(--color-text-muted);">vs last quarter</span>
+            </div>
+          </div>
+        `).join('');
+        if (window.lucide) lucide.createIcons();
+      }
+
+      // Providers
+      const provGrid = document.getElementById('provider-list-grid');
+      if (provGrid && data.providers) {
+        provGrid.innerHTML = data.providers.map(p => `
+          <div class="provider-pulse-item">
+            <div class="provider-pulse-name">${p.name}<span class="badge badge-teal" style="font-size: 0.7rem;">${p.rate}%</span></div>
+            <div class="provider-pulse-district">${p.district}</div>
+            <div class="provider-pulse-stat"><span>Trainees</span><strong>${p.trainees}</strong></div>
+            <div class="provider-pulse-stat"><span>Verified</span><strong>${p.verified}</strong></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${p.rate}%;"></div></div>
+          </div>
+        `).join('');
+      }
+
+      // Charts
+      renderCharts(data);
+    }
+
+    function renderCharts(data) {
+      // Monthly Outcomes
+      const ctx1 = document.getElementById('chart-monthly-outcomes');
+      if (ctx1 && data.monthly_outcomes) {
+        new Chart(ctx1, {
+          type: 'bar',
+          data: {
+            labels: data.monthly_outcomes.labels,
+            datasets: [
+              { label: 'Certified', data: data.monthly_outcomes.certified, backgroundColor: '#0E8176', borderRadius: 4 },
+              { label: 'Placed', data: data.monthly_outcomes.placed, backgroundColor: '#D69541', borderRadius: 4 },
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#EDF2F7' } }, x: { grid: { display: false } } } }
+        });
+      }
+
+      // Sector Distribution
+      const ctx2 = document.getElementById('chart-sector-dist');
+      if (ctx2 && data.sector_distribution) {
+        new Chart(ctx2, {
+          type: 'doughnut',
+          data: {
+            labels: data.sector_distribution.labels,
+            datasets: [{
+              data: data.sector_distribution.values,
+              backgroundColor: ['#0E8176', '#D69541', '#D56F58', '#49618B', '#38BDF8', '#94A3B8'],
+              borderWidth: 0,
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { padding: 16, font: { size: 12 } } } }, cutout: '65%' }
+        });
+      }
+    }
+
+    // ═══ Load Courses ═══
+    async function loadCourses() {
+      try {
+        const data = await FieldAtlasAPI.get('/api/trainer/courses/');
+        const tbody = document.getElementById('courses-table-body');
+        if (tbody && data.courses) {
+          tbody.innerHTML = data.courses.map(c => `
+            <tr>
+              <td><strong>${c.name}</strong></td>
+              <td>${c.sector}</td>
+              <td>${c.duration}</td>
+              <td>${c.enrolled}</td>
+              <td>${c.certified}</td>
+              <td><span class="badge ${c.status === 'active' ? 'badge-teal' : 'badge-neutral'}">${c.status}</span></td>
+            </tr>
+          `).join('');
+        }
+      } catch (e) { console.warn('Courses load error:', e); }
+    }
+
+    // ═══ Load Follow-Ups ═══
+    async function loadFollowUps() {
+      try {
+        const data = await FieldAtlasAPI.get('/api/trainer/follow-ups/');
+        const list = document.getElementById('followup-queue-list');
+        const countBadge = document.getElementById('followup-count');
+        if (countBadge) countBadge.textContent = (data.total || 0) + ' pending';
+        if (list && data.queue) {
+          list.innerHTML = data.queue.map(f => `
+            <div class="queue-item" onclick="selectFollowUp(this, '${f.trainee_name}', '${f.message}')">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <strong style="font-size: 0.9rem;">${f.trainee_name}</strong>
+                <span class="badge ${f.priority === 'high' ? 'badge-coral' : f.priority === 'medium' ? 'badge-ochre' : 'badge-neutral'}">${f.priority}</span>
+              </div>
+              <div style="font-size: 0.825rem; color: var(--color-text-secondary);">${f.message}</div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.35rem;">${f.days_pending} days pending · ${f.channel}</div>
+            </div>
+          `).join('');
+        }
+      } catch (e) { console.warn('Follow-ups load error:', e); }
+    }
+
+    window.selectFollowUp = function(el, name, message) {
+      document.querySelectorAll('.queue-item').forEach(q => q.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('simulator-message').textContent = `Hi ${name}, this is a reminder: ${message}. Please reply with your current status.`;
+      document.getElementById('simulator-actions').style.display = 'flex';
+    };
+
+    // ═══ Load Trainees ═══
+    async function loadTrainees() {
+      try {
+        const data = await FieldAtlasAPI.get('/api/trainer/trainees/');
+        renderTraineesTable(data.trainees || []);
+      } catch (e) { console.warn('Trainees load error:', e); }
+    }
+
+    function renderTraineesTable(trainees) {
+      const tbody = document.getElementById('trainees-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = trainees.map(t => {
+        const stageBadge = { Training: 'badge-ochre', Assessment: 'badge-ochre', Certified: 'badge-teal', Placed: 'badge-indigo' }[t.stage] || 'badge-neutral';
+        const statusBadge = { active: 'badge-teal', pending: 'badge-ochre', verified: 'badge-indigo' }[t.status] || 'badge-neutral';
+        return `<tr>
+          <td><code style="font-family: var(--font-mono); font-size: 0.8rem;">${t.field_atlas_id}</code></td>
+          <td><strong>${t.name}</strong></td>
+          <td>${t.course}</td>
+          <td><span class="badge ${stageBadge}">${t.stage}</span></td>
+          <td>${t.provider}</td>
+          <td>${t.wage ? '₹' + Number(t.wage).toLocaleString('en-IN') + '/mo' : '—'}</td>
+          <td><span class="badge ${statusBadge}">${t.status}</span></td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ═══ Load Providers ═══
+    async function loadProviders() {
+      try {
+        const data = await FieldAtlasAPI.get('/api/trainer/providers/');
+        const grid = document.getElementById('providers-full-grid');
+        if (grid && data.providers) {
+          grid.innerHTML = data.providers.map(p => `
+            <div class="provider-pulse-item">
+              <div class="provider-pulse-name">${p.name}<span class="badge badge-teal">${p.compliance_score}%</span></div>
+              <div class="provider-pulse-district">${p.district}</div>
+              <div class="provider-pulse-stat"><span>Total Trainees</span><strong>${p.total_trainees}</strong></div>
+              <div class="provider-pulse-stat"><span>Verified</span><strong>${p.verified}</strong></div>
+              <div class="provider-pulse-stat"><span>Placed</span><strong>${p.placed}</strong></div>
+              <div class="provider-pulse-stat"><span>Avg Wage</span><strong>₹${Number(p.avg_wage).toLocaleString('en-IN')}</strong></div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${p.compliance_score}%;"></div></div>
+            </div>
+          `).join('');
+        }
+      } catch (e) { console.warn('Providers load error:', e); }
+    }
+
+    // ═══ Load Reports ═══
+    async function loadReports() {
+      try {
+        const data = await FieldAtlasAPI.get('/api/trainer/reports/');
+        const el = document.getElementById('reports-list');
+        if (el && data.available_reports) {
+          el.innerHTML = data.available_reports.map(r => `
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-bottom: 1px solid var(--color-border-subtle);">
+              <div>
+                <div style="font-weight: 700; font-size: 0.95rem;">${r.name}</div>
+                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Format: ${r.format} · Last generated: ${r.last_generated}</div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="FieldAtlasAPI.showToast('Demo mode: Report download simulated.', 'success')">
+                <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download
+              </button>
+            </div>
+          `).join('');
+          if (window.lucide) lucide.createIcons();
+        }
+      } catch (e) { console.warn('Reports load error:', e); }
+    }
+
+  })();
   </script>
 </body>
 </html>

@@ -4,119 +4,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Create Account — Field Atlas</title>
-  
-  <!-- Modern Typography: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Core Application Stylesheets -->
   <link rel="stylesheet" href="css/field-atlas.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/watermark.css">
 </head>
 <body>
-  <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem 1.5rem; background-color: var(--color-parchment);">
-    
-    <div style="position: absolute; top: 1.25rem; right: 1.5rem;" class="lang-selector-wrap">
-      <select class="lang-select" aria-label="Choose Language">
-        <option value="en">English</option>
-        <option value="hi">हिन्दी (Hindi)</option>
-        <option value="mr">मराठी (Marathi)</option>
-        <option value="bn">বাংলা (Bengali)</option>
-        <option value="ta">தமிழ் (Tamil)</option>
-        <option value="te">తెలుగు (Telugu)</option>
-        <option value="kn">ಕನ್ನಡ (Kannada)</option>
-        <option value="gu">ગુજરાતી (Gujarati)</option>
-        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-        <option value="ml">മലയാളം (Malayalam)</option>
-        <option value="ur">اردو (Urdu)</option>
-      </select>
-      <i data-lucide="globe" class="lang-icon" style="width: 16px; height: 16px;"></i>
-    </div>
+  <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: var(--color-parchment);">
 
-    <div style="max-width: 500px; width: 100%;">
-      <div style="text-align: center; margin-bottom: 1.75rem;">
-        <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 0.75rem;">
-          <i data-lucide="compass" style="width: 26px; height: 26px;"></i>
+    <div style="max-width: 480px; width: 100%;">
+      <!-- Brand Header -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 0.85rem; box-shadow: 0 4px 10px rgba(14, 129, 118, 0.3);">
+          <i data-lucide="compass" style="width: 28px; height: 28px;"></i>
         </div>
-        <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--color-deep-indigo);">Join Field Atlas</h1>
-        <p style="font-size: 0.85rem; color: var(--color-text-muted);">Empowering India's skilling and post-training employment journeys.</p>
+        <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em;">Field Atlas</h1>
+        <p style="font-size: 0.85rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">Create Your Account</p>
       </div>
 
+      <!-- Registration Card -->
       <div style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; box-shadow: var(--shadow-md);">
-        <form id="register-form">
-          
-          <!-- Role Selection -->
-          <div class="form-group">
-            <label class="form-label" for="reg-role">I am registering as a</label>
-            <select id="reg-role" class="form-control" required>
-              <option value="trainer">Trainer / Vocational Coordinator</option>
-              <option value="trainee">Trainee / Learner</option>
-            </select>
-            <small style="display: block; margin-top: 0.35rem; color: var(--color-text-muted); font-size: 0.75rem;">Trainers manage learner cohorts; trainees track personal employment outcomes.</small>
-          </div>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">Register a New Account</h2>
+        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">Join India's skilling outcomes intelligence platform.</p>
 
+        <form id="register-form">
           <div class="form-group">
             <label class="form-label" for="reg-fullname">Full Name</label>
-            <input type="text" id="reg-fullname" class="form-control" placeholder="e.g. Ramesh Chandra" required>
+            <input type="text" id="reg-fullname" class="form-control" placeholder="e.g. Priya Patel" required>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="reg-email">Email Address</label>
-            <div style="display: flex; gap: 0.5rem;">
-              <input type="email" id="reg-email" class="form-control" placeholder="name@example.com" required>
-              <button type="button" id="btn-send-otp" class="btn btn-outline" style="white-space: nowrap; padding: 0.5rem 0.85rem; font-size: 0.825rem;" data-purpose="registration">Send OTP</button>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="reg-otp">6-Digit Email Verification Code</label>
-            <input type="text" id="reg-otp" class="form-control" placeholder="123456" maxlength="6" pattern="[0-9]{6}">
-            <small style="display: block; margin-top: 0.25rem; color: var(--color-teal); font-size: 0.75rem;">OTPs appear in console or terminal during local testing.</small>
+            <input type="email" id="reg-email" class="form-control" placeholder="your@email.com" required>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="reg-password">Password</label>
-            <input type="password" id="reg-password" class="form-control" placeholder="Minimum 6 characters" minlength="6" required>
+            <input type="password" id="reg-password" class="form-control" placeholder="Min 8 characters" required minlength="8">
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-            <div class="form-group">
-              <label class="form-label" for="reg-provider">Provider / Org</label>
-              <input type="text" id="reg-provider" class="form-control" placeholder="e.g. Saksham">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="reg-district">District</label>
-              <input type="text" id="reg-district" class="form-control" placeholder="e.g. Pune">
-            </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-role">Role</label>
+            <select id="reg-role" class="form-control" required>
+              <option value="">Select your role</option>
+              <option value="trainee">Trainee (Learner)</option>
+              <option value="trainer">Trainer (Instructor / Admin)</option>
+            </select>
           </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Create My Account</button>
+          <div class="form-group">
+            <label class="form-label" for="reg-provider">Training Provider (Optional)</label>
+            <input type="text" id="reg-provider" class="form-control" placeholder="e.g. NSDC, PMKVY">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-district">District (Optional)</label>
+            <input type="text" id="reg-district" class="form-control" placeholder="e.g. Mumbai, Delhi">
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
         </form>
+      </div>
 
-        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.875rem; color: var(--color-text-secondary);">
-          Already have an account? <a href="login.html" style="color: var(--color-teal); font-weight: 700; text-decoration: none;">Sign in here</a>
+      <!-- Demo Note -->
+      <div style="margin-top: 1.25rem; background: rgba(14, 129, 118, 0.08); border: 1px dashed var(--color-teal); border-radius: var(--radius-md); padding: 1rem; font-size: 0.8rem;">
+        <div style="font-weight: 700; color: var(--color-teal); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
+          <i data-lucide="info" style="width: 14px; height: 14px;"></i> Demo Mode
         </div>
+        <div style="color: var(--color-deep-indigo);">
+          Registration works instantly — no email verification needed. You'll be logged in immediately.
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--color-text-secondary);">
+        Already have an account? <a href="login.html" style="color: var(--color-teal); font-weight: 700; text-decoration: none;">Sign In</a>
+      </div>
+
+      <div style="text-align: center; margin-top: 1rem; font-size: 0.75rem; color: var(--color-text-muted); display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+        <i data-lucide="shield-check" style="width: 14px; height: 14px; color: var(--color-teal);"></i>
+        Consent-aware by design · No raw Aadhaar stored
       </div>
     </div>
   </div>
 
+  <div class="watermark">#crafted by team Synkro</div>
   <div id="toast-container"></div>
 
-  <!-- Core JavaScript Libraries -->
   <script src="js/config.js"></script>
+  <script src="js/mock-auth.js"></script>
+  <script src="js/mock-data.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/i18n.js"></script>
   <script src="js/notifications.js"></script>
   <script src="js/auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+      if (window.lucide) lucide.createIcons();
     });
   </script>
 </body>

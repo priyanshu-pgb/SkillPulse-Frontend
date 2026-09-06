@@ -3,246 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>My Profile & Account Settings — Field Atlas</title>
-  
-  <!-- Modern Typography: Plus Jakarta Sans -->
+  <title>User Profile — Field Atlas</title>
+  <meta name="description" content="Manage your account profile, credentials, and course enrollments on Field Atlas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Core Application Stylesheets -->
-  <link rel="stylesheet" href="css/field-atlas.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/watermark.css">
+  <style>
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .profile-card {
+      background: var(--color-surface, #ffffff);
+      border: 1px solid var(--color-border, #e5e7eb);
+      border-radius: var(--radius-lg, 12px);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .avatar-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 1rem auto;
+    }
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--color-primary, #0f172a);
+    }
+    .avatar-upload-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--color-primary, #0f172a);
+      color: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border: 2px solid #fff;
+      transition: background 0.2s ease;
+    }
+    .avatar-upload-btn:hover {
+      background: var(--color-teal, #0d9488);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-secondary, #475569);
+      margin-bottom: 0.4rem;
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid var(--color-border, #cbd5e1);
+      border-radius: var(--radius-md, 8px);
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--color-text, #0f172a);
+      background-color: var(--color-bg, #f8fafc);
+      transition: border-color 0.2s ease;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-teal, #0d9488);
+      background-color: #fff;
+    }
+    .form-control[readonly] {
+      background-color: #f1f5f9;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-teal { background: #ccfbf1; color: #0f766e; }
+    .badge-indigo { background: #e0e7ff; color: #3730a3; }
+    .badge-coral { background: #ffe4e6; color: #9f1239; }
+    .badge-neutral { background: #f1f5f9; color: #475569; }
+  </style>
 </head>
-<body>
-<div class="app-container" style="background-color: var(--color-parchment); min-height: 100vh;">
-  <div class="main-wrapper" style="margin-left: 0; width: 100%; max-width: 860px; margin: 0 auto; padding-bottom: 4rem;">
+<body class="bg-gray">
+
+  <!-- Header / Navigation -->
+  <header style="background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0.8rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.2rem; color: #0f172a;">Field Atlas</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="nav-back-btn" class="btn btn-outline btn-sm" onclick="history.back()" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">← Back</button>
+        <a href="index.html" class="btn btn-sm" style="background: #f1f5f9; color: #0f172a; text-decoration: none; font-size: 0.85rem; padding: 0.4rem 0.9rem;">Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Profile Layout -->
+  <main class="profile-layout">
     
-    <!-- Top Header -->
-    <header class="top-header">
-      <div class="header-left">
-        <a id="back-to-dashboard-btn" href="trainer-dashboard.html" class="btn btn-outline btn-sm" style="display: flex; align-items: center; gap: 0.35rem;">
-          <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> Back to Dashboard
-        </a>
-      </div>
-      <div class="header-right">
-        <a href="#logout" class="btn btn-outline btn-sm btn-logout" style="color: var(--color-coral);">
-          <i data-lucide="log-out" style="width: 14px; height: 14px;"></i> Sign out
-        </a>
-      </div>
-    </header>
-
-    <div class="content-body" style="padding: 1.5rem;">
-      <div style="margin-bottom: 1.75rem;">
-        <h1 style="font-size: 1.6rem; font-weight: 800; color: var(--color-deep-indigo);">Account & Profile Settings</h1>
-        <p style="font-size: 0.85rem; color: var(--color-text-muted);">Manage your personal information, interface language, and security credentials.</p>
-      </div>
-
-      <!-- Avatar & Identity Summary Card -->
-      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; box-shadow: var(--shadow-sm);">
-        <div style="position: relative;">
-          <img id="profile-avatar-preview" src="images/avatar-placeholder.png" alt="Profile Photo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--color-border);">
-          <label for="profile-photo-input" style="position: absolute; bottom: 0; right: 0; background: var(--color-teal); color: white; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);" title="Change Photo">
-            <i data-lucide="camera" style="width: 14px; height: 14px;"></i>
+    <!-- Left Column: User Summary & Password Change -->
+    <aside style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <div class="profile-card" style="text-align: center;">
+        <div class="avatar-wrapper">
+          <img id="profile-avatar-preview" class="avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Profile Picture">
+          <label for="profile-photo-input" class="avatar-upload-btn" title="Upload Photo">
+            📷
           </label>
           <input type="file" id="profile-photo-input" accept="image/*" style="display: none;">
         </div>
-
-        <div>
-          <h2 id="profile-full-name-display" style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo);">User Profile</h2>
-          <div id="profile-id-display" style="font-size: 0.85rem; color: var(--color-text-muted); font-family: var(--font-mono);">Field Atlas ID: —</div>
-          <div style="margin-top: 0.35rem;">
-            <span id="profile-role-badge" class="badge badge-teal">User</span>
-            <span id="profile-provider-badge" class="badge badge-indigo">National Network</span>
-          </div>
+        <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.25rem 0;" id="user-display-name">Demo User</h2>
+        <p style="font-size: 0.8rem; color: #64748b; margin: 0 0 1rem 0;" id="user-display-role">Vocational Specialist</p>
+        <div style="font-size: 0.8rem; background: #f8fafc; padding: 0.75rem; border-radius: 8px; text-align: left;">
+          <div style="margin-bottom: 0.4rem;"><strong>System ID:</strong> <span id="display-atlas-id">FA-88902</span></div>
+          <div><strong>Status:</strong> <span class="badge badge-teal">Verified</span></div>
         </div>
       </div>
 
-      <!-- General Details Form Card -->
-      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
-        <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 1.25rem;">Personal Details</h3>
-        
-        <form id="profile-form">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label class="form-label" for="profile-name">Full Name</label>
-              <input type="text" id="profile-name" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="profile-email">Email Address</label>
-              <input type="email" id="profile-email" class="form-control" disabled style="background-color: var(--color-parchment);">
-            </div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label class="form-label" for="profile-phone">Phone Number</label>
-              <input type="text" id="profile-phone" class="form-control" placeholder="+91 98765 43210">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="profile-language">Preferred Language</label>
-              <select id="profile-language" class="form-control">
-                <option value="en">English</option>
-                <option value="hi">हिन्दी (Hindi)</option>
-                <option value="mr">मराठी (Marathi)</option>
-                <option value="bn">বাংলা (Bengali)</option>
-                <option value="ta">தமிழ் (Tamil)</option>
-                <option value="te">తెలుగు (Telugu)</option>
-                <option value="kn">ಕನ್ನಡ (Kannada)</option>
-                <option value="gu">ગુજરાતી (Gujarati)</option>
-                <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-                <option value="ml">മലയാളം (Malayalam)</option>
-                <option value="ur">اردو (Urdu)</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label class="form-label" for="profile-district">District</label>
-              <input type="text" id="profile-district" class="form-control">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="profile-state">State</label>
-              <input type="text" id="profile-state" class="form-control">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="profile-address">Address</label>
-            <textarea id="profile-address" class="form-control" rows="2" placeholder="Postal residential or office address..."></textarea>
-          </div>
-
-          <div class="form-group" id="profile-bio-group">
-            <label class="form-label" for="profile-bio">Professional Bio</label>
-            <textarea id="profile-bio" class="form-control" rows="3" placeholder="Brief summary of experience, certifications, and mentorship focus..."></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;" data-i18n="save_changes">Save Changes</button>
-        </form>
-      </div>
-
-      <!-- Programmes & Courses Record Card -->
-      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-          <div>
-            <h3 id="profile-courses-heading" style="font-size: 1.1rem; font-weight: 700; color: var(--color-deep-indigo); margin: 0;">
-              Programmes & Courses Record
-            </h3>
-            <p id="profile-courses-subheading" style="font-size: 0.8rem; color: var(--color-text-muted); margin: 0.25rem 0 0 0;">
-              Active vocational skilling courses and enrolled credentials.
-            </p>
-          </div>
-        </div>
-        <div id="profile-courses-container">
-          <div style="text-align: center; padding: 1.5rem; color: var(--color-text-muted); font-size: 0.85rem;">
-            Loading programme records...
-          </div>
-        </div>
-      </div>
-
-      <!-- Password Change Card -->
-      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm);">
-        <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 1.25rem;">Security & Password</h3>
-        
+      <!-- Password Reset Form -->
+      <div class="profile-card">
+        <h3 style="font-size: 1rem; font-weight: 700; margin: 0 0 1rem 0; color: #0f172a;">Change Password</h3>
         <form id="change-password-form">
           <div class="form-group">
-            <label class="form-label" for="current-password">Current Password</label>
-            <input type="password" id="current-password" class="form-control" required autocomplete="current-password">
+            <label for="current-password">Current Password</label>
+            <input type="password" id="current-password" class="form-control" placeholder="••••••••" required>
           </div>
+          <div class="form-group">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" class="form-control" placeholder="••••••••" required>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" class="form-control" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn" style="width: 100%; background: #0f172a; color: #fff; padding: 0.6rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; border: none; cursor: pointer;">
+            Update Password
+          </button>
+        </form>
+      </div>
+    </aside>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+    <!-- Right Column: Profile Details & Courses -->
+    <section style="display: flex; flex-direction: column; gap: 1.5rem;">
+      
+      <!-- Profile Information Form -->
+      <div class="profile-card">
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 1.25rem 0; color: #0f172a; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9;">Personal Details</h3>
+        <form id="profile-form">
+          <div class="form-grid">
             <div class="form-group">
-              <label class="form-label" for="new-password">New Password</label>
-              <input type="password" id="new-password" class="form-control" minlength="6" required autocomplete="new-password">
+              <label for="profile-name">Full Name</label>
+              <input type="text" id="profile-name" class="form-control" value="Demo User" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="confirm-password">Confirm New Password</label>
-              <input type="password" id="confirm-password" class="form-control" minlength="6" required autocomplete="new-password">
+              <label for="profile-email">Email Address</label>
+              <input type="email" id="profile-email" class="form-control" value="demo@fieldatlas.org" readonly title="Email cannot be changed directly">
+            </div>
+            <div class="form-group">
+              <label for="profile-phone">Phone Number</label>
+              <input type="tel" id="profile-phone" class="form-control" value="+91 98765 43210">
+            </div>
+            <div class="form-group">
+              <label for="profile-id">Field Atlas ID</label>
+              <input type="text" id="profile-id" class="form-control" value="FA-88902" readonly>
+            </div>
+            <div class="form-group">
+              <label for="profile-language">Preferred Language</label>
+              <select id="profile-language" class="form-control">
+                <option value="en">English</option>
+                <option value="hi">Hindi (हिन्दी)</option>
+                <option value="mr">Marathi (मराठी)</option>
+                <option value="te">Telugu (తెలుగు)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="profile-provider">Training Provider / NGO</label>
+              <input type="text" id="profile-provider" class="form-control" value="Apex Vocational Skill Council">
+            </div>
+            <div class="form-group">
+              <label for="profile-district">District</label>
+              <input type="text" id="profile-district" class="form-control" value="Central Delhi">
+            </div>
+            <div class="form-group">
+              <label for="profile-state">State / Region</label>
+              <input type="text" id="profile-state" class="form-control" value="Delhi (NCT)">
             </div>
           </div>
 
-          <button type="submit" class="btn btn-outline">Update Password</button>
+          <div class="form-group">
+            <label for="profile-address">Address</label>
+            <input type="text" id="profile-address" class="form-control" value="102 Sector 4, Technical Training Complex">
+          </div>
+
+          <div class="form-group">
+            <label for="profile-bio">Bio / Professional Summary</label>
+            <textarea id="profile-bio" class="form-control" rows="3" style="resize: vertical;">Certified vocational specialist focused on renewable energy maintenance, solar grid setup, and youth employability tracking.</textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+            <button type="submit" class="btn" style="background: #0d9488; color: white; border: none; padding: 0.65rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">
+              Save Profile Changes
+            </button>
+          </div>
         </form>
       </div>
 
-    </div>
-  </div>
-</div>
+      <!-- Enrolled/Instructed Courses Summary -->
+      <div class="profile-card">
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 1rem 0; color: #0f172a;">Course Allocations & Records</h3>
+        <div id="profile-courses-container">
+          <!-- Populated by profile.js -->
+        </div>
+      </div>
 
-<div id="toast-container"></div>
+    </section>
+  </main>
 
-<!-- Core JavaScript Libraries -->
-<script src="js/config.js"></script>
-<script src="js/api.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/notifications.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/profile.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', async function() {
-    if (window.lucide) {
-      lucide.createIcons();
-    }
-
-    try {
-      const res = await FieldAtlasAPI.getCurrentUser();
-      if (res && res.user) {
-        const u = res.user;
-        const backBtn = document.getElementById('back-to-dashboard-btn');
-        if (backBtn) {
-          backBtn.href = u.role === 'trainee' ? 'trainee-dashboard.html' : 'trainer-dashboard.html';
-        }
-
-        const nameEl = document.getElementById('profile-full-name-display');
-        if (nameEl) nameEl.textContent = u.full_name || 'User Profile';
-
-        const idEl = document.getElementById('profile-id-display');
-        if (idEl) idEl.textContent = `Field Atlas ID: ${u.field_atlas_id || '—'}`;
-
-        const roleBadge = document.getElementById('profile-role-badge');
-        if (roleBadge) roleBadge.textContent = u.role ? u.role.charAt(0).toUpperCase() + u.role.slice(1) : 'User';
-
-        const providerBadge = document.getElementById('profile-provider-badge');
-        if (providerBadge) providerBadge.textContent = u.provider || 'National Network';
-
-        const bioGroup = document.getElementById('profile-bio-group');
-        if (bioGroup && u.role === 'trainee') {
-          bioGroup.style.display = 'none';
-        }
-
-        const coursesHeading = document.getElementById('profile-courses-heading');
-        const coursesSubheading = document.getElementById('profile-courses-subheading');
-        if (coursesHeading && coursesSubheading) {
-          if (u.role === 'trainee') {
-            coursesHeading.textContent = 'Enrolled Courses & Credentials';
-            coursesSubheading.textContent = 'Official learning track, completion progress, and verifiable certificates.';
-          } else {
-            coursesHeading.textContent = 'Courses Offered & Mentored';
-            coursesSubheading.textContent = 'Active and archived vocational skilling courses under your instruction.';
-          }
-        }
-      } else {
-        window.location.href = 'login.html';
-      }
-    } catch(err) {
-      window.location.href = 'login.html';
-    }
-
-    // Handle sign out
-    document.querySelectorAll('.btn-logout').forEach(btn => {
-      btn.addEventListener('click', async function(e) {
-        e.preventDefault();
-        try {
-          await FieldAtlasAPI.logout();
-        } catch(e) {}
-        window.location.href = 'login.html';
-      });
-    });
-  });
-</script>
+  <script src="js/config.js"></script>
+  <script src="js/mock-auth.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/profile.js"></script>
 </body>
 </html>

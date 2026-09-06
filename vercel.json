@@ -1,24 +1,25 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/login", "destination": "/login.html" },
-    { "source": "/login/", "destination": "/login.html" },
     { "source": "/register", "destination": "/register.html" },
-    { "source": "/register/", "destination": "/register.html" },
     { "source": "/verify-otp", "destination": "/verify-otp.html" },
-    { "source": "/verify-otp/", "destination": "/verify-otp.html" },
     { "source": "/forgot-password", "destination": "/forgot-password.html" },
-    { "source": "/forgot-password/", "destination": "/forgot-password.html" },
     { "source": "/trainer", "destination": "/trainer-dashboard.html" },
-    { "source": "/trainer/", "destination": "/trainer-dashboard.html" },
     { "source": "/trainee", "destination": "/trainee-dashboard.html" },
-    { "source": "/trainee/", "destination": "/trainee-dashboard.html" },
     { "source": "/profile", "destination": "/profile.html" },
-    { "source": "/profile/", "destination": "/profile.html" },
-    { "source": "/certificate/verify/:token", "destination": "/certificate-verify.html?token=:token" },
-    { "source": "/certificate/verify/:token/", "destination": "/certificate-verify.html?token=:token" }
+    { "source": "/certificate/verify/:token", "destination": "/certificate-verify.html?token=:token" }
+  ],
+  "redirects": [
+    { "source": "/trainer/", "destination": "/trainer", "permanent": false },
+    { "source": "/trainee/", "destination": "/trainee", "permanent": false },
+    { "source": "/login/", "destination": "/login", "permanent": false },
+    { "source": "/register/", "destination": "/register", "permanent": false },
+    { "source": "/profile/", "destination": "/profile", "permanent": false },
+    { "source": "/verify-otp/", "destination": "/verify-otp", "permanent": false },
+    { "source": "/forgot-password/", "destination": "/forgot-password", "permanent": false }
   ],
   "headers": [
     {
