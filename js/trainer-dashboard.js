@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Selects a follow-up item and updates the outreach preview message
+  // Selects a follow-up item and updates the outreach preview message for WhatsApp, SMS, and Call Script
   function selectFollowUpItem(item) {
     selectedFollowUp = item;
     renderFollowUpQueue();
@@ -195,8 +195,28 @@ document.addEventListener('DOMContentLoaded', function() {
     if (courseEl) courseEl.textContent = `${item.trainee_course} (${item.trainee_district})`;
 
     if (bubbleEl) {
-      const channelGreeting = currentChannel === 'whatsapp' ? '👋 Namaste' : 'Hello';
-      bubbleEl.textContent = `${channelGreeting} ${item.trainee_name}, this is Field Atlas checking in on your employment after completing your ${item.trainee_course} training. Could you please share your current work status?`;
+      if (currentChannel === 'sms') {
+        bubbleEl.innerHTML = `<div style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.4; color: #1E293B;">
+          <strong>[GOVT SMS GATEWAY]</strong><br>
+          Namaste ${item.trainee_name}, this is Field Atlas (Skill India Mission check-in). Please verify your work status for course "${item.trainee_course}".<br>
+          Reply <strong>1</strong> for Employed | <strong>2</strong> for Self-Employed | <strong>3</strong> for Seeking Work. Toll-free SMS.
+        </div>`;
+      } else if (currentChannel === 'call') {
+        bubbleEl.innerHTML = `<div style="font-size: 0.85rem; line-height: 1.5; color: #0F172A; text-align: left;">
+          <strong style="color: var(--color-teal); display: block; margin-bottom: 4px;">📞 TELE-OUTREACH CALL SCRIPT</strong>
+          <strong>1. Opening:</strong> "Namaste ${item.trainee_name}, I am calling from Field Atlas regarding your ${item.trainee_course} training in ${item.trainee_district}."<br>
+          <strong>2. Verification:</strong> "Are you currently employed or self-employed? What is your current monthly wage?"<br>
+          <strong>3. Action:</strong> Record response status below and save outcome record.
+        </div>`;
+      } else {
+        bubbleEl.innerHTML = `👋 Namaste ${item.trainee_name}, this is Field Atlas checking in on your employment after completing your ${item.trainee_course} training. Could you please share your current work status?`;
+      }
+    }
+
+    if (sendBtn) {
+      if (currentChannel === 'sms') sendBtn.innerHTML = '📲 Send SMS Outreach';
+      else if (currentChannel === 'call') sendBtn.innerHTML = '📞 Log Call & Save Result';
+      else sendBtn.innerHTML = '💬 Dispatch WhatsApp Outreach';
     }
 
     if (statusNoteEl) {
@@ -204,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
         statusNoteEl.innerHTML = `<span style="color: var(--color-coral); font-weight: 700;">⚠️ Participant has withdrawn consent. Outreach is blocked.</span>`;
         if (sendBtn) sendBtn.disabled = true;
       } else {
-        statusNoteEl.innerHTML = `<span style="color: var(--color-teal);">✓ Consent verified active. Safe to contact.</span>`;
+        statusNoteEl.innerHTML = `<span style="color: var(--color-teal);">✓ Consent verified active (${currentChannel.toUpperCase()} Channel Ready).</span>`;
         if (sendBtn) sendBtn.disabled = false;
       }
     }
@@ -215,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Sends an outreach attempt via the simulated gateway, verifying active consent and updating state
+  // Sends an outreach attempt via WhatsApp, SMS, or Tele-Call gateway
   async function dispatchFollowUpOutreach() {
     if (!selectedFollowUp) {
       FieldAtlasAPI.showToast('Please select a participant from the queue.', 'warning');
@@ -225,27 +245,66 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendBtn = document.getElementById('btn-dispatch-followup');
     const originalText = sendBtn.innerHTML;
     sendBtn.disabled = true;
-    sendBtn.innerHTML = 'Dispatching...';
+    sendBtn.innerHTML = 'Processing...';
 
-    // Show simulated typing state
     const bubbleEl = document.getElementById('simulator-message-text');
     if (bubbleEl) bubbleEl.classList.add('typing');
 
     try {
-      const res = await FieldAtlasAPI.post(`/api/outcomes/follow-ups/${selectedFollowUp.id}/send/`);
-      FieldAtlasAPI.showToast(res.message, 'success');
+      if (currentChannel === 'call') {
+        // Interactive Tele-Call Dialog
+        const response = prompt(
+          `Log Call Result for ${selectedFollowUp.trainee_name}:\n1 = Placed & Employed\n2 = Self-Employed\n3 = Needs Assistance\n\nEnter status number (1, 2, or 3):`,
+          '1'
+        );
+        if (response === null) {
+          sendBtn.disabled = false;
+          sendBtn.innerHTML = originalText;
+          if (bubbleEl) bubbleEl.classList.remove('typing');
+          return;
+        }
 
-      // Update local item
-      selectedFollowUp.attempts += 1;
-      selectedFollowUp.status = 'sent';
-      selectedFollowUp.last_attempt_at = new Date().toISOString();
+        let newStatus = 'sent';
+        let msg = 'Call outcome recorded: Learner confirmed active placement.';
+        if (response === '2') {
+          newStatus = 'sent';
+          msg = 'Call outcome recorded: Learner self-employed.';
+        } else if (response === '3') {
+          newStatus = 'needs_assistance';
+          msg = 'Call outcome recorded: Learner requested placement assistance.';
+        }
+
+        selectedFollowUp.attempts += 1;
+        selectedFollowUp.status = newStatus;
+        selectedFollowUp.last_attempt_at = new Date().toISOString();
+
+        FieldAtlasAPI.showToast(msg, 'success');
+        renderFollowUpQueue();
+      } else if (currentChannel === 'sms') {
+        // SMS Gateway Dispatch
+        const res = await FieldAtlasAPI.post(`/api/outcomes/follow-ups/${selectedFollowUp.id}/send/`, { channel: 'sms' });
+        FieldAtlasAPI.showToast(`SMS Gateway: Verification text sent to ${selectedFollowUp.trainee_name}!`, 'success');
+
+        selectedFollowUp.attempts += 1;
+        selectedFollowUp.status = 'sent';
+        selectedFollowUp.last_attempt_at = new Date().toISOString();
+        renderFollowUpQueue();
+      } else {
+        // WhatsApp Gateway Dispatch
+        const res = await FieldAtlasAPI.post(`/api/outcomes/follow-ups/${selectedFollowUp.id}/send/`, { channel: 'whatsapp' });
+        FieldAtlasAPI.showToast(res.message || `WhatsApp outreach sent to ${selectedFollowUp.trainee_name}!`, 'success');
+
+        selectedFollowUp.attempts += 1;
+        selectedFollowUp.status = 'sent';
+        selectedFollowUp.last_attempt_at = new Date().toISOString();
+        renderFollowUpQueue();
+      }
 
       setTimeout(() => {
         if (bubbleEl) bubbleEl.classList.remove('typing');
-        renderFollowUpQueue();
         sendBtn.disabled = false;
         sendBtn.innerHTML = originalText;
-      }, 750);
+      }, 500);
     } catch (err) {
       if (bubbleEl) bubbleEl.classList.remove('typing');
       sendBtn.disabled = false;

@@ -48,43 +48,43 @@
     ],
   };
 
-  // ─── Trainer Courses Data ────────────────────────────────────────────────
+  // ─── Trainer Courses Data (Govt NCVET & PMKVY 4.0 Standards) ───────────
   const TRAINER_COURSES = {
     courses: [
-      { id: 1, name: 'Full Stack Web Development', sector: 'IT/ITES', duration: '6 months', enrolled: 45, certified: 38, status: 'active', start_date: '2026-01-15' },
-      { id: 2, name: 'Data Analytics & Visualization', sector: 'IT/ITES', duration: '4 months', enrolled: 32, certified: 28, status: 'active', start_date: '2026-03-01' },
-      { id: 3, name: 'Healthcare Assistant', sector: 'Healthcare', duration: '3 months', enrolled: 28, certified: 25, status: 'active', start_date: '2026-02-10' },
-      { id: 4, name: 'Digital Marketing', sector: 'IT/ITES', duration: '3 months', enrolled: 52, certified: 44, status: 'completed', start_date: '2025-09-01' },
-      { id: 5, name: 'Construction Supervision', sector: 'Construction', duration: '5 months', enrolled: 35, certified: 30, status: 'active', start_date: '2026-04-01' },
-      { id: 6, name: 'Retail Management', sector: 'Retail', duration: '2 months', enrolled: 40, certified: 36, status: 'completed', start_date: '2025-11-15' },
+      { id: 1, title: 'Solar PV Installer (Suryamitra Initiative)', course_code: 'PMKVY-4.0-SOL-01', category: 'Renewable Energy', duration_weeks: 12, capacity: 50, enrolled_count: 48, status: 'published', start_date: '2026-01-10', end_date: '2026-04-10', district: 'Varanasi', state: 'Uttar Pradesh', language: 'Hindi / English', description: 'NSDC & National Institute of Solar Energy (NISE) certified course on solar PV array mounting, inverter setup, and grid synchronization.' },
+      { id: 2, title: 'Electric Vehicle Service Technician', course_code: 'NCVET-AUTO-EV-02', category: 'Automotive', duration_weeks: 16, capacity: 40, enrolled_count: 36, status: 'published', start_date: '2026-02-01', end_date: '2026-05-30', district: 'Pune', state: 'Maharashtra', language: 'Marathi / English', description: 'ASDC accredited program covering high-voltage battery management systems, EV drivetrain diagnostics, and charging infrastructure.' },
+      { id: 3, title: 'CNC Machine Operator & Programmer', course_code: 'DGT-CTS-CNC-03', category: 'Capital Goods & Mfg', duration_weeks: 24, capacity: 30, enrolled_count: 30, status: 'published', start_date: '2025-11-01', end_date: '2026-04-30', district: 'Belagavi', state: 'Karnataka', language: 'Kannada / English', description: 'Directorate General of Training (DGT) craftsman training scheme for multi-axis CNC lathe turning and milling operations.' },
+      { id: 4, title: 'General Duty Assistant (Healthcare)', course_code: 'HSSC-GDA-HC-04', category: 'Healthcare & Life Sciences', duration_weeks: 12, capacity: 60, enrolled_count: 55, status: 'published', start_date: '2026-01-15', end_date: '2026-04-15', district: 'Ranchi', state: 'Jharkhand', language: 'Hindi / English', description: 'Healthcare Sector Skill Council certified patient care management, vital signs recording, and emergency response assistance.' },
+      { id: 5, title: 'Micro Irrigation & Precision Farmer', course_code: 'ASCI-AGR-MI-05', category: 'Agriculture & Allied', duration_weeks: 8, capacity: 45, enrolled_count: 42, status: 'published', start_date: '2026-02-15', end_date: '2026-04-15', district: 'Jaipur', state: 'Rajasthan', language: 'Hindi', description: 'ASCI module focusing on drip and sprinkler irrigation automation, soil moisture sensors, and climate-resilient farming.' },
+      { id: 6, title: 'Full Stack Software Associate', course_code: 'NSDC-IT-FS-06', category: 'IT-ITeS', duration_weeks: 24, capacity: 50, enrolled_count: 46, status: 'published', start_date: '2026-01-05', end_date: '2026-06-30', district: 'Bengaluru', state: 'Karnataka', language: 'English', description: 'NASSCOM FutureSkills Prime accredited web development, REST API design, and cloud containerization.' },
     ],
     total: 6,
   };
 
-  // ─── Trainer Trainees List ───────────────────────────────────────────────
+  // ─── Trainer Trainees List (Skill India Digital Registered Trainees) ──────
   const TRAINER_TRAINEES = {
     trainees: [
-      { id: 1, field_atlas_id: 'FA-24-0182', name: 'Priya Patel', email: 'priya@example.in', course: 'Full Stack Web Dev', stage: 'Placed', provider: 'NSDC', district: 'Pune', wage: 22000, status: 'verified' },
-      { id: 2, field_atlas_id: 'FA-24-0201', name: 'Rahul Kumar', email: 'rahul@example.in', course: 'Data Analytics', stage: 'Certified', provider: 'NSDC', district: 'Mumbai', wage: null, status: 'pending' },
-      { id: 3, field_atlas_id: 'FA-24-0215', name: 'Anita Sharma', email: 'anita@example.in', course: 'Healthcare Assistant', stage: 'Placed', provider: 'PMKVY', district: 'Delhi', wage: 18000, status: 'verified' },
-      { id: 4, field_atlas_id: 'FA-24-0223', name: 'Vikram Singh', email: 'vikram@example.in', course: 'Construction Supervision', stage: 'Training', provider: 'SSM', district: 'Jaipur', wage: null, status: 'active' },
-      { id: 5, field_atlas_id: 'FA-24-0230', name: 'Meera Devi', email: 'meera@example.in', course: 'Retail Management', stage: 'Placed', provider: 'IL&FS', district: 'Bangalore', wage: 16500, status: 'verified' },
-      { id: 6, field_atlas_id: 'FA-24-0245', name: 'Arjun Nair', email: 'arjun@example.in', course: 'Digital Marketing', stage: 'Certified', provider: 'NSDC', district: 'Chennai', wage: null, status: 'pending' },
-      { id: 7, field_atlas_id: 'FA-24-0258', name: 'Sneha Gupta', email: 'sneha@example.in', course: 'Full Stack Web Dev', stage: 'Assessment', provider: 'PMKVY', district: 'Kolkata', wage: null, status: 'active' },
-      { id: 8, field_atlas_id: 'FA-24-0267', name: 'Deepak Yadav', email: 'deepak@example.in', course: 'Data Analytics', stage: 'Placed', provider: 'NSDC', district: 'Hyderabad', wage: 20000, status: 'verified' },
+      { id: 1, field_atlas_id: 'PMKVY-4.0-ND-2026-88219', name: 'Rajesh Kumar Verma', email: 'rajesh.verma@pmkvy-portal.in', course: 'Solar PV Installer', stage: 'placed', provider: 'National Institute of Solar Energy', district: 'Varanasi', state: 'Uttar Pradesh', wage: 21500, consent_status: 'active', latest_placement: { role: 'Solar Assembly Specialist', wage: 21500, validation_status: 'verified' } },
+      { id: 2, field_atlas_id: 'NCVET-EV-2026-99401', name: 'Ananya Deshmukh', email: 'ananya.d@asdc-skill.in', course: 'EV Service Technician', stage: 'retained', provider: 'Automotive Skill Council', district: 'Pune', state: 'Maharashtra', wage: 24000, consent_status: 'active', latest_placement: { role: 'EV Diagnostics Technician', wage: 24000, validation_status: 'verified' } },
+      { id: 3, field_atlas_id: 'DGT-CTS-2025-77102', name: 'Suresh Chandran', email: 'suresh.c@dgt-ati.gov.in', course: 'CNC Machine Operator', stage: 'placed', provider: 'Advanced Training Institute', district: 'Belagavi', state: 'Karnataka', wage: 19500, consent_status: 'active', latest_placement: { role: 'CNC Milling Operator', wage: 19500, validation_status: 'verified' } },
+      { id: 4, field_atlas_id: 'PMKVY-GDA-2026-33910', name: 'Sunita Soren', email: 'sunita.soren@hssc.in', course: 'General Duty Assistant', stage: 'follow_up_due', provider: 'Healthcare Sector Skill Council', district: 'Ranchi', state: 'Jharkhand', wage: 17200, consent_status: 'active', latest_placement: { role: 'Hospital Patient Care Asst', wage: 17200, validation_status: 'pending' } },
+      { id: 5, field_atlas_id: 'NCVET-AGR-2026-44109', name: 'Vikram Singh Rathore', email: 'vikram.r@asci-skill.in', course: 'Micro Irrigation Specialist', stage: 'placed', provider: 'Agriculture Skill Council', district: 'Jaipur', state: 'Rajasthan', wage: 18500, consent_status: 'active', latest_placement: { role: 'Irrigation Systems Tech', wage: 18500, validation_status: 'verified' } },
+      { id: 6, field_atlas_id: 'NSDC-IT-2026-55201', name: 'Priya Patel', email: 'priya.patel@nsdc-digital.in', course: 'Full Stack Software Associate', stage: 'retained', provider: 'NASSCOM FutureSkills Prime', district: 'Bengaluru', state: 'Karnataka', wage: 28000, consent_status: 'active', latest_placement: { role: 'Junior Web Developer', wage: 28000, validation_status: 'verified' } },
+      { id: 7, field_atlas_id: 'PMKVY-4.0-UP-2026-11892', name: 'Amitabh Tripathi', email: 'amitabh.t@pmkvy.in', course: 'Solar PV Installer', stage: 'training', provider: 'National Institute of Solar Energy', district: 'Varanasi', state: 'Uttar Pradesh', wage: null, consent_status: 'active', latest_placement: null },
+      { id: 8, field_atlas_id: 'NCVET-AUTO-2026-66381', name: 'Kavita Naik', email: 'kavita.n@asdc.in', course: 'EV Service Technician', stage: 'assessment', provider: 'Automotive Skill Council', district: 'Pune', state: 'Maharashtra', wage: null, consent_status: 'active', latest_placement: null },
     ],
     total: 8,
     page: 1,
     per_page: 20,
   };
 
-  // ─── Follow-Up Queue ─────────────────────────────────────────────────────
+  // ─── Follow-Up Queue (Outreach Channels: WhatsApp, SMS, Tele-Call) ────────
   const TRAINER_FOLLOWUPS = {
     queue: [
-      { id: 1, trainee_name: 'Rahul Kumar', trainee_id: 'FA-24-0201', type: 'placement_verification', priority: 'high', message: 'Pending placement verification at Infosys', days_pending: 3, channel: 'whatsapp' },
-      { id: 2, trainee_name: 'Arjun Nair', trainee_id: 'FA-24-0245', type: 'certificate_collection', priority: 'medium', message: 'Certificate ready for collection', days_pending: 7, channel: 'sms' },
-      { id: 3, trainee_name: 'Sneha Gupta', trainee_id: 'FA-24-0258', type: 'assessment_reminder', priority: 'high', message: 'Assessment scheduled for next week', days_pending: 1, channel: 'whatsapp' },
-      { id: 4, trainee_name: 'Vikram Singh', trainee_id: 'FA-24-0223', type: 'attendance', priority: 'low', message: 'Absent for 3 consecutive days', days_pending: 5, channel: 'call' },
+      { id: 1, trainee_name: 'Sunita Soren', trainee_unified_id: 'PMKVY-GDA-2026-33910', trainee_course: 'General Duty Assistant', trainee_district: 'Ranchi', trainee_consent: 'active', milestone: '90_day_retention', attempts: 2, status: 'needs_assistance', is_overdue: true, is_due_today: false, next_contact_date: '2026-09-07', trainer_notes: 'Learner reported shift timing issues. Requires 3-month retention check.' },
+      { id: 2, trainee_name: 'Rajesh Kumar Verma', trainee_unified_id: 'PMKVY-4.0-ND-2026-88219', trainee_course: 'Solar PV Installer', trainee_district: 'Varanasi', trainee_consent: 'active', milestone: '30_day_verification', attempts: 1, status: 'pending', is_overdue: false, is_due_today: true, next_contact_date: '2026-09-06', trainer_notes: 'Verify 1st month salary slip upload with employer NISE Solar Corp.' },
+      { id: 3, trainee_name: 'Suresh Chandran', trainee_unified_id: 'DGT-CTS-2025-77102', trainee_course: 'CNC Machine Operator', trainee_district: 'Belagavi', trainee_consent: 'active', milestone: 'placement_check', attempts: 0, status: 'pending', is_overdue: false, is_due_today: true, next_contact_date: '2026-09-06', trainer_notes: 'Confirm joining date at Kirloskar Systems Belagavi unit.' },
+      { id: 4, trainee_name: 'Vikram Singh Rathore', trainee_unified_id: 'NCVET-AGR-2026-44109', trainee_course: 'Micro Irrigation Specialist', trainee_district: 'Jaipur', trainee_consent: 'active', milestone: 'retention_check', attempts: 3, status: 'sent', is_overdue: false, is_due_today: false, next_contact_date: '2026-09-12', trainer_notes: 'Outreach dispatched via WhatsApp. Awaiting self-employment verification.' },
     ],
     total: 4,
   };
