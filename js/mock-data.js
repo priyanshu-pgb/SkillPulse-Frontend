@@ -64,16 +64,18 @@
   // ─── Trainer Trainees List (Skill India Digital Registered Trainees) ──────
   const TRAINER_TRAINEES = {
     trainees: [
-      { id: 1, field_atlas_id: 'PMKVY-4.0-ND-2026-88219', name: 'Rajesh Kumar Verma', email: 'rajesh.verma@pmkvy-portal.in', course: 'Solar PV Installer', stage: 'placed', provider: 'National Institute of Solar Energy', district: 'Varanasi', state: 'Uttar Pradesh', wage: 21500, consent_status: 'active', latest_placement: { role: 'Solar Assembly Specialist', wage: 21500, validation_status: 'verified' } },
-      { id: 2, field_atlas_id: 'NCVET-EV-2026-99401', name: 'Ananya Deshmukh', email: 'ananya.d@asdc-skill.in', course: 'EV Service Technician', stage: 'retained', provider: 'Automotive Skill Council', district: 'Pune', state: 'Maharashtra', wage: 24000, consent_status: 'active', latest_placement: { role: 'EV Diagnostics Technician', wage: 24000, validation_status: 'verified' } },
-      { id: 3, field_atlas_id: 'DGT-CTS-2025-77102', name: 'Suresh Chandran', email: 'suresh.c@dgt-ati.gov.in', course: 'CNC Machine Operator', stage: 'placed', provider: 'Advanced Training Institute', district: 'Belagavi', state: 'Karnataka', wage: 19500, consent_status: 'active', latest_placement: { role: 'CNC Milling Operator', wage: 19500, validation_status: 'verified' } },
-      { id: 4, field_atlas_id: 'PMKVY-GDA-2026-33910', name: 'Sunita Soren', email: 'sunita.soren@hssc.in', course: 'General Duty Assistant', stage: 'follow_up_due', provider: 'Healthcare Sector Skill Council', district: 'Ranchi', state: 'Jharkhand', wage: 17200, consent_status: 'active', latest_placement: { role: 'Hospital Patient Care Asst', wage: 17200, validation_status: 'pending' } },
-      { id: 5, field_atlas_id: 'NCVET-AGR-2026-44109', name: 'Vikram Singh Rathore', email: 'vikram.r@asci-skill.in', course: 'Micro Irrigation Specialist', stage: 'placed', provider: 'Agriculture Skill Council', district: 'Jaipur', state: 'Rajasthan', wage: 18500, consent_status: 'active', latest_placement: { role: 'Irrigation Systems Tech', wage: 18500, validation_status: 'verified' } },
-      { id: 6, field_atlas_id: 'NSDC-IT-2026-55201', name: 'Priya Patel', email: 'priya.patel@nsdc-digital.in', course: 'Full Stack Software Associate', stage: 'retained', provider: 'NASSCOM FutureSkills Prime', district: 'Bengaluru', state: 'Karnataka', wage: 28000, consent_status: 'active', latest_placement: { role: 'Junior Web Developer', wage: 28000, validation_status: 'verified' } },
-      { id: 7, field_atlas_id: 'PMKVY-4.0-UP-2026-11892', name: 'Amitabh Tripathi', email: 'amitabh.t@pmkvy.in', course: 'Solar PV Installer', stage: 'training', provider: 'National Institute of Solar Energy', district: 'Varanasi', state: 'Uttar Pradesh', wage: null, consent_status: 'active', latest_placement: null },
-      { id: 8, field_atlas_id: 'NCVET-AUTO-2026-66381', name: 'Kavita Naik', email: 'kavita.n@asdc.in', course: 'EV Service Technician', stage: 'assessment', provider: 'Automotive Skill Council', district: 'Pune', state: 'Maharashtra', wage: null, consent_status: 'active', latest_placement: null },
+      { id: 1, field_atlas_id: 'PMKVY-4.0-ND-2026-88219', name: 'Rajesh Kumar Verma', email: 'rajesh.verma@pmkvy-portal.in', course: 'Solar PV Installer', stage: 'placed', provider: 'National Institute of Solar Energy', district: 'Varanasi', state: 'Uttar Pradesh', wage: 21500, consent_status: 'active', status: 'verified' },
+      { id: 2, field_atlas_id: 'NCVET-EV-2026-99401', name: 'Ananya Deshmukh', email: 'ananya.d@asdc-skill.in', course: 'EV Service Technician', stage: 'Certified', provider: 'Automotive Skill Council', district: 'Pune', state: 'Maharashtra', wage: 24000, consent_status: 'active', status: 'active' },
+      { id: 3, field_atlas_id: 'DGT-CTS-2025-77102', name: 'Suresh Chandran', email: 'suresh.c@dgt-ati.gov.in', course: 'CNC Machine Operator', stage: 'Placed', provider: 'Advanced Training Institute', district: 'Belagavi', state: 'Karnataka', wage: 19500, consent_status: 'active', status: 'verified' },
+      { id: 4, field_atlas_id: 'PMKVY-GDA-2026-33910', name: 'Sunita Soren', email: 'sunita.soren@hssc.in', course: 'General Duty Assistant', stage: 'Assessment', provider: 'Healthcare Sector Skill Council', district: 'Ranchi', state: 'Jharkhand', wage: null, consent_status: 'active', status: 'pending' },
+      { id: 5, field_atlas_id: 'NCVET-AGR-2026-44109', name: 'Vikram Singh Rathore', email: 'vikram.r@asci-skill.in', course: 'Micro Irrigation Specialist', stage: 'Training', provider: 'Agriculture Skill Council', district: 'Jaipur', state: 'Rajasthan', wage: null, consent_status: 'active', status: 'active' },
+      { id: 6, field_atlas_id: 'NSDC-IT-2026-55201', name: 'Priya Patel', email: 'priya.patel@nsdc-digital.in', course: 'Full Stack Software Associate', stage: 'Certified', provider: 'NASSCOM FutureSkills Prime', district: 'Bengaluru', state: 'Karnataka', wage: null, consent_status: 'active', status: 'active' },
+      { id: 7, field_atlas_id: 'PMKVY-4.0-UP-2026-11892', name: 'Amitabh Tripathi', email: 'amitabh.t@pmkvy.in', course: 'Solar PV Installer', stage: 'Training', provider: 'National Institute of Solar Energy', district: 'Varanasi', state: 'Uttar Pradesh', wage: null, consent_status: 'active', status: 'active' },
+      { id: 8, field_atlas_id: 'NCVET-AUTO-2026-66381', name: 'Kavita Naik', email: 'kavita.n@asdc.in', course: 'EV Service Technician', stage: 'Assessment', provider: 'Automotive Skill Council', district: 'Pune', state: 'Maharashtra', wage: null, consent_status: 'active', status: 'pending' },
+      { id: 9, field_atlas_id: 'DDU-GKY-2026-77812', name: 'Ramesh Jha', email: 'ramesh.jha@ddugky.in', course: 'Retail Sales Associate', stage: 'Placed', provider: 'Ministry of Rural Development', district: 'Patna', state: 'Bihar', wage: 16000, consent_status: 'active', status: 'verified' },
+      { id: 10, field_atlas_id: 'NULM-2026-33921', name: 'Meena Kumari', email: 'meena.k@nulm.gov.in', course: 'Apparel Pattern Maker', stage: 'Placed', provider: 'National Urban Livelihoods Mission', district: 'Surat', state: 'Gujarat', wage: 18500, consent_status: 'active', status: 'verified' }
     ],
-    total: 8,
+    total: 10,
     page: 1,
     per_page: 20,
   };
@@ -226,6 +228,8 @@
     // Catch-all for any trainee/trainer sub-endpoints
     '/api/trainee/': () => mockResponse({ message: 'OK' }),
     '/api/trainer/': () => mockResponse({ message: 'OK' }),
+    
+    '/api/i18n/set-language/': () => mockResponse({ message: 'Language updated successfully.' }),
   };
 
   // ─── Patch fetch to intercept data endpoints ─────────────────────────────

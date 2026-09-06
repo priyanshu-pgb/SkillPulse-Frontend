@@ -533,18 +533,63 @@
       } catch (e) { console.warn('Follow-ups load error:', e); }
     }
 
+    let currentFollowUp = null;
+    let currentChannel = 'whatsapp';
+
+    document.querySelectorAll('.simulator-tab-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.simulator-tab-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentChannel = e.target.getAttribute('data-channel');
+        if (currentFollowUp) {
+          updateSimulatorMessage();
+        }
+      });
+    });
+
+    function updateSimulatorMessage() {
+      const { name, message } = currentFollowUp;
+      const msgBox = document.getElementById('simulator-message');
+      if (currentChannel === 'whatsapp') {
+        msgBox.innerHTML = `Hi ${name}, this is a reminder: ${message}. Please reply with your current status.`;
+      } else if (currentChannel === 'sms') {
+        msgBox.innerHTML = `[SMS] Namaste ${name}, Skill India checking in. Reply 1 for Employed, 2 for Unemployed.`;
+      } else if (currentChannel === 'call') {
+        msgBox.innerHTML = `📞 CALL SCRIPT: "Hello ${name}, I am calling from Field Atlas to verify your status..."`;
+      }
+    }
+
     window.selectFollowUp = function(el, name, message) {
+      currentFollowUp = { name, message };
       document.querySelectorAll('.queue-item').forEach(q => q.classList.remove('selected'));
       el.classList.add('selected');
-      document.getElementById('simulator-message').textContent = `Hi ${name}, this is a reminder: ${message}. Please reply with your current status.`;
+      updateSimulatorMessage();
       document.getElementById('simulator-actions').style.display = 'flex';
     };
 
+    const sendActionBtn = document.querySelector('#simulator-actions .btn-primary');
+    if (sendActionBtn) {
+      sendActionBtn.addEventListener('click', () => {
+        if (!currentFollowUp) return;
+        FieldAtlasAPI.showToast(`${currentChannel.toUpperCase()} message sent to ${currentFollowUp.name}!`, 'success');
+      });
+    }
+
+    const resolveActionBtn = document.querySelector('#simulator-actions .btn-outline');
+    if (resolveActionBtn) {
+      resolveActionBtn.addEventListener('click', () => {
+        if (!currentFollowUp) return;
+        FieldAtlasAPI.showToast(`Marked ${currentFollowUp.name}'s follow-up as resolved.`, 'success');
+      });
+    }
+
     // ═══ Load Trainees ═══
+    let allTrainees = [];
     async function loadTrainees() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainer/trainees/');
-        renderTraineesTable(data.trainees || []);
+        allTrainees = data.trainees || [];
+        renderTraineesTable(allTrainees);
       } catch (e) { console.warn('Trainees load error:', e); }
     }
 
@@ -564,6 +609,19 @@
           <td><span class="badge ${statusBadge}">${t.status}</span></td>
         </tr>`;
       }).join('');
+    }
+
+    const traineeSearchInput = document.getElementById('trainee-search');
+    if (traineeSearchInput) {
+      traineeSearchInput.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        const filtered = allTrainees.filter(t => 
+          t.name.toLowerCase().includes(q) || 
+          t.field_atlas_id.toLowerCase().includes(q) || 
+          (t.email && t.email.toLowerCase().includes(q))
+        );
+        renderTraineesTable(filtered);
+      });
     }
 
     // ═══ Load Providers ═══
