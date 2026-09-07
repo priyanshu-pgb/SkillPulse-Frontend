@@ -23,7 +23,7 @@
       <div class="sidebar-header">
         <a href="/" class="brand-badge">
           <div class="brand-logo-icon">
-            <i data-lucide="compass" style="width: 20px; height: 20px;"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
           </div>
           <div class="brand-text-wrap">
             <span class="brand-title">Field Atlas</span>
@@ -171,15 +171,15 @@
         <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Quick Actions</h3>
         <div class="trainee-action-grid" style="margin-bottom: 1.5rem;">
           <button class="trainee-action-btn" onclick="switchTraineeView('learning')">
-            <i data-lucide="book-open" style="width: 22px; height: 22px; color: var(--color-teal);"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
             My Courses
           </button>
           <button class="trainee-action-btn" onclick="switchTraineeView('certificates')">
-            <i data-lucide="award" style="width: 22px; height: 22px; color: var(--color-ochre);"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-ochre)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
             Certificates
           </button>
           <button class="trainee-action-btn" onclick="FieldAtlasAPI.showToast('Demo: 90-day check-in submitted!', 'success')">
-            <i data-lucide="clipboard-check" style="width: 22px; height: 22px; color: var(--color-coral);"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
             90-Day Check-in
           </button>
         </div>
@@ -340,19 +340,31 @@
       if (completionEl) completionEl.textContent = data.completion_percentage + '%';
       if (completionBar) completionBar.style.width = data.completion_percentage + '%';
 
-      // Stage Rail
+      // Stage Rail with crisp, visible symbols
       const rail = document.getElementById('trainee-stage-rail');
-      if (rail && data.stages) {
-        const icons = ['user-plus', 'book-open', 'clipboard-check', 'award', 'briefcase'];
-        rail.innerHTML = data.stages.map((s, i) => `
+      if (rail) {
+        const stagesList = data.stages || ['Enrolled', 'Training', 'Assessment', 'Certified', 'Placed'];
+        const stageSVGs = [
+          // Enrolled: User Check / Registration
+          `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>`,
+          // Training: Open Book / Learning
+          `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+          // Assessment: Checked Exam Clipboard
+          `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>`,
+          // Certified: Medal / Award Certificate
+          `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+          // Placed: Briefcase / Career Outcome
+          `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>`
+        ];
+
+        rail.innerHTML = stagesList.map((s, i) => `
           <div class="trainee-stage-step ${i <= data.current_stage_index ? 'active' : ''}">
-            <div class="trainee-stage-dot">
-              <i data-lucide="${icons[i]}" style="width: 16px; height: 16px;"></i>
+            <div class="trainee-stage-dot" title="${s}">
+              ${stageSVGs[i] || stageSVGs[0]}
             </div>
             <div class="trainee-stage-text">${s}</div>
           </div>
         `).join('');
-        if (window.lucide) lucide.createIcons();
       }
 
       // Placement

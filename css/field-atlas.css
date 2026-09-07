@@ -686,9 +686,26 @@ p {
   transition: all var(--transition-fast);
 }
 
+.route-step-circle svg {
+  width: 20px !important;
+  height: 20px !important;
+  display: block;
+}
+
 .route-step-item.active .route-step-circle {
-  background-color: var(--color-teal);
-  color: #FFFFFF;
+  background-color: var(--color-teal) !important;
+  border-color: var(--color-teal) !important;
+  color: #FFFFFF !important;
+}
+
+.route-step-item.active .route-step-circle svg {
+  stroke: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+.route-step-item:not(.active) .route-step-circle svg {
+  stroke: var(--color-teal) !important;
+  color: var(--color-teal) !important;
 }
 
 .route-step-label {
@@ -1357,8 +1374,7 @@ p {
 .trainee-welcome-card h1,
 .trainee-welcome-card h2,
 .trainee-welcome-card p,
-.trainee-welcome-card div,
-.trainee-welcome-card span {
+.trainee-welcome-card .trainee-stage-text {
   color: #FFFFFF !important;
 }
 
@@ -1374,11 +1390,11 @@ p {
 .trainee-stage-rail::before {
   content: '';
   position: absolute;
-  top: 18px;
+  top: 20px;
   left: 5%;
   right: 5%;
   height: 3px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   z-index: 1;
 }
 
@@ -1388,32 +1404,61 @@ p {
   align-items: center;
   position: relative;
   z-index: 2;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .trainee-stage-dot {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid #FFFFFF;
-  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
+  transition: all var(--transition-fast);
 }
 
+.trainee-stage-dot svg,
+.trainee-stage-dot i {
+  width: 18px !important;
+  height: 18px !important;
+  display: inline-block !important;
+  stroke-width: 2.3px !important;
+}
+
+/* Active & Completed Stage Dots: Solid Pure White Circle with High-Contrast Deep Teal Icon */
 .trainee-stage-step.active .trainee-stage-dot {
-  background: #FFFFFF;
-  color: var(--color-teal);
+  background: #FFFFFF !important;
+  color: #0E8176 !important;
+  border: 2px solid #FFFFFF !important;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.35), 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+.trainee-stage-step.active .trainee-stage-dot svg,
+.trainee-stage-step.active .trainee-stage-dot i {
+  color: #0E8176 !important;
+  stroke: #0E8176 !important;
+  fill: none !important;
+}
+
+/* Inactive Stage Dots: Translucent Glass Circle with Crisp White Icon */
+.trainee-stage-step:not(.active) .trainee-stage-dot {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  color: #FFFFFF !important;
+}
+
+.trainee-stage-step:not(.active) .trainee-stage-dot svg,
+.trainee-stage-step:not(.active) .trainee-stage-dot i {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+  fill: none !important;
 }
 
 .trainee-stage-text {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .trainee-action-grid {

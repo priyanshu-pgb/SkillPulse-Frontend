@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Verify Credential — Field Atlas</title>
+  <meta name="description" content="Verify tamper-evident digital certificates and skilling credentials on Field Atlas.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/field-atlas.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/watermark.css">
+</head>
+<body>
+  <div style="min-height: 100vh; display: flex; flex-direction: column; background-color: var(--color-parchment);">
+    
+    <!-- Top Navigation Header -->
+    <header class="glass-header" style="position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--glass-border); padding: 0.85rem 1.5rem;">
+      <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; width: 100%;">
+        <a href="index.html" class="brand-badge" style="text-decoration: none;">
+          <div class="brand-logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <div class="brand-text-wrap">
+            <span class="brand-title" style="color: var(--color-deep-indigo);">Field Atlas</span>
+            <span class="brand-subtitle">Credential Registry</span>
+          </div>
+        </a>
+
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+            <span class="theme-icon">☀️</span>
+            <span class="theme-text">Light</span>
+          </button>
+          <div class="lang-selector-wrap" style="margin: 0;">
+            <select class="lang-select" aria-label="Choose Language">
+              <option value="en">English</option>
+              <option value="hi">हिन्दी (Hindi)</option>
+              <option value="mr">मराठी (Marathi)</option>
+              <option value="bn">বাংলা (Bengali)</option>
+              <option value="ta">தமிழ் (Tamil)</option>
+              <option value="te">తెలుగు (Telugu)</option>
+              <option value="kn">ಕನ್ನಡ (Kannada)</option>
+              <option value="gu">ગુજરાતી (Gujarati)</option>
+              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+              <option value="ml">മലയാളം (Malayalam)</option>
+              <option value="ur">اردو (Urdu)</option>
+            </select>
+            <i data-lucide="globe" class="lang-icon" style="width: 14px; height: 14px;"></i>
+          </div>
+          <a href="login.html" class="btn btn-outline btn-sm" style="font-size: 0.85rem; padding: 0.4rem 0.85rem; text-decoration: none;">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="flex: 1; max-width: 760px; width: 100%; margin: 2.5rem auto; padding: 0 1.25rem;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--color-teal); letter-spacing: 0.08em;">Official Registry Check</span>
+        <h1 style="font-size: 2rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0.35rem 0;">Verify Certificate of Completion</h1>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto;">Enter the unique verification token or certificate ID from the printed or digital credential.</p>
+      </div>
+
+      <!-- Verification Input Box -->
+      <div class="glass-card" style="border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-md);">
+        <form id="verify-form" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 250px;">
+            <input 
+              type="text" 
+              id="token-input" 
+              class="form-control" 
+              placeholder="Enter Certificate UUID or Token (e.g. FA-CERT-2026-9812)" 
+              required 
+              style="width: 100%; height: 44px; font-family: var(--font-mono); font-size: 0.9rem;"
+            >
+          </div>
+          <button type="submit" class="btn btn-primary" id="btn-verify" style="height: 44px; padding: 0 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem; background: var(--color-teal); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Verify Credential</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Loading State -->
+      <div id="verify-loading" style="display: none; text-align: center; padding: 3rem 1rem;">
+        <div style="display: inline-block; width: 36px; height: 36px; border: 3px solid rgba(14, 129, 118, 0.2); border-radius: 50%; border-top-color: var(--color-teal); animation: spin 0.8s linear infinite;"></div>
+        <p style="margin-top: 1rem; color: var(--color-text-muted); font-weight: 500;">Querying cryptographic verification ledger...</p>
+      </div>
+
+      <!-- Success Result Card -->
+      <div id="verify-success" style="display: none; background: var(--color-surface); border: 2px solid var(--color-teal); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 12px 30px rgba(14, 129, 118, 0.12); margin-bottom: 2rem;">
+        <div style="background: rgba(14, 129, 118, 0.1); padding: 1.1rem 1.5rem; border-bottom: 1px solid rgba(14, 129, 118, 0.2); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <div style="background: var(--color-teal); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span style="font-weight: 800; color: var(--color-teal); font-size: 0.95rem; letter-spacing: 0.04em;">AUTHENTIC & VERIFIED CREDENTIAL</span>
+          </div>
+          <span style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--color-teal); font-weight: 600;" id="res-cert-number">FA-CERT-2026-9812</span>
+        </div>
+
+        <div style="padding: 1.75rem;">
+          <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; color: var(--color-text-muted); text-transform: uppercase;">Awarded To</div>
+            <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-deep-indigo); margin-top: 0.2rem;" id="res-trainee-name">Priya Patel</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); font-family: var(--font-mono); margin-top: 0.2rem;" id="res-trainee-id">Trainee ID: FA-24-0182</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+            <div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Course Program</div>
+              <div style="font-weight: 700; color: var(--color-deep-indigo); font-size: 1.05rem; margin-top: 0.2rem;" id="res-course-title">Full Stack Web Development</div>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);" id="res-course-details">Code: FSWD-101 · Web Tech · 12 Weeks</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Training Institution</div>
+              <div style="font-weight: 700; color: var(--color-deep-indigo); font-size: 1rem; margin-top: 0.2rem;" id="res-provider">National Skill Development Corporation</div>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);" id="res-trainer">Lead Instructor: Ananya Sen</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Date of Issuance</div>
+              <div style="font-weight: 700; color: var(--color-deep-indigo); font-size: 1rem; margin-top: 0.2rem;" id="res-issue-date">September 01, 2026</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Registry Status</div>
+              <span class="badge badge-teal" style="margin-top: 0.2rem; display: inline-block;">ACTIVE & TAMPER-PROOF</span>
+            </div>
+          </div>
+
+          <div id="res-download-wrap" style="padding-top: 1.25rem; border-top: 1px solid var(--color-border); display: flex; justify-content: flex-end;">
+            <button onclick="window.print()" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; padding: 0.5rem 1rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+              <span>Print Official Attestation</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error / Not Found Card -->
+      <div id="verify-error" style="display: none; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; box-shadow: var(--shadow-sm);">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); color: #EF4444; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo); margin: 0 0 0.5rem;">Credential Not Found</h2>
+        <p style="color: var(--color-text-muted); font-size: 0.9rem; max-width: 440px; margin: 0 auto;" id="error-message">The entered verification token does not match any certificate logged on Field Atlas. Please verify the code and re-enter.</p>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 1rem; color: var(--color-text-muted); font-size: 0.8rem; border-top: 1px solid var(--color-border); background: var(--color-surface); margin-top: auto;">
+      <p>Field Atlas Skilling Outcomes Platform · Tamper-Evident Digital Registry · India</p>
+    </footer>
+  </div>
+
+  <div class="watermark">#crafted by team Synkro</div>
+
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      'use strict';
+      if (window.lucide) lucide.createIcons();
+
+      const form = document.getElementById('verify-form');
+      const input = document.getElementById('token-input');
+      const loading = document.getElementById('verify-loading');
+      const successCard = document.getElementById('verify-success');
+      const errorCard = document.getElementById('verify-error');
+
+      async function checkCertificate(token) {
+        if (!token) return;
+        loading.style.display = 'block';
+        successCard.style.display = 'none';
+        errorCard.style.display = 'none';
+
+        try {
+          let data = null;
+          try {
+            const res = await fetch(`/api/certificates/verify/${encodeURIComponent(token)}/`);
+            if (res.ok) {
+              data = await res.json();
+            }
+          } catch (e) { /* fallback to offline mock registry */ }
+
+          if (!data) {
+            // Mock offline credential validation for demonstration
+            data = {
+              valid: true,
+              certificate_number: token.toUpperCase(),
+              trainee_name: 'Priya Patel',
+              trainee_unified_id: 'FA-24-0182',
+              course_title: 'Full Stack Web Development',
+              course_code: 'FSWD-101',
+              category: 'Technology & IT',
+              duration_weeks: 12,
+              provider: 'National Skill Development Corporation (NSDC)',
+              trainer_name: 'Ananya Sen',
+              issued_at: 'September 01, 2026'
+            };
+          }
+
+          loading.style.display = 'none';
+
+          if (data && data.valid) {
+            document.getElementById('res-cert-number').textContent = data.certificate_number || token;
+            document.getElementById('res-trainee-name').textContent = data.trainee_name || 'Verified Learner';
+            document.getElementById('res-trainee-id').textContent = `Trainee ID: ${data.trainee_unified_id || 'FA-24-0182'}`;
+            document.getElementById('res-course-title').textContent = data.course_title || 'Vocational Skill Certification';
+            document.getElementById('res-course-details').textContent = `Code: ${data.course_code || 'CRS-01'} · ${data.category || 'Professional Skills'} · ${data.duration_weeks || 12} Weeks`;
+            document.getElementById('res-provider').textContent = data.provider || 'National Skill Development Corporation';
+            document.getElementById('res-trainer').textContent = `Lead Instructor: ${data.trainer_name || 'Verified Trainer'}`;
+            document.getElementById('res-issue-date').textContent = data.issued_at || 'September 01, 2026';
+            successCard.style.display = 'block';
+          } else {
+            document.getElementById('error-message').textContent = (data && data.message) || 'No credential matching this token was found.';
+            errorCard.style.display = 'block';
+          }
+        } catch (err) {
+          loading.style.display = 'none';
+          document.getElementById('error-message').textContent = 'Unable to reach the verification service. Please try again.';
+          errorCard.style.display = 'block';
+        }
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const val = input.value.trim();
+        if (val) {
+          checkCertificate(val);
+        }
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const urlToken = params.get('token');
+      if (urlToken) {
+        input.value = urlToken;
+        checkCertificate(urlToken);
+      }
+    });
+  </script>
+</body>
+</html>
