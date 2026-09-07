@@ -84,7 +84,7 @@
     <div class="main-wrapper">
 
       <!-- Top Header -->
-      <header class="top-header">
+      <header class="top-header glass-header">
         <div class="header-left">
           <button class="mobile-drawer-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
             <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
@@ -94,15 +94,24 @@
             <span id="header-active-view-name">Overview</span>
           </div>
         </div>
-        <div class="header-right">
+        <div class="header-right" style="display: flex; align-items: center; gap: 0.65rem;">
+          <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+            <span class="theme-icon">☀️</span>
+            <span class="theme-text">Light</span>
+          </button>
           <div class="lang-selector-wrap">
             <select class="lang-select" aria-label="Choose Language">
               <option value="en">English</option>
-              <option value="hi">हिन्दी</option>
-              <option value="mr">मराठी</option>
-              <option value="bn">বাংলা</option>
-              <option value="ta">தமிழ்</option>
-              <option value="te">తెలుగు</option>
+              <option value="hi">हिन्दी (Hindi)</option>
+              <option value="mr">मराठी (Marathi)</option>
+              <option value="bn">বাংলা (Bengali)</option>
+              <option value="ta">தமிழ் (Tamil)</option>
+              <option value="te">తెలుగు (Telugu)</option>
+              <option value="kn">ಕನ್ನಡ (Kannada)</option>
+              <option value="gu">ગુજરાતી (Gujarati)</option>
+              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+              <option value="ml">മലയാളം (Malayalam)</option>
+              <option value="ur">اردو (Urdu)</option>
             </select>
             <i data-lucide="globe" class="lang-icon" style="width: 16px; height: 16px;"></i>
           </div>
@@ -112,8 +121,8 @@
       <!-- ════════════ OVERVIEW TAB ════════════ -->
       <main class="content-body tab-view-panel" id="view-overview">
 
-        <!-- Hero / Welcome Card -->
-        <div class="hero-card">
+        <!-- Hero / Welcome Card with Glass Effect -->
+        <div class="hero-card glass-panel" style="border: 1px solid var(--glass-border); box-shadow: var(--shadow-lg);">
           <div class="hero-content">
             <span class="eyebrow">Programme Pulse</span>
             <h1 class="hero-title" id="hero-greeting">Good afternoon, Arjun</h1>
@@ -372,15 +381,25 @@
       if (window.lucide) lucide.createIcons();
 
       // Check session
-      const session = window.FieldAtlasMockAuth ? window.FieldAtlasMockAuth.getSession() : null;
+      const session = (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.getSession()) ||
+                      (window.FieldAtlasCache && window.FieldAtlasCache.get('user_session')) || null;
       if (session) {
-        const initials = (session.full_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-        document.getElementById('sidebar-avatar').textContent = initials;
-        document.getElementById('sidebar-user-name').textContent = session.full_name || 'User';
+        const photoUrl = session.profile_picture || session.profile_photo_url;
+        const avatarEl = document.getElementById('sidebar-avatar');
+        if (avatarEl) {
+          if (photoUrl) {
+            avatarEl.innerHTML = `<img src="${photoUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" alt="Avatar">`;
+          } else {
+            const initials = (session.full_name || session.aadhaar_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+            avatarEl.textContent = initials;
+          }
+        }
+        const nameEl = document.getElementById('sidebar-user-name');
+        if (nameEl) nameEl.textContent = session.full_name || session.aadhaar_name || 'Trainer';
         const heroGreeting = document.getElementById('hero-greeting');
         const hour = new Date().getHours();
         const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-        if (heroGreeting) heroGreeting.textContent = greeting + ', ' + (session.full_name || 'Trainer').split(' ')[0];
+        if (heroGreeting) heroGreeting.textContent = greeting + ', ' + (session.full_name || session.aadhaar_name || 'Trainer').split(' ')[0];
       }
 
       loadOverview();

@@ -192,10 +192,19 @@
     });
   }
 
+  function getActiveSession() {
+    return (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.getSession()) ||
+           (window.FieldAtlasCache && window.FieldAtlasCache.get('user_session')) || null;
+  }
+
   // ─── Data Endpoint Handlers ──────────────────────────────────────────────
   const DATA_HANDLERS = {
     // Trainer endpoints
-    '/api/trainer/dashboard/': () => mockResponse(TRAINER_DASHBOARD),
+    '/api/trainer/dashboard/': () => {
+      const session = getActiveSession();
+      const overview = JSON.parse(JSON.stringify(TRAINER_DASHBOARD));
+      return mockResponse(overview);
+    },
     '/api/trainer/courses/': () => mockResponse(TRAINER_COURSES),
     '/api/trainer/trainees/': () => mockResponse(TRAINER_TRAINEES),
     '/api/trainer/follow-ups/': () => mockResponse(TRAINER_FOLLOWUPS),
@@ -203,15 +212,55 @@
     '/api/trainer/providers/': () => mockResponse(TRAINER_PROVIDERS),
     '/api/trainer/reports/': () => mockResponse(TRAINER_REPORTS),
 
-    // Trainee endpoints
-    '/api/trainee/me/dashboard/': () => mockResponse(TRAINEE_DASHBOARD),
+    // Trainee endpoints (hydrated dynamically with active user session)
+    '/api/trainee/me/dashboard/': () => {
+      const session = getActiveSession();
+      const dashboard = JSON.parse(JSON.stringify(TRAINEE_DASHBOARD));
+      if (session) {
+        dashboard.trainee.name = session.full_name || session.aadhaar_name || dashboard.trainee.name;
+        dashboard.trainee.unified_id = session.field_atlas_id || dashboard.trainee.unified_id;
+        dashboard.trainee.email = session.email || (session.aadhaar_number ? `Aadhaar: ${session.aadhaar_number}` : dashboard.trainee.email);
+        dashboard.trainee.phone_number = session.phone_number || '';
+        dashboard.trainee.district = session.district || dashboard.trainee.district;
+        dashboard.trainee.provider = session.provider || dashboard.trainee.provider;
+        dashboard.trainee.profile_picture = session.profile_picture || session.profile_photo_url || null;
+      }
+      return mockResponse(dashboard);
+    },
     '/api/trainee/me/enrollments/': () => mockResponse(TRAINEE_ENROLLMENTS),
     '/api/trainee/me/certificates/': () => mockResponse(TRAINEE_CERTIFICATES),
     '/api/trainee/me/applications/': () => mockResponse({ applications: [], total: 0 }),
 
     // Profile endpoint
-    '/api/auth/profile/': () => mockResponse(getProfileData()),
-    '/api/auth/profile/update/': () => mockResponse({ ...getProfileData(), message: 'Profile updated successfully.' }),
+    '/api/profile/': () => {
+      const session = getActiveSession() || {
+        id: 2,
+        field_atlas_id: 'FA-24-0182',
+        full_name: 'Priya Patel',
+        email: 'trainee@fieldatlas.in',
+        phone_number: '9833456789',
+        role: 'trainee',
+        district: 'Pune',
+        state: 'Maharashtra',
+        provider: 'National Skill Development Corporation'
+      };
+      return mockResponse({ user: session });
+    },
+    '/api/auth/profile/': () => {
+      const session = getActiveSession() || {
+        id: 2,
+        field_atlas_id: 'FA-24-0182',
+        full_name: 'Priya Patel',
+        email: 'trainee@fieldatlas.in',
+        phone_number: '9833456789',
+        role: 'trainee',
+        district: 'Pune',
+        state: 'Maharashtra',
+        provider: 'National Skill Development Corporation'
+      };
+      return mockResponse(session);
+    },
+    '/api/auth/profile/update/': () => mockResponse({ message: 'Profile updated successfully.' }),
 
     // Certificate verification
     '/api/certificates/verify/': () => mockResponse({

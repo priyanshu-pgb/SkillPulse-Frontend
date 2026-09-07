@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
           remember_me: rememberMe
         });
 
+        // Store into compulsory session memory cache
+        if (window.FieldAtlasCache) {
+          FieldAtlasCache.set('user_session', response);
+        }
+
         FieldAtlasAPI.showToast('Login successful! Redirecting...', 'success');
         setTimeout(() => {
           window.location.href = response.redirect_url || '/';
@@ -38,7 +43,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Handles account creation and role registration
+  // Auto-format Aadhaar Card Number input (XXXX XXXX XXXX)
+  const aadhaarInput = document.getElementById('reg-aadhaar');
+  if (aadhaarInput) {
+    aadhaarInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '').substring(0, 12);
+      let formatted = '';
+      for (let i = 0; i < value.length; i++) {
+        if (i > 0 && i % 4 === 0) formatted += ' ';
+        formatted += value[i];
+      }
+      e.target.value = formatted;
+    });
+  }
+
+  // Auto-format Indian Mobile Number (10 digits)
+  const mobileInput = document.getElementById('reg-phone');
+  if (mobileInput) {
+    mobileInput.addEventListener('input', function(e) {
+      e.target.value = e.target.value.replace(/\D/g, '').substring(0, 10);
+    });
+  }
+
+  // Handles account creation and role registration with Aadhaar
   const registerForm = document.getElementById('register-form');
   if (registerForm) {
     registerForm.addEventListener('submit', async function(e) {
@@ -48,18 +75,42 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.disabled = true;
       submitBtn.innerHTML = 'Creating Account...';
 
-      const fullName = document.getElementById('reg-fullname').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
+      const aadhaarNameInput = document.getElementById('reg-fullname') || document.getElementById('reg-aadhaar-name');
+      const fullName = aadhaarNameInput ? aadhaarNameInput.value.trim() : '';
+
+      const aadhaarEl = document.getElementById('reg-aadhaar');
+      const rawAadhaar = aadhaarEl ? aadhaarEl.value.replace(/\s+/g, '').trim() : '';
+
+      const phoneEl = document.getElementById('reg-phone') || document.getElementById('reg-mobile');
+      const rawPhone = phoneEl ? phoneEl.value.replace(/\D/g, '').trim() : '';
+
       const password = document.getElementById('reg-password').value;
       const role = document.getElementById('reg-role').value;
       const provider = document.getElementById('reg-provider') ? document.getElementById('reg-provider').value.trim() : '';
       const district = document.getElementById('reg-district') ? document.getElementById('reg-district').value.trim() : '';
       const otpCode = document.getElementById('reg-otp') ? document.getElementById('reg-otp').value.trim() : '';
 
+      if (rawAadhaar && rawAadhaar.length !== 12) {
+        FieldAtlasAPI.showToast('Please enter a valid 12-digit Aadhaar Card Number.', 'warning');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
+
+      if (rawPhone && rawPhone.length < 10) {
+        FieldAtlasAPI.showToast('Please enter a valid 10-digit registered Aadhaar mobile number.', 'warning');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
+
       try {
         const response = await FieldAtlasAPI.post('/api/auth/register/', {
           full_name: fullName,
-          email: email,
+          aadhaar_name: fullName,
+          aadhaar_number: rawAadhaar,
+          phone_number: rawPhone,
+          mobile_number: rawPhone,
           password: password,
           role: role,
           provider: provider,
@@ -67,7 +118,12 @@ document.addEventListener('DOMContentLoaded', function() {
           otp_code: otpCode
         });
 
-        FieldAtlasAPI.showToast('Account registered successfully! Redirecting...', 'success');
+        // Store into compulsory session memory cache
+        if (window.FieldAtlasCache) {
+          FieldAtlasCache.set('user_session', response);
+        }
+
+        FieldAtlasAPI.showToast('Account registered successfully with Aadhaar! Redirecting...', 'success');
         setTimeout(() => {
           window.location.href = response.redirect_url || '/';
         }, 600);

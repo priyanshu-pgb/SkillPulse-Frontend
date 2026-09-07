@@ -18,45 +18,51 @@
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-  <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: var(--color-parchment);">
+  <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: var(--color-parchment); position: relative;">
     
-    <!-- Language Selector Top Bar -->
-    <div style="position: absolute; top: 1.25rem; right: 1.5rem;" class="lang-selector-wrap">
-      <select class="lang-select" aria-label="Choose Language">
-        <option value="en">English</option>
-        <option value="hi">हिन्दी (Hindi)</option>
-        <option value="mr">मराठी (Marathi)</option>
-        <option value="bn">বাংলা (Bengali)</option>
-        <option value="ta">தமிழ் (Tamil)</option>
-        <option value="te">తెలుగు (Telugu)</option>
-        <option value="kn">ಕನ್ನಡ (Kannada)</option>
-        <option value="gu">ગુજરાતી (Gujarati)</option>
-        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-        <option value="ml">മലയാളം (Malayalam)</option>
-        <option value="ur">اردو (Urdu)</option>
-      </select>
-      <i data-lucide="globe" class="lang-icon" style="width: 16px; height: 16px;"></i>
+    <!-- Top Navigation Controls: Theme Toggle (☀️/🌙) & Language Selector -->
+    <div style="position: absolute; top: 1.25rem; right: 1.5rem; display: flex; align-items: center; gap: 0.65rem;" class="glass-pill">
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+        <span class="theme-icon">☀️</span>
+        <span class="theme-text">Light</span>
+      </button>
+      <div class="lang-selector-wrap" style="margin: 0;">
+        <select class="lang-select" aria-label="Choose Language" style="border: none; background: transparent; padding-right: 1.8rem; font-size: 0.85rem;">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="gu">ગુજરાતી (Gujarati)</option>
+          <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+          <option value="ml">മലയാളം (Malayalam)</option>
+          <option value="ur">اردو (Urdu)</option>
+        </select>
+        <i data-lucide="globe" class="lang-icon" style="width: 14px; height: 14px;"></i>
+      </div>
     </div>
 
-    <div style="max-width: 440px; width: 100%;">
-      <!-- Brand Header -->
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <div style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 0.85rem; box-shadow: 0 4px 10px rgba(14, 129, 118, 0.3);">
-          <i data-lucide="compass" style="width: 28px; height: 28px;"></i>
+    <div style="max-width: 440px; width: 100%; margin-top: 1.5rem;">
+      <!-- Brand Header with Glass Effect -->
+      <div class="glass-panel" style="text-align: center; margin-bottom: 1.5rem; padding: 1.25rem; border-radius: var(--radius-lg);">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 0.5rem; box-shadow: 0 4px 10px rgba(14, 129, 118, 0.3);">
+          <i data-lucide="compass" style="width: 26px; height: 26px;"></i>
         </div>
-        <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em;">Field Atlas</h1>
-        <p style="font-size: 0.85rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;" data-i18n="workspace">Good Outcomes / National workspace</p>
+        <h1 style="font-size: 1.7rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em;">Field Atlas</h1>
+        <p style="font-size: 0.825rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;" data-i18n="workspace">Good Outcomes / National Workspace</p>
       </div>
 
-      <!-- Login Card -->
-      <div style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; box-shadow: var(--shadow-md);">
+      <!-- Login Card with Glassmorphism -->
+      <div class="glass-card" style="border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; box-shadow: var(--shadow-lg);">
         <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">Sign in to your account</h2>
-        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">Access verified skills outcome intelligence and field operations.</p>
+        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">Access verified skills outcome intelligence and citizen skilling credentials.</p>
 
         <form id="login-form">
           <div class="form-group">
-            <label class="form-label" for="login-identifier">Email or Field Atlas ID</label>
-            <input type="text" id="login-identifier" class="form-control" placeholder="e.g. trainer@fieldatlas.in or FA-TR-1001" required autocomplete="username">
+            <label class="form-label" for="login-identifier">Aadhaar Number / Mobile / Field Atlas ID / Email</label>
+            <input type="text" id="login-identifier" class="form-control" placeholder="12-digit Aadhaar, 10-digit Mobile, ID or Email" required autocomplete="username">
           </div>
 
           <div class="form-group">
@@ -78,26 +84,26 @@
         </form>
 
         <div style="margin-top: 1.5rem; text-align: center; font-size: 0.875rem; color: var(--color-text-secondary);">
-          Don't have an account? <a href="register.html" style="color: var(--color-teal); font-weight: 700; text-decoration: none;">Create account</a>
+          Don't have an account? <a href="register.html" style="color: var(--color-teal); font-weight: 700; text-decoration: none;">Create account with Aadhaar</a>
         </div>
       </div>
 
       <!-- Demo Credentials Helper Card -->
-      <div style="margin-top: 1.25rem; background: rgba(14, 129, 118, 0.08); border: 1px dashed var(--color-teal); border-radius: var(--radius-md); padding: 1rem; font-size: 0.8rem;">
+      <div class="glass-panel" style="margin-top: 1.25rem; border: 1px dashed var(--color-teal); border-radius: var(--radius-md); padding: 1rem; font-size: 0.8rem;">
         <div style="font-weight: 700; color: var(--color-teal); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
           <i data-lucide="key" style="width: 14px; height: 14px;"></i> Quick Demo Credentials (Password: Atlas@2026!)
         </div>
-        <div style="display: flex; flex-direction: column; gap: 0.25rem; color: var(--color-deep-indigo);">
-          <div><strong>Trainer:</strong> trainer@fieldatlas.in (ID: FA-TR-1001)</div>
-          <div><strong>Trainee:</strong> trainee@fieldatlas.in (ID: FA-24-0182)</div>
-          <div><strong>Admin:</strong> admin@fieldatlas.in</div>
+        <div style="display: flex; flex-direction: column; gap: 0.35rem; color: var(--color-deep-indigo);">
+          <div><strong>Trainee:</strong> <code>8765 4321 0987</code> (or mobile: <code>9833456789</code> / <code>FA-24-0182</code>)</div>
+          <div><strong>Trainer:</strong> <code>2345 6789 0123</code> (or mobile: <code>9820123456</code> / <code>FA-TR-1001</code>)</div>
+          <div><strong>Admin:</strong> <code>1122 3344 5566</code> (or <code>admin@fieldatlas.in</code>)</div>
         </div>
       </div>
 
       <!-- Privacy & Governance Badge -->
       <div style="text-align: center; margin-top: 1.5rem; font-size: 0.75rem; color: var(--color-text-muted); display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
         <i data-lucide="shield-check" style="width: 14px; height: 14px; color: var(--color-teal);"></i>
-        <span data-i18n="privacy_note">Consent-aware by design · No raw Aadhaar stored</span>
+        <span data-i18n="privacy_note">Consent-aware by design · Encrypted session memory caching</span>
       </div>
     </div>
   </div>

@@ -120,20 +120,24 @@
 </head>
 <body class="bg-gray">
 
-  <!-- Header / Navigation -->
-  <header style="background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;">
+  <!-- Header / Navigation with Glassmorphism -->
+  <header class="glass-header" style="position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--glass-border);">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0.8rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
       <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
           <polyline points="2 17 12 22 22 17"></polyline>
           <polyline points="2 12 12 17 22 12"></polyline>
         </svg>
-        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.2rem; color: #0f172a;">Field Atlas</span>
+        <span style="font-family: var(--font-sans); font-weight: 800; font-size: 1.2rem; color: var(--color-deep-indigo);">Field Atlas</span>
       </a>
-      <div style="display: flex; align-items: center; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+          <span class="theme-icon">☀️</span>
+          <span class="theme-text">Light</span>
+        </button>
         <button id="nav-back-btn" class="btn btn-outline btn-sm" onclick="history.back()" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">← Back</button>
-        <a href="index.html" class="btn btn-sm" style="background: #f1f5f9; color: #0f172a; text-decoration: none; font-size: 0.85rem; padding: 0.4rem 0.9rem;">Home</a>
+        <a href="index.html" class="btn btn-sm btn-outline" style="text-decoration: none; font-size: 0.85rem; padding: 0.4rem 0.9rem;">Home</a>
       </div>
     </div>
   </header>

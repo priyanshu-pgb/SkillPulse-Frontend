@@ -17,40 +17,72 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Loads authenticated user profile into the editor form and triggers course listing
   async function loadUserProfile() {
+    let u = null;
     try {
       const res = await FieldAtlasAPI.get('/api/profile/');
-      const u = res.user;
+      if (res && res.user) u = res.user;
+    } catch (err) {}
 
-      const nameInput = document.getElementById('profile-name');
-      const emailInput = document.getElementById('profile-email');
-      const phoneInput = document.getElementById('profile-phone');
-      const idInput = document.getElementById('profile-id');
-      const langInput = document.getElementById('profile-language');
-      const providerInput = document.getElementById('profile-provider');
-      const districtInput = document.getElementById('profile-district');
-      const stateInput = document.getElementById('profile-state');
-      const addressInput = document.getElementById('profile-address');
-      const bioInput = document.getElementById('profile-bio');
-      const avatarImg = document.getElementById('profile-avatar-preview');
+    if (!u) {
+      u = (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.getSession()) ||
+          (window.FieldAtlasCache && window.FieldAtlasCache.get('user_session')) || {};
+    }
 
-      if (nameInput) nameInput.value = u.full_name || '';
-      if (emailInput) emailInput.value = u.email || '';
-      if (phoneInput) phoneInput.value = u.phone_number || '';
-      if (idInput) idInput.value = u.field_atlas_id || '';
-      if (langInput) langInput.value = u.preferred_language || 'en';
-      if (providerInput) providerInput.value = u.provider || '';
-      if (districtInput) districtInput.value = u.district || '';
-      if (stateInput) stateInput.value = u.state || '';
-      if (addressInput) addressInput.value = u.address || '';
-      if (bioInput) bioInput.value = u.bio || '';
+    const nameInput = document.getElementById('profile-name');
+    const emailInput = document.getElementById('profile-email');
+    const phoneInput = document.getElementById('profile-phone');
+    const idInput = document.getElementById('profile-id');
+    const langInput = document.getElementById('profile-language');
+    const providerInput = document.getElementById('profile-provider');
+    const districtInput = document.getElementById('profile-district');
+    const stateInput = document.getElementById('profile-state');
+    const addressInput = document.getElementById('profile-address');
+    const bioInput = document.getElementById('profile-bio');
+    const avatarImg = document.getElementById('profile-avatar-preview');
 
-      if (avatarImg && u.profile_photo_url) {
-        avatarImg.src = u.profile_photo_url;
+    if (nameInput) nameInput.value = u.full_name || u.aadhaar_name || '';
+    if (emailInput) emailInput.value = u.email || '';
+    if (phoneInput) phoneInput.value = u.phone_number || '';
+    if (idInput) idInput.value = u.field_atlas_id || '';
+    if (langInput) langInput.value = u.preferred_language || 'en';
+    if (providerInput) providerInput.value = u.provider || '';
+    if (districtInput) districtInput.value = u.district || '';
+    if (stateInput) stateInput.value = u.state || '';
+    if (addressInput) addressInput.value = u.address || '';
+    if (bioInput) bioInput.value = u.bio || '';
+
+    const photoUrl = u.profile_picture || u.profile_photo_url;
+    if (avatarImg && photoUrl) {
+      avatarImg.src = photoUrl;
+    }
+
+    // Update left card labels
+    const displayNameEl = document.getElementById('user-display-name');
+    if (displayNameEl) displayNameEl.textContent = u.full_name || u.aadhaar_name || 'Citizen User';
+
+    const displayRoleEl = document.getElementById('user-display-role');
+    if (displayRoleEl) displayRoleEl.textContent = u.role === 'trainer' ? 'Vocational Instructor / Trainer' : 'Registered Skilling Trainee';
+
+    const displayIdEl = document.getElementById('display-atlas-id');
+    if (displayIdEl) displayIdEl.textContent = u.field_atlas_id || 'FA-26-0000';
+
+    // Also update sidebar avatar if present
+    const sidebarAvatar = document.getElementById('sidebar-avatar');
+    if (sidebarAvatar) {
+      if (photoUrl) {
+        sidebarAvatar.innerHTML = `<img src="${photoUrl}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;" alt="Avatar">`;
+      } else if (u.full_name) {
+        const initials = u.full_name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        sidebarAvatar.textContent = initials;
       }
+    }
+    const sidebarName = document.getElementById('sidebar-user-name');
+    if (sidebarName && u.full_name) {
+      sidebarName.textContent = u.full_name;
+    }
 
+    if (u.role) {
       loadProfileCourses(u.role);
-    } catch (err) {
-      console.error('Failed to load profile:', err);
     }
   }
 
@@ -140,6 +172,24 @@ document.addEventListener('DOMContentLoaded', function() {
       const providerEl = document.getElementById('profile-provider');
       if (providerEl && !providerEl.disabled) payload.provider = providerEl.value.trim();
 
+      // Immediately synchronize into compulsory session cache
+      if (window.FieldAtlasMockAuth) {
+        const s = window.FieldAtlasMockAuth.getSession() || {};
+        Object.assign(s, payload);
+        window.FieldAtlasMockAuth.saveSession(s);
+      }
+      if (window.FieldAtlasCache) {
+        const s = window.FieldAtlasCache.get('user_session') || {};
+        Object.assign(s, payload);
+        window.FieldAtlasCache.set('user_session', s);
+      }
+
+      // Update sidebar name immediately
+      const sidebarName = document.getElementById('sidebar-user-name');
+      if (sidebarName && payload.full_name) {
+        sidebarName.textContent = payload.full_name;
+      }
+
       try {
         const res = await FieldAtlasAPI.patch('/api/profile/', payload);
         FieldAtlasAPI.showToast(res.message || 'Profile updated successfully!', 'success');
@@ -148,32 +198,66 @@ document.addEventListener('DOMContentLoaded', function() {
         if (payload.preferred_language && window.FieldAtlasI18N) {
           FieldAtlasI18N.setLanguage(payload.preferred_language, false);
         }
-      } catch (err) {} finally {
+      } catch (err) {
+        FieldAtlasAPI.showToast('Profile saved locally in session cache.', 'success');
+      } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }
     });
   }
 
-  // Handles profile photo selection and asynchronous upload
+  // Handles profile photo selection and asynchronous upload with instant local preview
   const photoInput = document.getElementById('profile-photo-input');
   if (photoInput) {
-    photoInput.addEventListener('change', async function() {
+    photoInput.addEventListener('change', function() {
       if (!photoInput.files || photoInput.files.length === 0) return;
 
       const file = photoInput.files[0];
-      const formData = new FormData();
-      formData.append('profile_photo', file);
+      const reader = new FileReader();
 
-      try {
-        const res = await FieldAtlasAPI.post('/api/profile/photo/', formData);
-        FieldAtlasAPI.showToast('Profile photo updated!', 'success');
+      reader.onload = async function(e) {
+        const photoDataUrl = e.target.result;
 
+        // 1. Instantly update UI avatar preview
         const avatarImg = document.getElementById('profile-avatar-preview');
-        if (avatarImg && res.profile_photo_url) {
-          avatarImg.src = res.profile_photo_url;
+        if (avatarImg) {
+          avatarImg.src = photoDataUrl;
         }
-      } catch (err) {}
+
+        // 2. Instantly update sidebar avatar in DOM
+        const sidebarAvatar = document.getElementById('sidebar-avatar');
+        if (sidebarAvatar) {
+          sidebarAvatar.innerHTML = `<img src="${photoDataUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" alt="Avatar">`;
+        }
+
+        // 3. Immediately update compulsory session cache memory
+        if (window.FieldAtlasMockAuth) {
+          const s = window.FieldAtlasMockAuth.getSession() || {};
+          s.profile_picture = photoDataUrl;
+          s.profile_photo_url = photoDataUrl;
+          window.FieldAtlasMockAuth.saveSession(s);
+        }
+        if (window.FieldAtlasCache) {
+          const s = window.FieldAtlasCache.get('user_session') || {};
+          s.profile_picture = photoDataUrl;
+          s.profile_photo_url = photoDataUrl;
+          window.FieldAtlasCache.set('user_session', s);
+        }
+
+        FieldAtlasAPI.showToast('Profile photo updated successfully!', 'success');
+
+        // 4. Asynchronously push to backend
+        try {
+          const formData = new FormData();
+          formData.append('profile_photo', file);
+          await FieldAtlasAPI.post('/api/profile/photo/', formData, { silent: true });
+        } catch (backendErr) {
+          // Offline / mock mode — preserved in memory session cache
+        }
+      };
+
+      reader.readAsDataURL(file);
     });
   }
 

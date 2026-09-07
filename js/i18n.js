@@ -729,8 +729,11 @@ const FieldAtlasI18N = (function() {
     const isRtl = (langCode === 'ur');
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
 
-    // Store in localStorage for client caching
+    // Store in localStorage & session cache
     localStorage.setItem('field_atlas_lang', langCode);
+    if (window.FieldAtlasCache) {
+      FieldAtlasCache.set('preferred_language', langCode);
+    }
 
     // Update all matching UI selectors
     document.querySelectorAll('.lang-select').forEach(select => {
@@ -755,9 +758,9 @@ const FieldAtlasI18N = (function() {
       }
     });
 
-    // Persist choice to backend if user is authenticated and persist flag is active
+    // Persist choice to backend silently (never pop error toasts on background preference sync)
     if (persist && window.FieldAtlasAPI) {
-      FieldAtlasAPI.post('/api/i18n/set-language/', { language: langCode }).catch(() => {});
+      FieldAtlasAPI.post('/api/i18n/set-language/', { language: langCode }, { silent: true }).catch(() => {});
     }
 
     // Dispatch custom event for charts and dynamic widgets to re-render

@@ -118,13 +118,15 @@ const FieldAtlasAPI = (function() {
       }
       return data;
     } catch (err) {
-      showToast(err.message, 'error');
+      if (!options.silent) {
+        showToast(err.message, 'error');
+      }
       throw err;
     }
   }
 
   // Sends an authenticated HTTP GET request
-  async function get(endpoint, params = {}) {
+  async function get(endpoint, params = {}, options = {}) {
     const baseUrl = getApiBaseUrl() || window.location.origin;
     const fullUrl = endpoint.startsWith('http') ? endpoint : `${baseUrl}${endpoint}`;
     const url = new URL(fullUrl, window.location.origin);
@@ -133,24 +135,26 @@ const FieldAtlasAPI = (function() {
         url.searchParams.append(key, params[key]);
       }
     });
-    return request(url.toString(), { method: 'GET' });
+    return request(url.toString(), { method: 'GET', ...options });
   }
 
   // Sends an authenticated HTTP POST request
-  async function post(endpoint, data = {}) {
+  async function post(endpoint, data = {}, options = {}) {
     const isFormData = data instanceof FormData;
     return request(endpoint, {
       method: 'POST',
-      body: isFormData ? data : JSON.stringify(data)
+      body: isFormData ? data : JSON.stringify(data),
+      ...options
     });
   }
 
   // Sends an authenticated HTTP PATCH request
-  async function patch(endpoint, data = {}) {
+  async function patch(endpoint, data = {}, options = {}) {
     const isFormData = data instanceof FormData;
     return request(endpoint, {
       method: 'PATCH',
-      body: isFormData ? data : JSON.stringify(data)
+      body: isFormData ? data : JSON.stringify(data),
+      ...options
     });
   }
 

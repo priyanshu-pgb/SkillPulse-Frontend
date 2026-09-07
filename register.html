@@ -13,79 +13,120 @@
   <link rel="stylesheet" href="css/watermark.css">
 </head>
 <body>
-  <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: var(--color-parchment);">
+  <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: var(--color-parchment); position: relative;">
 
-    <div style="max-width: 480px; width: 100%;">
-      <!-- Brand Header -->
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <div style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 0.85rem; box-shadow: 0 4px 10px rgba(14, 129, 118, 0.3);">
-          <i data-lucide="compass" style="width: 28px; height: 28px;"></i>
+    <!-- Top Navigation Controls: Theme Toggle (☀️/🌙) & Language -->
+    <div style="position: absolute; top: 1.25rem; right: 1.5rem; display: flex; align-items: center; gap: 0.65rem;" class="glass-pill">
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+        <span class="theme-icon">☀️</span>
+        <span class="theme-text">Light</span>
+      </button>
+      <div class="lang-selector-wrap" style="margin: 0;">
+        <select class="lang-select" aria-label="Choose Language" style="border: none; background: transparent; padding-right: 1.8rem; font-size: 0.85rem;">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="gu">ગુજરાતી (Gujarati)</option>
+          <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+          <option value="ml">മലയാളം (Malayalam)</option>
+          <option value="ur">اردو (Urdu)</option>
+        </select>
+        <i data-lucide="globe" class="lang-icon" style="width: 14px; height: 14px;"></i>
+      </div>
+    </div>
+
+    <div style="max-width: 480px; width: 100%; margin-top: 2rem;">
+      <!-- Brand Header with Glass Effect -->
+      <div class="glass-panel" style="text-align: center; margin-bottom: 1.5rem; padding: 1.25rem; border-radius: var(--radius-lg);">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 0.5rem; box-shadow: 0 4px 10px rgba(14, 129, 118, 0.3);">
+          <i data-lucide="compass" style="width: 26px; height: 26px;"></i>
         </div>
-        <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em;">Field Atlas</h1>
-        <p style="font-size: 0.85rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">Create Your Account</p>
+        <h1 style="font-size: 1.65rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em;">Field Atlas</h1>
+        <p style="font-size: 0.8rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">Aadhaar-Verified Citizen Skilling Registration</p>
       </div>
 
-      <!-- Registration Card -->
-      <div style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; box-shadow: var(--shadow-md);">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">Register a New Account</h2>
-        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">Join India's skilling outcomes intelligence platform.</p>
+      <!-- Registration Card with Glassmorphism -->
+      <div class="glass-card" style="border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 2rem 1.75rem; box-shadow: var(--shadow-lg);">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.3rem;">Create Your Account</h2>
+        <p style="font-size: 0.825rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">Verify your identity via Aadhaar card details to access national skilling credentials.</p>
 
         <form id="register-form">
-          <div class="form-group">
-            <label class="form-label" for="reg-fullname">Full Name</label>
-            <input type="text" id="reg-fullname" class="form-control" placeholder="e.g. Priya Patel" required>
+          <!-- 1. Aadhaar Name -->
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="reg-fullname">Aadhaar Name <span style="color: var(--color-coral);">*</span></label>
+            <input type="text" id="reg-fullname" class="form-control" placeholder="Full name as printed on Aadhaar card" required autocomplete="name">
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="reg-email">Email Address</label>
-            <input type="email" id="reg-email" class="form-control" placeholder="your@email.com" required>
+          <!-- 2. Aadhaar Card Number (12 digits) -->
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="reg-aadhaar">Aadhaar Card Number <span style="color: var(--color-coral);">*</span></label>
+            <input type="text" id="reg-aadhaar" class="form-control" placeholder="12-digit number: 1234 5678 9012" required maxlength="14" autocomplete="off">
+            <div style="font-size: 0.725rem; color: var(--color-text-muted); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+              <i data-lucide="shield-check" style="width: 12px; height: 12px; color: var(--color-teal);"></i> 12-digit Unique Identification Authority of India format
+            </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="reg-password">Password</label>
-            <input type="password" id="reg-password" class="form-control" placeholder="Min 8 characters" required minlength="8">
+          <!-- 3. Registered Aadhaar Mobile Number -->
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="reg-phone">Registered Aadhaar Mobile Number <span style="color: var(--color-coral);">*</span></label>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <span class="glass-pill" style="padding: 0.65rem 0.85rem; font-weight: 700; font-size: 0.9rem; color: var(--color-text-secondary); white-space: nowrap; border: 1px solid var(--color-border); background: var(--color-surface);">+91</span>
+              <input type="tel" id="reg-phone" class="form-control" placeholder="10-digit mobile number" required maxlength="10" autocomplete="tel">
+            </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="reg-role">Role</label>
+          <!-- 4. Password -->
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="reg-password">Password <span style="color: var(--color-coral);">*</span></label>
+            <input type="password" id="reg-password" class="form-control" placeholder="Min 6 characters" required minlength="6" autocomplete="new-password">
+          </div>
+
+          <!-- 5. Role Selection -->
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="reg-role">Role <span style="color: var(--color-coral);">*</span></label>
             <select id="reg-role" class="form-control" required>
-              <option value="">Select your role</option>
-              <option value="trainee">Trainee (Learner)</option>
+              <option value="trainee">Trainee (Learner / Candidate)</option>
               <option value="trainer">Trainer (Instructor / Admin)</option>
             </select>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="reg-provider">Training Provider (Optional)</label>
-            <input type="text" id="reg-provider" class="form-control" placeholder="e.g. NSDC, PMKVY">
+          <!-- 6. District -->
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="reg-district">District / Location</label>
+            <input type="text" id="reg-district" class="form-control" placeholder="e.g. Pune, Mumbai, Delhi, Varanasi">
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="reg-district">District (Optional)</label>
-            <input type="text" id="reg-district" class="form-control" placeholder="e.g. Mumbai, Delhi">
+          <!-- 7. Provider (Optional) -->
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="form-label" for="reg-provider">Training Provider / Centre (Optional)</label>
+            <input type="text" id="reg-provider" class="form-control" placeholder="e.g. NSDC, PMKVY 4.0 Centre, DGT">
           </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+          <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem;">Complete Registration</button>
         </form>
       </div>
 
       <!-- Demo Note -->
-      <div style="margin-top: 1.25rem; background: rgba(14, 129, 118, 0.08); border: 1px dashed var(--color-teal); border-radius: var(--radius-md); padding: 1rem; font-size: 0.8rem;">
-        <div style="font-weight: 700; color: var(--color-teal); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
-          <i data-lucide="info" style="width: 14px; height: 14px;"></i> Demo Mode
+      <div class="glass-panel" style="margin-top: 1.25rem; border: 1px dashed var(--color-teal); border-radius: var(--radius-md); padding: 0.85rem 1rem; font-size: 0.8rem;">
+        <div style="font-weight: 700; color: var(--color-teal); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.35rem;">
+          <i data-lucide="info" style="width: 14px; height: 14px;"></i> Aadhaar Instant Skilling Verification
         </div>
-        <div style="color: var(--color-deep-indigo);">
-          Registration works instantly — no email verification needed. You'll be logged in immediately.
+        <div style="color: var(--color-text-secondary); line-height: 1.4;">
+          Aadhaar registration verifies your citizen profile and immediately activates your personal dashboard session.
         </div>
       </div>
 
-      <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--color-text-secondary);">
-        Already have an account? <a href="login.html" style="color: var(--color-teal); font-weight: 700; text-decoration: none;">Sign In</a>
+      <div style="text-align: center; margin-top: 1.25rem; font-size: 0.875rem; color: var(--color-text-secondary);">
+        Already registered? <a href="login.html" style="color: var(--color-teal); font-weight: 700; text-decoration: none;">Sign In</a>
       </div>
 
-      <div style="text-align: center; margin-top: 1rem; font-size: 0.75rem; color: var(--color-text-muted); display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+      <div style="text-align: center; margin-top: 0.85rem; font-size: 0.75rem; color: var(--color-text-muted); display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
         <i data-lucide="shield-check" style="width: 14px; height: 14px; color: var(--color-teal);"></i>
-        Consent-aware by design · No raw Aadhaar stored
+        UIDAI compliant · Data encrypted with session memory caching
       </div>
     </div>
   </div>
