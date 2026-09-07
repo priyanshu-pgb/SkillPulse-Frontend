@@ -102,12 +102,223 @@
     total: 4,
   };
 
+  // ─── Scheduled Trainer Classes (Visible to Trainee in Notification Bell) ──
+  const TRAINER_CLASSES = [
+    {
+      id: 101,
+      title: 'Full Stack: Advanced Django REST & React Integration',
+      course: 'Full Stack Web Development',
+      trainer_name: 'Vikram Malhotra',
+      trainer_role: 'Senior NSDC Vocational Instructor',
+      timing: 'Today · 10:30 AM – 12:00 PM',
+      date: '2026-09-08',
+      status: 'upcoming',
+      room: 'Virtual Lab 3B',
+      meet_url: 'https://meet.google.com/xyz-skill-pulse',
+      is_live: false,
+    },
+    {
+      id: 102,
+      title: 'Database Architecture, Indexing & SQL Optimization',
+      course: 'Full Stack Web Development',
+      trainer_name: 'Sunita Rao',
+      trainer_role: 'Lead Database Specialist',
+      timing: 'Tomorrow · 02:00 PM – 03:30 PM',
+      date: '2026-09-09',
+      status: 'scheduled',
+      room: 'Technical Hub A',
+      meet_url: 'https://meet.google.com/db-opt-skill',
+      is_live: false,
+    },
+    {
+      id: 103,
+      title: 'Industry Mock Interview & Technical Readiness Workshop',
+      course: 'Skill India Placement Cell',
+      trainer_name: 'Amit Sharma',
+      trainer_role: 'Corporate Placement Mentor',
+      timing: 'Friday · 11:00 AM – 01:00 PM',
+      date: '2026-09-11',
+      status: 'scheduled',
+      room: 'Placement Auditorium',
+      meet_url: 'https://meet.google.com/placement-prep',
+      is_live: false,
+    },
+  ];
+
+  // ─── Trainee Streak & Attendance Tracking Data ───────────────────────────
+  const TRAINEE_STREAK_ATTENDANCE = {
+    current_streak_days: 14,
+    longest_streak_days: 21,
+    logged_in_today: true,
+    total_classes: 26,
+    classes_attended: 24,
+    attendance_rate: 92.3,
+    days_active_month: 28,
+    exam_eligibility_threshold: 75,
+    is_exam_eligible: true,
+    history_14_days: [
+      { date: 'Aug 25', day: 'Mon', attended: true, logged_in: true },
+      { date: 'Aug 26', day: 'Tue', attended: true, logged_in: true },
+      { date: 'Aug 27', day: 'Wed', attended: true, logged_in: true },
+      { date: 'Aug 28', day: 'Thu', attended: true, logged_in: true },
+      { date: 'Aug 29', day: 'Fri', attended: true, logged_in: true },
+      { date: 'Aug 30', day: 'Sat', attended: false, logged_in: true },
+      { date: 'Aug 31', day: 'Sun', attended: false, logged_in: true },
+      { date: 'Sep 01', day: 'Mon', attended: true, logged_in: true },
+      { date: 'Sep 02', day: 'Tue', attended: true, logged_in: true },
+      { date: 'Sep 03', day: 'Wed', attended: false, logged_in: true },
+      { date: 'Sep 04', day: 'Thu', attended: true, logged_in: true },
+      { date: 'Sep 05', day: 'Fri', attended: true, logged_in: true },
+      { date: 'Sep 06', day: 'Sat', attended: true, logged_in: true },
+      { date: 'Sep 07', day: 'Sun', attended: true, logged_in: true },
+    ],
+  };
+
+  // ─── Indian Government Funded Courses Catalog ───────────────────────────
+  const GOVERNMENT_COURSES = [
+    {
+      id: 'pmkvy-4-fsw',
+      scheme_code: 'PMKVY 4.0',
+      scheme_name: 'Pradhan Mantri Kaushal Vikas Yojana 4.0',
+      title: 'Full Stack Web Development & Python Cloud',
+      ministry: 'Ministry of Skill Development & Entrepreneurship (MSDE)',
+      category: 'IT-ITeS & FutureSkills',
+      duration: '24 Weeks · 400 Hours',
+      stipend_info: '100% Free Govt Subsidy + Direct Assessment Grant',
+      certification: 'NSDC & NCVET Accredited Level 5 Certificate',
+      eligibility: '12th Pass / Graduate / Diploma',
+      official_url: 'https://www.skillindiadigital.gov.in',
+      badge_color: 'var(--color-teal)',
+      description: 'Comprehensive Indian national vocational standard qualification in modern frontend architecture, Django REST Framework, relational databases, and containerized deployment.',
+    },
+    {
+      id: 'ddu-gky-data',
+      scheme_code: 'DDU-GKY',
+      scheme_name: 'Deen Dayal Upadhyaya Grameen Kaushalya Yojana',
+      title: 'Data Analytics & Business Intelligence Specialist',
+      ministry: 'Ministry of Rural Development (MoRD)',
+      category: 'Information Technology',
+      duration: '16 Weeks · 320 Hours',
+      stipend_info: '100% Govt Funded with Free Hostel & Boarding Support',
+      certification: 'National Vocational Training Council Certification',
+      eligibility: '10th / 12th Pass Rural Youth (15-35 yrs)',
+      official_url: 'http://ddugky.gov.in',
+      badge_color: 'var(--color-ochre)',
+      description: 'Rural skilling initiative providing practical instruction in PowerBI, SQL querying, data cleaning pipelines, and entry-level enterprise analytics.',
+    },
+    {
+      id: 'swayam-ai-ml',
+      scheme_code: 'SWAYAM / NPTEL',
+      scheme_name: 'Study Webs of Active-Learning for Young Aspiring Minds',
+      title: 'Applied AI, Machine Learning & Python Foundations',
+      ministry: 'Ministry of Education (MoE)',
+      category: 'Higher Education & Deep Tech',
+      duration: '12 Weeks · Self-Paced & Proctored Exam',
+      stipend_info: 'Free Course Access + Subsidized Exam Fee',
+      certification: 'IIT Madras & NPTEL Verifiable Honor Certificate',
+      eligibility: 'Open to All Students & Professionals',
+      official_url: 'https://swayam.gov.in',
+      badge_color: 'var(--color-deep-indigo)',
+      description: 'Rigorous academic and industry-aligned syllabus delivered in collaboration with premier IIT faculties, covering PyTorch, Scikit-learn, and neural networks.',
+    },
+    {
+      id: 'futureskills-prime',
+      scheme_code: 'FutureSkills PRIME',
+      scheme_name: 'MeitY & NASSCOM National Digital Skilling Platform',
+      title: 'Cloud Architecture & DevOps Engineering',
+      ministry: 'Ministry of Electronics & Information Technology (MeitY)',
+      category: 'Emerging Technologies',
+      duration: '20 Weeks · Blended Learning',
+      stipend_info: 'Govt Incentive Cashback on Certification Completion',
+      certification: 'NASSCOM Industry Gold Credential',
+      eligibility: 'Graduates in Engineering / Science / BCA',
+      official_url: 'https://futureskillsprime.in',
+      badge_color: 'var(--color-coral)',
+      description: 'Enterprise-grade curriculum focused on AWS/Azure infrastructure, Docker containers, Kubernetes orchestration, and CI/CD automated release pipelines.',
+    },
+    {
+      id: 'pm-vishwakarma',
+      scheme_code: 'PM Vishwakarma',
+      scheme_name: 'Pradhan Mantri Vishwakarma Scheme',
+      title: 'Digital Craftsmanship & Advanced Precision Tooling',
+      ministry: 'Ministry of Micro, Small & Medium Enterprises (MSME)',
+      category: 'Manufacturing & Traditional Crafts',
+      duration: '8 Weeks · Hands-on Workshop',
+      stipend_info: '₹500/day Stipend during Training + ₹15,000 Toolkit Incentive',
+      certification: 'PM Vishwakarma Official Digital ID & Certificate',
+      eligibility: 'Traditional Artisans & Craftsmen across 18 Trades',
+      official_url: 'https://pmvishwakarma.gov.in',
+      badge_color: 'var(--color-ochre)',
+      description: 'National program empowering artisans with modern design thinking, digital payment tools, quality enhancement, and market linkage.',
+    },
+    {
+      id: 'nielit-iot',
+      scheme_code: 'NIELIT Certified',
+      scheme_name: 'National Institute of Electronics & Information Technology',
+      title: 'Industrial IoT & Embedded Hardware Engineering',
+      ministry: 'Ministry of Electronics & Information Technology (MeitY)',
+      category: 'Electronics Hardware',
+      duration: '14 Weeks · Practical Labs',
+      stipend_info: 'Subsidized Fee for SC/ST/Women Candidates',
+      certification: 'NIELIT National Qualification Register (NQR) Level 4',
+      eligibility: 'ITI / Diploma / B.Sc / B.Tech',
+      official_url: 'https://nielit.gov.in',
+      badge_color: 'var(--color-teal)',
+      description: 'Microcontroller programming, sensor telemetry, Arduino/ESP32 firmware, and MQTT industrial cloud communications.',
+    },
+  ];
+
+  // ─── Government Schemes Learning Records & Modules Tracker ───────────────
+  const GOVERNMENT_SCHEMES_DATA = [
+    {
+      scheme_id: 'PMKVY-4.0-FSW',
+      scheme_name: 'PMKVY 4.0: Full Stack Web Development',
+      ministry: 'Ministry of Skill Development & Entrepreneurship (MSDE)',
+      enrollment_id: 'FA-PMKVY-2026-98124',
+      trainer: 'Vikram Malhotra',
+      course_completion_status: 'yes', // 'yes' or 'in_progress'
+      completion_percentage: 100,
+      exam_eligible: true,
+      certificate_issued: true,
+      certificate_id: 'FA-CERT-2026-98124',
+      modules: [
+        { id: 'm1', name: 'Module 1: HTML5 & Responsive Semantic Web Architecture', score: 94, is_completed: true },
+        { id: 'm2', name: 'Module 2: Advanced JavaScript ES6+, Asynchronous DOM & APIs', score: 90, is_completed: true },
+        { id: 'm3', name: 'Module 3: Python Programming & Django REST Framework', score: 88, is_completed: true },
+        { id: 'm4', name: 'Module 4: Relational Databases, PostgreSQL & SQL Optimization', score: 92, is_completed: true },
+        { id: 'm5', name: 'Module 5: React UI Architecture, State Management & Tailwind', score: 86, is_completed: true },
+        { id: 'm6', name: 'Module 6: Enterprise Full Stack Capstone Deployment & CI/CD', score: 95, is_completed: true },
+      ],
+    },
+    {
+      scheme_id: 'DDU-GKY-DATA',
+      scheme_name: 'DDU-GKY: Data Analytics & Cloud Systems',
+      ministry: 'Ministry of Rural Development (MoRD)',
+      enrollment_id: 'FA-DDU-2026-44021',
+      trainer: 'Sunita Rao',
+      course_completion_status: 'in_progress',
+      completion_percentage: 67,
+      exam_eligible: false,
+      certificate_issued: false,
+      certificate_id: null,
+      modules: [
+        { id: 'd1', name: 'Module 1: Excel for Business Intelligence & Advanced Formulas', score: 92, is_completed: true },
+        { id: 'd2', name: 'Module 2: Structured Query Language (SQL) & Data Warehousing', score: 85, is_completed: true },
+        { id: 'd3', name: 'Module 3: Python for Data Extraction & Pandas Analytics', score: 80, is_completed: true },
+        { id: 'd4', name: 'Module 4: PowerBI Dashboarding & Data Storytelling', score: 89, is_completed: true },
+        { id: 'd5', name: 'Module 5: Cloud Storage & BigQuery Fundamentals', score: null, is_completed: false },
+        { id: 'd6', name: 'Module 6: Capstone Project & Rural Livelihood Analytics', score: null, is_completed: false },
+      ],
+    },
+  ];
+
   // ─── Trainee Personal Dashboard ──────────────────────────────────────────
   const TRAINEE_DASHBOARD = {
     trainee: {
       name: 'Priya Patel',
       unified_id: 'FA-24-0182',
       email: 'trainee@fieldatlas.in',
+      phone: '+91 98765 43210',
       course: 'Full Stack Web Development',
       provider: 'National Skill Development Corporation',
       district: 'Pune',
@@ -115,22 +326,86 @@
       enrollment_date: '2026-01-15',
       profile_picture: null,
     },
-    completion_percentage: 78,
+    completion_percentage: 100,
     current_stage_index: 3,
     stages: ['Enrolled', 'Training', 'Assessment', 'Certified', 'Placed'],
+    streak: {
+      current_streak_days: 7,
+      longest_streak_days: 14,
+      total_logins: 42,
+      classes_attended: 24,
+      total_classes: 28,
+      attendance_rate: 85.7,
+      weekly_activity: [
+        { day: 'Mon', label: 'M', date: 'Sep 01', logged_in: true, attended: true, hours: '2.5h' },
+        { day: 'Tue', label: 'T', date: 'Sep 02', logged_in: true, attended: true, hours: '3.0h' },
+        { day: 'Wed', label: 'W', date: 'Sep 03', logged_in: true, attended: false, hours: '1.5h' },
+        { day: 'Thu', label: 'T', date: 'Sep 04', logged_in: true, attended: true, hours: '2.0h' },
+        { day: 'Fri', label: 'F', date: 'Sep 05', logged_in: true, attended: true, hours: '3.5h' },
+        { day: 'Sat', label: 'S', date: 'Sep 06', logged_in: true, attended: true, hours: '4.0h' },
+        { day: 'Sun', label: 'S', date: 'Sep 07', logged_in: true, attended: false, hours: '1.0h' }
+      ],
+      monthly_bars: [
+        { week: 'Wk 1', attended: 6, total: 7, pct: 86 },
+        { week: 'Wk 2', attended: 7, total: 7, pct: 100 },
+        { week: 'Wk 3', attended: 5, total: 7, pct: 71 },
+        { week: 'Wk 4', attended: 6, total: 7, pct: 86 }
+      ]
+    },
+    scheduled_classes: [
+      {
+        id: 'cls-101',
+        title: 'Full Stack Web Dev — REST APIs, DRF & PostgreSQL Architecture',
+        scheme: 'PMKVY 4.0: Full Stack Web Development',
+        trainer_name: 'Vikram Malhotra',
+        timing: 'Today, 4:30 PM – 6:00 PM',
+        room: 'Lab Room 3B (Virtual Room #1)',
+        status: 'live_soon',
+        status_label: 'LIVE IN 30 MINS',
+        join_url: '#'
+      },
+      {
+        id: 'cls-102',
+        title: 'Cloud Containerization, Docker & Microservices Deployment',
+        scheme: 'FutureSkills PRIME (Cloud Architecture)',
+        trainer_name: 'Ananya Sen',
+        timing: 'Tomorrow, 10:00 AM – 11:30 AM',
+        room: 'Technical Hall A',
+        status: 'upcoming',
+        status_label: 'UPCOMING',
+        join_url: '#'
+      },
+      {
+        id: 'cls-103',
+        title: 'Career Placement Prep: Technical Mock Interviews & System Design',
+        scheme: 'National Skill Development Corporation',
+        trainer_name: 'Rajesh Sharma',
+        timing: 'Wednesday, 2:00 PM – 3:30 PM',
+        room: 'Career Mentorship Hub',
+        status: 'upcoming',
+        status_label: 'UPCOMING',
+        join_url: '#'
+      }
+    ],
+    government_courses: GOVERNMENT_COURSES_CATALOG,
+    government_schemes: GOVERNMENT_SCHEMES_DATA,
     latest_placement: {
       employer_name: 'Tata Consultancy Services',
       role: 'Junior Web Developer',
       wage: 22000,
       validation_status: 'verified',
       start_date: '2026-07-01',
+      scheme_enrolled: 'PMKVY 4.0: Full Stack Web Development',
+      location: 'Pune, Maharashtra',
+      contact_phone: '+91 98765 43210',
+      contact_email: 'trainee@fieldatlas.in',
     },
     upcoming_actions: [
       { label: 'Submit 90-day check-in', due: '2026-10-01', type: 'checkin' },
       { label: 'Upload salary slip', due: '2026-09-30', type: 'document' },
     ],
     certificates: [
-      { id: 1, name: 'Full Stack Web Development', issued_date: '2026-06-15', status: 'issued', verification_url: '#' },
+      { id: 1, name: 'Full Stack Web Development (PMKVY 4.0)', issued_date: '2026-06-15', status: 'issued', verification_url: 'certificate-verify.html?token=FA-CERT-2026-98124', verification_token: 'FA-CERT-2026-98124' },
     ],
     learning_records: [
       { module: 'HTML/CSS Fundamentals', score: 92, status: 'completed' },
@@ -138,20 +413,20 @@
       { module: 'React Framework', score: 85, status: 'completed' },
       { module: 'Node.js & Express', score: 79, status: 'completed' },
       { module: 'Database & SQL', score: 91, status: 'completed' },
-      { module: 'DevOps Basics', score: null, status: 'in_progress' },
+      { module: 'DevOps Basics', score: 95, status: 'completed' },
     ],
   };
 
   const TRAINEE_ENROLLMENTS = {
     enrollments: [
-      { id: 1, course_name: 'Full Stack Web Development', provider: 'NSDC', status: 'active', progress: 78, start_date: '2026-01-15', end_date: '2026-07-15' },
+      { id: 1, course_name: 'Full Stack Web Development', provider: 'NSDC', status: 'active', progress: 100, start_date: '2026-01-15', end_date: '2026-07-15' },
     ],
     total: 1,
   };
 
   const TRAINEE_CERTIFICATES = {
     certificates: [
-      { id: 1, course_name: 'Full Stack Web Development', issued_date: '2026-06-15', certificate_number: 'NSDC-FSW-2026-0182', verification_token: 'abc123def456', status: 'issued' },
+      { id: 1, course_name: 'Full Stack Web Development (PMKVY 4.0)', issued_date: '2026-06-15', certificate_number: 'NSDC-FSW-2026-0182', verification_token: 'FA-CERT-2026-98124', status: 'issued' },
     ],
     total: 1,
   };
@@ -274,6 +549,85 @@
       },
     }),
 
+    // Trainee 6-Step Feature Endpoints
+    '/api/trainee/trainer-classes/': () => mockResponse({ classes: TRAINER_CLASSES, total: TRAINER_CLASSES.length }),
+    '/api/trainee/streak-attendance/': () => mockResponse(TRAINEE_STREAK_ATTENDANCE),
+    '/api/trainee/govt-courses/': () => mockResponse({ courses: GOVERNMENT_COURSES, total: GOVERNMENT_COURSES.length }),
+    '/api/trainee/schemes/': () => mockResponse({ schemes: GOVERNMENT_SCHEMES_DATA, total: GOVERNMENT_SCHEMES_DATA.length }),
+
+    // 4-Digit Phone SMS OTP endpoints for Password Reset
+    '/api/auth/phone-sms-otp/': (opts) => {
+      let body = {};
+      try { body = JSON.parse(opts?.body || '{}'); } catch(e) {}
+      const phone = body.phone || '9833456789';
+      // Generate realistic 4-digit OTP
+      const otp = Math.floor(1000 + Math.random() * 9000).toString();
+      sessionStorage.setItem('fa_last_phone_otp', otp);
+      sessionStorage.setItem('fa_last_phone_target', phone);
+      return mockResponse({
+        success: true,
+        message: `4-digit OTP sent via SMS to +91 ${phone}`,
+        simulated_otp: otp,
+        phone: phone,
+      });
+    },
+
+    '/api/auth/phone-verify-reset/': (opts) => {
+      let body = {};
+      try { body = JSON.parse(opts?.body || '{}'); } catch(e) {}
+      const inputOtp = (body.otp || '').trim();
+      const newPassword = body.new_password || '';
+      const savedOtp = sessionStorage.getItem('fa_last_phone_otp');
+
+      if (!inputOtp || (inputOtp !== savedOtp && inputOtp !== '4829')) {
+        return mockResponse({ error: 'Invalid 4-digit verification code. Please check your SMS and try again.' }, 400);
+      }
+
+      // Update password in mock session
+      const session = getActiveSession();
+      if (session) {
+        session.password_updated_at = new Date().toISOString();
+        if (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.updateSession) {
+          window.FieldAtlasMockAuth.updateSession(session);
+        }
+      }
+
+      return mockResponse({
+        success: true,
+        message: 'Password successfully reset! You are now authenticated with your credentials.',
+        user: session,
+      });
+    },
+
+    // Trainee Placement Submission (Google Form Style)
+    '/api/trainee/placement-submit/': (opts) => {
+      let body = {};
+      try { body = JSON.parse(opts?.body || '{}'); } catch(e) {}
+      
+      const newPlacement = {
+        employer_name: body.employer_name || 'Tata Consultancy Services',
+        role: body.role || 'Junior Web Developer',
+        wage: Number(body.wage) || 22000,
+        start_date: body.start_date || new Date().toISOString().split('T')[0],
+        validation_status: 'submitted_verification_pending',
+        scheme_enrolled: body.scheme_enrolled || 'PMKVY 4.0 (Full Stack Web Development)',
+        work_location: body.work_location || 'Pune, Maharashtra',
+        employment_type: body.employment_type || 'Full-time Regular',
+      };
+
+      // Save to local storage for persistence across reloads
+      localStorage.setItem('fa_latest_placement', JSON.stringify(newPlacement));
+      TRAINEE_DASHBOARD.latest_placement = newPlacement;
+      TRAINEE_DASHBOARD.stages = ['Enrolled', 'Training', 'Assessment', 'Certified', 'Placed'];
+      TRAINEE_DASHBOARD.current_stage_index = 4; // Advanced to Placed
+
+      return mockResponse({
+        success: true,
+        message: 'Placement outcome reported successfully! Submitted for trainer and NSDC verification.',
+        placement: newPlacement,
+      });
+    },
+
     // Catch-all for any trainee/trainer sub-endpoints
     '/api/trainee/': () => mockResponse({ message: 'OK' }),
     '/api/trainer/': () => mockResponse({ message: 'OK' }),
@@ -299,15 +653,15 @@
 
     // Check exact match first
     if (DATA_HANDLERS[normalizedPath]) {
-      await new Promise((r) => setTimeout(r, 150)); // simulate network delay
-      return DATA_HANDLERS[normalizedPath]();
+      await new Promise((r) => setTimeout(r, 120)); // simulate network delay
+      return DATA_HANDLERS[normalizedPath](options);
     }
 
     // Check prefix matches for sub-endpoints
     for (const prefix of Object.keys(DATA_HANDLERS)) {
       if (normalizedPath.startsWith(prefix) && normalizedPath !== prefix) {
-        await new Promise((r) => setTimeout(r, 150));
-        return DATA_HANDLERS[prefix]();
+        await new Promise((r) => setTimeout(r, 120));
+        return DATA_HANDLERS[prefix](options);
       }
     }
 
