@@ -98,6 +98,14 @@
           <div><strong>Trainer:</strong> <code>2345 6789 0123</code> (or mobile: <code>9820123456</code> / <code>FA-TR-1001</code>)</div>
           <div><strong>Admin:</strong> <code>1122 3344 5566</code> (or <code>admin@fieldatlas.in</code>)</div>
         </div>
+        <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+          <button type="button" class="btn btn-sm btn-outline" onclick="fillDemo('trainee')" style="flex: 1; font-size: 0.75rem;">
+            ⚡ Auto-Fill Trainee
+          </button>
+          <button type="button" class="btn btn-sm btn-primary" onclick="fillDemo('trainer')" style="flex: 1; font-size: 0.75rem;">
+            ⚡ Auto-Fill Trainer
+          </button>
+        </div>
       </div>
 
       <!-- Privacy & Governance Badge -->
@@ -118,6 +126,23 @@
   <script src="js/notifications.js"></script>
   <script src="js/auth.js"></script>
   <script>
+    window.fillDemo = function(role) {
+      const idInput = document.getElementById('login-identifier');
+      const passInput = document.getElementById('login-password');
+      if (role === 'trainer') {
+        idInput.value = 'trainer@fieldatlas.in';
+        passInput.value = 'Atlas@2026!';
+      } else {
+        idInput.value = 'trainee@fieldatlas.in';
+        passInput.value = 'Atlas@2026!';
+      }
+      FieldAtlasAPI.showToast(`Logged in credentials filled for ${role.toUpperCase()}. Submitting...`, 'success');
+      setTimeout(() => {
+        const form = document.getElementById('login-form');
+        if (form) form.requestSubmit ? form.requestSubmit() : form.submit();
+      }, 300);
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
       if (window.lucide) {
         lucide.createIcons();
