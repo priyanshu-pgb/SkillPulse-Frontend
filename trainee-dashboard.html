@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Trainee Portal — Field Atlas | SkillPulse</title>
-  <meta name="description" content="Field Atlas Trainee Portal — Track classes, daily login streak, attendance, government funded courses, learning records, verifiable certificates, and placement outcomes.">
+  <meta name="description" content="Field Atlas Trainee Portal — Track classes, daily login streak, attendance, government funded courses with live official portals, learning records, verifiable certificates, and placement outcomes.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,62 @@
   <link rel="stylesheet" href="css/field-atlas.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/watermark.css">
+
+  <style>
+    /* Trainee Continuous Single-Page Flow Styles */
+    .trainee-section-block {
+      margin-bottom: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border-subtle);
+    }
+    .trainee-section-block:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-category-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-teal);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .section-heading-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--color-deep-indigo);
+      margin: 0;
+    }
+    .btn-live-portal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #0E8176 0%, #1A2238 100%);
+      color: #FFFFFF !important;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-decoration: none !important;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(14, 129, 118, 0.3);
+    }
+    .btn-live-portal:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(14, 129, 118, 0.4);
+      color: #FFFFFF !important;
+    }
+  </style>
 </head>
 <body>
   <div class="app-container">
@@ -34,21 +90,21 @@
       </div>
 
       <nav class="sidebar-nav">
-        <div class="nav-group-label">My Learning Journey</div>
-        <a class="nav-link active" data-tab="dashboard" onclick="switchTraineeView('dashboard')">
-          <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> Dashboard
+        <div class="nav-group-label">Quick Jump to Sections</div>
+        <a class="nav-link active" data-nav-target="section-dashboard" id="nav-item-dashboard">
+          <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> 1. Dashboard & Streak
         </a>
-        <a class="nav-link" data-tab="govt-courses" onclick="switchTraineeView('govt-courses')">
-          <i data-lucide="landmark" style="width: 18px; height: 18px;"></i> Government Courses
+        <a class="nav-link" data-nav-target="section-govt-courses" id="nav-item-govt-courses">
+          <i data-lucide="landmark" style="width: 18px; height: 18px;"></i> 2. Government Courses
         </a>
-        <a class="nav-link" data-tab="learning" onclick="switchTraineeView('learning')">
-          <i data-lucide="book-open" style="width: 18px; height: 18px;"></i> Learning Record
+        <a class="nav-link" data-nav-target="section-learning" id="nav-item-learning">
+          <i data-lucide="book-open" style="width: 18px; height: 18px;"></i> 3. Learning Record
         </a>
-        <a class="nav-link" data-tab="certificates" onclick="switchTraineeView('certificates')">
-          <i data-lucide="award" style="width: 18px; height: 18px;"></i> Certificates
+        <a class="nav-link" data-nav-target="section-certificates" id="nav-item-certificates">
+          <i data-lucide="award" style="width: 18px; height: 18px;"></i> 4. Certificates
         </a>
-        <a class="nav-link" data-tab="placement" onclick="switchTraineeView('placement')">
-          <i data-lucide="briefcase" style="width: 18px; height: 18px;"></i> Placement Details
+        <a class="nav-link" data-nav-target="section-placement" id="nav-item-placement">
+          <i data-lucide="briefcase" style="width: 18px; height: 18px;"></i> 5. Placement Details
         </a>
       </nav>
 
@@ -59,7 +115,7 @@
             <div class="user-profile-name" id="sidebar-user-name">Priya Patel</div>
             <div class="user-profile-role">
               <i data-lucide="graduation-cap" style="width: 12px; height: 12px;"></i>
-              <span>Trainee</span>
+              <span>Registered Trainee</span>
             </div>
           </div>
         </div>
@@ -74,7 +130,7 @@
 
     <div class="mobile-backdrop" id="mobile-backdrop" onclick="toggleSidebar()"></div>
 
-    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <!-- ═══════════════ MAIN WRAPPER ═══════════════ -->
     <div class="main-wrapper">
       <header class="top-header glass-header">
         <div class="header-left" style="display: flex; align-items: center; gap: 0.75rem;">
@@ -109,7 +165,7 @@
 
           <div class="header-breadcrumb">
             <i data-lucide="home" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
-            <span id="header-active-view-name">Dashboard</span>
+            <span id="header-active-view-name">Trainee Full Journey</span>
           </div>
         </div>
 
@@ -137,545 +193,598 @@
         </div>
       </header>
 
-      <!-- ════════════ TAB 1: DASHBOARD (STEP 2: STREAK & ATTENDANCE) ════════════ -->
-      <main class="content-body tab-view-panel" id="view-dashboard">
+      <!-- ════════════ ALL 5 SECTIONS ON THE SAME PAGE (SEQUENTIAL FLOW) ════════════ -->
+      <main class="content-body" style="padding-bottom: 5rem;">
 
-        <!-- Welcome Card -->
-        <div class="trainee-welcome-card">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-            <div>
-              <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); margin-bottom: 0.25rem;">Learner Dashboard</div>
-              <h1 style="color: #FFFFFF; font-size: 1.5rem; margin-bottom: 0.25rem;" id="trainee-name-display">Priya Patel</h1>
-              <p style="color: rgba(255,255,255,0.85); font-size: 0.9rem;" id="trainee-course-display">Full Stack Web Development · PMKVY 4.0 / NSDC</p>
-            </div>
-            <div style="text-align: right;">
-              <div style="font-size: 0.75rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.05em;">Course Completion</div>
-              <div style="font-size: 2rem; font-weight: 800; color: #FFFFFF;" id="trainee-completion-pct">100%</div>
-              <div style="background: rgba(255,255,255,0.2); height: 6px; border-radius: 3px; width: 130px; margin-top: 0.25rem;">
-                <div id="trainee-completion-bar" style="background: #FFFFFF; height: 100%; border-radius: 3px; width: 100%; transition: width 0.5s ease;"></div>
+        <!-- ════════════ SECTION 1: DASHBOARD & STREAK (STEP 2) ════════════ -->
+        <section id="section-dashboard" class="trainee-section-block">
+          
+          <!-- Welcome Card -->
+          <div class="trainee-welcome-card">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); margin-bottom: 0.25rem;">Learner Dashboard</div>
+                <h1 style="color: #FFFFFF; font-size: 1.5rem; margin-bottom: 0.25rem;" id="trainee-name-display">Priya Patel</h1>
+                <p style="color: rgba(255,255,255,0.85); font-size: 0.9rem;" id="trainee-course-display">Full Stack Web Development · PMKVY 4.0 / NSDC</p>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.05em;">Course Completion</div>
+                <div style="font-size: 2rem; font-weight: 800; color: #FFFFFF;" id="trainee-completion-pct">100%</div>
+                <div style="background: rgba(255,255,255,0.2); height: 6px; border-radius: 3px; width: 130px; margin-top: 0.25rem;">
+                  <div id="trainee-completion-bar" style="background: #FFFFFF; height: 100%; border-radius: 3px; width: 100%; transition: width 0.5s ease;"></div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Stage Timeline Rail -->
-          <div class="trainee-stage-rail" id="trainee-stage-rail">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <!-- ═════ STEP 2: STREAK & ATTENDANCE SECTION WITH GRAPH ═════ -->
-        <div class="streak-hero-card">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-            <div>
-              <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 9999px;">
-                🔥 DAILY LEARNER STREAK
-              </span>
-              <h2 style="color: #FFFFFF; font-size: 1.4rem; margin: 0.5rem 0 0.2rem; font-weight: 800;">
-                <span id="streak-days-counter">14</span>-Day Login Streak Active!
-              </h2>
-              <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.85rem; margin: 0;">
-                You logged in today. Keep your momentum going to unlock the Skill India Gold Scholar badge!
-              </p>
-            </div>
-            <div style="text-align: right;">
-              <span class="badge badge-teal" style="background: #34D399; color: #064E3B; font-weight: 800; padding: 0.4rem 0.85rem; font-size: 0.8rem;" id="exam-eligibility-badge">
-                EXAM ELIGIBLE (92.3% ATTENDANCE)
-              </span>
-            </div>
-          </div>
-
-          <!-- Streak & Attendance Metrics Row -->
-          <div class="streak-stats-row">
-            <div class="streak-stat-box">
-              <div class="streak-stat-value">🔥 <span id="stat-streak-num">14</span> <span style="font-size: 0.9rem; font-weight: 600;">Days</span></div>
-              <div class="streak-stat-label">Daily App Streak</div>
-            </div>
-            <div class="streak-stat-box">
-              <div class="streak-stat-value">📚 <span id="stat-classes-attended">24</span>/<span id="stat-classes-total">26</span></div>
-              <div class="streak-stat-label">Classes Attended</div>
-            </div>
-            <div class="streak-stat-box">
-              <div class="streak-stat-value">📊 <span id="stat-attendance-rate">92.3</span>%</div>
-              <div class="streak-stat-label">Attendance Rate</div>
-            </div>
-            <div class="streak-stat-box">
-              <div class="streak-stat-value">⚡ <span id="stat-days-active">28</span> <span style="font-size: 0.9rem; font-weight: 600;">Days</span></div>
-              <div class="streak-stat-label">App Logins (This Month)</div>
-            </div>
-          </div>
-
-          <!-- 14-Day Activity Heat Matrix -->
-          <div style="margin-top: 1rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: rgba(255,255,255,0.8); margin-bottom: 0.35rem;">
-              <span>Past 14 Days Activity & Attendance</span>
-              <span>🟢 Attended Class & Logged In &nbsp;|&nbsp; 🔵 Logged In &nbsp;|&nbsp; ⚪ Rest Day</span>
-            </div>
-            <div class="attendance-dot-grid" id="attendance-dots-container">
+            <!-- Stage Timeline Rail -->
+            <div class="trainee-stage-rail" id="trainee-stage-rail">
               <!-- Rendered by JS -->
             </div>
           </div>
-        </div>
 
-        <!-- Attendance & Streak Graph Card -->
-        <div class="table-card" style="margin-bottom: 1.5rem; padding: 1.25rem;">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-            <div>
-              <h3 style="font-size: 1rem; color: var(--color-deep-indigo); font-weight: 700; margin: 0;">Attendance & Daily Login Tracking Graph</h3>
-              <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0.2rem 0 0;">Visual progress showing your class participation and platform login consistency</p>
-            </div>
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span class="badge badge-teal" style="font-size: 0.72rem;">Govt Scheme Min: 75%</span>
-            </div>
-          </div>
-          <div style="position: relative; height: 260px; width: 100%;">
-            <canvas id="streakAttendanceChart"></canvas>
-          </div>
-        </div>
-
-        <!-- ID Card & Current Placement -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
-          <div class="metric-card">
-            <div class="metric-header">
-              <div class="metric-title">Field Atlas Unified ID</div>
-              <div class="metric-icon-wrap" style="background: var(--color-teal-light); color: var(--color-teal);">
-                <i data-lucide="fingerprint" style="width: 18px; height: 18px;"></i>
+          <!-- ═════ STEP 2: STREAK & ATTENDANCE HERO CARD ═════ -->
+          <div class="streak-hero-card">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+              <div>
+                <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 9999px;">
+                  🔥 DAILY LEARNER STREAK
+                </span>
+                <h2 style="color: #FFFFFF; font-size: 1.4rem; margin: 0.5rem 0 0.2rem; font-weight: 800;">
+                  <span id="streak-days-counter">14</span>-Day Login Streak Active!
+                </h2>
+                <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.85rem; margin: 0;">
+                  You logged in today. Keep your momentum going to unlock the Skill India Gold Scholar badge!
+                </p>
+              </div>
+              <div style="text-align: right;">
+                <span class="badge badge-teal" style="background: #34D399; color: #064E3B; font-weight: 800; padding: 0.4rem 0.85rem; font-size: 0.8rem;" id="exam-eligibility-badge">
+                  EXAM ELIGIBLE (92.3% ATTENDANCE)
+                </span>
               </div>
             </div>
-            <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo);" id="trainee-id-display">FA-24-0182</div>
-            <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 0.35rem;">National Skilling Registry Verified</div>
-          </div>
 
-          <!-- Placement Card -->
-          <div class="metric-card" id="trainee-placement-card">
-            <div class="metric-header">
-              <div class="metric-title">Verified Placement</div>
-              <div class="metric-icon-wrap" style="background: var(--color-ochre-light); color: var(--color-ochre);">
-                <i data-lucide="briefcase" style="width: 18px; height: 18px;"></i>
+            <!-- Streak & Attendance Metrics Row -->
+            <div class="streak-stats-row">
+              <div class="streak-stat-box">
+                <div class="streak-stat-value">🔥 <span id="stat-streak-num">14</span> <span style="font-size: 0.9rem; font-weight: 600;">Days</span></div>
+                <div class="streak-stat-label">Daily App Streak</div>
+              </div>
+              <div class="streak-stat-box">
+                <div class="streak-stat-value">📚 <span id="stat-classes-attended">24</span>/<span id="stat-classes-total">26</span></div>
+                <div class="streak-stat-label">Classes Attended</div>
+              </div>
+              <div class="streak-stat-box">
+                <div class="streak-stat-value">📊 <span id="stat-attendance-rate">92.3</span>%</div>
+                <div class="streak-stat-label">Attendance Rate</div>
+              </div>
+              <div class="streak-stat-box">
+                <div class="streak-stat-value">⚡ <span id="stat-days-active">28</span> <span style="font-size: 0.9rem; font-weight: 600;">Days</span></div>
+                <div class="streak-stat-label">App Logins (This Month)</div>
               </div>
             </div>
-            <div style="font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem;" id="placement-employer">Tata Consultancy Services</div>
-            <div style="font-size: 0.85rem; color: var(--color-text-secondary);" id="placement-role">Junior Web Developer</div>
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-              <span style="font-weight: 700; color: var(--color-teal);" id="placement-wage">₹22,000/month</span>
-              <span class="badge badge-teal" id="placement-status">VERIFIED</span>
-            </div>
-          </div>
 
-          <div id="trainee-placement-empty" style="display: none;" class="metric-card">
-            <div style="text-align: center; padding: 1rem; color: var(--color-text-muted);">
-              <i data-lucide="briefcase" style="width: 24px; height: 24px; margin-bottom: 0.5rem;"></i>
-              <p>No placement recorded yet</p>
-              <button class="btn btn-outline btn-sm" onclick="switchTraineeView('placement')" style="margin-top: 0.5rem;">Submit Placement Survey</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick Actions Navigation -->
-        <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Direct Module Navigation</h3>
-        <div class="trainee-action-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 1.5rem;">
-          <button class="trainee-action-btn" onclick="switchTraineeView('govt-courses')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="5 10 5 21"/><polyline points="19 10 19 21"/><polygon points="12 3 2 10 22 10 12 3"/></svg>
-            Govt Courses
-          </button>
-          <button class="trainee-action-btn" onclick="switchTraineeView('learning')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo-blue)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            Learning Record
-          </button>
-          <button class="trainee-action-btn" onclick="switchTraineeView('certificates')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-ochre)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-            Certificates
-          </button>
-          <button class="trainee-action-btn" onclick="switchTraineeView('placement')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            Placement Details
-          </button>
-        </div>
-
-        <!-- Upcoming Actions -->
-        <div class="table-card" style="margin-bottom: 1.5rem;">
-          <div class="table-toolbar">
-            <h3 style="font-size: 1rem;">Upcoming Actions & Check-ins</h3>
-          </div>
-          <div id="upcoming-actions-list" style="padding: 0.5rem;">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-      </main>
-
-      <!-- ════════════ TAB 2: GOVERNMENT COURSES (STEP 3) ════════════ -->
-      <main class="content-body tab-view-panel" id="view-govt-courses" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <h2 style="font-size: 1.5rem; color: var(--color-deep-indigo); margin-bottom: 0.25rem;">Indian Government Funded Courses</h2>
-            <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">
-              Browse nationally recognized skill development programs funded by the Government of India (PMKVY 4.0, DDU-GKY, SWAYAM, FutureSkills).
-            </p>
-          </div>
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span class="badge badge-teal" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
-              <i data-lucide="check-circle" style="width: 14px; height: 14px; margin-right: 4px;"></i> 100% Subsidized
-            </span>
-          </div>
-        </div>
-
-        <!-- Course Filter Pills -->
-        <div style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1rem;">
-          <button class="btn btn-primary btn-sm" onclick="filterGovtCourses('all', this)">All Courses</button>
-          <button class="btn btn-outline btn-sm" onclick="filterGovtCourses('IT-ITeS & FutureSkills', this)">IT & Software</button>
-          <button class="btn btn-outline btn-sm" onclick="filterGovtCourses('Information Technology', this)">Data Analytics</button>
-          <button class="btn btn-outline btn-sm" onclick="filterGovtCourses('Higher Education & Deep Tech', this)">AI & Machine Learning</button>
-          <button class="btn btn-outline btn-sm" onclick="filterGovtCourses('Emerging Technologies', this)">Cloud & DevOps</button>
-          <button class="btn btn-outline btn-sm" onclick="filterGovtCourses('Manufacturing & Traditional Crafts', this)">PM Vishwakarma</button>
-        </div>
-
-        <!-- Govt Courses Catalog Grid -->
-        <div class="govt-course-grid" id="govt-courses-grid">
-          <!-- Rendered dynamically by JS -->
-        </div>
-      </main>
-
-      <!-- ════════════ TAB 3: LEARNING RECORD / SCHEMES (STEP 4) ════════════ -->
-      <main class="content-body tab-view-panel" id="view-learning" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <h2 style="font-size: 1.5rem; color: var(--color-deep-indigo); margin-bottom: 0.25rem;">SCHEMES & Learning Records</h2>
-            <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">
-              Track course modules and real-time completion status for all enrolled Government Skilling Schemes.
-            </p>
-          </div>
-        </div>
-
-        <!-- Active Scheme Hero Header -->
-        <div class="scheme-hero-header">
-          <div>
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-              <span class="govt-badge-pill" style="background: var(--color-teal); color: #FFFFFF;" id="active-scheme-badge">PMKVY 4.0</span>
-              <span style="font-size: 0.8rem; color: var(--color-text-muted);" id="active-scheme-enrollment">Enrollment: FA-PMKVY-2026-98124</span>
-            </div>
-            <h3 style="font-size: 1.3rem; color: var(--color-deep-indigo); font-weight: 700; margin: 0.2rem 0;" id="active-scheme-title">
-              Full Stack Web Development
-            </h3>
-            <div style="font-size: 0.82rem; color: var(--color-text-secondary);" id="active-scheme-trainer">
-              Assigned Vocational Trainer: <strong>Vikram Malhotra</strong> (NSDC Senior Instructor)
-            </div>
-          </div>
-
-          <!-- DYNAMIC COURSE COMPLETION STATUS -->
-          <div style="text-align: right;">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.25rem;">
-              National Skill Status
-            </div>
-            <div id="course-completion-badge-wrap">
-              <div class="completion-status-badge completed" id="course-completion-status-badge">
-                <i data-lucide="check-circle" style="width: 18px; height: 18px;"></i>
-                <span id="course-completion-status-text">Course Completion Status: YES</span>
+            <!-- 14-Day Activity Heat Matrix -->
+            <div style="margin-top: 1rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: rgba(255,255,255,0.8); margin-bottom: 0.35rem;">
+                <span>Past 14 Days Activity & Attendance</span>
+                <span>🟢 Attended Class & Logged In &nbsp;|&nbsp; 🔵 Logged In &nbsp;|&nbsp; ⚪ Rest Day</span>
+              </div>
+              <div class="attendance-dot-grid" id="attendance-dots-container">
+                <!-- Rendered by JS -->
               </div>
             </div>
-            <div style="font-size: 0.78rem; font-weight: 700; color: var(--color-teal); margin-top: 0.35rem;" id="modules-completed-counter">
-              6 of 6 Modules Completed (100%)
+          </div>
+
+          <!-- Attendance & Streak Graph Card -->
+          <div class="table-card" style="margin-bottom: 1.5rem; padding: 1.25rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div>
+                <h3 style="font-size: 1rem; color: var(--color-deep-indigo); font-weight: 700; margin: 0;">Attendance & Daily Login Tracking Graph</h3>
+                <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0.2rem 0 0;">Visual progress showing class participation and platform login consistency</p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span class="badge badge-teal" style="font-size: 0.72rem;">Govt Scheme Min: 75%</span>
+              </div>
+            </div>
+            <div style="position: relative; height: 260px; width: 100%;">
+              <canvas id="streakAttendanceChart"></canvas>
             </div>
           </div>
-        </div>
 
-        <!-- Scheme Modules List -->
-        <div class="table-card" style="padding: 1.25rem;">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <h3 style="font-size: 1rem; color: var(--color-deep-indigo); font-weight: 700; margin: 0;">Curriculum Modules & Assessment Scores</h3>
-            <span style="font-size: 0.75rem; color: var(--color-text-muted);">Click "Toggle Status" to simulate progress</span>
+          <!-- ID Card & Current Placement -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Field Atlas Unified ID</div>
+                <div class="metric-icon-wrap" style="background: var(--color-teal-light); color: var(--color-teal);">
+                  <i data-lucide="fingerprint" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo);" id="trainee-id-display">FA-24-0182</div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 0.35rem;">National Skilling Registry Verified</div>
+            </div>
+
+            <!-- Placement Card -->
+            <div class="metric-card" id="trainee-placement-card">
+              <div class="metric-header">
+                <div class="metric-title">Verified Placement</div>
+                <div class="metric-icon-wrap" style="background: var(--color-ochre-light); color: var(--color-ochre);">
+                  <i data-lucide="briefcase" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div style="font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem;" id="placement-employer">Tata Consultancy Services</div>
+              <div style="font-size: 0.85rem; color: var(--color-text-secondary);" id="placement-role">Junior Web Developer</div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                <span style="font-weight: 700; color: var(--color-teal);" id="placement-wage">₹22,000/month</span>
+                <span class="badge badge-teal" id="placement-status">VERIFIED</span>
+              </div>
+            </div>
+
+            <div id="trainee-placement-empty" style="display: none;" class="metric-card">
+              <div style="text-align: center; padding: 1rem; color: var(--color-text-muted);">
+                <i data-lucide="briefcase" style="width: 24px; height: 24px; margin-bottom: 0.5rem;"></i>
+                <p>No placement recorded yet</p>
+                <button class="btn btn-outline btn-sm" onclick="scrollToSection('section-placement')" style="margin-top: 0.5rem;">Submit Placement Survey</button>
+              </div>
+            </div>
           </div>
 
-          <div id="scheme-modules-container">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-      </main>
-
-      <!-- ════════════ TAB 4: CERTIFICATES (STEP 5) ════════════ -->
-      <main class="content-body tab-view-panel" id="view-certificates" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <h2 style="font-size: 1.5rem; color: var(--color-deep-indigo); margin-bottom: 0.25rem;">Official Government Scheme Certificate</h2>
-            <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">
-              Verifiable certificate issued under Pradhan Mantri Kaushal Vikas Yojana (PMKVY 4.0) and NSDC.
-            </p>
-          </div>
-          <div>
-            <button class="btn btn-primary" onclick="downloadCertificateAction()">
-              <i data-lucide="download" style="width: 16px; height: 16px; margin-right: 6px;"></i> Download Certificate (PDF)
+          <!-- Quick Navigation Jump Buttons -->
+          <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Jump to Page Sections Below</h3>
+          <div class="trainee-action-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 1.5rem;">
+            <button class="trainee-action-btn" onclick="scrollToSection('section-govt-courses')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="5 10 5 21"/><polyline points="19 10 19 21"/><polygon points="12 3 2 10 22 10 12 3"/></svg>
+              Govt Courses ↓
+            </button>
+            <button class="trainee-action-btn" onclick="scrollToSection('section-learning')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo-blue)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              Learning Record ↓
+            </button>
+            <button class="trainee-action-btn" onclick="scrollToSection('section-certificates')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-ochre)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              Certificates ↓
+            </button>
+            <button class="trainee-action-btn" onclick="scrollToSection('section-placement')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              Placement Form ↓
             </button>
           </div>
-        </div>
+        </section>
 
-        <!-- Eligibility Banner -->
-        <div style="background: var(--color-teal-light); border: 1px solid var(--color-teal); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-teal); color: #FFFFFF; display: flex; align-items: center; justify-content: center;">
-              <i data-lucide="award" style="width: 20px; height: 20px;"></i>
+        <!-- ════════════ SECTION 2: GOVERNMENT COURSES (STEP 3 - BELOW DASHBOARD) ════════════ -->
+        <section id="section-govt-courses" class="trainee-section-block">
+          <div class="section-title-wrap">
+            <div>
+              <span class="section-category-tag">SECTION 2 · INDIAN GOVERNMENT FUNDED INITIATIVES</span>
+              <h2 class="section-heading-text">Government Courses & Official Portals</h2>
+              <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0.25rem 0 0;">
+                Direct live official government websites + SSO Portal access with 4-digit SMS OTP reset.
+              </p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="badge badge-teal" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                <i data-lucide="check-circle" style="width: 14px; height: 14px; margin-right: 4px;"></i> 100% Govt Funded
+              </span>
+            </div>
+          </div>
+
+          <!-- Official Government Directory Bar -->
+          <div style="background: linear-gradient(135deg, #1E2749 0%, #0E8176 100%); border-radius: var(--radius-md); padding: 1rem 1.25rem; color: #FFFFFF; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85;">Official Central Ministries & Skill Portals</div>
+              <div style="font-size: 0.95rem; font-weight: 700;">Government of India Verified Skilling Infrastructure</div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <a href="https://www.skillindiadigital.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700;">
+                Skill India Digital ↗
+              </a>
+              <a href="https://www.pmkvyofficial.org" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700;">
+                PMKVY Official ↗
+              </a>
+              <a href="https://swayam.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700;">
+                SWAYAM / NPTEL ↗
+              </a>
+              <a href="https://ddugky.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700;">
+                DDU-GKY ↗
+              </a>
+              <a href="https://pmvishwakarma.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700;">
+                PM Vishwakarma ↗
+              </a>
+              <a href="https://www.apprenticeshipindia.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700;">
+                NAPS Portal ↗
+              </a>
+            </div>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1rem;" id="govt-filter-pill-container">
+            <button class="btn btn-primary btn-sm filter-pill active" data-filter="all">All Courses (7)</button>
+            <button class="btn btn-outline btn-sm filter-pill" data-filter="IT-ITeS & FutureSkills">IT & Software</button>
+            <button class="btn btn-outline btn-sm filter-pill" data-filter="Information Technology">Data Analytics</button>
+            <button class="btn btn-outline btn-sm filter-pill" data-filter="Higher Education & Deep Tech">AI & Machine Learning</button>
+            <button class="btn btn-outline btn-sm filter-pill" data-filter="Emerging Technologies">Cloud & DevOps</button>
+            <button class="btn btn-outline btn-sm filter-pill" data-filter="Manufacturing & Traditional Crafts">PM Vishwakarma</button>
+            <button class="btn btn-outline btn-sm filter-pill" data-filter="Apprenticeship & On-the-Job Training">Apprenticeship (NAPS)</button>
+          </div>
+
+          <!-- Govt Courses Grid -->
+          <div class="govt-course-grid" id="govt-courses-grid">
+            <!-- Rendered dynamically with prominent Live Government Links -->
+          </div>
+        </section>
+
+        <!-- ════════════ SECTION 3: LEARNING RECORD & SCHEMES (STEP 4) ════════════ -->
+        <section id="section-learning" class="trainee-section-block">
+          <div class="section-title-wrap">
+            <div>
+              <span class="section-category-tag">SECTION 3 · CURRICULUM MODULES & PROGRESS</span>
+              <h2 class="section-heading-text">SCHEMES & Learning Records</h2>
+              <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0.25rem 0 0;">
+                Enrolled Government Schemes module completion tracking with instant verification.
+              </p>
             </div>
             <div>
-              <div style="font-weight: 700; color: var(--color-teal); font-size: 0.95rem;">National Assessment & Exam Eligibility: ELIGIBLE ✅</div>
-              <div style="font-size: 0.8rem; color: var(--color-deep-indigo);">All 6 Modules Completed · Attendance 92.3% (Exceeds 75% Govt Requirement)</div>
-            </div>
-          </div>
-          <span class="badge badge-teal" style="font-size: 0.75rem;">DIRECT CERTIFICATION ISSUED</span>
-        </div>
-
-        <!-- ═════ OFFICIAL HIGH-FIDELITY GOVERNMENT SCHEME CERTIFICATE ═════ -->
-        <div class="certificate-preview-container" id="printable-certificate">
-          <!-- Ashoka Emblem / Govt Crest -->
-          <div class="cert-emblem">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#D69541" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <div class="cert-scheme-title">GOVERNMENT OF INDIA · SKILL INDIA MISSION</div>
-          <div style="font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: #49618B; margin-bottom: 0.5rem;">
-            NATIONAL SKILL DEVELOPMENT CORPORATION (NSDC)
-          </div>
-          <h2 class="cert-main-heading">Certificate of Vocational Excellence</h2>
-          <p style="font-size: 0.9rem; color: #49618B; margin: 0.5rem 0;">This is to certify that</p>
-          
-          <div class="cert-recipient-name" id="cert-display-name">Priya Patel</div>
-          
-          <p style="font-size: 0.88rem; color: #1E2749; max-width: 580px; margin: 0.75rem auto 1.25rem; line-height: 1.6;">
-            bearing Unified Field Atlas Identifier <strong id="cert-display-id" style="font-family: var(--font-mono); color: #0E8176;">FA-24-0182</strong> has successfully fulfilled all curricular requirements, attended designated instructional hours, and achieved qualifying scores across all technical modules in:
-          </p>
-
-          <div style="display: inline-block; background: #F4E8D1; border: 1px solid #D69541; padding: 0.6rem 1.5rem; border-radius: 4px; font-weight: 800; font-size: 1.1rem; color: #1E2749; margin-bottom: 1.5rem;">
-            Full Stack Web Development & Python Cloud (PMKVY 4.0)
-          </div>
-
-          <!-- Completed Modules Summary inside Certificate -->
-          <div style="max-width: 540px; margin: 0 auto 1.5rem; font-size: 0.78rem; text-align: left; background: rgba(14, 129, 118, 0.05); padding: 0.75rem 1rem; border-radius: 6px; border: 1px dashed rgba(14, 129, 118, 0.3);">
-            <div style="font-weight: 700; color: #0E8176; margin-bottom: 0.35rem;">Assessed & Completed Modules:</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem; color: #334155;">
-              <span>• HTML5 & Semantic Web (94%)</span>
-              <span>• JavaScript ES6+ & APIs (90%)</span>
-              <span>• Python & Django REST (88%)</span>
-              <span>• Database & SQL Schema (92%)</span>
-              <span>• React UI Architecture (86%)</span>
-              <span>• Capstone Deployment (95%)</span>
+              <a href="https://www.skillindiadigital.gov.in" target="_blank" rel="noopener noreferrer" class="btn-live-portal" title="Official Skill India Registry">
+                🌐 Live Scheme Portal (skillindiadigital.gov.in) ↗
+              </a>
             </div>
           </div>
 
-          <!-- Certificate Footer: QR Code, Signatures, Verification Token -->
-          <div class="cert-footer-row">
-            <div style="text-align: left;">
-              <div style="font-family: 'Brush Script MT', cursive; font-size: 1.4rem; color: #1E2749;">Vikram Malhotra</div>
-              <div style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Senior Vocational Trainer</div>
-              <div style="font-size: 0.68rem; color: #94A3B8;">Field Atlas Skilling Hub</div>
+          <!-- Interactive Government Scheme Selector Switcher Pills -->
+          <div style="margin-bottom: 1.25rem;">
+            <div style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+              Enrolled Central & State Government Schemes (Click to Switch):
             </div>
+            <div style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.35rem;" id="scheme-selector-pills">
+              <!-- Rendered dynamically by JS with interactive switching -->
+            </div>
+          </div>
 
-            <!-- QR Code & Token -->
-            <div style="text-align: center;">
-              <div style="display: inline-block; padding: 4px; background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 4px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#1E2749" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <!-- Active Scheme Hero Header -->
+          <div class="scheme-hero-header">
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; flex-wrap: wrap;">
+                <span class="govt-badge-pill" style="background: var(--color-teal); color: #FFFFFF;" id="active-scheme-badge">PMKVY 4.0</span>
+                <span style="font-size: 0.8rem; color: var(--color-text-muted);" id="active-scheme-enrollment">Enrollment: FA-PMKVY-2026-98124</span>
               </div>
-              <div style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #0E8176; margin-top: 0.25rem;">
-                TOKEN: FA-CERT-2026-98124
+              <h3 style="font-size: 1.3rem; color: var(--color-deep-indigo); font-weight: 700; margin: 0.2rem 0;" id="active-scheme-title">
+                Full Stack Web Development & Python Cloud
+              </h3>
+              <div style="font-size: 0.82rem; color: var(--color-text-secondary);" id="active-scheme-trainer">
+                Assigned Vocational Trainer: <strong>Vikram Malhotra</strong> (NSDC Senior Instructor)
+              </div>
+
+              <!-- DIRECT LIVE GOVERNMENT SCHEME OFFICIAL WEBSITES ROW -->
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.85rem; flex-wrap: wrap;">
+                <a href="https://www.pmkvyofficial.org" id="scheme-primary-govt-link" target="_blank" rel="noopener noreferrer" class="btn-live-portal" style="padding: 0.45rem 0.85rem; font-size: 0.8rem;">
+                  🏛️ Visit Official Scheme Portal (pmkvyofficial.org) ↗
+                </a>
+                <a href="https://www.skillindiadigital.gov.in" id="scheme-portal-govt-link" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="font-weight: 700; font-size: 0.8rem; background: var(--color-surface);">
+                  🌐 Skill India Digital Registry ↗
+                </a>
+                <a href="https://www.msde.gov.in" id="scheme-guidelines-govt-link" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="font-size: 0.8rem; background: var(--color-surface);">
+                  📑 Official Gazette & Guidelines ↗
+                </a>
               </div>
             </div>
 
+            <!-- DYNAMIC COURSE COMPLETION STATUS -->
             <div style="text-align: right;">
-              <div style="font-family: 'Brush Script MT', cursive; font-size: 1.4rem; color: #1E2749;">Dr. Rajeshwar Sen</div>
-              <div style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Director of Certifications</div>
-              <div style="font-size: 0.68rem; color: #94A3B8;">NSDC Sector Council</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 1rem;">
-          <a href="certificate-verify.html?token=FA-CERT-2026-98124" target="_blank" class="btn btn-outline btn-sm">
-            <i data-lucide="shield-check" style="width: 14px; height: 14px; margin-right: 4px;"></i> Verify Credential on Public Registry
-          </a>
-        </div>
-      </main>
-
-      <!-- ════════════ TAB 5: PLACEMENT DETAILS (STEP 6: GOOGLE FORM STYLE) ════════════ -->
-      <main class="content-body tab-view-panel" id="view-placement" style="display: none;">
-        <div class="gform-container">
-          
-          <!-- Google Form Header Card -->
-          <div class="gform-header-card">
-            <div class="gform-header-content">
-              <span class="badge" style="background: rgba(14, 129, 118, 0.12); color: var(--color-teal); font-weight: 800; font-size: 0.72rem; margin-bottom: 0.5rem; display: inline-block;">
-                NATIONAL SKILLING OUTCOMES REGISTRY
-              </span>
-              <h1 class="gform-header-title">Government Scheme Placement & Career Outcome Survey</h1>
-              <p class="gform-header-desc">
-                Congratulations on your vocational training milestone! In accordance with National Skill Development Corporation (NSDC) and Field Atlas reporting standards, please complete your employment and placement outcome details below.
-              </p>
-              <div style="font-size: 0.75rem; color: var(--color-coral); margin-top: 0.75rem; font-weight: 600;">
-                * Indicates required question
+              <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); margin-bottom: 0.25rem;">
+                National Skill Status
+              </div>
+              <div id="course-completion-badge-wrap">
+                <div class="completion-status-badge completed" id="course-completion-status-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span>Course Completion Status: YES</span>
+                </div>
+              </div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--color-teal); margin-top: 0.35rem;" id="modules-completed-counter">
+                6 of 6 Modules Completed (100%)
               </div>
             </div>
           </div>
 
-          <!-- Placement Form -->
-          <form id="placement-outcome-form" onsubmit="handlePlacementSubmit(event)">
+          <!-- Scheme Modules List -->
+          <div class="table-card" style="padding: 1.25rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h3 style="font-size: 1rem; color: var(--color-deep-indigo); font-weight: 700; margin: 0;">Curriculum Modules & Assessment Scores</h3>
+              <span style="font-size: 0.75rem; color: var(--color-text-muted);">Click "Mark Completed / Incomplete" to test status recalculation live</span>
+            </div>
+
+            <div id="scheme-modules-container">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ════════════ SECTION 4: CERTIFICATES (STEP 5) ════════════ -->
+        <section id="section-certificates" class="trainee-section-block">
+          <div class="section-title-wrap">
+            <div>
+              <span class="section-category-tag">SECTION 4 · VERIFIABLE NATIONAL CREDENTIAL</span>
+              <h2 class="section-heading-text">Official Government Scheme Certificate</h2>
+              <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0.25rem 0 0;">
+                Accredited certification under Pradhan Mantri Kaushal Vikas Yojana (PMKVY 4.0) & NSDC.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-primary" id="btn-download-cert" onclick="downloadCertificateAction()">
+                <i data-lucide="download" style="width: 16px; height: 16px; margin-right: 6px;"></i> Download Certificate (PDF)
+              </button>
+            </div>
+          </div>
+
+          <!-- Eligibility Banner -->
+          <div style="background: var(--color-teal-light); border: 1px solid var(--color-teal); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-teal); color: #FFFFFF; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="award" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div>
+                <div style="font-weight: 700; color: var(--color-teal); font-size: 0.95rem;">National Assessment & Exam Eligibility: ELIGIBLE ✅</div>
+                <div style="font-size: 0.8rem; color: var(--color-deep-indigo);">All 6 Modules Completed · Attendance 92.3% (Exceeds 75% Govt Requirement)</div>
+              </div>
+            </div>
+            <span class="badge badge-teal" style="font-size: 0.75rem;">DIRECT CERTIFICATION ISSUED</span>
+          </div>
+
+          <!-- High-Fidelity Certificate Card -->
+          <div class="certificate-preview-container" id="printable-certificate">
+            <div class="cert-emblem">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#D69541" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="cert-scheme-title">GOVERNMENT OF INDIA · SKILL INDIA MISSION</div>
+            <div style="font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: #49618B; margin-bottom: 0.5rem;">
+              NATIONAL SKILL DEVELOPMENT CORPORATION (NSDC)
+            </div>
+            <h2 class="cert-main-heading">Certificate of Vocational Excellence</h2>
+            <p style="font-size: 0.9rem; color: #49618B; margin: 0.5rem 0;">This is to certify that</p>
             
-            <!-- Question 1: Personal & Contact Information -->
-            <div class="gform-question-card">
-              <div class="gform-question-title">
-                1. Trainee Identity & Registered Contact Information <span class="gform-required-star">*</span>
-              </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
-                <div>
-                  <label style="font-size: 0.75rem; color: var(--color-text-muted);">Full Name</label>
-                  <input type="text" class="gform-input" id="gform-name" value="Priya Patel" required>
-                </div>
-                <div>
-                  <label style="font-size: 0.75rem; color: var(--color-text-muted);">Contact Phone Number</label>
-                  <input type="tel" class="gform-input" id="gform-phone" value="9833456789" required>
-                </div>
-                <div>
-                  <label style="font-size: 0.75rem; color: var(--color-text-muted);">Registered Email Address</label>
-                  <input type="email" class="gform-input" id="gform-email" value="trainee@fieldatlas.in" required>
-                </div>
-                <div>
-                  <label style="font-size: 0.75rem; color: var(--color-text-muted);">Field Atlas ID</label>
-                  <input type="text" class="gform-input" id="gform-id" value="FA-24-0182" readonly style="background: var(--color-parchment);">
-                </div>
-              </div>
-            </div>
-
-            <!-- Question 2: Enrolled Government Scheme -->
-            <div class="gform-question-card">
-              <div class="gform-question-title">
-                2. Which Government Scheme were you enrolled in for this placement offer? <span class="gform-required-star">*</span>
-              </div>
-              <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin-bottom: 0.75rem;">
-                Select the funded government initiative under which your training or apprenticeship was sponsored:
-              </p>
-              <select class="gform-input" id="gform-scheme" required>
-                <option value="PMKVY 4.0 (Full Stack Web Development)" selected>PMKVY 4.0 — Pradhan Mantri Kaushal Vikas Yojana (MSDE)</option>
-                <option value="DDU-GKY (Data Analytics & Cloud Systems)">DDU-GKY — Deen Dayal Upadhyaya Grameen Kaushalya Yojana (MoRD)</option>
-                <option value="SWAYAM / NPTEL (Applied AI & Python)">SWAYAM / NPTEL — Ministry of Education</option>
-                <option value="FutureSkills PRIME (Cloud Architecture)">FutureSkills PRIME — MeitY & NASSCOM</option>
-                <option value="PM Vishwakarma (Digital Craftsmanship)">PM Vishwakarma Scheme — Ministry of MSME</option>
-                <option value="NIELIT (IoT & Embedded Systems)">NIELIT Certified Course — National Institute of Electronics</option>
-              </select>
-            </div>
-
-            <!-- Question 3: Employer / Organization Details -->
-            <div class="gform-question-card">
-              <div class="gform-question-title">
-                3. Employer / Company Name <span class="gform-required-star">*</span>
-              </div>
-              <input type="text" class="gform-input" id="gform-employer" placeholder="e.g. Tata Consultancy Services, Infosys, Wipro..." value="Tata Consultancy Services" required>
-            </div>
-
-            <!-- Question 4: Job Designation & Role -->
-            <div class="gform-question-card">
-              <div class="gform-question-title">
-                4. Job Role / Designation Offered <span class="gform-required-star">*</span>
-              </div>
-              <input type="text" class="gform-input" id="gform-role" placeholder="e.g. Junior Web Developer, Full Stack Associate..." value="Junior Web Developer" required>
-            </div>
-
-            <!-- Question 5: Salary & Compensation -->
-            <div class="gform-question-card">
-              <div class="gform-question-title">
-                5. Monthly Gross Salary / Stipend Received (₹ INR) <span class="gform-required-star">*</span>
-              </div>
-              <p style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
-                Enter monthly in-hand wage or stipend in Indian Rupees:
-              </p>
-              <div style="position: relative;">
-                <span style="position: absolute; left: 12px; top: 11px; font-weight: 700; color: var(--color-teal);">₹</span>
-                <input type="number" class="gform-input" id="gform-wage" style="padding-left: 28px;" value="22000" min="5000" max="250000" required>
-              </div>
-            </div>
-
-            <!-- Question 6: Job Location & Joining Date -->
-            <div class="gform-question-card">
-              <div class="gform-question-title">
-                6. Work Location & Joining Date <span class="gform-required-star">*</span>
-              </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-                <div>
-                  <label style="font-size: 0.75rem; color: var(--color-text-muted);">City / District</label>
-                  <input type="text" class="gform-input" id="gform-location" value="Pune, Maharashtra" required>
-                </div>
-                <div>
-                  <label style="font-size: 0.75rem; color: var(--color-text-muted);">Date of Joining</label>
-                  <input type="date" class="gform-input" id="gform-joining-date" value="2026-07-01" required>
-                </div>
-              </div>
-            </div>
-
-            <!-- Question 7: Employment Nature -->
-            <div class="gform-question-card">
-              <div class="gform-question-title">
-                7. Employment Nature & Terms <span class="gform-required-star">*</span>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.88rem;">
-                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="radio" name="emp-type" value="Full-time Regular" checked> Full-time Regular Employment
-                </label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="radio" name="emp-type" value="Apprenticeship (NAPS / NATS)"> National Apprenticeship Promotion Scheme (NAPS)
-                </label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                  <input type="radio" name="emp-type" value="Remote / Hybrid"> Remote / Hybrid Software Engineer
-                </label>
-              </div>
-            </div>
-
-            <!-- Submit Button & Feedback -->
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
-              <button type="submit" class="btn btn-primary" id="gform-submit-btn" style="padding: 0.75rem 2rem; font-weight: 700;">
-                Submit Placement Response
-              </button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('placement-outcome-form').reset();">
-                Clear Form
-              </button>
-            </div>
-          </form>
-
-          <!-- Form Confirmation Screen (Hidden until submitted) -->
-          <div id="gform-confirmation-card" class="gform-header-card" style="display: none; text-align: center; padding: 2.5rem 1.5rem;">
-            <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--color-teal-light); color: var(--color-teal); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-              <i data-lucide="check-circle-2" style="width: 32px; height: 32px;"></i>
-            </div>
-            <h2 style="font-size: 1.4rem; color: var(--color-deep-indigo); margin-bottom: 0.5rem;">Your response has been recorded.</h2>
-            <p style="color: var(--color-text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem;">
-              Thank you for reporting your employment outcome! Your placement at <strong id="confirm-employer-name">Tata Consultancy Services</strong> under the <strong id="confirm-scheme-name">PMKVY 4.0</strong> scheme has been forwarded to your trainer and recorded in your Field Atlas timeline.
+            <div class="cert-recipient-name" id="cert-display-name">Priya Patel</div>
+            
+            <p style="font-size: 0.88rem; color: #1E2749; max-width: 580px; margin: 0.75rem auto 1.25rem; line-height: 1.6;">
+              bearing Unified Field Atlas Identifier <strong id="cert-display-id" style="font-family: var(--font-mono); color: #0E8176;">FA-24-0182</strong> has successfully fulfilled all curricular requirements, attended designated instructional hours, and achieved qualifying scores across all technical modules in:
             </p>
-            <div style="display: flex; gap: 0.75rem; justify-content: center;">
-              <button class="btn btn-primary btn-sm" onclick="switchTraineeView('dashboard')">
-                Return to Dashboard
-              </button>
-              <button class="btn btn-outline btn-sm" onclick="document.getElementById('gform-confirmation-card').style.display = 'none'; document.getElementById('placement-outcome-form').style.display = 'block';">
-                Submit Another Response
-              </button>
+
+            <div style="display: inline-block; background: #F4E8D1; border: 1px solid #D69541; padding: 0.6rem 1.5rem; border-radius: 4px; font-weight: 800; font-size: 1.1rem; color: #1E2749; margin-bottom: 1.5rem;">
+              Full Stack Web Development & Python Cloud (PMKVY 4.0)
+            </div>
+
+            <!-- Completed Modules Summary inside Certificate -->
+            <div style="max-width: 540px; margin: 0 auto 1.5rem; font-size: 0.78rem; text-align: left; background: rgba(14, 129, 118, 0.05); padding: 0.75rem 1rem; border-radius: 6px; border: 1px dashed rgba(14, 129, 118, 0.3);">
+              <div style="font-weight: 700; color: #0E8176; margin-bottom: 0.35rem;">Assessed & Completed Modules:</div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem; color: #334155;">
+                <span>• HTML5 & Semantic Web (94%)</span>
+                <span>• JavaScript ES6+ & APIs (90%)</span>
+                <span>• Python & Django REST (88%)</span>
+                <span>• Database & SQL Schema (92%)</span>
+                <span>• React UI Architecture (86%)</span>
+                <span>• Capstone Deployment (95%)</span>
+              </div>
+            </div>
+
+            <!-- Certificate Footer: QR Code, Signatures, Verification Token -->
+            <div class="cert-footer-row">
+              <div style="text-align: left;">
+                <div style="font-family: 'Brush Script MT', cursive; font-size: 1.4rem; color: #1E2749;">Vikram Malhotra</div>
+                <div style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Senior Vocational Trainer</div>
+                <div style="font-size: 0.68rem; color: #94A3B8;">Field Atlas Skilling Hub</div>
+              </div>
+
+              <!-- QR Code & Token -->
+              <div style="text-align: center;">
+                <div style="display: inline-block; padding: 4px; background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 4px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#1E2749" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #0E8176; margin-top: 0.25rem;">
+                  TOKEN: FA-CERT-2026-98124
+                </div>
+              </div>
+
+              <div style="text-align: right;">
+                <div style="font-family: 'Brush Script MT', cursive; font-size: 1.4rem; color: #1E2749;">Dr. Rajeshwar Sen</div>
+                <div style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Director of Certifications</div>
+                <div style="font-size: 0.68rem; color: #94A3B8;">NSDC Sector Council</div>
+              </div>
             </div>
           </div>
 
-        </div>
-      </main>
+          <div style="text-align: center; margin-top: 1rem;">
+            <a href="certificate-verify.html?token=FA-CERT-2026-98124" target="_blank" class="btn btn-outline btn-sm">
+              <i data-lucide="shield-check" style="width: 14px; height: 14px; margin-right: 4px;"></i> Verify Credential on Public Registry
+            </a>
+          </div>
+        </section>
 
+        <!-- ════════════ SECTION 5: PLACEMENT DETAILS (STEP 6 - GOOGLE FORM STYLE) ════════════ -->
+        <section id="section-placement" class="trainee-section-block">
+          <div class="gform-container">
+            
+            <!-- Google Form Header Card -->
+            <div class="gform-header-card">
+              <div class="gform-header-content">
+                <span class="badge" style="background: rgba(14, 129, 118, 0.12); color: var(--color-teal); font-weight: 800; font-size: 0.72rem; margin-bottom: 0.5rem; display: inline-block;">
+                  SECTION 5 · NATIONAL SKILLING OUTCOMES REGISTRY
+                </span>
+                <h1 class="gform-header-title">Government Scheme Placement & Career Outcome Survey</h1>
+                <p class="gform-header-desc">
+                  Congratulations on your vocational training milestone! In accordance with National Skill Development Corporation (NSDC) and Field Atlas reporting standards, please complete your employment and placement outcome details below.
+                </p>
+                <div style="font-size: 0.75rem; color: var(--color-coral); margin-top: 0.75rem; font-weight: 600;">
+                  * Indicates required question
+                </div>
+              </div>
+            </div>
+
+            <!-- Placement Form -->
+            <form id="placement-outcome-form">
+              
+              <!-- Question 1: Personal & Contact Information -->
+              <div class="gform-question-card">
+                <div class="gform-question-title">
+                  1. Trainee Identity & Registered Contact Information <span class="gform-required-star">*</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Full Name</label>
+                    <input type="text" class="gform-input" id="gform-name" value="Priya Patel" required>
+                  </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Contact Phone Number</label>
+                    <input type="tel" class="gform-input" id="gform-phone" value="9833456789" required>
+                  </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Registered Email Address</label>
+                    <input type="email" class="gform-input" id="gform-email" value="trainee@fieldatlas.in" required>
+                  </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Field Atlas ID</label>
+                    <input type="text" class="gform-input" id="gform-id" value="FA-24-0182" readonly style="background: var(--color-parchment);">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 2: Enrolled Government Scheme -->
+              <div class="gform-question-card">
+                <div class="gform-question-title">
+                  2. Which Government Scheme were you enrolled in for this placement offer? <span class="gform-required-star">*</span>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin-bottom: 0.75rem;">
+                  Select the funded government initiative under which your training or apprenticeship was sponsored:
+                </p>
+                <select class="gform-input" id="gform-scheme" required>
+                  <option value="PMKVY 4.0 (Full Stack Web Development)" selected>PMKVY 4.0 — Pradhan Mantri Kaushal Vikas Yojana (MSDE)</option>
+                  <option value="DDU-GKY (Data Analytics & Cloud Systems)">DDU-GKY — Deen Dayal Upadhyaya Grameen Kaushalya Yojana (MoRD)</option>
+                  <option value="SWAYAM / NPTEL (Applied AI & Python)">SWAYAM / NPTEL — Ministry of Education</option>
+                  <option value="FutureSkills PRIME (Cloud Architecture)">FutureSkills PRIME — MeitY & NASSCOM</option>
+                  <option value="PM Vishwakarma (Digital Craftsmanship)">PM Vishwakarma Scheme — Ministry of MSME</option>
+                  <option value="NIELIT (IoT & Embedded Systems)">NIELIT Certified Course — National Institute of Electronics</option>
+                </select>
+              </div>
+
+              <!-- Question 3: Employer / Organization Details -->
+              <div class="gform-question-card">
+                <div class="gform-question-title">
+                  3. Employer / Company Name <span class="gform-required-star">*</span>
+                </div>
+                <input type="text" class="gform-input" id="gform-employer" placeholder="e.g. Tata Consultancy Services, Infosys, Wipro..." value="Tata Consultancy Services" required>
+              </div>
+
+              <!-- Question 4: Job Designation & Role -->
+              <div class="gform-question-card">
+                <div class="gform-question-title">
+                  4. Job Role / Designation Offered <span class="gform-required-star">*</span>
+                </div>
+                <input type="text" class="gform-input" id="gform-role" placeholder="e.g. Junior Web Developer, Full Stack Associate..." value="Junior Web Developer" required>
+              </div>
+
+              <!-- Question 5: Salary & Compensation -->
+              <div class="gform-question-card">
+                <div class="gform-question-title">
+                  5. Monthly Gross Salary / Stipend Received (₹ INR) <span class="gform-required-star">*</span>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
+                  Enter monthly in-hand wage or stipend in Indian Rupees:
+                </p>
+                <div style="position: relative;">
+                  <span style="position: absolute; left: 12px; top: 11px; font-weight: 700; color: var(--color-teal);">₹</span>
+                  <input type="number" class="gform-input" id="gform-wage" style="padding-left: 28px;" value="22000" min="5000" max="250000" required>
+                </div>
+              </div>
+
+              <!-- Question 6: Job Location & Joining Date -->
+              <div class="gform-question-card">
+                <div class="gform-question-title">
+                  6. Work Location & Joining Date <span class="gform-required-star">*</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">City / District</label>
+                    <input type="text" class="gform-input" id="gform-location" value="Pune, Maharashtra" required>
+                  </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Date of Joining</label>
+                    <input type="date" class="gform-input" id="gform-joining-date" value="2026-07-01" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question 7: Employment Nature -->
+              <div class="gform-question-card">
+                <div class="gform-question-title">
+                  7. Employment Nature & Terms <span class="gform-required-star">*</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.88rem;">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="radio" name="emp-type" value="Full-time Regular" checked> Full-time Regular Employment
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="radio" name="emp-type" value="Apprenticeship (NAPS / NATS)"> National Apprenticeship Promotion Scheme (NAPS)
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="radio" name="emp-type" value="Remote / Hybrid"> Remote / Hybrid Software Engineer
+                  </label>
+                </div>
+              </div>
+
+              <!-- Submit Button & Feedback -->
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
+                <button type="submit" class="btn btn-primary" id="gform-submit-btn" style="padding: 0.75rem 2rem; font-weight: 700;">
+                  Submit Placement Response
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('placement-outcome-form').reset();">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+
+            <!-- Form Confirmation Screen (Hidden until submitted) -->
+            <div id="gform-confirmation-card" class="gform-header-card" style="display: none; text-align: center; padding: 2.5rem 1.5rem;">
+              <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--color-teal-light); color: var(--color-teal); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                <i data-lucide="check-circle-2" style="width: 32px; height: 32px;"></i>
+              </div>
+              <h2 style="font-size: 1.4rem; color: var(--color-deep-indigo); margin-bottom: 0.5rem;">Your response has been recorded.</h2>
+              <p style="color: var(--color-text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem;">
+                Thank you for reporting your employment outcome! Your placement at <strong id="confirm-employer-name">Tata Consultancy Services</strong> under the <strong id="confirm-scheme-name">PMKVY 4.0</strong> scheme has been forwarded to your trainer and recorded in your Field Atlas timeline.
+              </p>
+              <div style="display: flex; gap: 0.75rem; justify-content: center;">
+                <button class="btn btn-primary btn-sm" onclick="scrollToSection('section-dashboard')">
+                  Return to Top Dashboard
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="document.getElementById('gform-confirmation-card').style.display = 'none'; document.getElementById('placement-outcome-form').style.display = 'block';">
+                  Submit Another Response
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
     </div>
   </div>
 
   <!-- ════════════ MOBILE BOTTOM NAVIGATION ════════════ -->
   <nav class="mobile-bottom-nav">
     <div class="bottom-nav-inner">
-      <a class="bottom-nav-item active" data-tab="dashboard" onclick="switchTraineeView('dashboard')">
+      <a class="bottom-nav-item active" onclick="scrollToSection('section-dashboard')">
         <i data-lucide="home" style="width: 20px; height: 20px;"></i>
-        <span>Home</span>
+        <span>Dashboard</span>
       </a>
-      <a class="bottom-nav-item" data-tab="govt-courses" onclick="switchTraineeView('govt-courses')">
+      <a class="bottom-nav-item" onclick="scrollToSection('section-govt-courses')">
         <i data-lucide="landmark" style="width: 20px; height: 20px;"></i>
-        <span>Govt</span>
+        <span>Govt Sites</span>
       </a>
-      <a class="bottom-nav-item" data-tab="learning" onclick="switchTraineeView('learning')">
+      <a class="bottom-nav-item" onclick="scrollToSection('section-learning')">
         <i data-lucide="book-open" style="width: 20px; height: 20px;"></i>
-        <span>Record</span>
+        <span>Schemes</span>
       </a>
-      <a class="bottom-nav-item" data-tab="certificates" onclick="switchTraineeView('certificates')">
+      <a class="bottom-nav-item" onclick="scrollToSection('section-certificates')">
         <i data-lucide="award" style="width: 20px; height: 20px;"></i>
-        <span>Certs</span>
+        <span>Certificate</span>
       </a>
-      <a class="bottom-nav-item" data-tab="placement" onclick="switchTraineeView('placement')">
+      <a class="bottom-nav-item" onclick="scrollToSection('section-placement')">
         <i data-lucide="briefcase" style="width: 20px; height: 20px;"></i>
         <span>Placement</span>
       </a>
@@ -683,14 +792,14 @@
   </nav>
 
   <!-- ════════════ SSO LOGIN & 4-DIGIT SMS OTP PASSWORD RESET MODAL ════════════ -->
-  <div class="sso-modal-overlay" id="sso-portal-modal" style="display: none;" onclick="handleModalBackdropClick(event)">
+  <div class="sso-modal-overlay" id="sso-portal-modal" style="display: none;">
     <div class="sso-modal-card">
       <div class="sso-modal-header">
         <div>
           <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85;">Unified SSO Gateway</div>
           <h3 style="margin: 0; font-size: 1.15rem; color: #FFFFFF;" id="sso-course-title">Government Course Portal Access</h3>
         </div>
-        <button onclick="closeSsoModal()" style="background: none; border: none; color: #FFFFFF; cursor: pointer;" aria-label="Close modal">
+        <button id="sso-close-modal-btn" style="background: none; border: none; color: #FFFFFF; cursor: pointer;" aria-label="Close modal">
           <i data-lucide="x" style="width: 20px; height: 20px;"></i>
         </button>
       </div>
@@ -701,7 +810,7 @@
           To enroll in this subsidized Government Course, authenticate with the <strong>same ID & Password</strong> you use on SkillPulse / Field Atlas:
         </div>
 
-        <form id="sso-login-form" onsubmit="handleSsoLoginSubmit(event)">
+        <form id="sso-login-form">
           <div style="margin-bottom: 1rem;">
             <label style="display: block; font-size: 0.78rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.25rem;">
               Field Atlas ID / Registered Email
@@ -712,9 +821,9 @@
           <div style="margin-bottom: 1rem;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
               <label style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-primary);">Password</label>
-              <a href="javascript:void(0)" onclick="switchToForgotPwdView()" style="font-size: 0.75rem; color: var(--color-teal); font-weight: 600; text-decoration: underline;">
+              <button type="button" id="btn-goto-forgot" style="background:none; border:none; padding:0; font-size: 0.75rem; color: var(--color-teal); font-weight: 600; text-decoration: underline; cursor:pointer;">
                 Forgot password?
-              </a>
+              </button>
             </div>
             <input type="password" class="gform-input" id="sso-password-input" value="••••••••" required>
           </div>
@@ -728,7 +837,7 @@
       <!-- VIEW B: FORGOT PASSWORD & 4-DIGIT SMS OTP RESET -->
       <div id="sso-forgot-view" style="display: none; padding: 1.5rem;">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-          <button onclick="switchToLoginView()" class="btn btn-outline btn-sm" style="padding: 0.25rem 0.5rem;">
+          <button id="btn-goto-login" class="btn btn-outline btn-sm" style="padding: 0.25rem 0.5rem;">
             <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
           </button>
           <h4 style="margin: 0; font-size: 1rem; color: var(--color-deep-indigo);">Reset Password via 4-Digit SMS OTP</h4>
@@ -746,7 +855,7 @@
               <input type="tel" class="gform-input" id="forgot-phone-input" value="9833456789" style="padding-left: 45px;" placeholder="10-digit number" required>
             </div>
           </div>
-          <button type="button" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem; font-weight: 700;" onclick="sendPhoneSmsOtp()">
+          <button type="button" class="btn btn-primary" id="btn-send-sms-otp" style="width: 100%; justify-content: center; padding: 0.75rem; font-weight: 700;">
             <i data-lucide="message-square" style="width: 16px; height: 16px; margin-right: 6px;"></i> Send 4-Digit SMS OTP
           </button>
         </div>
@@ -758,10 +867,16 @@
           </p>
 
           <div class="otp-box-container">
-            <input type="text" class="otp-digit-input" maxlength="1" id="otp-1" autofocus oninput="handleOtpInput(this, 'otp-2')">
-            <input type="text" class="otp-digit-input" maxlength="1" id="otp-2" oninput="handleOtpInput(this, 'otp-3')">
-            <input type="text" class="otp-digit-input" maxlength="1" id="otp-3" oninput="handleOtpInput(this, 'otp-4')">
-            <input type="text" class="otp-digit-input" maxlength="1" id="otp-4" oninput="handleOtpInput(this, null)">
+            <input type="text" class="otp-digit-input" maxlength="1" id="otp-1" autofocus>
+            <input type="text" class="otp-digit-input" maxlength="1" id="otp-2">
+            <input type="text" class="otp-digit-input" maxlength="1" id="otp-3">
+            <input type="text" class="otp-digit-input" maxlength="1" id="otp-4">
+          </div>
+
+          <div style="text-align: center; margin-bottom: 0.75rem;">
+            <button type="button" id="btn-quick-fill-otp" class="btn btn-outline btn-sm" style="font-size: 0.75rem; padding: 0.25rem 0.65rem; color: var(--color-teal); border-color: var(--color-teal); font-weight: 700;">
+              ⚡ Quick Fill Code (4829)
+            </button>
           </div>
 
           <div style="margin-bottom: 0.75rem;">
@@ -774,14 +889,14 @@
             <input type="password" class="gform-input" id="confirm-new-password-input" placeholder="Repeat new password">
           </div>
 
-          <button type="button" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem; font-weight: 700;" onclick="verifyAndResetPassword()">
+          <button type="button" class="btn btn-primary" id="btn-verify-reset-pwd" style="width: 100%; justify-content: center; padding: 0.75rem; font-weight: 700;">
             Verify OTP & Reset Password
           </button>
 
           <div style="text-align: center; margin-top: 0.75rem;">
-            <a href="javascript:void(0)" onclick="sendPhoneSmsOtp()" style="font-size: 0.75rem; color: var(--color-teal); text-decoration: underline;">
+            <button type="button" id="btn-resend-sms" style="background:none; border:none; font-size: 0.75rem; color: var(--color-teal); text-decoration: underline; cursor:pointer;">
               Resend SMS Code
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -800,7 +915,7 @@
           Your 4-digit SkillPulse verification OTP is <strong style="font-size: 1rem; color: #34D399; font-family: var(--font-mono);">4829</strong>. Valid for 10 minutes.
         </div>
       </div>
-      <button onclick="document.getElementById('sms-banner-simulator').style.display = 'none'" style="background: none; border: none; color: #FFFFFF; opacity: 0.7; cursor: pointer;">✕</button>
+      <button id="btn-close-sms-banner" style="background: none; border: none; color: #FFFFFF; opacity: 0.7; cursor: pointer;">✕</button>
     </div>
   </div>
 
@@ -808,7 +923,7 @@
   <div class="watermark">#crafted by team Synkro</div>
   <div id="toast-container"></div>
 
-  <!-- Scripts -->
+  <!-- Core Scripts -->
   <script src="js/config.js"></script>
   <script src="js/mock-auth.js"></script>
   <script src="js/mock-data.js"></script>
@@ -817,7 +932,7 @@
   <script src="js/notifications.js"></script>
   <script src="js/auth.js"></script>
 
-  <!-- Trainee Portal Controller -->
+  <!-- Clean, Event-Driven Trainee Portal Controller -->
   <script>
   (function() {
     'use strict';
@@ -827,44 +942,69 @@
     let currentSchemesData = [];
     let selectedSchemeIndex = 0;
 
-    // Sidebar Toggle
+    // Smooth Anchor Scrolling to sections
+    window.scrollToSection = function(sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.sidebar-nav .nav-link').forEach(link => {
+          link.classList.toggle('active', link.getAttribute('data-nav-target') === sectionId);
+        });
+      }
+    };
+
     window.toggleSidebar = function() {
       document.getElementById('sidebar').classList.toggle('open');
       document.getElementById('mobile-backdrop').classList.toggle('active');
     };
 
-    // Navigation Tab Switching
-    window.switchTraineeView = function(tabId) {
-      document.querySelectorAll('.nav-link[data-tab]').forEach(l => l.classList.toggle('active', l.getAttribute('data-tab') === tabId));
-      document.querySelectorAll('.bottom-nav-item[data-tab]').forEach(l => l.classList.toggle('active', l.getAttribute('data-tab') === tabId));
-      document.querySelectorAll('.tab-view-panel').forEach(p => p.style.display = (p.id === 'view-' + tabId) ? 'block' : 'none');
-      
-      const breadcrumb = document.getElementById('header-active-view-name');
-      const tabNames = {
-        'dashboard': 'Dashboard',
-        'govt-courses': 'Government Courses',
-        'learning': 'Learning Record & Schemes',
-        'certificates': 'Certificates',
-        'placement': 'Placement Details'
-      };
-      if (breadcrumb) breadcrumb.textContent = tabNames[tabId] || (tabId.charAt(0).toUpperCase() + tabId.slice(1));
-      try {
-        history.replaceState(null, '', '#' + tabId);
-      } catch (e) {}
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    // DOM Ready Initialization
-    document.addEventListener('DOMContentLoaded', async function() {
+    // DOM Ready
+    document.addEventListener('DOMContentLoaded', function() {
       if (window.lucide) lucide.createIcons();
 
-      const validTabs = ['dashboard', 'govt-courses', 'learning', 'certificates', 'placement'];
-      const initialTab = (window.location.hash || '').replace('#', '');
-      if (validTabs.includes(initialTab)) {
-        switchTraineeView(initialTab);
-      }
+      // Hydrate Session
+      hydrateUserSession();
 
-      // Hydrate session profile
+      // Attach all interactive event listeners immediately so buttons NEVER lag or fail
+      initNotificationBell();
+      attachActionJumpListeners();
+      attachSsoModalListeners();
+      attachPlacementFormListener();
+
+      // Launch async data loaders independently without blocking each other
+      loadTraineeDashboard().catch(console.warn);
+      loadTrainerClasses().catch(console.warn);
+      loadStreakAndAttendance().catch(console.warn);
+      loadGovtCourses().catch(console.warn);
+      loadSchemesAndModules().catch(console.warn);
+
+      if (window.lucide) lucide.createIcons();
+    });
+
+    function attachActionJumpListeners() {
+      document.querySelectorAll('.sidebar-nav .nav-link[data-nav-target]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = this.getAttribute('data-nav-target');
+          if (target) {
+            window.scrollToSection(target);
+            if (window.innerWidth <= 768) {
+              window.toggleSidebar();
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll('.trainee-action-btn[data-target]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = this.getAttribute('data-target');
+          if (target) window.scrollToSection(target);
+        });
+      });
+    }
+
+    function hydrateUserSession() {
       const session = (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.getSession()) ||
                       (window.FieldAtlasCache && window.FieldAtlasCache.get('user_session')) || null;
       if (session) {
@@ -881,7 +1021,6 @@
         const nameEl = document.getElementById('sidebar-user-name');
         if (nameEl) nameEl.textContent = session.full_name || session.aadhaar_name || 'Priya Patel';
         
-        // Also pre-fill form and certificate
         const certName = document.getElementById('cert-display-name');
         if (certName) certName.textContent = session.full_name || session.aadhaar_name || 'Priya Patel';
         const gName = document.getElementById('gform-name');
@@ -889,19 +1028,9 @@
         const gPhone = document.getElementById('gform-phone');
         if (gPhone && session.phone_number) gPhone.value = session.phone_number;
       }
+    }
 
-      // Initialize all 6 steps
-      initNotificationBell();
-      await loadTraineeDashboard();
-      await loadTrainerClasses();
-      await loadStreakAndAttendance();
-      await loadGovtCourses();
-      await loadSchemesAndModules();
-
-      if (window.lucide) lucide.createIcons();
-    });
-
-    // ════════════ STEP 1: TOP-LEFT NOTIFICATION BELL FOR TRAINER CLASSES ════════════
+    // ════════════ STEP 1: NOTIFICATION BELL FOR TRAINER CLASSES ════════════
     function initNotificationBell() {
       const bellBtn = document.getElementById('class-schedule-bell-btn');
       const popover = document.getElementById('class-schedule-popover');
@@ -955,20 +1084,27 @@
             <span><i data-lucide="map-pin" style="width: 12px; height: 12px; display: inline; vertical-align: middle;"></i> ${c.room}</span>
           </div>
           <div style="margin-top: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
-            <a href="${c.meet_url}" target="_blank" class="btn btn-primary btn-sm" style="padding: 0.25rem 0.65rem; font-size: 0.75rem; border-radius: 4px;">
+            <a href="${c.meet_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="padding: 0.25rem 0.65rem; font-size: 0.75rem; border-radius: 4px;">
               <i data-lucide="video" style="width: 12px; height: 12px; margin-right: 4px;"></i> Join Class
             </a>
-            <button class="btn btn-outline btn-sm" style="padding: 0.25rem 0.65rem; font-size: 0.75rem; border-radius: 4px;" onclick="FieldAtlasAPI.showToast('Reminder added for ${c.title.replace(/'/g, "\\'")}', 'success')">
+            <button type="button" class="btn btn-outline btn-sm btn-remind-class" data-title="${c.title}" style="padding: 0.25rem 0.65rem; font-size: 0.75rem; border-radius: 4px;">
               Remind Me
             </button>
           </div>
         </div>
       `).join('');
 
+      listContainer.querySelectorAll('.btn-remind-class').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const title = this.getAttribute('data-title') || 'Class';
+          FieldAtlasAPI.showToast(`Reminder set for "${title}"!`, 'success');
+        });
+      });
+
       if (window.lucide) lucide.createIcons();
     }
 
-    // ════════════ STEP 2: STREAK & ATTENDANCE TRACKING & GRAPH ════════════
+    // ════════════ STEP 2: STREAK & ATTENDANCE ════════════
     async function loadStreakAndAttendance() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainee/streak-attendance/');
@@ -1004,7 +1140,7 @@
         }
       }
 
-      // Render 14-day activity dots
+      // Render dots
       const dotsContainer = document.getElementById('attendance-dots-container');
       if (dotsContainer && data.history_14_days) {
         dotsContainer.innerHTML = data.history_14_days.map(d => {
@@ -1098,36 +1234,39 @@
       });
     }
 
-    // ════════════ STEP 3: GOVERNMENT COURSES & SSO 4-DIGIT SMS OTP RESET ════════════
+    // ════════════ STEP 3: GOVERNMENT COURSES WITH LIVE PORTAL LINKS ════════════
     async function loadGovtCourses() {
       try {
         const res = await FieldAtlasAPI.get('/api/trainee/govt-courses/');
         currentGovtCourses = (res && res.courses) || [];
         renderGovtCoursesList(currentGovtCourses);
+        attachFilterPillListeners();
       } catch (e) { console.warn('Govt courses fetch err:', e); }
     }
 
-    window.filterGovtCourses = function(category, btnEl) {
-      if (btnEl) {
-        btnEl.parentElement.querySelectorAll('button').forEach(b => {
-          b.className = 'btn btn-outline btn-sm';
+    function attachFilterPillListeners() {
+      document.querySelectorAll('#govt-filter-pill-container .filter-pill').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('#govt-filter-pill-container .filter-pill').forEach(b => {
+            b.className = 'btn btn-outline btn-sm filter-pill';
+          });
+          this.className = 'btn btn-primary btn-sm filter-pill';
+          const filter = this.getAttribute('data-filter');
+          if (filter === 'all') {
+            renderGovtCoursesList(currentGovtCourses);
+          } else {
+            const filtered = currentGovtCourses.filter(c => c.category === filter);
+            renderGovtCoursesList(filtered);
+          }
         });
-        btnEl.className = 'btn btn-primary btn-sm';
-      }
-
-      if (category === 'all') {
-        renderGovtCoursesList(currentGovtCourses);
-      } else {
-        const filtered = currentGovtCourses.filter(c => c.category === category);
-        renderGovtCoursesList(filtered);
-      }
-    };
+      });
+    }
 
     function renderGovtCoursesList(courses) {
       const container = document.getElementById('govt-courses-grid');
       if (!container) return;
 
-      container.innerHTML = courses.map(c => `
+      container.innerHTML = courses.map((c, i) => `
         <div class="govt-course-card">
           <div class="govt-course-banner">
             <span class="govt-badge-pill">
@@ -1141,6 +1280,7 @@
             </div>
             <h3 class="govt-course-title">${c.title}</h3>
             <p class="govt-course-desc">${c.description}</p>
+            
             <div class="govt-meta-list">
               <div class="govt-meta-item">
                 <span>Duration</span>
@@ -1151,71 +1291,140 @@
                 <span>${c.eligibility}</span>
               </div>
               <div class="govt-meta-item" style="grid-column: span 2;">
-                <span>Certification Standard</span>
-                <span>${c.certification}</span>
+                <span>Official Live Website</span>
+                <span style="color: var(--color-teal); word-break: break-all;">${c.official_url}</span>
               </div>
             </div>
-            <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: auto;">
-              <button class="btn btn-primary btn-sm" style="flex: 1; justify-content: center;" onclick="openSsoModal('${c.title.replace(/'/g, "\\'")}', '${c.scheme_code}')">
-                <i data-lucide="log-in" style="width: 14px; height: 14px; margin-right: 4px;"></i> Access Course Portal
-              </button>
-              <a href="${c.official_url}" target="_blank" class="btn btn-outline btn-sm" title="Official Ministry Website" style="padding: 0.4rem 0.6rem;">
-                <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+
+            <!-- DUAL PROMINENT ACTION BUTTONS: LIVE GOVT LINK + SSO LOGIN -->
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto;">
+              <!-- 1. DIRECT LIVE OFFICIAL GOVT WEBSITE LINK -->
+              <a href="${c.official_url}" target="_blank" rel="noopener noreferrer" class="btn-live-portal" style="width: 100%; text-align: center;">
+                <i data-lucide="external-link" style="width: 15px; height: 15px;"></i> Visit Official Govt Website (${c.scheme_code}) ↗
               </a>
+              
+              <!-- 2. SSO AUTHENTICATION & COURSE ENROLLMENT -->
+              <button type="button" class="btn btn-outline btn-sm btn-open-sso-modal" data-course-index="${i}" style="width: 100%; justify-content: center; font-weight: 700;">
+                <i data-lucide="log-in" style="width: 14px; height: 14px; margin-right: 4px;"></i> Enroll & Access Course Portal (SSO)
+              </button>
             </div>
           </div>
         </div>
       `).join('');
 
+      // Attach SSO Modal click listeners
+      container.querySelectorAll('.btn-open-sso-modal').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const idx = parseInt(this.getAttribute('data-course-index'), 10);
+          const course = courses[idx];
+          if (course) {
+            openSsoModal(course.title, course.scheme_code);
+          }
+        });
+      });
+
       if (window.lucide) lucide.createIcons();
     }
 
-    // SSO Modal Management
-    window.openSsoModal = function(courseTitle, schemeCode) {
+    // SSO Modal Logic
+    function attachSsoModalListeners() {
+      const modal = document.getElementById('sso-portal-modal');
+      const closeBtn = document.getElementById('sso-close-modal-btn');
+      const gotoForgot = document.getElementById('btn-goto-forgot');
+      const gotoLogin = document.getElementById('btn-goto-login');
+      const ssoForm = document.getElementById('sso-login-form');
+      const sendSmsBtn = document.getElementById('btn-send-sms-otp');
+      const verifyResetBtn = document.getElementById('btn-verify-reset-pwd');
+      const resendSmsBtn = document.getElementById('btn-resend-sms');
+      const closeSmsBannerBtn = document.getElementById('btn-close-sms-banner');
+
+      if (closeBtn) closeBtn.addEventListener('click', closeSsoModal);
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) closeSsoModal();
+        });
+      }
+
+      if (gotoForgot) {
+        gotoForgot.addEventListener('click', function() {
+          document.getElementById('sso-login-view').style.display = 'none';
+          document.getElementById('sso-forgot-view').style.display = 'block';
+          document.getElementById('forgot-phone-step').style.display = 'block';
+          document.getElementById('forgot-otp-step').style.display = 'none';
+        });
+      }
+
+      if (gotoLogin) {
+        gotoLogin.addEventListener('click', function() {
+          document.getElementById('sso-login-view').style.display = 'block';
+          document.getElementById('sso-forgot-view').style.display = 'none';
+        });
+      }
+
+      if (ssoForm) {
+        ssoForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          FieldAtlasAPI.showToast('Authenticated via Field Atlas Single Sign-On! Unlocking course modules...', 'success');
+          setTimeout(() => {
+            closeSsoModal();
+            window.scrollToSection('section-learning');
+          }, 700);
+        });
+      }
+
+      if (sendSmsBtn) sendSmsBtn.addEventListener('click', sendPhoneSmsOtpAction);
+      if (resendSmsBtn) resendSmsBtn.addEventListener('click', sendPhoneSmsOtpAction);
+      if (verifyResetBtn) verifyResetBtn.addEventListener('click', verifyAndResetPasswordAction);
+
+      if (closeSmsBannerBtn) {
+        closeSmsBannerBtn.addEventListener('click', function() {
+          document.getElementById('sms-banner-simulator').style.display = 'none';
+        });
+      }
+
+      const quickFillOtpBtn = document.getElementById('btn-quick-fill-otp');
+      if (quickFillOtpBtn) {
+        quickFillOtpBtn.addEventListener('click', function() {
+          const otp = sessionStorage.getItem('fa_last_phone_otp') || '4829';
+          const digits = otp.split('');
+          if (digits[0]) document.getElementById('otp-1').value = digits[0];
+          if (digits[1]) document.getElementById('otp-2').value = digits[1];
+          if (digits[2]) document.getElementById('otp-3').value = digits[2];
+          if (digits[3]) document.getElementById('otp-4').value = digits[3];
+          FieldAtlasAPI.showToast(`Autofilled 4-digit OTP: ${otp}`, 'info');
+        });
+      }
+
+      // OTP inputs auto-advance
+      ['otp-1', 'otp-2', 'otp-3', 'otp-4'].forEach((id, idx, arr) => {
+        const input = document.getElementById(id);
+        if (input) {
+          input.addEventListener('input', function() {
+            if (this.value.length >= 1 && idx < arr.length - 1) {
+              const nextEl = document.getElementById(arr[idx + 1]);
+              if (nextEl) nextEl.focus();
+            }
+          });
+        }
+      });
+    }
+
+    function openSsoModal(courseTitle, schemeCode) {
       const modal = document.getElementById('sso-portal-modal');
       const titleEl = document.getElementById('sso-course-title');
       if (titleEl) titleEl.textContent = `${courseTitle} (${schemeCode})`;
-      switchToLoginView();
-      if (modal) modal.style.display = 'flex';
-      if (window.lucide) lucide.createIcons();
-    };
-
-    window.closeSsoModal = function() {
-      const modal = document.getElementById('sso-portal-modal');
-      if (modal) modal.style.display = 'none';
-    };
-
-    window.handleModalBackdropClick = function(e) {
-      if (e.target.id === 'sso-portal-modal') {
-        closeSsoModal();
-      }
-    };
-
-    window.switchToForgotPwdView = function() {
-      document.getElementById('sso-login-view').style.display = 'none';
-      document.getElementById('sso-forgot-view').style.display = 'block';
-      document.getElementById('forgot-phone-step').style.display = 'block';
-      document.getElementById('forgot-otp-step').style.display = 'none';
-      if (window.lucide) lucide.createIcons();
-    };
-
-    window.switchToLoginView = function() {
       document.getElementById('sso-login-view').style.display = 'block';
       document.getElementById('sso-forgot-view').style.display = 'none';
+      if (modal) modal.style.display = 'flex';
       if (window.lucide) lucide.createIcons();
-    };
+    }
 
-    window.handleSsoLoginSubmit = function(e) {
-      e.preventDefault();
-      FieldAtlasAPI.showToast('Authenticated via Field Atlas Single Sign-On! Unlocking course modules...', 'success');
-      setTimeout(() => {
-        closeSsoModal();
-        switchTraineeView('learning');
-      }, 700);
-    };
+    function closeSsoModal() {
+      const modal = document.getElementById('sso-portal-modal');
+      if (modal) modal.style.display = 'none';
+    }
 
-    // 4-Digit SMS OTP Send Simulator
-    window.sendPhoneSmsOtp = async function() {
+    async function sendPhoneSmsOtpAction() {
       const phoneInput = document.getElementById('forgot-phone-input');
       const phone = phoneInput ? phoneInput.value.trim() : '9833456789';
 
@@ -1228,7 +1437,6 @@
         const res = await FieldAtlasAPI.post('/api/auth/phone-sms-otp/', { phone: phone });
         const otp = res.simulated_otp || '4829';
 
-        // Show realistic SMS simulation notification
         const smsBanner = document.getElementById('sms-banner-simulator');
         const smsText = document.getElementById('sms-banner-text');
         if (smsText) {
@@ -1236,17 +1444,14 @@
         }
         if (smsBanner) {
           smsBanner.style.display = 'block';
-          // Auto-hide after 12 seconds
-          setTimeout(() => { smsBanner.style.display = 'none'; }, 12000);
+          setTimeout(() => { smsBanner.style.display = 'none'; }, 14000);
         }
 
-        // Switch to OTP step
         document.getElementById('forgot-phone-step').style.display = 'none';
         document.getElementById('forgot-otp-step').style.display = 'block';
         const phoneDisp = document.getElementById('target-phone-display');
         if (phoneDisp) phoneDisp.textContent = `+91 ${phone}`;
 
-        // Auto-fill first digit focus
         const otp1 = document.getElementById('otp-1');
         if (otp1) otp1.focus();
 
@@ -1254,16 +1459,9 @@
       } catch (err) {
         FieldAtlasAPI.showToast('Failed to send SMS OTP.', 'error');
       }
-    };
+    }
 
-    window.handleOtpInput = function(currentInput, nextId) {
-      if (currentInput.value.length >= 1 && nextId) {
-        const nextInput = document.getElementById(nextId);
-        if (nextInput) nextInput.focus();
-      }
-    };
-
-    window.verifyAndResetPassword = async function() {
+    async function verifyAndResetPasswordAction() {
       const d1 = document.getElementById('otp-1').value;
       const d2 = document.getElementById('otp-2').value;
       const d3 = document.getElementById('otp-3').value;
@@ -1277,41 +1475,62 @@
         FieldAtlasAPI.showToast('Please enter the complete 4-digit OTP code received via SMS.', 'error');
         return;
       }
-
       if (!newPass || newPass.length < 6) {
         FieldAtlasAPI.showToast('Please enter a new password (min 6 characters).', 'error');
         return;
       }
-
       if (newPass !== confPass) {
         FieldAtlasAPI.showToast('New passwords do not match. Please recheck.', 'error');
         return;
       }
 
       try {
-        const res = await FieldAtlasAPI.post('/api/auth/phone-verify-reset/', {
+        await FieldAtlasAPI.post('/api/auth/phone-verify-reset/', {
           otp: enteredOtp,
           new_password: newPass
         });
 
-        FieldAtlasAPI.showToast('Password reset successfully! Logged in to your Government Course portal.', 'success');
+        FieldAtlasAPI.showToast('Password reset successfully! Logged into course portal.', 'success');
         document.getElementById('sms-banner-simulator').style.display = 'none';
         setTimeout(() => {
           closeSsoModal();
-          switchTraineeView('learning');
+          window.scrollToSection('section-learning');
         }, 700);
       } catch (err) {
         FieldAtlasAPI.showToast(err.message || 'Invalid 4-digit OTP code. Please check SMS.', 'error');
       }
-    };
+    }
 
     // ════════════ STEP 4: LEARNING RECORD & SCHEMES MODULE TRACKER ════════════
     async function loadSchemesAndModules() {
       try {
         const res = await FieldAtlasAPI.get('/api/trainee/schemes/');
         currentSchemesData = (res && res.schemes) || [];
+        renderSchemeSelectorPills();
         renderActiveScheme(selectedSchemeIndex);
       } catch (e) { console.warn('Schemes fetch err:', e); }
+    }
+
+    function renderSchemeSelectorPills() {
+      const pillContainer = document.getElementById('scheme-selector-pills');
+      if (!pillContainer || !currentSchemesData || currentSchemesData.length === 0) return;
+
+      pillContainer.innerHTML = currentSchemesData.map((s, idx) => `
+        <button type="button" class="btn ${idx === selectedSchemeIndex ? 'btn-primary' : 'btn-outline'} btn-sm scheme-pill-btn" data-scheme-index="${idx}" style="white-space: nowrap; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+          <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: ${idx === selectedSchemeIndex ? '#FFFFFF' : 'var(--color-teal)'}; margin-right: 6px;"></span>
+          ${s.scheme_id}
+        </button>
+      `).join('');
+
+      pillContainer.querySelectorAll('.scheme-pill-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const idx = parseInt(this.getAttribute('data-scheme-index'), 10);
+          selectedSchemeIndex = idx;
+          renderSchemeSelectorPills();
+          renderActiveScheme(selectedSchemeIndex);
+          FieldAtlasAPI.showToast(`Switched to scheme: ${currentSchemesData[idx].scheme_name}`, 'info');
+        });
+      });
     }
 
     function renderActiveScheme(idx) {
@@ -1324,14 +1543,28 @@
       const trainerEl = document.getElementById('active-scheme-trainer');
       const counterEl = document.getElementById('modules-completed-counter');
 
+      const primaryGovtLink = document.getElementById('scheme-primary-govt-link');
+      const portalGovtLink = document.getElementById('scheme-portal-govt-link');
+      const guidelinesGovtLink = document.getElementById('scheme-guidelines-govt-link');
+
       if (badgeEl) badgeEl.textContent = scheme.scheme_id;
       if (enrollEl) enrollEl.textContent = `Enrollment: ${scheme.enrollment_id}`;
       if (titleEl) titleEl.textContent = scheme.scheme_name;
       if (trainerEl) trainerEl.innerHTML = `Assigned Vocational Trainer: <strong>${scheme.trainer}</strong> (NSDC Senior Instructor)`;
 
+      if (primaryGovtLink) {
+        primaryGovtLink.href = scheme.official_scheme_url || 'https://www.pmkvyofficial.org';
+        primaryGovtLink.innerHTML = `🏛️ Visit Official Scheme Portal (${scheme.scheme_id}) ↗`;
+      }
+      if (portalGovtLink) {
+        portalGovtLink.href = scheme.portal_url || 'https://www.skillindiadigital.gov.in';
+      }
+      if (guidelinesGovtLink) {
+        guidelinesGovtLink.href = scheme.guidelines_url || 'https://www.msde.gov.in';
+      }
+
       updateCourseCompletionStatusBadge(scheme);
 
-      // Render modules list
       const modulesContainer = document.getElementById('scheme-modules-container');
       if (modulesContainer) {
         modulesContainer.innerHTML = scheme.modules.map((m, mIdx) => `
@@ -1352,12 +1585,19 @@
               <span class="badge ${m.is_completed ? 'badge-teal' : 'badge-ochre'}" style="font-size: 0.75rem;">
                 ${m.is_completed ? 'COMPLETED' : 'IN PROGRESS'}
               </span>
-              <button class="btn btn-outline btn-sm" style="padding: 0.3rem 0.65rem; font-size: 0.75rem;" onclick="toggleModuleComplete(${mIdx})">
+              <button type="button" class="btn btn-outline btn-sm btn-toggle-module" data-module-index="${mIdx}" style="padding: 0.3rem 0.65rem; font-size: 0.75rem;">
                 ${m.is_completed ? 'Mark Incomplete' : 'Mark Completed'}
               </button>
             </div>
           </div>
         `).join('');
+
+        modulesContainer.querySelectorAll('.btn-toggle-module').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const mIdx = parseInt(this.getAttribute('data-module-index'), 10);
+            toggleModuleComplete(mIdx);
+          });
+        });
       }
 
       const completedCount = scheme.modules.filter(m => m.is_completed).length;
@@ -1396,7 +1636,7 @@
       }
     }
 
-    window.toggleModuleComplete = function(moduleIdx) {
+    function toggleModuleComplete(moduleIdx) {
       const scheme = currentSchemesData[selectedSchemeIndex];
       if (!scheme || !scheme.modules[moduleIdx]) return;
 
@@ -1408,67 +1648,72 @@
       renderActiveScheme(selectedSchemeIndex);
 
       const status = scheme.modules[moduleIdx].is_completed ? 'completed' : 'pending';
-      FieldAtlasAPI.showToast(`Module updated to ${status}! Course Completion recalculated.`, 'success');
-    };
+      FieldAtlasAPI.showToast(`Module updated to ${status}! Course Completion status recalculated.`, 'success');
+    }
 
-    // ════════════ STEP 5: CERTIFICATE DOWNLOAD & PRINT ════════════
+    // ════════════ STEP 5: CERTIFICATE DOWNLOAD ════════════
     window.downloadCertificateAction = function() {
       FieldAtlasAPI.showToast('Generating official ReportLab landscape PDF certificate...', 'info');
       setTimeout(() => {
         window.print();
-      }, 500);
+      }, 400);
     };
 
-    // ════════════ STEP 6: PLACEMENT DETAILS (GOOGLE FORM STYLE) ════════════
-    window.handlePlacementSubmit = async function(e) {
-      e.preventDefault();
+    // ════════════ STEP 6: PLACEMENT SURVEY (GOOGLE FORM STYLE) ════════════
+    function attachPlacementFormListener() {
+      const form = document.getElementById('placement-outcome-form');
+      if (!form) return;
 
-      const employer = document.getElementById('gform-employer').value.trim();
-      const role = document.getElementById('gform-role').value.trim();
-      const scheme = document.getElementById('gform-scheme').value;
-      const wage = document.getElementById('gform-wage').value;
-      const location = document.getElementById('gform-location').value.trim();
-      const joiningDate = document.getElementById('gform-joining-date').value;
-      const empType = document.querySelector('input[name="emp-type"]:checked')?.value || 'Full-time Regular';
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-      try {
-        const res = await FieldAtlasAPI.post('/api/trainee/placement-submit/', {
-          employer_name: employer,
-          role: role,
-          scheme_enrolled: scheme,
-          wage: wage,
-          work_location: location,
-          start_date: joiningDate,
-          employment_type: empType
-        });
+        const employer = document.getElementById('gform-employer').value.trim();
+        const role = document.getElementById('gform-role').value.trim();
+        const scheme = document.getElementById('gform-scheme').value;
+        const wage = document.getElementById('gform-wage').value;
+        const location = document.getElementById('gform-location').value.trim();
+        const joiningDate = document.getElementById('gform-joining-date').value;
+        const empType = document.querySelector('input[name="emp-type"]:checked')?.value || 'Full-time Regular';
 
-        // Hide form and show Google Form confirmation card
-        document.getElementById('placement-outcome-form').style.display = 'none';
-        const confirmCard = document.getElementById('gform-confirmation-card');
-        document.getElementById('confirm-employer-name').textContent = employer;
-        document.getElementById('confirm-scheme-name').textContent = scheme;
-        if (confirmCard) confirmCard.style.display = 'block';
+        try {
+          await FieldAtlasAPI.post('/api/trainee/placement-submit/', {
+            employer_name: employer,
+            role: role,
+            scheme_enrolled: scheme,
+            wage: wage,
+            work_location: location,
+            start_date: joiningDate,
+            employment_type: empType
+          });
 
-        // Update Placement Card in Dashboard
-        const pCard = document.getElementById('trainee-placement-card');
-        const pEmpty = document.getElementById('trainee-placement-empty');
-        if (pCard) {
-          pCard.style.display = 'flex';
-          if (pEmpty) pEmpty.style.display = 'none';
-          document.getElementById('placement-employer').textContent = employer;
-          document.getElementById('placement-role').textContent = role;
-          document.getElementById('placement-wage').textContent = '₹' + Number(wage).toLocaleString('en-IN') + '/month';
-          document.getElementById('placement-status').textContent = 'SUBMITTED';
+          // Show Google Form confirmation card
+          form.style.display = 'none';
+          const confirmCard = document.getElementById('gform-confirmation-card');
+          document.getElementById('confirm-employer-name').textContent = employer;
+          document.getElementById('confirm-scheme-name').textContent = scheme;
+          if (confirmCard) confirmCard.style.display = 'block';
+
+          // Update Dashboard Placement Card
+          const pCard = document.getElementById('trainee-placement-card');
+          const pEmpty = document.getElementById('trainee-placement-empty');
+          if (pCard) {
+            pCard.style.display = 'flex';
+            if (pEmpty) pEmpty.style.display = 'none';
+            document.getElementById('placement-employer').textContent = employer;
+            document.getElementById('placement-role').textContent = role;
+            document.getElementById('placement-wage').textContent = '₹' + Number(wage).toLocaleString('en-IN') + '/month';
+            document.getElementById('placement-status').textContent = 'SUBMITTED';
+          }
+
+          FieldAtlasAPI.showToast('Placement response successfully recorded in Field Atlas!', 'success');
+          if (window.lucide) lucide.createIcons();
+        } catch (err) {
+          FieldAtlasAPI.showToast('Failed to submit placement survey.', 'error');
         }
+      });
+    }
 
-        FieldAtlasAPI.showToast('Placement response successfully recorded in Field Atlas!', 'success');
-        if (window.lucide) lucide.createIcons();
-      } catch (err) {
-        FieldAtlasAPI.showToast('Failed to submit placement survey.', 'error');
-      }
-    };
-
-    // Existing Dashboard Data Hydration
+    // Dashboard Data Hydration
     async function loadTraineeDashboard() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainee/me/dashboard/');
@@ -1506,7 +1751,7 @@
         const stageSVGs = [
           `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>`,
           `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
-          `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>`,
+          `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>`,
           `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
           `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>`
         ];
@@ -1517,29 +1762,6 @@
               ${stageSVGs[i] || stageSVGs[0]}
             </div>
             <div class="trainee-stage-text">${s}</div>
-          </div>
-        `).join('');
-      }
-
-      // Upcoming Actions
-      const actionsList = document.getElementById('upcoming-actions-list');
-      const upcoming = (data.upcoming_actions && data.upcoming_actions.length > 0) ? data.upcoming_actions : [
-        { label: 'Submit 90-day retention survey', due: '2026-10-01', type: 'checkin' },
-        { label: 'Upload 1st month salary slip', due: '2026-09-30', type: 'document' }
-      ];
-      if (actionsList) {
-        actionsList.innerHTML = upcoming.map(a => `
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-bottom: 1px solid var(--color-border-subtle);">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-              <div style="width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--color-ochre-light); color: var(--color-ochre); display: flex; align-items: center; justify-content: center;">
-                <i data-lucide="${a.type === 'checkin' ? 'clipboard-check' : 'upload'}" style="width: 16px; height: 16px;"></i>
-              </div>
-              <div>
-                <div style="font-weight: 600; font-size: 0.9rem; color: var(--color-text-primary);">${a.label}</div>
-                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Due: ${a.due}</div>
-              </div>
-            </div>
-            <button class="btn btn-outline btn-sm" onclick="FieldAtlasAPI.showToast('Demo: Action marked completed!', 'success')">Complete</button>
           </div>
         `).join('');
       }
