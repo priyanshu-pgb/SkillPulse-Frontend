@@ -4,10 +4,16 @@
   bottom: 1rem;
   right: 1rem;
   font-size: 0.75rem;
-  color: rgba(0,0,0,0.4);
+  color: var(--color-text-muted, rgba(0,0,0,0.4));
+  opacity: 0.45;
   pointer-events: none;
   z-index: 1000;
   font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+[data-theme="dark"] .watermark,
+html.dark .watermark {
+  color: rgba(255, 255, 255, 0.25) !important;
 }
 
 /* Top‑right auth button */

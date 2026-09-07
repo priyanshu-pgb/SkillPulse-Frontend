@@ -51,10 +51,15 @@
   --sidebar-width: 260px;
   --header-height: 64px;
   --bottom-nav-height: 60px;
+
+  /* Sidebar Tokens (Light Mode: Deep Navy Shell) */
+  --sidebar-bg: #1A2238;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+
   /* Glassmorphism tokens (Light Mode) */
-  --glass-bg: rgba(255, 255, 255, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 8px 32px 0 rgba(14, 129, 118, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --glass-shadow: 0 8px 32px 0 rgba(14, 129, 118, 0.06);
 }
 
 /* Dark Mode Theme Tokens */
@@ -81,6 +86,10 @@ html.dark {
   --color-text-muted: #94A3B8;
   --color-text-inverse: #0B0F19;
 
+  /* Sidebar Tokens (Dark Mode: Midnight Slate Shell) */
+  --sidebar-bg: #0C1222;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+
   /* Status Tokens */
   --status-verified: #14B8A6;
   --status-pending: #F59E0B;
@@ -95,19 +104,25 @@ html.dark {
   --shadow-popover: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
 
   /* Glassmorphism tokens (Dark Mode) */
-  --glass-bg: rgba(19, 27, 46, 0.78);
+  --glass-bg: rgba(19, 27, 46, 0.85);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
 }
 
 /* Glassmorphism Utilities */
-.glass-header,
-.glass-panel {
+.glass-header {
   background: var(--glass-bg) !important;
   backdrop-filter: blur(14px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
-  border: 1px solid var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
 
 .glass-pill {
@@ -268,8 +283,8 @@ p {
 /* Desktop Sidebar */
 .sidebar {
   width: var(--sidebar-width);
-  background-color: var(--color-deep-indigo);
-  color: var(--color-surface);
+  background-color: var(--sidebar-bg, #1A2238) !important;
+  color: #FFFFFF !important;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -278,11 +293,12 @@ p {
   display: flex;
   flex-direction: column;
   transition: transform var(--transition-normal);
+  border-right: 1px solid var(--sidebar-border, rgba(255, 255, 255, 0.08)) !important;
 }
 
 .sidebar-header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -350,7 +366,7 @@ p {
   gap: 0.85rem;
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
-  color: #CBD5E1;
+  color: #CBD5E1 !important;
   text-decoration: none;
   font-weight: 500;
   font-size: 0.925rem;
@@ -360,13 +376,13 @@ p {
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
 }
 
 .nav-link.active {
-  background-color: var(--color-teal);
-  color: #FFFFFF;
+  background-color: var(--color-teal) !important;
+  color: #FFFFFF !important;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(14, 129, 118, 0.3);
 }
@@ -517,14 +533,36 @@ p {
 
 /* Hero & Programme Pulse Section */
 .hero-card {
-  background: linear-gradient(135deg, #1E2749 0%, #2A3660 100%);
+  background: linear-gradient(135deg, #1E2749 0%, #2A3660 100%) !important;
   border-radius: var(--radius-lg);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   padding: 2.25rem 2.5rem;
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .hero-card {
+  background: linear-gradient(135deg, #131B2E 0%, #1E293B 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.hero-card .hero-title {
+  color: #FFFFFF !important;
+}
+
+.hero-card .hero-description {
+  color: #CBD5E1 !important;
+}
+
+.hero-card .hero-description strong {
+  color: #FFFFFF !important;
+}
+
+.hero-card .eyebrow {
+  color: #38BDF8 !important;
 }
 
 .hero-card::after {
@@ -1305,12 +1343,23 @@ p {
 
 /* Trainee Mobile-First Portal Styles */
 .trainee-welcome-card {
-  background: linear-gradient(135deg, var(--color-teal) 0%, #0A5D54 100%);
+  background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%) !important;
   border-radius: var(--radius-lg);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   padding: 1.75rem 2rem;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.trainee-welcome-card h1,
+.trainee-welcome-card h2,
+.trainee-welcome-card p,
+.trainee-welcome-card div,
+.trainee-welcome-card span {
+  color: #FFFFFF !important;
 }
 
 .trainee-stage-rail {

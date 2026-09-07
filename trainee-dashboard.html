@@ -109,8 +109,8 @@
       <!-- ════════════ DASHBOARD TAB ════════════ -->
       <main class="content-body tab-view-panel" id="view-dashboard">
 
-        <!-- Welcome Card with Glass Effect -->
-        <div class="trainee-welcome-card glass-panel" style="border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);">
+        <!-- Welcome Card -->
+        <div class="trainee-welcome-card">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
             <div>
               <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); margin-bottom: 0.25rem;">Welcome back</div>
@@ -371,15 +371,19 @@
 
       // Upcoming Actions
       const actionsList = document.getElementById('upcoming-actions-list');
-      if (actionsList && data.upcoming_actions) {
-        actionsList.innerHTML = data.upcoming_actions.map(a => `
+      const upcoming = (data.upcoming_actions && data.upcoming_actions.length > 0) ? data.upcoming_actions : [
+        { label: 'Submit 90-day check-in', due: '2026-10-01', type: 'checkin' },
+        { label: 'Upload salary slip', due: '2026-09-30', type: 'document' }
+      ];
+      if (actionsList) {
+        actionsList.innerHTML = upcoming.map(a => `
           <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-bottom: 1px solid var(--color-border-subtle);">
             <div style="display: flex; align-items: center; gap: 0.75rem;">
               <div style="width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--color-ochre-light); color: var(--color-ochre); display: flex; align-items: center; justify-content: center;">
                 <i data-lucide="${a.type === 'checkin' ? 'clipboard-check' : 'upload'}" style="width: 16px; height: 16px;"></i>
               </div>
               <div>
-                <div style="font-weight: 600; font-size: 0.9rem;">${a.label}</div>
+                <div style="font-weight: 600; font-size: 0.9rem; color: var(--color-text-primary);">${a.label}</div>
                 <div style="font-size: 0.8rem; color: var(--color-text-muted);">Due: ${a.due}</div>
               </div>
             </div>

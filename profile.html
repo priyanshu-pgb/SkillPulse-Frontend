@@ -155,17 +155,17 @@
           </label>
           <input type="file" id="profile-photo-input" accept="image/*" style="display: none;">
         </div>
-        <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.25rem 0;" id="user-display-name">Demo User</h2>
-        <p style="font-size: 0.8rem; color: #64748b; margin: 0 0 1rem 0;" id="user-display-role">Vocational Specialist</p>
-        <div style="font-size: 0.8rem; background: #f8fafc; padding: 0.75rem; border-radius: 8px; text-align: left;">
-          <div style="margin-bottom: 0.4rem;"><strong>System ID:</strong> <span id="display-atlas-id">FA-88902</span></div>
-          <div><strong>Status:</strong> <span class="badge badge-teal">Verified</span></div>
+        <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 0.25rem 0; color: var(--color-deep-indigo);" id="user-display-name">Demo User</h2>
+        <p style="font-size: 0.8rem; color: var(--color-text-muted); margin: 0 0 1rem 0;" id="user-display-role">Vocational Specialist</p>
+        <div style="font-size: 0.8rem; background: var(--color-parchment); padding: 0.75rem; border-radius: 8px; text-align: left; border: 1px solid var(--color-border);">
+          <div style="margin-bottom: 0.4rem; color: var(--color-text-primary);"><strong>System ID:</strong> <span id="display-atlas-id">FA-88902</span></div>
+          <div style="color: var(--color-text-primary);"><strong>Status:</strong> <span class="badge badge-teal">Verified</span></div>
         </div>
       </div>
 
       <!-- Password Reset Form -->
       <div class="profile-card">
-        <h3 style="font-size: 1rem; font-weight: 700; margin: 0 0 1rem 0; color: #0f172a;">Change Password</h3>
+        <h3 style="font-size: 1rem; font-weight: 700; margin: 0 0 1rem 0; color: var(--color-deep-indigo);">Change Password</h3>
         <form id="change-password-form">
           <div class="form-group">
             <label for="current-password">Current Password</label>
@@ -179,7 +179,7 @@
             <label for="confirm-password">Confirm Password</label>
             <input type="password" id="confirm-password" class="form-control" placeholder="••••••••" required>
           </div>
-          <button type="submit" class="btn" style="width: 100%; background: #0f172a; color: #fff; padding: 0.6rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; border: none; cursor: pointer;">
+          <button type="submit" class="btn" style="width: 100%; background: var(--color-teal); color: #fff; padding: 0.6rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; border: none; cursor: pointer;">
             Update Password
           </button>
         </form>
@@ -191,7 +191,7 @@
       
       <!-- Profile Information Form -->
       <div class="profile-card">
-        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 1.25rem 0; color: #0f172a; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9;">Personal Details</h3>
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 1.25rem 0; color: var(--color-deep-indigo); padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-border);">Personal Details</h3>
         <form id="profile-form">
           <div class="form-grid">
             <div class="form-group">
@@ -244,7 +244,7 @@
           </div>
 
           <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-            <button type="submit" class="btn" style="background: #0d9488; color: white; border: none; padding: 0.65rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">
+            <button type="submit" class="btn" style="background: var(--color-teal); color: white; border: none; padding: 0.65rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">
               Save Profile Changes
             </button>
           </div>
@@ -253,7 +253,7 @@
 
       <!-- Enrolled/Instructed Courses Summary -->
       <div class="profile-card">
-        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 1rem 0; color: #0f172a;">Course Allocations & Records</h3>
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 1rem 0; color: var(--color-deep-indigo);">Course Allocations & Records</h3>
         <div id="profile-courses-container">
           <!-- Populated by profile.js -->
         </div>
