@@ -102,6 +102,359 @@
     total: 4,
   };
 
+  // ─── Trainer Qualification & Accreditation Data (Step 4) ────────────────
+  const TRAINER_QUALIFICATION_DATA = {
+    trainer_name: 'Arjun Sharma',
+    trainer_unique_id: 'TR-NCVET-2026-8819',
+    is_verified: true,
+    highest_degree: 'Master of Technology (M.Tech) in Computer Science & Engineering',
+    degree_institution: 'Indian Institute of Technology (IIT) Bombay · First Class with Distinction',
+    tot_certification: 'NCVET / NSDC Master Trainer of Trainers (TOT) Level 6',
+    tot_cert_number: 'NCVET-TOT-IT-2024-99124',
+    sector_skill_council: 'IT-ITeS Sector Skill Council NASSCOM & MSDE',
+    pedagogy_years: '6 Years Vocational Teaching Experience',
+    industry_years: '8 Years Enterprise Software Architecture Experience',
+    aadhaar_status: 'Aadhaar Verified & Biometric Seeded',
+    govt_teaching_eligibility: 'ELIGIBLE_TO_TEACH_CENTRAL_SCHEMES',
+    eligibility_score: 96,
+    accredited_trades: [
+      'PMKVY 4.0: Full Stack Web Development',
+      'FutureSkills PRIME: Cloud & DevOps',
+      'SWAYAM / NPTEL: Applied AI & Python',
+      'DDU-GKY: Enterprise Data Analytics',
+      'NAPS: Industrial Software Apprenticeship'
+    ],
+    verification_date: '2026-02-15',
+    verified_by: 'National Council for Vocational Education and Training (NCVET)'
+  };
+
+  // ─── Course Deep-Dive Analytics & Live Session Monitor (Step 1) ──────────
+  const COURSE_STUDENT_ANALYTICS = {
+    'pmkvy-4-fsw': {
+      course_id: 'pmkvy-4-fsw',
+      course_title: 'Full Stack Web Development & Python Cloud',
+      scheme_code: 'PMKVY 4.0',
+      total_enrolled: 48,
+      avg_attendance_rate: 92.4,
+      avg_watch_time: 86.5,
+      quiz_participation_rate: 95.8,
+      avg_quiz_score: 89.2,
+      live_session: {
+        is_live_now: true,
+        session_title: 'Advanced Django REST Framework & PostgreSQL Query Optimization',
+        active_watchers: 42,
+        total_enrolled: 48,
+        timing: 'Today · 4:30 PM – 6:00 PM',
+        room: 'Virtual Lab 3B',
+        stream_url: 'https://meet.google.com/xyz-skill-pulse'
+      },
+      students: [
+        { id: 't1', name: 'Priya Patel', field_atlas_id: 'FA-24-0182', email: 'trainee@fieldatlas.in', phone: '+91 9833456789', attendance_rate: 92.3, classes_attended: 24, total_classes: 26, watch_time_pct: 94.0, quiz_score: 92, quiz_completed: true, is_watching_live: true, last_active: 'Today 10:15 AM' },
+        { id: 't2', name: 'Rajesh Kumar Verma', field_atlas_id: 'PMKVY-4.0-ND-2026-88219', email: 'rajesh.verma@pmkvy-portal.in', phone: '+91 9820123456', attendance_rate: 96.2, classes_attended: 25, total_classes: 26, watch_time_pct: 91.5, quiz_score: 88, quiz_completed: true, is_watching_live: true, last_active: 'Today 11:20 AM' },
+        { id: 't3', name: 'Ananya Deshmukh', field_atlas_id: 'NCVET-EV-2026-99401', email: 'ananya.d@asdc-skill.in', phone: '+91 9845678901', attendance_rate: 88.5, classes_attended: 23, total_classes: 26, watch_time_pct: 82.0, quiz_score: 85, quiz_completed: true, is_watching_live: false, last_active: 'Yesterday' },
+        { id: 't4', name: 'Suresh Chandran', field_atlas_id: 'DGT-CTS-2025-77102', email: 'suresh.c@dgt-ati.gov.in', phone: '+91 9834567890', attendance_rate: 92.3, classes_attended: 24, total_classes: 26, watch_time_pct: 89.0, quiz_score: 90, quiz_completed: true, is_watching_live: true, last_active: 'Today 09:40 AM' },
+        { id: 't5', name: 'Sunita Soren', field_atlas_id: 'PMKVY-GDA-2026-33910', email: 'sunita.soren@hssc.in', phone: '+91 9871234567', attendance_rate: 76.9, classes_attended: 20, total_classes: 26, watch_time_pct: 71.0, quiz_score: 78, quiz_completed: false, is_watching_live: false, last_active: '3 days ago' },
+        { id: 't6', name: 'Vikram Singh Rathore', field_atlas_id: 'NCVET-AGR-2026-44109', email: 'vikram.r@asci-skill.in', phone: '+91 9823456789', attendance_rate: 84.6, classes_attended: 22, total_classes: 26, watch_time_pct: 85.0, quiz_score: 86, quiz_completed: true, is_watching_live: true, last_active: 'Today 08:30 AM' },
+        { id: 't7', name: 'Amitabh Tripathi', field_atlas_id: 'PMKVY-4.0-UP-2026-11892', email: 'amitabh.t@pmkvy.in', phone: '+91 9812345678', attendance_rate: 80.8, classes_attended: 21, total_classes: 26, watch_time_pct: 79.5, quiz_score: 82, quiz_completed: true, is_watching_live: true, last_active: 'Today 10:50 AM' },
+        { id: 't8', name: 'Kavita Naik', field_atlas_id: 'NCVET-AUTO-2026-66381', email: 'kavita.n@asdc.in', phone: '+91 9890123456', attendance_rate: 92.3, classes_attended: 24, total_classes: 26, watch_time_pct: 88.0, quiz_score: 91, quiz_completed: true, is_watching_live: true, last_active: 'Today 09:00 AM' },
+        { id: 't9', name: 'Ramesh Jha', field_atlas_id: 'DDU-GKY-2026-77812', email: 'ramesh.jha@ddugky.in', phone: '+91 9876543211', attendance_rate: 96.2, classes_attended: 25, total_classes: 26, watch_time_pct: 95.0, quiz_score: 94, quiz_completed: true, is_watching_live: true, last_active: 'Today 11:00 AM' },
+        { id: 't10', name: 'Meena Kumari', field_atlas_id: 'NULM-2026-33921', email: 'meena.k@nulm.gov.in', phone: '+91 9811223344', attendance_rate: 88.5, classes_attended: 23, total_classes: 26, watch_time_pct: 83.5, quiz_score: 87, quiz_completed: true, is_watching_live: false, last_active: 'Yesterday' }
+      ]
+    },
+    'ddu-gky-data': {
+      course_id: 'ddu-gky-data',
+      course_title: 'Data Analytics & Business Intelligence Specialist',
+      scheme_code: 'DDU-GKY',
+      total_enrolled: 36,
+      avg_attendance_rate: 89.2,
+      avg_watch_time: 81.0,
+      quiz_participation_rate: 91.6,
+      avg_quiz_score: 84.5,
+      live_session: {
+        is_live_now: false,
+        session_title: 'PowerBI Dashboarding & SQL Pipeline Review',
+        active_watchers: 0,
+        total_enrolled: 36,
+        timing: 'Tomorrow · 10:00 AM – 11:30 AM',
+        room: 'Data Lab 2A',
+        stream_url: 'https://meet.google.com/db-opt-skill'
+      },
+      students: [
+        { id: 't4', name: 'Suresh Chandran', field_atlas_id: 'DGT-CTS-2025-77102', email: 'suresh.c@dgt-ati.gov.in', phone: '+91 9834567890', attendance_rate: 92.3, classes_attended: 24, total_classes: 26, watch_time_pct: 89.0, quiz_score: 90, quiz_completed: true, is_watching_live: false, last_active: 'Today 09:40 AM' },
+        { id: 't9', name: 'Ramesh Jha', field_atlas_id: 'DDU-GKY-2026-77812', email: 'ramesh.jha@ddugky.in', phone: '+91 9876543211', attendance_rate: 96.2, classes_attended: 25, total_classes: 26, watch_time_pct: 95.0, quiz_score: 94, quiz_completed: true, is_watching_live: false, last_active: 'Today 11:00 AM' }
+      ]
+    }
+  };
+
+  // ─── Course Placement Efficiency & Outcome Metrics (Step 1) ───────────────
+  const COURSE_EFFICIENCY_DATA = {
+    'pmkvy-4-fsw': {
+      course_id: 'pmkvy-4-fsw',
+      course_title: 'Full Stack Web Development & Python Cloud',
+      scheme_code: 'PMKVY 4.0',
+      total_students: 48,
+      placed_students: 42,
+      unplaced_students: 6,
+      placement_efficiency_pct: 87.5,
+      avg_monthly_salary: 22500,
+      highest_monthly_salary: 32000,
+      min_monthly_salary: 18000,
+      avg_job_offer_days: 28,
+      top_employers: [
+        { name: 'Tata Consultancy Services (TCS)', hired: 15, avg_wage: 22000 },
+        { name: 'Infosys Limited', hired: 11, avg_wage: 21500 },
+        { name: 'Wipro Digital', hired: 9, avg_wage: 24000 },
+        { name: 'Cognizant Technology', hired: 7, avg_wage: 23500 },
+      ],
+      recent_placed_students: [
+        { name: 'Priya Patel', employer: 'Tata Consultancy Services', role: 'Junior Web Developer', wage: 22000, date: '2026-07-01' },
+        { name: 'Rajesh Kumar Verma', employer: 'NISE Solar Corp', role: 'Solar Tech Specialist', wage: 21500, date: '2026-06-20' },
+        { name: 'Suresh Chandran', employer: 'Kirloskar Systems', role: 'CNC Operator', wage: 19500, date: '2026-06-15' },
+      ]
+    }
+  };
+
+  // ─── Confirmation: Trainee Placement Outcomes Registry (Step 3) ───────────
+  const TRAINER_CONFIRMATION_REGISTRY = [
+    {
+      id: 1,
+      trainee_name: 'Priya Patel',
+      field_atlas_id: 'FA-24-0182',
+      course_enrolled: 'Full Stack Web Development (PMKVY 4.0)',
+      phone: '9833456789',
+      email: 'trainee@fieldatlas.in',
+      district: 'Pune',
+      state: 'Maharashtra',
+      aadhaar_name: 'Priya Patel',
+      got_job: true,
+      placement: {
+        employer_name: 'Tata Consultancy Services',
+        job_role: 'Junior Web Developer',
+        monthly_wage: 22000,
+        work_location: 'Pune, Maharashtra',
+        date_of_joining: '2026-07-01',
+        employment_type: 'Full-time Regular',
+        verification_status: 'CONFIRMED',
+        verified_date: '2026-09-07'
+      }
+    },
+    {
+      id: 2,
+      trainee_name: 'Rajesh Kumar Verma',
+      field_atlas_id: 'PMKVY-4.0-ND-2026-88219',
+      course_enrolled: 'Solar PV Installer (PMKVY 4.0)',
+      phone: '9820123456',
+      email: 'rajesh.verma@pmkvy-portal.in',
+      district: 'Varanasi',
+      state: 'Uttar Pradesh',
+      aadhaar_name: 'Rajesh Kumar Verma',
+      got_job: true,
+      placement: {
+        employer_name: 'NISE Solar Corp',
+        job_role: 'Solar PV Commissioning Technician',
+        monthly_wage: 21500,
+        work_location: 'Varanasi, UP',
+        date_of_joining: '2026-06-20',
+        employment_type: 'Full-time Regular',
+        verification_status: 'CONFIRMED',
+        verified_date: '2026-08-15'
+      }
+    },
+    {
+      id: 3,
+      trainee_name: 'Suresh Chandran',
+      field_atlas_id: 'DGT-CTS-2025-77102',
+      course_enrolled: 'CNC Machine Operator (DGT-CTS)',
+      phone: '9834567890',
+      email: 'suresh.c@dgt-ati.gov.in',
+      district: 'Belagavi',
+      state: 'Karnataka',
+      aadhaar_name: 'Suresh Chandran',
+      got_job: true,
+      placement: {
+        employer_name: 'Kirloskar Systems Belagavi',
+        job_role: 'CNC Multi-Axis Machinist',
+        monthly_wage: 19500,
+        work_location: 'Belagavi, Karnataka',
+        date_of_joining: '2026-06-15',
+        employment_type: 'Full-time Regular',
+        verification_status: 'CONFIRMED',
+        verified_date: '2026-08-01'
+      }
+    },
+    {
+      id: 4,
+      trainee_name: 'Ramesh Jha',
+      field_atlas_id: 'DDU-GKY-2026-77812',
+      course_enrolled: 'Data Analytics & Retail (DDU-GKY)',
+      phone: '9876543211',
+      email: 'ramesh.jha@ddugky.in',
+      district: 'Patna',
+      state: 'Bihar',
+      aadhaar_name: 'Ramesh Jha',
+      got_job: true,
+      placement: {
+        employer_name: 'Reliance Retail Logistics',
+        job_role: 'Inventory & Data Associate',
+        monthly_wage: 16000,
+        work_location: 'Patna, Bihar',
+        date_of_joining: '2026-05-10',
+        employment_type: 'Full-time Regular',
+        verification_status: 'CONFIRMED',
+        verified_date: '2026-07-20'
+      }
+    },
+    {
+      id: 5,
+      trainee_name: 'Meena Kumari',
+      field_atlas_id: 'NULM-2026-33921',
+      course_enrolled: 'Apparel Pattern Maker (NULM)',
+      phone: '9811223344',
+      email: 'meena.k@nulm.gov.in',
+      district: 'Surat',
+      state: 'Gujarat',
+      aadhaar_name: 'Meena Kumari',
+      got_job: true,
+      placement: {
+        employer_name: 'Arvind Mills Limited',
+        job_role: 'CAD Apparel Pattern Designer',
+        monthly_wage: 18500,
+        work_location: 'Surat, Gujarat',
+        date_of_joining: '2026-05-15',
+        employment_type: 'Full-time Regular',
+        verification_status: 'CONFIRMED',
+        verified_date: '2026-07-15'
+      }
+    },
+    // Non-Placed / Seeking Trainees (Job = NO) with personal contact details
+    {
+      id: 6,
+      trainee_name: 'Sunita Soren',
+      field_atlas_id: 'PMKVY-GDA-2026-33910',
+      course_enrolled: 'General Duty Assistant (Healthcare)',
+      phone: '9871234567',
+      email: 'sunita.soren@hssc.in',
+      district: 'Ranchi',
+      state: 'Jharkhand',
+      aadhaar_name: 'Sunita Soren',
+      got_job: false,
+      reason_seeking: 'Certified & Looking for Day Shifts in Ranchi Hospitals',
+      preferred_role: 'Patient Care & Nursing Assistant',
+      last_counseling_date: '2026-09-02',
+      trainer_action_needed: 'Schedule interview with Apollo Ranchi Clinic'
+    },
+    {
+      id: 7,
+      trainee_name: 'Vikram Singh Rathore',
+      field_atlas_id: 'NCVET-AGR-2026-44109',
+      course_enrolled: 'Micro Irrigation Specialist (ASCI)',
+      phone: '9823456789',
+      email: 'vikram.r@asci-skill.in',
+      district: 'Jaipur',
+      state: 'Rajasthan',
+      aadhaar_name: 'Vikram Singh Rathore',
+      got_job: false,
+      reason_seeking: 'Exploring Kisan Drone & Precision Irrigation Schemes',
+      preferred_role: 'Drip Irrigation Technical Advisor',
+      last_counseling_date: '2026-09-04',
+      trainer_action_needed: 'Connect with Jain Irrigation Regional Officer'
+    },
+    {
+      id: 8,
+      trainee_name: 'Ananya Deshmukh',
+      field_atlas_id: 'NCVET-EV-2026-99401',
+      course_enrolled: 'EV Service Technician (Automotive)',
+      phone: '9845678901',
+      email: 'ananya.d@asdc-skill.in',
+      district: 'Pune',
+      state: 'Maharashtra',
+      aadhaar_name: 'Ananya Deshmukh',
+      got_job: false,
+      reason_seeking: 'Awaiting Final Technical Interview Results at Tata Motors',
+      preferred_role: 'High-Voltage Battery Diagnostics Associate',
+      last_counseling_date: '2026-09-05',
+      trainer_action_needed: 'Follow up with ASDC Placement Liaison'
+    },
+    {
+      id: 9,
+      trainee_name: 'Amitabh Tripathi',
+      field_atlas_id: 'PMKVY-4.0-UP-2026-11892',
+      course_enrolled: 'Solar PV Installer (PMKVY 4.0)',
+      phone: '9812345678',
+      email: 'amitabh.t@pmkvy.in',
+      district: 'Varanasi',
+      state: 'Uttar Pradesh',
+      aadhaar_name: 'Amitabh Tripathi',
+      got_job: false,
+      reason_seeking: 'Undergoing On-the-Job Apprenticeship Assessments',
+      preferred_role: 'Solar Rooftop Grid Engineer',
+      last_counseling_date: '2026-08-28',
+      trainer_action_needed: 'Coordinate with NISE Rooftop Vendor Pool'
+    },
+    {
+      id: 10,
+      trainee_name: 'Kavita Naik',
+      field_atlas_id: 'NCVET-AUTO-2026-66381',
+      course_enrolled: 'EV Service Technician (Automotive)',
+      phone: '9890123456',
+      email: 'kavita.n@asdc.in',
+      district: 'Pune',
+      state: 'Maharashtra',
+      aadhaar_name: 'Kavita Naik',
+      got_job: false,
+      reason_seeking: 'Preparing for NCVET Skill Certification Exam',
+      preferred_role: 'EV Powertrain Maintenance Trainee',
+      last_counseling_date: '2026-09-01',
+      trainer_action_needed: 'Provide extra practical lab session on inverter testing'
+    }
+  ];
+
+  // ─── Trainer Previous / Old Courses (Step 2) ─────────────────────────────
+  let TRAINER_CUSTOM_COURSES = [
+    {
+      id: 'tc-01',
+      title: 'Full Stack Web Development & Python Cloud (Batch 2026-A)',
+      govt_scheme: 'PMKVY 4.0 (MSDE)',
+      official_url: 'https://www.pmkvyofficial.org',
+      course_code: 'PMKVY-4.0-FSW-A1',
+      enrolled_count: 48,
+      attendance_rate: 92.4,
+      completion_rate: 100,
+      placement_rate: 87.5,
+      status: 'active',
+      trainer_id: 'TR-NCVET-2026-8819',
+      created_date: '2026-01-10'
+    },
+    {
+      id: 'tc-02',
+      title: 'Data Analytics & Business Intelligence (Batch 2025-B)',
+      govt_scheme: 'DDU-GKY (MoRD)',
+      official_url: 'https://ddugky.gov.in',
+      course_code: 'DDU-GKY-DA-B2',
+      enrolled_count: 36,
+      attendance_rate: 89.2,
+      completion_rate: 85,
+      placement_rate: 78.0,
+      status: 'completed',
+      trainer_id: 'TR-NCVET-2026-8819',
+      created_date: '2025-08-15'
+    },
+    {
+      id: 'tc-03',
+      title: 'Cloud Architecture & DevOps Engineering (Batch 2026-Q1)',
+      govt_scheme: 'FutureSkills PRIME (MeitY)',
+      official_url: 'https://futureskillsprime.in',
+      course_code: 'FSP-CLOUD-Q1',
+      enrolled_count: 40,
+      attendance_rate: 94.0,
+      completion_rate: 90,
+      placement_rate: 85.0,
+      status: 'active',
+      trainer_id: 'TR-NCVET-2026-8819',
+      created_date: '2026-02-01'
+    }
+  ];
+
   // ─── Scheduled Trainer Classes (Visible to Trainee in Notification Bell) ──
   const TRAINER_CLASSES = [
     {
@@ -289,6 +642,8 @@
       description: 'Microcontroller programming, sensor telemetry, Arduino/ESP32 firmware, and MQTT industrial cloud communications.',
     },
   ];
+
+  const GOVERNMENT_COURSES_CATALOG = GOVERNMENT_COURSES;
 
   // ─── Government Schemes Learning Records & Modules Tracker ───────────────
   const GOVERNMENT_SCHEMES_DATA = [
@@ -558,6 +913,173 @@
     '/api/trainer/providers/': () => mockResponse(TRAINER_PROVIDERS),
     '/api/trainer/reports/': () => mockResponse(TRAINER_REPORTS),
 
+    // ─── Trainer 4-Step Feature Endpoints ─────────────────────────────────────
+    '/api/trainer/govt-courses/': () => mockResponse({ courses: GOVERNMENT_COURSES, total: GOVERNMENT_COURSES.length }),
+
+    // Step 1: Course Student Attendance, Watch Time Retention & Live Session Monitor
+    '/api/trainer/courses/analytics/': (opts) => {
+      let courseId = 'pmkvy-4-fsw';
+      if (opts?.url) {
+        try {
+          const u = new URL(opts.url, window.location.origin);
+          const cid = u.searchParams.get('course_id') || u.searchParams.get('id');
+          if (cid) courseId = cid;
+        } catch (e) {}
+      }
+      if (opts?.body) {
+        try {
+          const b = JSON.parse(opts.body);
+          if (b.course_id) courseId = b.course_id;
+        } catch (e) {}
+      }
+      const data = COURSE_STUDENT_ANALYTICS[courseId] || COURSE_STUDENT_ANALYTICS['pmkvy-4-fsw'];
+      return mockResponse({ course_id: courseId, ...data });
+    },
+
+    // Step 1: Course Placement Efficiency & Outcomes
+    '/api/trainer/courses/efficiency/': (opts) => {
+      let courseId = 'pmkvy-4-fsw';
+      if (opts?.url) {
+        try {
+          const u = new URL(opts.url, window.location.origin);
+          const cid = u.searchParams.get('course_id') || u.searchParams.get('id');
+          if (cid) courseId = cid;
+        } catch (e) {}
+      }
+      if (opts?.body) {
+        try {
+          const b = JSON.parse(opts.body);
+          if (b.course_id) courseId = b.course_id;
+        } catch (e) {}
+      }
+      const data = COURSE_EFFICIENCY_DATA[courseId] || COURSE_EFFICIENCY_DATA['pmkvy-4-fsw'];
+      return mockResponse({ course_id: courseId, ...data });
+    },
+
+    // Step 2: Create Course (requires Trainer Unique ID & Password)
+    '/api/trainer/courses/create/': (opts) => {
+      let body = {};
+      try { body = JSON.parse(opts?.body || '{}'); } catch(e) {}
+      const trainerId = (body.trainer_id || '').trim();
+      const password = (body.trainer_password || body.password || '').trim();
+      const courseTitle = (body.course_title || body.title || '').trim();
+      const govtScheme = (body.govt_scheme || body.scheme_name || 'PMKVY 4.0 (MSDE)').trim();
+      const officialUrl = (body.official_url || 'https://www.pmkvyofficial.org').trim();
+
+      if (!trainerId) {
+        return mockResponse({ error: 'Trainer Unique ID is required. Complete Step 4 (Trainer Qualification) to generate your verified ID.' }, 400);
+      }
+      if (trainerId !== 'TR-NCVET-2026-8819' && !trainerId.startsWith('TR-NCVET-')) {
+        return mockResponse({ error: 'Invalid Trainer Unique ID. Please verify your qualification in Step 4 to obtain a valid NCVET credential.' }, 400);
+      }
+      if (!password) {
+        return mockResponse({ error: 'Trainer authentication password is required.' }, 400);
+      }
+      if (!courseTitle) {
+        return mockResponse({ error: 'Course title is required.' }, 400);
+      }
+
+      const newCourse = {
+        id: 'tc-' + Date.now().toString().slice(-4),
+        title: courseTitle,
+        govt_scheme: govtScheme,
+        official_url: officialUrl,
+        course_code: (body.course_code || 'GOVT-SKILL-' + Math.floor(1000 + Math.random() * 9000)),
+        enrolled_count: Number(body.enrolled_count) || 30,
+        attendance_rate: 90.0,
+        completion_rate: 0,
+        placement_rate: 0,
+        status: 'active',
+        trainer_id: trainerId,
+        created_date: new Date().toISOString().split('T')[0]
+      };
+
+      TRAINER_CUSTOM_COURSES.unshift(newCourse);
+      try {
+        localStorage.setItem('fa_custom_courses', JSON.stringify(TRAINER_CUSTOM_COURSES));
+      } catch (e) {}
+
+      return mockResponse({
+        success: true,
+        message: 'Course created and registered with Government Skilling Portal successfully!',
+        course: newCourse
+      });
+    },
+
+    // Step 2: Track Old Courses
+    '/api/trainer/courses/custom-list/': () => {
+      try {
+        const saved = localStorage.getItem('fa_custom_courses');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            TRAINER_CUSTOM_COURSES = parsed;
+          }
+        }
+      } catch (e) {}
+      return mockResponse({ courses: TRAINER_CUSTOM_COURSES, total: TRAINER_CUSTOM_COURSES.length });
+    },
+
+    // Step 3: Trainee Confirmation Registry (Placement outcomes, salary, contact details)
+    '/api/trainer/placements/confirmation/': () => {
+      const list = JSON.parse(JSON.stringify(TRAINER_CONFIRMATION_REGISTRY));
+      // Hydrate with latest placement from trainee if submitted
+      try {
+        const latestP = localStorage.getItem('fa_latest_placement');
+        if (latestP) {
+          const p = JSON.parse(latestP);
+          const priya = list.find(s => s.trainee_name === 'Priya Patel' || s.field_atlas_id === 'FA-24-0182');
+          if (priya) {
+            priya.got_job = true;
+            priya.placement = {
+              employer_name: p.employer_name || 'Tata Consultancy Services',
+              job_role: p.role || 'Junior Web Developer',
+              monthly_wage: p.wage || 22000,
+              work_location: p.work_location || 'Pune, Maharashtra',
+              date_of_joining: p.start_date || '2026-07-01',
+              employment_type: p.employment_type || 'Full-time Regular',
+              verification_status: priya.placement?.verification_status || 'CONFIRMED',
+              verified_date: '2026-09-07'
+            };
+          }
+        }
+      } catch (e) {}
+      return mockResponse({ trainees: list, total: list.length });
+    },
+
+    // Step 3: Confirm Placement Action
+    '/api/trainer/placements/confirm-action/': (opts) => {
+      let body = {};
+      try { body = JSON.parse(opts?.body || '{}'); } catch(e) {}
+      const tid = Number(body.trainee_id || body.id) || 1;
+      const student = TRAINER_CONFIRMATION_REGISTRY.find(s => s.id === tid);
+      if (student && student.placement) {
+        student.placement.verification_status = 'CONFIRMED';
+        student.placement.verified_date = new Date().toISOString().split('T')[0];
+      }
+      return mockResponse({
+        success: true,
+        message: 'Trainee placement verified and confirmed with Central NSDC/NCVET repository.'
+      });
+    },
+
+    // Step 4: Trainer Qualification & Accreditation
+    '/api/trainer/qualification/': () => {
+      return mockResponse(TRAINER_QUALIFICATION_DATA);
+    },
+
+    // Step 4: Run Qualification Check
+    '/api/trainer/qualification/verify/': () => {
+      TRAINER_QUALIFICATION_DATA.is_verified = true;
+      TRAINER_QUALIFICATION_DATA.verification_date = new Date().toISOString().split('T')[0];
+      return mockResponse({
+        success: true,
+        qualification: TRAINER_QUALIFICATION_DATA,
+        trainer_unique_id: 'TR-NCVET-2026-8819',
+        message: 'NCVET Master Trainer Credential Verified! Trainer Unique ID: TR-NCVET-2026-8819'
+      });
+    },
+
     // Trainee endpoints (hydrated dynamically with active user session)
     '/api/trainee/me/dashboard/': () => {
       const session = getActiveSession();
@@ -725,14 +1247,14 @@
     // Check exact match first
     if (DATA_HANDLERS[normalizedPath]) {
       await new Promise((r) => setTimeout(r, 120)); // simulate network delay
-      return DATA_HANDLERS[normalizedPath](options);
+      return DATA_HANDLERS[normalizedPath]({ ...options, url });
     }
 
     // Check prefix matches for sub-endpoints
     for (const prefix of Object.keys(DATA_HANDLERS)) {
       if (normalizedPath.startsWith(prefix) && normalizedPath !== prefix) {
         await new Promise((r) => setTimeout(r, 120));
-        return DATA_HANDLERS[prefix](options);
+        return DATA_HANDLERS[prefix]({ ...options, url });
       }
     }
 

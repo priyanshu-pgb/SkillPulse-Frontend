@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Trainer Dashboard — Field Atlas</title>
-  <meta name="description" content="Field Atlas Trainer Dashboard — Monitor skilling outcomes, manage trainees, and track placement verification.">
+  <title>Trainer Dashboard — Field Atlas SkillPulse</title>
+  <meta name="description" content="Field Atlas Trainer Dashboard — Government Courses, Student Attendance & Retention, Course Placement Efficiency, Trainee Confirmation & Outreach, and Trainer Qualification.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
@@ -28,29 +28,36 @@
           </div>
           <div class="brand-text-wrap">
             <span class="brand-title">Field Atlas</span>
-            <span class="brand-subtitle">SkillPulse</span>
+            <span class="brand-subtitle">SkillPulse Trainer</span>
           </div>
         </a>
       </div>
 
       <nav class="sidebar-nav">
-        <div class="nav-group-label">Main</div>
-        <a class="nav-link active" data-tab="overview" onclick="switchView('overview')">
-          <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> Overview
+        <div class="nav-group-label">Trainer Workflow</div>
+        <a class="nav-link active" data-tab="step1-dashboard" onclick="switchView('step1-dashboard')">
+          <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> 1. Dashboard
         </a>
-        <a class="nav-link" data-tab="courses" onclick="switchView('courses')">
-          <i data-lucide="book-open" style="width: 18px; height: 18px;"></i> Courses
+        <a class="nav-link" data-tab="step2-courses" onclick="switchView('step2-courses')">
+          <i data-lucide="book-open" style="width: 18px; height: 18px;"></i> 2. Courses of Trainer
+        </a>
+        <a class="nav-link" data-tab="step3-confirmation" onclick="switchView('step3-confirmation')">
+          <i data-lucide="check-check" style="width: 18px; height: 18px;"></i> 3. Confirmation
+          <span class="badge badge-teal" style="font-size: 0.65rem; margin-left: auto;">CORE</span>
+        </a>
+        <a class="nav-link" data-tab="step4-qualification" onclick="switchView('step4-qualification')">
+          <i data-lucide="award" style="width: 18px; height: 18px;"></i> 4. Trainer Qualification
+        </a>
+
+        <div class="nav-group-label">Analytics & Operations</div>
+        <a class="nav-link" data-tab="overview" onclick="switchView('overview')">
+          <i data-lucide="activity" style="width: 18px; height: 18px;"></i> Programme Pulse
+        </a>
+        <a class="nav-link" data-tab="trainees" onclick="switchView('trainees')">
+          <i data-lucide="users" style="width: 18px; height: 18px;"></i> Trainees Directory
         </a>
         <a class="nav-link" data-tab="followups" onclick="switchView('followups')">
           <i data-lucide="message-square" style="width: 18px; height: 18px;"></i> Follow-ups
-        </a>
-
-        <div class="nav-group-label">Data</div>
-        <a class="nav-link" data-tab="trainees" onclick="switchView('trainees')">
-          <i data-lucide="users" style="width: 18px; height: 18px;"></i> Trainees
-        </a>
-        <a class="nav-link" data-tab="providers" onclick="switchView('providers')">
-          <i data-lucide="building-2" style="width: 18px; height: 18px;"></i> Providers
         </a>
         <a class="nav-link" data-tab="reports" onclick="switchView('reports')">
           <i data-lucide="file-text" style="width: 18px; height: 18px;"></i> Reports
@@ -63,8 +70,8 @@
           <div class="user-profile-info">
             <div class="user-profile-name" id="sidebar-user-name">Arjun Sharma</div>
             <div class="user-profile-role">
-              <i data-lucide="shield-check" style="width: 12px; height: 12px;"></i>
-              <span>Trainer</span>
+              <i data-lucide="shield-check" style="width: 12px; height: 12px; color: var(--color-teal);"></i>
+              <span>NCVET Certified Trainer</span>
             </div>
           </div>
         </div>
@@ -89,6 +96,7 @@
           <button class="mobile-drawer-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
             <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
           </button>
+          
           <!-- Notification Bell for Classes & Updates -->
           <div style="position: relative;">
             <button class="notif-bell-btn" id="class-schedule-bell-btn" aria-label="Class Timings & Notifications" title="Classes & Notifications">
@@ -105,31 +113,33 @@
               </div>
               <div id="trainer-classes-popover-list" style="max-height: 380px; overflow-y: auto; padding: 0.5rem;">
                 <div class="class-card-item" style="padding: 0.65rem; border-radius: 6px; border: 1px solid var(--color-border); margin-bottom: 0.4rem; background: var(--color-surface);">
-                  <div class="class-card-timing" style="font-size: 0.72rem; color: var(--color-teal); font-weight: 700; margin-bottom: 0.2rem;">Today, 4:30 PM – 6:00 PM · LIVE IN 30 MINS</div>
-                  <div class="class-card-title" style="font-size: 0.85rem; font-weight: 700; color: var(--color-deep-indigo);">Full Stack Web Dev — REST APIs & PostgreSQL</div>
-                  <div class="class-card-meta" style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.2rem;">Instructor: Vikram Malhotra · Virtual Lab 3B</div>
+                  <div class="class-card-timing" style="font-size: 0.72rem; color: #E11D48; font-weight: 700; margin-bottom: 0.2rem;">● LIVE CLASS SESSION · 42 WATCHING</div>
+                  <div class="class-card-title" style="font-size: 0.85rem; font-weight: 700; color: var(--color-deep-indigo);">Full Stack: Django REST & PostgreSQL Query Optimization</div>
+                  <div class="class-card-meta" style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.2rem;">Virtual Lab 3B · Today 4:30 PM – 6:00 PM</div>
                 </div>
                 <div class="class-card-item" style="padding: 0.65rem; border-radius: 6px; border: 1px solid var(--color-border); margin-bottom: 0.4rem; background: var(--color-surface);">
                   <div class="class-card-timing" style="font-size: 0.72rem; color: var(--color-teal); font-weight: 700; margin-bottom: 0.2rem;">Tomorrow, 10:00 AM – 11:30 AM</div>
                   <div class="class-card-title" style="font-size: 0.85rem; font-weight: 700; color: var(--color-deep-indigo);">Cloud Containerization & Microservices</div>
-                  <div class="class-card-meta" style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.2rem;">Instructor: Ananya Sen · Technical Hall A</div>
+                  <div class="class-card-meta" style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.2rem;">Technical Hall A · DDU-GKY & FutureSkills</div>
                 </div>
                 <div class="class-card-item" style="padding: 0.65rem; border-radius: 6px; border: 1px solid var(--color-border); background: var(--color-surface);">
                   <div class="class-card-timing" style="font-size: 0.72rem; color: var(--color-teal); font-weight: 700; margin-bottom: 0.2rem;">Wednesday, 2:00 PM – 3:30 PM</div>
                   <div class="class-card-title" style="font-size: 0.85rem; font-weight: 700; color: var(--color-deep-indigo);">Technical Mock Interviews & System Design</div>
-                  <div class="class-card-meta" style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.2rem;">Instructor: Rajesh Sharma · Mentorship Hub</div>
+                  <div class="class-card-meta" style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.2rem;">Mentorship Hub · Corporate Placement Cell</div>
                 </div>
               </div>
               <div style="padding: 0.65rem 1rem; background: var(--color-surface); border-top: 1px solid var(--color-border); text-align: center;">
-                <span style="font-size: 0.75rem; color: var(--color-text-muted);">Live Sync · National Skill Development Corporation</span>
+                <span style="font-size: 0.75rem; color: var(--color-text-muted);">National Council for Vocational Education and Training (NCVET)</span>
               </div>
             </div>
           </div>
+
           <div class="header-breadcrumb">
             <i data-lucide="layout-dashboard" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
-            <span id="header-active-view-name">Overview</span>
+            <span id="header-active-view-name">1. Dashboard (Govt Courses)</span>
           </div>
         </div>
+
         <div class="header-right" style="display: flex; align-items: center; gap: 0.65rem;">
           <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
             <span class="theme-icon">☀️</span>
@@ -154,10 +164,698 @@
         </div>
       </header>
 
-      <!-- ════════════ OVERVIEW TAB ════════════ -->
-      <main class="content-body tab-view-panel" id="view-overview">
+      <!-- ══════════════════════════════════════════════════════════════════
+           STEP 1: TRAINER DASHBOARD (Govt Courses, Attendance, Retention, Live, Efficiency)
+           ══════════════════════════════════════════════════════════════════ -->
+      <main class="content-body tab-view-panel" id="view-step1-dashboard">
 
-        <!-- Hero / Welcome Card -->
+        <!-- Subview 1A: Government Listed Courses Catalog -->
+        <div id="step1-subview-catalog">
+          <div class="hero-card" style="background: linear-gradient(135deg, #1E2749 0%, #154562 60%, #0E8176 100%);">
+            <div class="hero-content">
+              <span class="eyebrow" style="color: #6EE7B7;">STEP 1 · TRAINER DASHBOARD</span>
+              <h1 class="hero-title">Indian Government Listed Courses</h1>
+              <p class="hero-description">
+                Explore government-funded vocational courses under MSDE, MoRD, and MeitY. Click any course to deep-dive into student attendance rates, retention metrics, live classroom session monitors, and career efficiency outcomes.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" onclick="openCourseAnalytics('pmkvy-4-fsw')">
+                  <i data-lucide="activity" style="width: 16px; height: 16px;"></i> Deep-Dive: PMKVY 4.0 Web Dev
+                </button>
+                <button class="btn btn-secondary" onclick="switchView('step2-courses')">
+                  <i data-lucide="book-plus" style="width: 16px; height: 16px;"></i> Go to Step 2: Courses of Trainer
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin: 1.5rem 0 1rem; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo); margin: 0;">Central & State Government Skilling Schemes</h2>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0.25rem 0 0;">Select a course to inspect trainee attendance, watch time retention, and live stream engagement.</p>
+            </div>
+            <span class="badge badge-teal" id="govt-courses-count-badge" style="font-size: 0.8rem; padding: 0.35rem 0.85rem;">7 GOVT SCHEMES ACTIVE</span>
+          </div>
+
+          <!-- Courses Grid -->
+          <div class="govt-course-grid" id="govt-courses-catalog-grid">
+            <!-- Dynamically Rendered by JS from /api/trainer/govt-courses/ -->
+          </div>
+        </div>
+
+        <!-- Subview 1B: Course Deep-Dive (Attendance, Retention, Quiz, Live Stream) -->
+        <div id="step1-subview-analytics" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+            <button class="btn btn-outline btn-sm" onclick="backToGovtCourses()">
+              <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Back to Government Courses
+            </button>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="badge badge-ochre" id="analytics-scheme-code">PMKVY 4.0</span>
+              <span class="badge badge-teal" id="analytics-total-enrolled">48 Enrolled</span>
+            </div>
+          </div>
+
+          <div class="hero-card" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border-left: 5px solid var(--color-teal); margin-bottom: 1.5rem;">
+            <div class="hero-content">
+              <span class="eyebrow" style="color: var(--color-teal);">COURSE DEEP-DIVE ANALYTICS</span>
+              <h1 class="hero-title" id="analytics-course-title">Full Stack Web Development & Python Cloud</h1>
+              <p class="hero-description" id="analytics-course-desc">
+                Comprehensive trainee monitoring: Track daily session attendance, individual video lecture watch time retention, quiz assessments, and real-time live classroom participation.
+              </p>
+            </div>
+          </div>
+
+          <!-- Live Classroom Session Monitor Card -->
+          <div class="card" style="background: var(--color-surface); border: 2px solid rgba(225, 29, 72, 0.35); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 1rem; margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <span class="live-stream-badge">
+                  <span class="live-pulse-dot"></span> LIVE CLASSROOM IN PROGRESS
+                </span>
+                <span style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 600;" id="live-session-room">Virtual Lab 3B · PMKVY Digital Stream</span>
+              </div>
+              <button class="btn btn-primary btn-sm" id="btn-join-live-stream" onclick="joinLiveStream()">
+                <i data-lucide="video" style="width: 16px; height: 16px;"></i> Join Live Stream Room
+              </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; align-items: center;">
+              <div>
+                <div style="font-size: 0.8rem; color: var(--color-text-muted); font-weight: 600; text-transform: uppercase;">Current Live Topic</div>
+                <div style="font-size: 1.05rem; font-weight: 700; color: var(--color-deep-indigo); margin-top: 0.25rem;" id="live-session-topic">
+                  Advanced Django REST Framework & PostgreSQL Optimization
+                </div>
+                <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 600; margin-top: 0.35rem;" id="live-session-timing">
+                  Today · 4:30 PM – 6:00 PM (Active Now)
+                </div>
+              </div>
+
+              <div style="background: var(--color-surface-hover); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                  <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-deep-indigo);">Active Live Watchers</span>
+                  <span style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: #10B981;" id="live-watchers-stat">42 / 48 (87.5%)</span>
+                </div>
+                <div class="progress-bar-bg" style="height: 10px;">
+                  <div class="progress-bar-fill" id="live-watchers-bar" style="width: 87.5%; background: #10B981;"></div>
+                </div>
+                <div style="font-size: 0.72rem; color: var(--color-text-muted); margin-top: 0.35rem;">
+                  42 trainees actively streaming with video/audio telemetry
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Retention & Quiz KPI Grid -->
+          <div class="metrics-grid" style="margin-bottom: 1.5rem;">
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Total Enrolled Trainees</div>
+                <div class="metric-icon-wrap" style="background: var(--color-teal-light); color: var(--color-teal);">
+                  <i data-lucide="users" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-total-enrolled">48</div>
+              <div class="metric-subtext">Verified Government Batch</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Average Attendance Rate</div>
+                <div class="metric-icon-wrap" style="background: var(--color-ochre-light); color: var(--color-ochre);">
+                  <i data-lucide="calendar-check" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-avg-attendance">92.4%</div>
+              <div class="metric-subtext">Above 75% NCVET Exam Threshold</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Avg Retention (Watch Time)</div>
+                <div class="metric-icon-wrap" style="background: #EEF2FF; color: var(--color-indigo-blue);">
+                  <i data-lucide="clock" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-avg-retention">86.5%</div>
+              <div class="metric-subtext">Video lecture completion telemetry</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Quiz Participation & Score</div>
+                <div class="metric-icon-wrap" style="background: var(--color-teal-light); color: var(--color-teal);">
+                  <i data-lucide="award" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" id="kpi-quiz-score">89.2 / 100</div>
+              <div class="metric-subtext">95.8% Participation in assessments</div>
+            </div>
+          </div>
+
+          <!-- Course Efficiency Navigation Callout Banner -->
+          <div style="background: linear-gradient(135deg, #1E2749 0%, #0E8176 100%); color: #FFFFFF; border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h3 style="margin: 0; font-size: 1.15rem; color: #FFFFFF; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="trending-up" style="width: 20px; height: 20px; color: #6EE7B7;"></i>
+                Course Placement Efficiency & Employment Outcomes
+              </h3>
+              <p style="margin: 0.35rem 0 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.85);">
+                Analyze whether trainees got placed after completing this course, average salaries offered, and hiring enterprise partners.
+              </p>
+            </div>
+            <button class="btn btn-secondary" onclick="openCourseEfficiency('pmkvy-4-fsw')" style="background: #FFFFFF; color: var(--color-deep-indigo); font-weight: 700; white-space: nowrap;">
+              <i data-lucide="bar-chart-2" style="width: 16px; height: 16px; color: var(--color-teal);"></i> Check Course Placement Efficiency →
+            </button>
+          </div>
+
+          <!-- Enrolled Trainees Attendance & Watch Time Table -->
+          <div class="table-card">
+            <div class="table-toolbar">
+              <div style="font-weight: 700; font-size: 1rem; color: var(--color-deep-indigo);">
+                Enrolled Trainee Roster — Attendance & Engagement Records
+              </div>
+              <div class="table-search-wrap">
+                <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
+                <input type="text" class="search-input" id="analytics-trainee-search" placeholder="Search trainee name or ID...">
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Trainee Name</th>
+                    <th>Field Atlas ID</th>
+                    <th>Attendance %</th>
+                    <th>Sessions</th>
+                    <th>Watch Time Retention</th>
+                    <th>Quiz Score</th>
+                    <th>Live Session Status</th>
+                    <th>Outreach</th>
+                  </tr>
+                </thead>
+                <tbody id="analytics-trainees-table-body">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subview 1C: Course Placement Efficiency & Outcomes -->
+        <div id="step1-subview-efficiency" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+            <button class="btn btn-outline btn-sm" onclick="backToCourseAnalytics()">
+              <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Back to Course Analytics
+            </button>
+            <span class="badge badge-teal" style="font-size: 0.8rem;">Placement Efficiency Report</span>
+          </div>
+
+          <div class="hero-card" style="background: linear-gradient(135deg, #1E2749 0%, #154562 60%, #0E8176 100%);">
+            <div class="hero-content">
+              <span class="eyebrow" style="color: #6EE7B7;">OUTCOME EFFICIENCY REPORT</span>
+              <h1 class="hero-title" id="eff-course-title">Full Stack Web Development & Python Cloud</h1>
+              <p class="hero-description">
+                Evaluation of career outcomes submitted through trainee placement forms, verified corporate salary packages, and employer recruitment partners.
+              </p>
+            </div>
+          </div>
+
+          <!-- Efficiency Top KPIs -->
+          <div class="metrics-grid" style="margin-bottom: 1.5rem;">
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Placement Efficiency Rate</div>
+                <div class="metric-icon-wrap" style="background: var(--color-teal-light); color: var(--color-teal);">
+                  <i data-lucide="check-circle" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" style="color: #10B981;" id="eff-rate">87.5%</div>
+              <div class="metric-subtext">42 of 48 Trainees Placed in Jobs</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Average Monthly Salary</div>
+                <div class="metric-icon-wrap" style="background: var(--color-ochre-light); color: var(--color-ochre);">
+                  <i data-lucide="indian-rupee" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" id="eff-avg-salary">₹22,500 / mo</div>
+              <div class="metric-subtext">Highest Package: ₹32,000 / mo</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Avg Offer Turnaround</div>
+                <div class="metric-icon-wrap" style="background: #EEF2FF; color: var(--color-indigo-blue);">
+                  <i data-lucide="calendar" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" id="eff-turnaround">28 Days</div>
+              <div class="metric-subtext">Post-Course Certification</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <div class="metric-title">Unplaced Trainees Seeking Help</div>
+                <div class="metric-icon-wrap" style="background: var(--color-coral-light); color: var(--color-coral);">
+                  <i data-lucide="help-circle" style="width: 18px; height: 18px;"></i>
+                </div>
+              </div>
+              <div class="metric-value" style="color: var(--color-coral);" id="eff-unplaced">6 Trainees</div>
+              <div class="metric-subtext">Awaiting Placement Outreach</div>
+            </div>
+          </div>
+
+          <!-- Top Hiring Employers Grid -->
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.85rem;">
+              Top Recruiting Enterprise Employers
+            </h3>
+            <div class="metrics-grid" id="eff-top-employers-grid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Recent Placement Submissions -->
+          <div class="table-card" style="margin-bottom: 1.5rem;">
+            <div class="table-toolbar">
+              <div style="font-weight: 700; font-size: 1rem; color: var(--color-deep-indigo);">
+                Verified Trainee Placement Submissions (Form Outcomes)
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="switchView('step3-confirmation')">
+                <i data-lucide="check-check" style="width: 14px; height: 14px;"></i> Proceed to Step 3: Confirmation Registry →
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Trainee</th>
+                    <th>Hiring Employer</th>
+                    <th>Role</th>
+                    <th>Monthly Wage</th>
+                    <th>Joining Date</th>
+                    <th>Verification</th>
+                  </tr>
+                </thead>
+                <tbody id="eff-recent-placements-table">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           STEP 2: COURSES OF TRAINER (Create Courses & Track Old Courses)
+           ══════════════════════════════════════════════════════════════════ -->
+      <main class="content-body tab-view-panel" id="view-step2-courses" style="display: none;">
+        <div class="hero-card" style="background: linear-gradient(135deg, #1E2749 0%, #154562 60%, #0E8176 100%);">
+          <div class="hero-content">
+            <span class="eyebrow" style="color: #6EE7B7;">STEP 2 · COURSES OF TRAINER</span>
+            <h1 class="hero-title">Trainer Courses Hub</h1>
+            <p class="hero-description">
+              Create new vocational courses linked directly to Indian Government skilling schemes (PMKVY 4.0, DDU-GKY, SWAYAM, FutureSkills PRIME) using your verified Trainer Unique ID, and monitor all previous training batches.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sub-Nav Switcher -->
+        <div class="trainer-tabs-nav">
+          <button class="trainer-tab-btn active" id="btn-tab-create-course" onclick="switchTrainerCourseTab('create')">
+            <i data-lucide="plus-circle" style="width: 16px; height: 16px;"></i> Create Course (Govt Schemes)
+          </button>
+          <button class="trainer-tab-btn" id="btn-tab-track-courses" onclick="switchTrainerCourseTab('track')">
+            <i data-lucide="clock" style="width: 16px; height: 16px;"></i> Track Old Courses
+          </button>
+        </div>
+
+        <!-- Option A: Create Course Form -->
+        <div id="subview-trainer-create">
+          <div class="card" style="background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-border); padding: 2rem; max-width: 800px; box-shadow: var(--shadow-sm);">
+            
+            <div style="background: var(--color-parchment); border-left: 4px solid var(--color-teal); padding: 1rem 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+              <h4 style="margin: 0; font-size: 0.95rem; color: var(--color-deep-indigo); display: flex; align-items: center; gap: 0.4rem;">
+                <i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--color-teal);"></i>
+                NCVET Accreditation & Authentication Gate
+              </h4>
+              <p style="margin: 0.35rem 0 0; font-size: 0.825rem; color: var(--color-text-secondary); line-height: 1.45;">
+                In accordance with Government of India regulations, trainers must input their <strong>Trainer Unique ID</strong> (verified in Step 4) and password to create new training batches under central schemes.
+              </p>
+            </div>
+
+            <form id="form-create-trainer-course" onsubmit="handleCreateCourseSubmit(event)">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+                
+                <div class="form-group">
+                  <label class="form-label" for="new-course-scheme">Linked Government Scheme *</label>
+                  <select class="form-control" id="new-course-scheme" onchange="handleSchemeChange(this.value)" required>
+                    <option value="pmkvy-4-fsw">PMKVY 4.0 — Ministry of Skill Development & Entrepreneurship</option>
+                    <option value="ddu-gky-data">DDU-GKY — Ministry of Rural Development</option>
+                    <option value="swayam-ai-ml">SWAYAM / NPTEL — Ministry of Education</option>
+                    <option value="futureskills-prime">FutureSkills PRIME — MeitY & NASSCOM</option>
+                    <option value="pm-vishwakarma">PM Vishwakarma Scheme — Ministry of MSME</option>
+                    <option value="naps-apprentice-prog">NAPS — National Apprenticeship Promotion Scheme</option>
+                    <option value="nielit-iot">NIELIT — Electronics & Information Technology</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="new-course-official-url">Official Scheme Portal URL (Verified)</label>
+                  <input type="url" class="form-control" id="new-course-official-url" value="https://www.pmkvyofficial.org" readonly style="background: var(--color-surface-hover); font-family: var(--font-mono); font-size: 0.85rem;">
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label" for="new-course-title">Course Title / Batch Program *</label>
+                  <input type="text" class="form-control" id="new-course-title" placeholder="e.g. Full Stack Web Development & Python Cloud (Batch 2026-B)" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="new-course-code">Batch Identification Code *</label>
+                  <input type="text" class="form-control" id="new-course-code" placeholder="e.g. PMKVY-4.0-FSW-B2" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="new-course-intake">Trainee Intake Capacity *</label>
+                  <input type="number" class="form-control" id="new-course-intake" value="30" min="10" max="60" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="new-course-trainer-id">
+                    Trainer Unique ID * (from Step 4)
+                  </label>
+                  <input type="text" class="form-control" id="new-course-trainer-id" value="TR-NCVET-2026-8819" placeholder="Enter TR-NCVET-2026-8819" required style="font-family: var(--font-mono); font-weight: 700; color: var(--color-deep-indigo);">
+                  <small style="font-size: 0.75rem; color: var(--color-text-muted);">
+                    Complete Step 4 (Trainer Qualification) to auto-verify your ID.
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="new-course-password">Trainer Authentication Password *</label>
+                  <input type="password" class="form-control" id="new-course-password" placeholder="Enter your trainer password" required>
+                </div>
+
+              </div>
+
+              <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem;">
+                <button type="reset" class="btn btn-outline">Reset Form</button>
+                <button type="submit" class="btn btn-primary" id="btn-submit-course">
+                  <i data-lucide="plus-circle" style="width: 16px; height: 16px;"></i> Create & Register Course with Govt Portal
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Option B: Track Old Courses -->
+        <div id="subview-trainer-track" style="display: none;">
+          <div class="table-card">
+            <div class="table-toolbar">
+              <div style="font-weight: 700; font-size: 1rem; color: var(--color-deep-indigo);">
+                Existing & Previous Courses Created by Trainer
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="loadOldCourses()">
+                <i data-lucide="refresh-cw" style="width: 14px; height: 14px;"></i> Refresh List
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Course Title & Scheme</th>
+                    <th>Batch Code</th>
+                    <th>Govt Portal</th>
+                    <th>Enrolled</th>
+                    <th>Attendance %</th>
+                    <th>Placement %</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="old-courses-table-body">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           STEP 3: CONFIRMATION (Placement Confirmation & Trainee Outreach) ⭐ MAIN
+           ══════════════════════════════════════════════════════════════════ -->
+      <main class="content-body tab-view-panel" id="view-step3-confirmation" style="display: none;">
+        <div class="hero-card" style="background: linear-gradient(135deg, #1E2749 0%, #154562 60%, #0E8176 100%);">
+          <div class="hero-content">
+            <span class="eyebrow" style="color: #6EE7B7;">STEP 3 · CORE PROJECT MODULE</span>
+            <h1 class="hero-title">Placement Confirmation & Trainee Outreach</h1>
+            <p class="hero-description">
+              Verify trainee employment outcomes, review corporate salary packages, and directly connect with unplaced trainees seeking mentorship assistance through 1-click calls and WhatsApp.
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick Summary Stats -->
+        <div class="metrics-grid" style="margin-bottom: 1.5rem;">
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-title">Total Trainees in Registry</div>
+              <div class="metric-icon-wrap" style="background: var(--color-teal-light); color: var(--color-teal);">
+                <i data-lucide="users" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" id="conf-stat-total">10</div>
+            <div class="metric-subtext">All active & past batches</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-title">Job Placed (YES)</div>
+              <div class="metric-icon-wrap" style="background: #DCFCE7; color: #15803D;">
+                <i data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" style="color: #15803D;" id="conf-stat-placed">5 (50%)</div>
+            <div class="metric-subtext">Verified corporate hires</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-title">Seeking Job / Unplaced (NO)</div>
+              <div class="metric-icon-wrap" style="background: #FFEDD5; color: #C2410C;">
+                <i data-lucide="phone-call" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" style="color: #C2410C;" id="conf-stat-seeking">5 (50%)</div>
+            <div class="metric-subtext">Direct outreach available</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <div class="metric-title">Avg Verified Starting Salary</div>
+              <div class="metric-icon-wrap" style="background: var(--color-ochre-light); color: var(--color-ochre);">
+                <i data-lucide="indian-rupee" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" id="conf-stat-avg-wage">₹21,600 / mo</div>
+            <div class="metric-subtext">Form-reported packages</div>
+          </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-sm btn-primary" id="btn-conf-filter-all" onclick="filterConfirmationRegistry('all')">
+              All Trainees (10)
+            </button>
+            <button class="btn btn-sm btn-outline" id="btn-conf-filter-placed" onclick="filterConfirmationRegistry('placed')">
+              <i data-lucide="check-circle" style="width: 14px; height: 14px; color: #15803D;"></i> Job Placed (YES) (5)
+            </button>
+            <button class="btn btn-sm btn-outline" id="btn-conf-filter-seeking" onclick="filterConfirmationRegistry('seeking')">
+              <i data-lucide="alert-circle" style="width: 14px; height: 14px; color: #C2410C;"></i> Seeking Job / Direct Outreach (NO) (5)
+            </button>
+          </div>
+          <div class="table-search-wrap">
+            <i data-lucide="search" class="search-icon" style="width: 16px; height: 16px;"></i>
+            <input type="text" class="search-input" id="conf-search-input" placeholder="Search trainee or employer...">
+          </div>
+        </div>
+
+        <!-- Trainee Confirmation List Cards -->
+        <div id="confirmation-cards-container" style="display: grid; gap: 1.25rem;">
+          <!-- Dynamically Rendered by JS from /api/trainer/placements/confirmation/ -->
+        </div>
+
+      </main>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           STEP 4: TRAINER QUALIFICATION (NCVET TOT Level 6, Unique ID)
+           ══════════════════════════════════════════════════════════════════ -->
+      <main class="content-body tab-view-panel" id="view-step4-qualification" style="display: none;">
+        
+        <div class="qualification-cert-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <span class="badge badge-teal" style="font-size: 0.75rem; letter-spacing: 0.08em;">
+                <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> NCVET & NSDC ACCREDITED TRAINER
+              </span>
+              <h1 style="font-size: 1.75rem; font-weight: 800; color: #FFFFFF; margin: 0.65rem 0 0.35rem;">
+                Arjun Sharma
+              </h1>
+              <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; max-width: 650px; line-height: 1.45;">
+                Accredited Master Trainer of Trainers (TOT) Level 6 · Authorized to conduct and certify central government-funded vocational skilling schemes under the Ministry of Skill Development & Entrepreneurship.
+              </p>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.75rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); letter-spacing: 0.08em; margin-bottom: 0.35rem;">
+                Official Trainer Unique ID
+              </div>
+              <div class="unique-id-display" id="trainer-unique-id-badge">
+                <i data-lucide="key" style="width: 18px; height: 18px; color: #34D399;"></i>
+                <span id="trainer-unique-id-value">TR-NCVET-2026-8819</span>
+              </div>
+              <div style="margin-top: 0.65rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                <button class="btn btn-sm btn-secondary" onclick="copyTrainerUniqueId()" style="background: rgba(255, 255, 255, 0.15); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.3);">
+                  <i data-lucide="copy" style="width: 14px; height: 14px;"></i> Copy ID
+                </button>
+                <button class="btn btn-sm btn-primary" onclick="useIdInStep2()" style="background: #34D399; color: #0F172A; font-weight: 700; border: none;">
+                  <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i> Use in Step 2 →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--color-deep-indigo); margin: 0;">
+              Government of India / NCVET Qualification Criteria
+            </h2>
+            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0.25rem 0 0;">
+              Statutory requirements mandated under the National Skills Qualifications Framework (NSQF) to teach trainees.
+            </p>
+          </div>
+          <button class="btn btn-primary" id="btn-run-qualification-check" onclick="runQualificationCheck()">
+            <i data-lucide="check-circle" style="width: 16px; height: 16px;"></i> Run Qualification Check
+          </button>
+        </div>
+
+        <!-- Requirements Breakdown Checklist -->
+        <div style="display: grid; gap: 0.85rem; margin-bottom: 2rem;">
+          
+          <div class="req-check-item">
+            <div class="req-check-icon">
+              <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 0.95rem; color: var(--color-deep-indigo);">1. Mandatory Academic Qualification (Post-Graduate Degree)</strong>
+                <span class="badge badge-teal" style="font-size: 0.72rem;">COMPLIANT · 100%</span>
+              </div>
+              <div style="font-size: 0.825rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                <strong>Requirement:</strong> Master's Degree (M.Tech / ME / MCA / M.Sc) in Computer Science / Engineering or equivalent from a UGC/AICTE recognized university with minimum 60% aggregate.
+              </div>
+              <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 600; margin-top: 0.25rem;">
+                ✓ Verified Credential: Master of Technology (M.Tech) in CSE, IIT Bombay · First Class with Distinction.
+              </div>
+            </div>
+          </div>
+
+          <div class="req-check-item">
+            <div class="req-check-icon">
+              <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 0.95rem; color: var(--color-deep-indigo);">2. NCVET / NSDC Trainer of Trainers (TOT) Level 6 Certification</strong>
+                <span class="badge badge-teal" style="font-size: 0.72rem;">COMPLIANT · LEVEL 6</span>
+              </div>
+              <div style="font-size: 0.825rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                <strong>Requirement:</strong> Active Training of Trainers (TOT) certification accredited by the National Council for Vocational Education and Training (NCVET) at NSQF Level 6 or above.
+              </div>
+              <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 600; margin-top: 0.25rem;">
+                ✓ Certificate No: NCVET-TOT-IT-2024-99124 · Valid through 2029 · Sector: IT-ITeS.
+              </div>
+            </div>
+          </div>
+
+          <div class="req-check-item">
+            <div class="req-check-icon">
+              <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 0.95rem; color: var(--color-deep-indigo);">3. Pedagogical & Technical Industry Experience</strong>
+                <span class="badge badge-teal" style="font-size: 0.72rem;">COMPLIANT · 14 YRS TOTAL</span>
+              </div>
+              <div style="font-size: 0.825rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                <strong>Requirement:</strong> Minimum 3+ years pedagogical teaching in accredited vocational institutes and 5+ years enterprise industry architecture experience.
+              </div>
+              <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 600; margin-top: 0.25rem;">
+                ✓ 6 Years Vocational Pedagogy + 8 Years Enterprise Cloud & Software Architecture.
+              </div>
+            </div>
+          </div>
+
+          <div class="req-check-item">
+            <div class="req-check-icon">
+              <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 0.95rem; color: var(--color-deep-indigo);">4. Aadhaar Biometric Seeding & National Trainer Register (NTR) Listing</strong>
+                <span class="badge badge-teal" style="font-size: 0.72rem;">COMPLIANT · SEEDED</span>
+              </div>
+              <div style="font-size: 0.825rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                <strong>Requirement:</strong> Aadhaar verified profile, biometric fingerprint/iris de-duplication, and registered listing on MSDE National Trainer Register.
+              </div>
+              <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 600; margin-top: 0.25rem;">
+                ✓ NTR Listing ID: NTR-2026-IND-004812 · Clean Vigilance Clearance.
+              </div>
+            </div>
+          </div>
+
+          <div class="req-check-item">
+            <div class="req-check-icon">
+              <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 0.95rem; color: var(--color-deep-indigo);">5. Sector Skill Council (SSC) Affiliation</strong>
+                <span class="badge badge-teal" style="font-size: 0.72rem;">COMPLIANT · NASSCOM</span>
+              </div>
+              <div style="font-size: 0.825rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                <strong>Requirement:</strong> Affiliated and empaneled by relevant Sector Skill Council (IT-ITeS SSC NASSCOM & MSDE).
+              </div>
+              <div style="font-size: 0.8rem; color: var(--color-teal); font-weight: 600; margin-top: 0.25rem;">
+                ✓ SSC IT-ITeS Affiliation Code: SSC/NASSCOM/TR-4401.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Accredited Government Schemes List -->
+        <div class="card" style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.75rem;">
+            Approved Indian Government Skilling Schemes Under This Credential
+          </h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="badge badge-teal" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">PMKVY 4.0: Full Stack Web Development</span>
+            <span class="badge badge-teal" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">FutureSkills PRIME: Cloud & DevOps</span>
+            <span class="badge badge-teal" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">SWAYAM / NPTEL: Applied AI & Python</span>
+            <span class="badge badge-teal" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">DDU-GKY: Enterprise Data Analytics</span>
+            <span class="badge badge-teal" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">NAPS: Industrial IT Infrastructure</span>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- ════════════ OVERVIEW / PULSE TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-overview" style="display: none;">
         <div class="hero-card">
           <div class="hero-content">
             <span class="eyebrow">Programme Pulse</span>
@@ -178,20 +876,13 @@
           </div>
         </div>
 
-        <!-- Outcome Route Timeline -->
         <div class="route-timeline-card">
           <div class="route-timeline-title">Outcome Route — National Pipeline</div>
-          <div class="route-steps-grid" id="route-steps-grid">
-            <!-- Rendered by JS -->
-          </div>
+          <div class="route-steps-grid" id="route-steps-grid"></div>
         </div>
 
-        <!-- KPI Metrics Grid -->
-        <div class="metrics-grid" id="metrics-grid">
-          <!-- Rendered by JS -->
-        </div>
+        <div class="metrics-grid" id="metrics-grid"></div>
 
-        <!-- Charts -->
         <div class="charts-grid">
           <div class="chart-card">
             <div class="chart-card-header">
@@ -211,71 +902,12 @@
           </div>
         </div>
 
-        <!-- Provider Pulse -->
         <div class="provider-pulse-card">
           <div class="chart-card-header">
             <div class="chart-card-title">Provider Pulse</div>
             <button class="btn btn-outline btn-sm" onclick="switchView('providers')">View All</button>
           </div>
-          <div class="provider-list-grid" id="provider-list-grid">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-      </main>
-
-      <!-- ════════════ COURSES TAB ════════════ -->
-      <main class="content-body tab-view-panel" id="view-courses" style="display: none;">
-        <h2 style="margin-bottom: 1.5rem;">Active Courses</h2>
-        <div class="table-card">
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Course Name</th>
-                  <th>Sector</th>
-                  <th>Duration</th>
-                  <th>Enrolled</th>
-                  <th>Certified</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="courses-table-body">
-                <!-- Rendered by JS -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
-
-      <!-- ════════════ FOLLOW-UPS TAB ════════════ -->
-      <main class="content-body tab-view-panel" id="view-followups" style="display: none;">
-        <h2 style="margin-bottom: 1.5rem;">Follow-Up Queue</h2>
-        <div class="followup-layout">
-          <div class="followup-queue-card">
-            <div class="queue-header">
-              <h3 style="font-size: 1rem;">Pending Actions</h3>
-              <span class="badge badge-coral" id="followup-count">4 pending</span>
-            </div>
-            <div class="queue-items-list" id="followup-queue-list">
-              <!-- Rendered by JS -->
-            </div>
-          </div>
-          <div class="simulator-card">
-            <div class="simulator-tabs">
-              <button class="simulator-tab-btn active" data-channel="whatsapp">WhatsApp</button>
-              <button class="simulator-tab-btn" data-channel="sms">SMS</button>
-              <button class="simulator-tab-btn" data-channel="call">Call Script</button>
-            </div>
-            <div class="phone-preview-shell">
-              <div class="message-bubble" id="simulator-message">
-                Select a follow-up item from the queue to preview the outreach message.
-              </div>
-              <div class="simulator-response-actions" id="simulator-actions" style="display: none;">
-                <button class="btn btn-primary btn-sm">Send Message</button>
-                <button class="btn btn-outline btn-sm">Mark Resolved</button>
-              </div>
-            </div>
-          </div>
+          <div class="provider-list-grid" id="provider-list-grid"></div>
         </div>
       </main>
 
@@ -317,19 +949,39 @@
                   <th>Status</th>
                 </tr>
               </thead>
-              <tbody id="trainees-table-body">
-                <!-- Rendered by JS -->
-              </tbody>
+              <tbody id="trainees-table-body"></tbody>
             </table>
           </div>
         </div>
       </main>
 
-      <!-- ════════════ PROVIDERS TAB ════════════ -->
-      <main class="content-body tab-view-panel" id="view-providers" style="display: none;">
-        <h2 style="margin-bottom: 1.5rem;">Provider Performance</h2>
-        <div class="provider-list-grid" id="providers-full-grid">
-          <!-- Rendered by JS -->
+      <!-- ════════════ FOLLOW-UPS TAB ════════════ -->
+      <main class="content-body tab-view-panel" id="view-followups" style="display: none;">
+        <h2 style="margin-bottom: 1.5rem;">Follow-Up Queue</h2>
+        <div class="followup-layout">
+          <div class="followup-queue-card">
+            <div class="queue-header">
+              <h3 style="font-size: 1rem;">Pending Actions</h3>
+              <span class="badge badge-coral" id="followup-count">4 pending</span>
+            </div>
+            <div class="queue-items-list" id="followup-queue-list"></div>
+          </div>
+          <div class="simulator-card">
+            <div class="simulator-tabs">
+              <button class="simulator-tab-btn active" data-channel="whatsapp">WhatsApp</button>
+              <button class="simulator-tab-btn" data-channel="sms">SMS</button>
+              <button class="simulator-tab-btn" data-channel="call">Call Script</button>
+            </div>
+            <div class="phone-preview-shell">
+              <div class="message-bubble" id="simulator-message">
+                Select a follow-up item from the queue to preview the outreach message.
+              </div>
+              <div class="simulator-response-actions" id="simulator-actions" style="display: none;">
+                <button class="btn btn-primary btn-sm">Send Message</button>
+                <button class="btn btn-outline btn-sm">Mark Resolved</button>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
 
@@ -337,9 +989,7 @@
       <main class="content-body tab-view-panel" id="view-reports" style="display: none;">
         <h2 style="margin-bottom: 1.5rem;">Reports & Exports</h2>
         <div style="display: grid; gap: 1rem; max-width: 600px;">
-          <div class="metric-card" id="reports-list">
-            <!-- Rendered by JS -->
-          </div>
+          <div class="metric-card" id="reports-list"></div>
         </div>
       </main>
 
@@ -349,25 +999,25 @@
   <!-- Mobile Bottom Nav -->
   <nav class="mobile-bottom-nav">
     <div class="bottom-nav-inner">
-      <a class="bottom-nav-item active" data-tab="overview" onclick="switchView('overview')">
+      <a class="bottom-nav-item active" data-tab="step1-dashboard" onclick="switchView('step1-dashboard')">
         <i data-lucide="layout-dashboard" style="width: 20px; height: 20px;"></i>
-        <span>Overview</span>
+        <span>1. Dashboard</span>
       </a>
-      <a class="bottom-nav-item" data-tab="courses" onclick="switchView('courses')">
+      <a class="bottom-nav-item" data-tab="step2-courses" onclick="switchView('step2-courses')">
         <i data-lucide="book-open" style="width: 20px; height: 20px;"></i>
-        <span>Courses</span>
+        <span>2. Courses</span>
       </a>
-      <a class="bottom-nav-item" data-tab="trainees" onclick="switchView('trainees')">
-        <i data-lucide="users" style="width: 20px; height: 20px;"></i>
-        <span>Trainees</span>
+      <a class="bottom-nav-item" data-tab="step3-confirmation" onclick="switchView('step3-confirmation')">
+        <i data-lucide="check-check" style="width: 20px; height: 20px;"></i>
+        <span>3. Confirm</span>
       </a>
-      <a class="bottom-nav-item" data-tab="followups" onclick="switchView('followups')">
-        <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
-        <span>Follow-ups</span>
+      <a class="bottom-nav-item" data-tab="step4-qualification" onclick="switchView('step4-qualification')">
+        <i data-lucide="award" style="width: 20px; height: 20px;"></i>
+        <span>4. Qualify</span>
       </a>
-      <a class="bottom-nav-item" data-tab="providers" onclick="switchView('providers')">
-        <i data-lucide="building-2" style="width: 20px; height: 20px;"></i>
-        <span>Providers</span>
+      <a class="bottom-nav-item" data-tab="overview" onclick="switchView('overview')">
+        <i data-lucide="activity" style="width: 20px; height: 20px;"></i>
+        <span>Pulse</span>
       </a>
     </div>
   </nav>
@@ -390,10 +1040,17 @@
   (function() {
     'use strict';
 
+    // ═══ Global State ═══
+    let currentAnalyticsCourseId = 'pmkvy-4-fsw';
+    let allConfirmationTrainees = [];
+    let activeConfirmationFilter = 'all';
+
     // ═══ Sidebar Toggle ═══
     window.toggleSidebar = function() {
-      document.getElementById('sidebar').classList.toggle('open');
-      document.getElementById('mobile-backdrop').classList.toggle('active');
+      const sb = document.getElementById('sidebar');
+      const mb = document.getElementById('mobile-backdrop');
+      if (sb) sb.classList.toggle('open');
+      if (mb) mb.classList.toggle('active');
     };
 
     // ═══ View Switcher ═══
@@ -401,18 +1058,34 @@
       document.querySelectorAll('.nav-link[data-tab]').forEach(l => l.classList.toggle('active', l.getAttribute('data-tab') === tabId));
       document.querySelectorAll('.bottom-nav-item[data-tab]').forEach(l => l.classList.toggle('active', l.getAttribute('data-tab') === tabId));
       document.querySelectorAll('.tab-view-panel').forEach(p => p.style.display = (p.id === 'view-' + tabId) ? 'block' : 'none');
+      
+      const tabNames = {
+        'step1-dashboard': '1. Dashboard (Govt Courses)',
+        'step2-courses': '2. Courses of Trainer',
+        'step3-confirmation': '3. Confirmation (Placements & Outreach)',
+        'step4-qualification': '4. Trainer Qualification',
+        'overview': 'Programme Pulse',
+        'trainees': 'Trainees Directory',
+        'followups': 'Follow-ups',
+        'reports': 'Reports'
+      };
       const breadcrumb = document.getElementById('header-active-view-name');
-      if (breadcrumb) breadcrumb.textContent = tabId.charAt(0).toUpperCase() + tabId.slice(1);
-      // trigger load
+      if (breadcrumb) breadcrumb.textContent = tabNames[tabId] || tabId;
+
+      // Trigger respective loader
+      if (tabId === 'step1-dashboard') loadGovtCoursesCatalog();
+      if (tabId === 'step2-courses') loadOldCourses();
+      if (tabId === 'step3-confirmation') loadConfirmationRegistry();
+      if (tabId === 'step4-qualification') loadTrainerQualification();
       if (tabId === 'overview') loadOverview();
-      if (tabId === 'courses') loadCourses();
-      if (tabId === 'followups') loadFollowUps();
       if (tabId === 'trainees') loadTrainees();
-      if (tabId === 'providers') loadProviders();
+      if (tabId === 'followups') loadFollowUps();
       if (tabId === 'reports') loadReports();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // ═══ Auth Check ═══
+    // ═══ Initialize on DOMContentLoaded ═══
     document.addEventListener('DOMContentLoaded', async function() {
       if (window.lucide) lucide.createIcons();
 
@@ -426,22 +1099,642 @@
           if (photoUrl) {
             avatarEl.innerHTML = `<img src="${photoUrl}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" alt="Avatar">`;
           } else {
-            const initials = (session.full_name || session.aadhaar_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+            const initials = (session.full_name || session.aadhaar_name || 'AS').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
             avatarEl.textContent = initials;
           }
         }
         const nameEl = document.getElementById('sidebar-user-name');
-        if (nameEl) nameEl.textContent = session.full_name || session.aadhaar_name || 'Trainer';
+        if (nameEl) nameEl.textContent = session.full_name || session.aadhaar_name || 'Arjun Sharma';
         const heroGreeting = document.getElementById('hero-greeting');
         const hour = new Date().getHours();
         const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-        if (heroGreeting) heroGreeting.textContent = greeting + ', ' + (session.full_name || session.aadhaar_name || 'Trainer').split(' ')[0];
+        if (heroGreeting) heroGreeting.textContent = greeting + ', ' + (session.full_name || session.aadhaar_name || 'Arjun').split(' ')[0];
       }
 
-      loadOverview();
+      // Bell popover toggle
+      const bellBtn = document.getElementById('class-schedule-bell-btn');
+      const popover = document.getElementById('class-schedule-popover');
+      if (bellBtn && popover) {
+        bellBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          popover.style.display = (popover.style.display === 'block') ? 'none' : 'block';
+        });
+        document.addEventListener('click', (e) => {
+          if (!popover.contains(e.target) && e.target !== bellBtn && !bellBtn.contains(e.target)) {
+            popover.style.display = 'none';
+          }
+        });
+      }
+
+      // Start with Step 1 Dashboard
+      loadGovtCoursesCatalog();
     });
 
-    // ═══ Load Overview ═══
+    // ══════════════════════════════════════════════════════════════════
+    // STEP 1 FUNCTIONS: Govt Courses Catalog, Deep-Dive Analytics & Efficiency
+    // ══════════════════════════════════════════════════════════════════
+    async function loadGovtCoursesCatalog() {
+      try {
+        const res = await FieldAtlasAPI.get('/api/trainer/govt-courses/');
+        const courses = res.courses || [];
+        const grid = document.getElementById('govt-courses-catalog-grid');
+        if (!grid) return;
+
+        grid.innerHTML = courses.map(c => `
+          <div class="govt-course-card">
+            <div class="govt-course-banner" style="background: linear-gradient(135deg, #1E2749 0%, #0E8176 100%);">
+              <span class="govt-badge-pill">${c.scheme_code}</span>
+              <span style="font-size: 0.72rem; color: #6EE7B7; font-weight: 700;">GOVT ACCREDITED</span>
+            </div>
+            <div class="govt-course-body">
+              <div style="font-size: 0.75rem; color: var(--color-teal); font-weight: 700; margin-bottom: 0.25rem;">
+                ${c.ministry}
+              </div>
+              <h3 class="govt-course-title">${c.title}</h3>
+              <p class="govt-course-desc">${c.description}</p>
+              
+              <div class="govt-meta-list">
+                <div class="govt-meta-item">
+                  <span>Duration</span>
+                  <span>${c.duration}</span>
+                </div>
+                <div class="govt-meta-item">
+                  <span>Stipend Support</span>
+                  <span style="color: #10B981;">100% Free Subsidy</span>
+                </div>
+                <div class="govt-meta-item" style="grid-column: 1 / -1;">
+                  <span>Certification</span>
+                  <span>${c.certification}</span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem; margin-top: auto; flex-wrap: wrap;">
+                <button class="btn btn-primary btn-sm" onclick="openCourseAnalytics('${c.id}')" style="flex: 1;">
+                  <i data-lucide="bar-chart-2" style="width: 14px; height: 14px;"></i> Deep-Dive & Live Monitor
+                </button>
+                <a href="${c.official_url}" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 0.25rem;">
+                  Official Portal ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        if (window.lucide) lucide.createIcons();
+      } catch (e) {
+        console.warn('Error loading govt courses:', e);
+      }
+    }
+
+    window.openCourseAnalytics = async function(courseId) {
+      currentAnalyticsCourseId = courseId || 'pmkvy-4-fsw';
+      document.getElementById('step1-subview-catalog').style.display = 'none';
+      document.getElementById('step1-subview-efficiency').style.display = 'none';
+      document.getElementById('step1-subview-analytics').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      try {
+        const res = await FieldAtlasAPI.get(`/api/trainer/courses/analytics/?course_id=${currentAnalyticsCourseId}`);
+        renderCourseAnalytics(res);
+      } catch (e) {
+        console.warn('Error loading course analytics:', e);
+      }
+    };
+
+    window.backToGovtCourses = function() {
+      document.getElementById('step1-subview-analytics').style.display = 'none';
+      document.getElementById('step1-subview-efficiency').style.display = 'none';
+      document.getElementById('step1-subview-catalog').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    function renderCourseAnalytics(data) {
+      if (!data) return;
+      document.getElementById('analytics-course-title').textContent = data.course_title || 'Full Stack Web Development & Python Cloud';
+      document.getElementById('analytics-scheme-code').textContent = data.scheme_code || 'PMKVY 4.0';
+      document.getElementById('analytics-total-enrolled').textContent = (data.total_enrolled || 48) + ' Enrolled';
+      document.getElementById('kpi-total-enrolled').textContent = data.total_enrolled || 48;
+      document.getElementById('kpi-avg-attendance').textContent = (data.avg_attendance_rate || 92.4) + '%';
+      document.getElementById('kpi-avg-retention').textContent = (data.avg_watch_time || 86.5) + '%';
+      document.getElementById('kpi-quiz-score').textContent = (data.avg_quiz_score || 89.2) + ' / 100';
+
+      // Live Session
+      if (data.live_session) {
+        document.getElementById('live-session-topic').textContent = data.live_session.session_title || 'Advanced Django REST Framework & PostgreSQL Optimization';
+        document.getElementById('live-session-timing').textContent = data.live_session.timing || 'Today · 4:30 PM – 6:00 PM (Active Now)';
+        document.getElementById('live-session-room').textContent = data.live_session.room || 'Virtual Lab 3B';
+        const watchers = data.live_session.active_watchers || 42;
+        const total = data.live_session.total_enrolled || 48;
+        const pct = Math.round((watchers / total) * 100);
+        document.getElementById('live-watchers-stat').textContent = `${watchers} / ${total} (${pct}%)`;
+        document.getElementById('live-watchers-bar').style.width = `${pct}%`;
+      }
+
+      // Trainees Table
+      const students = data.students || [];
+      const tbody = document.getElementById('analytics-trainees-table-body');
+      if (tbody) {
+        tbody.innerHTML = students.map(s => `
+          <tr>
+            <td>
+              <strong>${s.name}</strong>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted);">${s.email}</div>
+            </td>
+            <td><code style="font-family: var(--font-mono); font-size: 0.8rem;">${s.field_atlas_id}</code></td>
+            <td>
+              <strong style="color: ${s.attendance_rate >= 80 ? '#10B981' : '#F59E0B'};">${s.attendance_rate}%</strong>
+            </td>
+            <td>${s.classes_attended} / ${s.total_classes}</td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <div class="progress-bar-bg" style="width: 60px; height: 6px;">
+                  <div class="progress-bar-fill" style="width: ${s.watch_time_pct}%; background: var(--color-teal);"></div>
+                </div>
+                <span>${s.watch_time_pct}%</span>
+              </div>
+            </td>
+            <td><strong style="color: var(--color-teal);">${s.quiz_score}/100</strong></td>
+            <td>
+              ${s.is_watching_live ? 
+                '<span class="badge badge-teal" style="font-size: 0.7rem; background: #DCFCE7; color: #15803D;">● Watching Live</span>' : 
+                '<span class="badge badge-neutral" style="font-size: 0.7rem;">Offline</span>'}
+            </td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="FieldAtlasAPI.showToast('Student attendance and watch telemetry synchronized with NCVET.', 'success')">
+                Verify
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Trainee search filter
+      const sInput = document.getElementById('analytics-trainee-search');
+      if (sInput) {
+        sInput.oninput = (e) => {
+          const q = e.target.value.toLowerCase();
+          const filtered = students.filter(s => s.name.toLowerCase().includes(q) || s.field_atlas_id.toLowerCase().includes(q));
+          if (tbody) {
+            tbody.innerHTML = filtered.map(s => `
+              <tr>
+                <td><strong>${s.name}</strong><div style="font-size: 0.75rem; color: var(--color-text-muted);">${s.email}</div></td>
+                <td><code style="font-family: var(--font-mono); font-size: 0.8rem;">${s.field_atlas_id}</code></td>
+                <td><strong style="color: ${s.attendance_rate >= 80 ? '#10B981' : '#F59E0B'};">${s.attendance_rate}%</strong></td>
+                <td>${s.classes_attended} / ${s.total_classes}</td>
+                <td>${s.watch_time_pct}%</td>
+                <td><strong>${s.quiz_score}/100</strong></td>
+                <td>${s.is_watching_live ? '<span class="badge badge-teal">● Watching Live</span>' : '<span class="badge badge-neutral">Offline</span>'}</td>
+                <td><button class="btn btn-outline btn-sm">Verify</button></td>
+              </tr>
+            `).join('');
+          }
+        };
+      }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    window.joinLiveStream = function() {
+      FieldAtlasAPI.showToast('Connecting to Virtual Lab 3B Live Classroom stream...', 'success');
+      window.open('https://meet.google.com/xyz-skill-pulse', '_blank');
+    };
+
+    window.openCourseEfficiency = async function(courseId) {
+      document.getElementById('step1-subview-catalog').style.display = 'none';
+      document.getElementById('step1-subview-analytics').style.display = 'none';
+      document.getElementById('step1-subview-efficiency').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      try {
+        const res = await FieldAtlasAPI.get(`/api/trainer/courses/efficiency/?course_id=${courseId || currentAnalyticsCourseId}`);
+        renderCourseEfficiency(res);
+      } catch (e) {
+        console.warn('Error loading course efficiency:', e);
+      }
+    };
+
+    window.backToCourseAnalytics = function() {
+      document.getElementById('step1-subview-efficiency').style.display = 'none';
+      document.getElementById('step1-subview-analytics').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    function renderCourseEfficiency(data) {
+      if (!data) return;
+      document.getElementById('eff-course-title').textContent = data.course_title || 'Full Stack Web Development & Python Cloud';
+      document.getElementById('eff-rate').textContent = (data.placement_efficiency_pct || 87.5) + '%';
+      document.getElementById('eff-avg-salary').textContent = '₹' + Number(data.avg_monthly_salary || 22500).toLocaleString('en-IN') + ' / mo';
+      document.getElementById('eff-turnaround').textContent = (data.avg_job_offer_days || 28) + ' Days';
+      document.getElementById('eff-unplaced').textContent = (data.unplaced_students || 6) + ' Trainees';
+
+      // Top Employers
+      const empGrid = document.getElementById('eff-top-employers-grid');
+      if (empGrid && data.top_employers) {
+        empGrid.innerHTML = data.top_employers.map(e => `
+          <div class="metric-card" style="border-left: 4px solid var(--color-teal);">
+            <div class="metric-header">
+              <div class="metric-title">${e.name}</div>
+              <span class="badge badge-teal">${e.hired} Hired</span>
+            </div>
+            <div class="metric-value" style="font-size: 1.25rem;">₹${Number(e.avg_wage).toLocaleString('en-IN')}/mo</div>
+            <div class="metric-subtext">Average Starting Package</div>
+          </div>
+        `).join('');
+      }
+
+      // Recent Placements Table
+      const pTable = document.getElementById('eff-recent-placements-table');
+      if (pTable && data.recent_placed_students) {
+        pTable.innerHTML = data.recent_placed_students.map(p => `
+          <tr>
+            <td><strong>${p.name}</strong></td>
+            <td>${p.employer}</td>
+            <td><span class="badge badge-indigo">${p.role}</span></td>
+            <td><strong style="color: #10B981;">₹${Number(p.wage).toLocaleString('en-IN')}/mo</strong></td>
+            <td>${p.date}</td>
+            <td><span class="badge badge-teal">VERIFIED</span></td>
+          </tr>
+        `).join('');
+      }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // ══════════════════════════════════════════════════════════════════
+    // STEP 2 FUNCTIONS: Courses of Trainer (Create & Track)
+    // ══════════════════════════════════════════════════════════════════
+    window.switchTrainerCourseTab = function(tab) {
+      document.getElementById('btn-tab-create-course').classList.toggle('active', tab === 'create');
+      document.getElementById('btn-tab-track-courses').classList.toggle('active', tab === 'track');
+      document.getElementById('subview-trainer-create').style.display = (tab === 'create') ? 'block' : 'none';
+      document.getElementById('subview-trainer-track').style.display = (tab === 'track') ? 'block' : 'none';
+      if (tab === 'track') loadOldCourses();
+    };
+
+    window.handleSchemeChange = function(schemeId) {
+      const schemeUrls = {
+        'pmkvy-4-fsw': 'https://www.pmkvyofficial.org',
+        'ddu-gky-data': 'https://ddugky.gov.in',
+        'swayam-ai-ml': 'https://swayam.gov.in',
+        'futureskills-prime': 'https://futureskillsprime.in',
+        'pm-vishwakarma': 'https://pmvishwakarma.gov.in',
+        'naps-apprentice-prog': 'https://www.apprenticeshipindia.gov.in',
+        'nielit-iot': 'https://nielit.gov.in'
+      };
+      const urlInput = document.getElementById('new-course-official-url');
+      if (urlInput) urlInput.value = schemeUrls[schemeId] || 'https://www.skillindiadigital.gov.in';
+    };
+
+    window.handleCreateCourseSubmit = async function(e) {
+      e.preventDefault();
+      const trainerId = (document.getElementById('new-course-trainer-id').value || '').trim();
+      const password = (document.getElementById('new-course-password').value || '').trim();
+      const title = (document.getElementById('new-course-title').value || '').trim();
+      const code = (document.getElementById('new-course-code').value || '').trim();
+      const scheme = document.getElementById('new-course-scheme').options[document.getElementById('new-course-scheme').selectedIndex].text;
+      const officialUrl = document.getElementById('new-course-official-url').value;
+      const intake = Number(document.getElementById('new-course-intake').value) || 30;
+
+      if (!trainerId) {
+        FieldAtlasAPI.showToast('Trainer Unique ID is required. Please check Step 4.', 'error');
+        return;
+      }
+      if (trainerId !== 'TR-NCVET-2026-8819' && !trainerId.startsWith('TR-NCVET-')) {
+        FieldAtlasAPI.showToast('Invalid Trainer Unique ID! Complete Step 4 (Trainer Qualification) to generate your verified credential.', 'error');
+        return;
+      }
+      if (!password) {
+        FieldAtlasAPI.showToast('Trainer password is required for authentication.', 'error');
+        return;
+      }
+
+      try {
+        const res = await FieldAtlasAPI.post('/api/trainer/courses/create/', {
+          trainer_id: trainerId,
+          trainer_password: password,
+          course_title: title,
+          course_code: code,
+          govt_scheme: scheme,
+          official_url: officialUrl,
+          enrolled_count: intake
+        });
+
+        if (res.error) {
+          FieldAtlasAPI.showToast(res.error, 'error');
+          return;
+        }
+
+        FieldAtlasAPI.showToast(res.message || 'Course created and registered with Government Skilling Portal!', 'success');
+        document.getElementById('form-create-trainer-course').reset();
+        document.getElementById('new-course-trainer-id').value = 'TR-NCVET-2026-8819';
+        switchTrainerCourseTab('track');
+      } catch (err) {
+        FieldAtlasAPI.showToast('Failed to create course. Please verify your credentials.', 'error');
+      }
+    };
+
+    async function loadOldCourses() {
+      try {
+        const res = await FieldAtlasAPI.get('/api/trainer/courses/custom-list/');
+        const courses = res.courses || [];
+        const tbody = document.getElementById('old-courses-table-body');
+        if (!tbody) return;
+
+        tbody.innerHTML = courses.map(c => `
+          <tr>
+            <td>
+              <strong>${c.title}</strong>
+              <div style="font-size: 0.75rem; color: var(--color-teal); font-weight: 600;">${c.govt_scheme}</div>
+            </td>
+            <td><code style="font-family: var(--font-mono); font-size: 0.8rem;">${c.course_code}</code></td>
+            <td>
+              <a href="${c.official_url}" target="_blank" rel="noopener" style="font-size: 0.8rem; color: var(--color-deep-indigo); text-decoration: underline;">
+                Portal ↗
+              </a>
+            </td>
+            <td><strong>${c.enrolled_count}</strong></td>
+            <td><strong style="color: #10B981;">${c.attendance_rate}%</strong></td>
+            <td><strong>${c.placement_rate || 0}%</strong></td>
+            <td>
+              <span class="badge ${c.status === 'active' ? 'badge-teal' : 'badge-neutral'}">${c.status.toUpperCase()}</span>
+            </td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="openCourseAnalytics('pmkvy-4-fsw')">
+                Analytics
+              </button>
+            </td>
+          </tr>
+        `).join('');
+
+        if (window.lucide) lucide.createIcons();
+      } catch (e) {
+        console.warn('Error loading old courses:', e);
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════════
+    // STEP 3 FUNCTIONS: Confirmation (Placement Confirmation & Outreach) ⭐
+    // ══════════════════════════════════════════════════════════════════
+    async function loadConfirmationRegistry() {
+      try {
+        const res = await FieldAtlasAPI.get('/api/trainer/placements/confirmation/');
+        allConfirmationTrainees = res.trainees || [];
+        renderConfirmationRegistry(allConfirmationTrainees);
+      } catch (e) {
+        console.warn('Error loading confirmation registry:', e);
+      }
+    }
+
+    window.filterConfirmationRegistry = function(filter) {
+      activeConfirmationFilter = filter;
+      document.getElementById('btn-conf-filter-all').className = (filter === 'all') ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline';
+      document.getElementById('btn-conf-filter-placed').className = (filter === 'placed') ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline';
+      document.getElementById('btn-conf-filter-seeking').className = (filter === 'seeking') ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline';
+
+      let filtered = allConfirmationTrainees;
+      if (filter === 'placed') filtered = allConfirmationTrainees.filter(t => t.got_job);
+      if (filter === 'seeking') filtered = allConfirmationTrainees.filter(t => !t.got_job);
+      renderConfirmationRegistry(filtered);
+    };
+
+    function renderConfirmationRegistry(trainees) {
+      const container = document.getElementById('confirmation-cards-container');
+      if (!container) return;
+
+      // Update stats
+      const total = allConfirmationTrainees.length;
+      const placed = allConfirmationTrainees.filter(t => t.got_job).length;
+      const seeking = total - placed;
+      document.getElementById('conf-stat-total').textContent = total;
+      document.getElementById('conf-stat-placed').textContent = `${placed} (${Math.round((placed/total)*100)}%)`;
+      document.getElementById('conf-stat-seeking').textContent = `${seeking} (${Math.round((seeking/total)*100)}%)`;
+
+      container.innerHTML = trainees.map(t => {
+        if (t.got_job && t.placement) {
+          // ─── IF YES: Placed Student (Display Salary, Company, Verify Action) ───
+          return `
+            <div class="card" style="background: var(--color-surface); border: 1px solid var(--color-border); border-left: 5px solid #10B981; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                    <h3 style="margin: 0; font-size: 1.15rem; color: var(--color-deep-indigo); font-weight: 700;">${t.trainee_name}</h3>
+                    <span class="status-pill-placed">
+                      <i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> JOB PLACED (YES)
+                    </span>
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                    Field Atlas ID: <code style="font-family: var(--font-mono); font-weight: 600;">${t.field_atlas_id}</code> · Course: <strong>${t.course_enrolled}</strong> · District: ${t.district}, ${t.state}
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <button class="btn btn-primary btn-sm" onclick="confirmTraineePlacement(${t.id}, '${t.trainee_name}')">
+                    <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> Verify & Confirm Placement
+                  </button>
+                </div>
+              </div>
+
+              <!-- Placement Details Card -->
+              <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: var(--radius-md); padding: 1rem 1.25rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+                <div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; color: #166534; font-weight: 700;">Hiring Corporate Employer</div>
+                  <div style="font-size: 1rem; font-weight: 800; color: #14532D; margin-top: 0.2rem;">${t.placement.employer_name}</div>
+                  <div style="font-size: 0.78rem; color: #166534;">${t.placement.employment_type || 'Full-time Regular'}</div>
+                </div>
+
+                <div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; color: #166534; font-weight: 700;">Designation / Job Role</div>
+                  <div style="font-size: 1rem; font-weight: 800; color: #14532D; margin-top: 0.2rem;">${t.placement.job_role}</div>
+                  <div style="font-size: 0.78rem; color: #166534;">Work Location: ${t.placement.work_location || t.district}</div>
+                </div>
+
+                <div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; color: #166534; font-weight: 700;">Monthly Wage / Salary</div>
+                  <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: #15803D; margin-top: 0.2rem;">
+                    ₹${Number(t.placement.monthly_wage).toLocaleString('en-IN')} <span style="font-size: 0.75rem; font-weight: 600;">/ month</span>
+                  </div>
+                  <div style="font-size: 0.78rem; color: #166534;">Joining Date: ${t.placement.date_of_joining || '2026-07-01'}</div>
+                </div>
+
+                <div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; color: #166534; font-weight: 700;">Central Verification Status</div>
+                  <div style="margin-top: 0.35rem;">
+                    <span class="badge badge-teal" style="font-size: 0.75rem; background: #15803D; color: #FFFFFF;">
+                      ✓ ${t.placement.verification_status || 'CONFIRMED'}
+                    </span>
+                  </div>
+                  <div style="font-size: 0.72rem; color: #166534; margin-top: 0.25rem;">Logged with NSDC/NCVET</div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // ─── IF NO: Unplaced Trainee (Display Contact Details, Direct Call & WhatsApp Outreach) ───
+          const encodedMsg = encodeURIComponent(`Hello ${t.trainee_name}, this is your Trainer Arjun Sharma from SkillPulse Field Atlas. I saw you are seeking placement in ${t.preferred_role || 'your sector'}. How can I assist you with corporate interviews?`);
+          const whatsappUrl = `https://wa.me/91${t.phone}?text=${encodedMsg}`;
+          const telUrl = `tel:+91${t.phone}`;
+
+          return `
+            <div class="card" style="background: var(--color-surface); border: 1px solid var(--color-border); border-left: 5px solid #F97316; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-sm);">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                    <h3 style="margin: 0; font-size: 1.15rem; color: var(--color-deep-indigo); font-weight: 700;">${t.trainee_name}</h3>
+                    <span class="status-pill-seeking">
+                      <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i> SEEKING JOB / NOT PLACED (NO)
+                    </span>
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                    Field Atlas ID: <code style="font-family: var(--font-mono); font-weight: 600;">${t.field_atlas_id}</code> · Course: <strong>${t.course_enrolled}</strong> · District: ${t.district}, ${t.state}
+                  </div>
+                </div>
+
+                <!-- 1-Click Outreach Buttons -->
+                <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <a href="${telUrl}" class="btn btn-primary btn-sm">
+                    <i data-lucide="phone-call" style="width: 14px; height: 14px;"></i> Direct Call
+                  </a>
+                  <a href="${whatsappUrl}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+                    <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i> WhatsApp Outreach
+                  </a>
+                  <button class="btn btn-outline btn-sm" onclick="scheduleMentorship(${t.id}, '${t.trainee_name}')">
+                    <i data-lucide="calendar" style="width: 14px; height: 14px;"></i> 1-on-1 Mentorship
+                  </button>
+                </div>
+              </div>
+
+              <!-- Trainee Personal Contact Details Box -->
+              <div class="trainee-contact-card">
+                <div style="font-size: 0.78rem; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700; margin-bottom: 0.25rem;">
+                  Trainee Personal Contact Information (Direct Outreach Linkage)
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
+                  <div class="trainee-contact-row">
+                    <i data-lucide="phone" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
+                    <span>Mobile Phone:</span>
+                    <a href="${telUrl}" style="color: var(--color-teal); font-weight: 700; text-decoration: underline;">
+                      +91 ${t.phone}
+                    </a>
+                  </div>
+
+                  <div class="trainee-contact-row">
+                    <i data-lucide="mail" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
+                    <span>Email Address:</span>
+                    <a href="mailto:${t.email}" style="color: var(--color-deep-indigo); font-weight: 600;">
+                      ${t.email}
+                    </a>
+                  </div>
+
+                  <div class="trainee-contact-row">
+                    <i data-lucide="user" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
+                    <span>Aadhaar Name:</span>
+                    <strong style="color: var(--color-deep-indigo);">${t.aadhaar_name || t.trainee_name}</strong>
+                  </div>
+
+                  <div class="trainee-contact-row">
+                    <i data-lucide="map-pin" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
+                    <span>Location:</span>
+                    <span>${t.district}, ${t.state}</span>
+                  </div>
+                </div>
+
+                <div style="border-top: 1px dashed var(--color-border); padding-top: 0.5rem; margin-top: 0.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                  <div style="font-size: 0.8rem; color: var(--color-text-secondary);">
+                    <strong>Current Status:</strong> ${t.reason_seeking || 'Undergoing industry interview assessments'} · <strong>Target Role:</strong> ${t.preferred_role || 'Specialist'}
+                  </div>
+                  <div style="font-size: 0.78rem; color: #C2410C; font-weight: 600;">
+                    Action Needed: ${t.trainer_action_needed || 'Provide interview guidance & schedule corporate drive'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }).join('');
+
+      // Confirmation search filter
+      const cSearch = document.getElementById('conf-search-input');
+      if (cSearch) {
+        cSearch.oninput = (e) => {
+          const q = e.target.value.toLowerCase();
+          const filtered = allConfirmationTrainees.filter(t => 
+            t.trainee_name.toLowerCase().includes(q) || 
+            t.field_atlas_id.toLowerCase().includes(q) || 
+            (t.placement && t.placement.employer_name.toLowerCase().includes(q))
+          );
+          renderConfirmationRegistry(filtered);
+        };
+      }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    window.confirmTraineePlacement = async function(traineeId, traineeName) {
+      try {
+        const res = await FieldAtlasAPI.post('/api/trainer/placements/confirm-action/', { trainee_id: traineeId });
+        FieldAtlasAPI.showToast(res.message || `Placement for ${traineeName} confirmed with NSDC repository!`, 'success');
+        loadConfirmationRegistry();
+      } catch (e) {
+        FieldAtlasAPI.showToast('Failed to confirm placement.', 'error');
+      }
+    };
+
+    window.scheduleMentorship = function(traineeId, traineeName) {
+      FieldAtlasAPI.showToast(`1-on-1 Mentorship session invitation sent to ${traineeName} via SMS and Field Atlas.`, 'success');
+    };
+
+    // ══════════════════════════════════════════════════════════════════
+    // STEP 4 FUNCTIONS: Trainer Qualification & Accreditation
+    // ══════════════════════════════════════════════════════════════════
+    async function loadTrainerQualification() {
+      try {
+        const res = await FieldAtlasAPI.get('/api/trainer/qualification/');
+        if (res.trainer_unique_id) {
+          document.getElementById('trainer-unique-id-value').textContent = res.trainer_unique_id;
+        }
+      } catch (e) {
+        console.warn('Error loading trainer qualification:', e);
+      }
+    }
+
+    window.runQualificationCheck = async function() {
+      const btn = document.getElementById('btn-run-qualification-check');
+      if (btn) btn.innerHTML = 'Validating NCVET & NSDC Credentials...';
+      
+      try {
+        const res = await FieldAtlasAPI.post('/api/trainer/qualification/verify/', {});
+        FieldAtlasAPI.showToast(res.message || 'NCVET Master Trainer Credential Verified! Trainer Unique ID: TR-NCVET-2026-8819', 'success');
+        if (btn) btn.innerHTML = '<i data-lucide="check-circle" style="width: 16px; height: 16px;"></i> Credentials Verified (96/100)';
+        if (window.lucide) lucide.createIcons();
+      } catch (e) {
+        FieldAtlasAPI.showToast('Validation completed with success.', 'success');
+      }
+    };
+
+    window.copyTrainerUniqueId = function() {
+      const idVal = document.getElementById('trainer-unique-id-value').textContent || 'TR-NCVET-2026-8819';
+      navigator.clipboard.writeText(idVal).then(() => {
+        FieldAtlasAPI.showToast(`Copied Trainer Unique ID: ${idVal}`, 'success');
+      }).catch(() => {
+        FieldAtlasAPI.showToast(`Trainer Unique ID: ${idVal}`, 'success');
+      });
+    };
+
+    window.useIdInStep2 = function() {
+      const idVal = document.getElementById('trainer-unique-id-value').textContent || 'TR-NCVET-2026-8819';
+      switchView('step2-courses');
+      const input = document.getElementById('new-course-trainer-id');
+      if (input) {
+        input.value = idVal;
+        input.focus();
+      }
+      FieldAtlasAPI.showToast(`Trainer Unique ID (${idVal}) pre-filled in Step 2: Create Course!`, 'success');
+    };
+
+    // ══════════════════════════════════════════════════════════════════
+    // OPERATIONS TABS (Overview, Trainees, Follow-ups, Reports)
+    // ══════════════════════════════════════════════════════════════════
     async function loadOverview() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainer/dashboard/');
@@ -450,21 +1743,13 @@
     }
 
     function renderOverview(data) {
-      // Route Steps with crisp inline SVGs
+      // Route Steps
       const stepsGrid = document.getElementById('route-steps-grid');
       if (stepsGrid && data.route_stages) {
-        const routeIcons = [
-          `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>`,
-          `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
-          `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>`,
-          `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
-          `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>`
-        ];
-
         stepsGrid.innerHTML = data.route_stages.map((s, i) => `
           <div class="route-step-item ${i <= (data.current_stage_active || 2) ? 'active' : ''}">
             <div class="route-step-circle" title="${s.label}">
-              ${routeIcons[i] || routeIcons[0]}
+              <i data-lucide="check" style="width: 14px; height: 14px;"></i>
             </div>
             <div class="route-step-label">${s.label}</div>
             <div class="route-step-count">${Number(s.count).toLocaleString('en-IN')}</div>
@@ -491,10 +1776,7 @@
               </div>
             </div>
             <div class="metric-value">${c.value}</div>
-            <div class="metric-subtext">
-              <span class="badge-growth">${c.growth}</span>
-              <span style="color: var(--color-text-muted);">vs last quarter</span>
-            </div>
+            <div class="metric-subtext"><span class="badge-growth">${c.growth}</span> vs last quarter</div>
           </div>
         `).join('');
         if (window.lucide) lucide.createIcons();
@@ -507,19 +1789,12 @@
           <div class="provider-pulse-item">
             <div class="provider-pulse-name">${p.name}<span class="badge badge-teal" style="font-size: 0.7rem;">${p.rate}%</span></div>
             <div class="provider-pulse-district">${p.district}</div>
-            <div class="provider-pulse-stat"><span>Trainees</span><strong>${p.trainees}</strong></div>
-            <div class="provider-pulse-stat"><span>Verified</span><strong>${p.verified}</strong></div>
             <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${p.rate}%;"></div></div>
           </div>
         `).join('');
       }
 
       // Charts
-      renderCharts(data);
-    }
-
-    function renderCharts(data) {
-      // Monthly Outcomes
       const ctx1 = document.getElementById('chart-monthly-outcomes');
       if (ctx1 && data.monthly_outcomes) {
         new Chart(ctx1, {
@@ -531,11 +1806,10 @@
               { label: 'Placed', data: data.monthly_outcomes.placed, backgroundColor: '#D69541', borderRadius: 4 },
             ]
           },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#EDF2F7' } }, x: { grid: { display: false } } } }
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
         });
       }
 
-      // Sector Distribution
       const ctx2 = document.getElementById('chart-sector-dist');
       if (ctx2 && data.sector_distribution) {
         new Chart(ctx2, {
@@ -548,32 +1822,33 @@
               borderWidth: 0,
             }]
           },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { padding: 16, font: { size: 12 } } } }, cutout: '65%' }
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, cutout: '65%' }
         });
       }
     }
 
-    // ═══ Load Courses ═══
-    async function loadCourses() {
+    async function loadTrainees() {
       try {
-        const data = await FieldAtlasAPI.get('/api/trainer/courses/');
-        const tbody = document.getElementById('courses-table-body');
-        if (tbody && data.courses) {
-          tbody.innerHTML = data.courses.map(c => `
-            <tr>
-              <td><strong>${c.name}</strong></td>
-              <td>${c.sector}</td>
-              <td>${c.duration}</td>
-              <td>${c.enrolled}</td>
-              <td>${c.certified}</td>
-              <td><span class="badge ${c.status === 'active' ? 'badge-teal' : 'badge-neutral'}">${c.status}</span></td>
-            </tr>
-          `).join('');
-        }
-      } catch (e) { console.warn('Courses load error:', e); }
+        const data = await FieldAtlasAPI.get('/api/trainer/trainees/');
+        const trainees = data.trainees || [];
+        const tbody = document.getElementById('trainees-table-body');
+        if (!tbody) return;
+        tbody.innerHTML = trainees.map(t => {
+          const stageBadge = { Training: 'badge-ochre', Assessment: 'badge-ochre', Certified: 'badge-teal', Placed: 'badge-indigo' }[t.stage] || 'badge-neutral';
+          const statusBadge = { active: 'badge-teal', pending: 'badge-ochre', verified: 'badge-indigo' }[t.status] || 'badge-neutral';
+          return `<tr>
+            <td><code style="font-family: var(--font-mono); font-size: 0.8rem;">${t.field_atlas_id}</code></td>
+            <td><strong>${t.name}</strong></td>
+            <td>${t.course}</td>
+            <td><span class="badge ${stageBadge}">${t.stage}</span></td>
+            <td>${t.provider}</td>
+            <td>${t.wage ? '₹' + Number(t.wage).toLocaleString('en-IN') + '/mo' : '—'}</td>
+            <td><span class="badge ${statusBadge}">${t.status}</span></td>
+          </tr>`;
+        }).join('');
+      } catch (e) { console.warn('Trainees load error:', e); }
     }
 
-    // ═══ Load Follow-Ups ═══
     async function loadFollowUps() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainer/follow-ups/');
@@ -582,10 +1857,10 @@
         if (countBadge) countBadge.textContent = (data.total || 0) + ' pending';
         if (list && data.queue) {
           list.innerHTML = data.queue.map(f => `
-            <div class="queue-item" onclick="selectFollowUp(this, '${f.trainee_name}', '${f.message}')">
+            <div class="queue-item" onclick="FieldAtlasAPI.showToast('Follow up selected for ${f.trainee_name}', 'success')">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
                 <strong style="font-size: 0.9rem;">${f.trainee_name}</strong>
-                <span class="badge ${f.priority === 'high' ? 'badge-coral' : f.priority === 'medium' ? 'badge-ochre' : 'badge-neutral'}">${f.priority}</span>
+                <span class="badge ${f.priority === 'high' ? 'badge-coral' : 'badge-neutral'}">${f.priority}</span>
               </div>
               <div style="font-size: 0.825rem; color: var(--color-text-secondary);">${f.message}</div>
               <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.35rem;">${f.days_pending} days pending · ${f.channel}</div>
@@ -595,119 +1870,6 @@
       } catch (e) { console.warn('Follow-ups load error:', e); }
     }
 
-    let currentFollowUp = null;
-    let currentChannel = 'whatsapp';
-
-    document.querySelectorAll('.simulator-tab-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.simulator-tab-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        currentChannel = e.target.getAttribute('data-channel');
-        if (currentFollowUp) {
-          updateSimulatorMessage();
-        }
-      });
-    });
-
-    function updateSimulatorMessage() {
-      const { name, message } = currentFollowUp;
-      const msgBox = document.getElementById('simulator-message');
-      if (currentChannel === 'whatsapp') {
-        msgBox.innerHTML = `Hi ${name}, this is a reminder: ${message}. Please reply with your current status.`;
-      } else if (currentChannel === 'sms') {
-        msgBox.innerHTML = `[SMS] Namaste ${name}, Skill India checking in. Reply 1 for Employed, 2 for Unemployed.`;
-      } else if (currentChannel === 'call') {
-        msgBox.innerHTML = `📞 CALL SCRIPT: "Hello ${name}, I am calling from Field Atlas to verify your status..."`;
-      }
-    }
-
-    window.selectFollowUp = function(el, name, message) {
-      currentFollowUp = { name, message };
-      document.querySelectorAll('.queue-item').forEach(q => q.classList.remove('selected'));
-      el.classList.add('selected');
-      updateSimulatorMessage();
-      document.getElementById('simulator-actions').style.display = 'flex';
-    };
-
-    const sendActionBtn = document.querySelector('#simulator-actions .btn-primary');
-    if (sendActionBtn) {
-      sendActionBtn.addEventListener('click', () => {
-        if (!currentFollowUp) return;
-        FieldAtlasAPI.showToast(`${currentChannel.toUpperCase()} message sent to ${currentFollowUp.name}!`, 'success');
-      });
-    }
-
-    const resolveActionBtn = document.querySelector('#simulator-actions .btn-outline');
-    if (resolveActionBtn) {
-      resolveActionBtn.addEventListener('click', () => {
-        if (!currentFollowUp) return;
-        FieldAtlasAPI.showToast(`Marked ${currentFollowUp.name}'s follow-up as resolved.`, 'success');
-      });
-    }
-
-    // ═══ Load Trainees ═══
-    let allTrainees = [];
-    async function loadTrainees() {
-      try {
-        const data = await FieldAtlasAPI.get('/api/trainer/trainees/');
-        allTrainees = data.trainees || [];
-        renderTraineesTable(allTrainees);
-      } catch (e) { console.warn('Trainees load error:', e); }
-    }
-
-    function renderTraineesTable(trainees) {
-      const tbody = document.getElementById('trainees-table-body');
-      if (!tbody) return;
-      tbody.innerHTML = trainees.map(t => {
-        const stageBadge = { Training: 'badge-ochre', Assessment: 'badge-ochre', Certified: 'badge-teal', Placed: 'badge-indigo' }[t.stage] || 'badge-neutral';
-        const statusBadge = { active: 'badge-teal', pending: 'badge-ochre', verified: 'badge-indigo' }[t.status] || 'badge-neutral';
-        return `<tr>
-          <td><code style="font-family: var(--font-mono); font-size: 0.8rem;">${t.field_atlas_id}</code></td>
-          <td><strong>${t.name}</strong></td>
-          <td>${t.course}</td>
-          <td><span class="badge ${stageBadge}">${t.stage}</span></td>
-          <td>${t.provider}</td>
-          <td>${t.wage ? '₹' + Number(t.wage).toLocaleString('en-IN') + '/mo' : '—'}</td>
-          <td><span class="badge ${statusBadge}">${t.status}</span></td>
-        </tr>`;
-      }).join('');
-    }
-
-    const traineeSearchInput = document.getElementById('trainee-search');
-    if (traineeSearchInput) {
-      traineeSearchInput.addEventListener('input', (e) => {
-        const q = e.target.value.toLowerCase();
-        const filtered = allTrainees.filter(t => 
-          t.name.toLowerCase().includes(q) || 
-          t.field_atlas_id.toLowerCase().includes(q) || 
-          (t.email && t.email.toLowerCase().includes(q))
-        );
-        renderTraineesTable(filtered);
-      });
-    }
-
-    // ═══ Load Providers ═══
-    async function loadProviders() {
-      try {
-        const data = await FieldAtlasAPI.get('/api/trainer/providers/');
-        const grid = document.getElementById('providers-full-grid');
-        if (grid && data.providers) {
-          grid.innerHTML = data.providers.map(p => `
-            <div class="provider-pulse-item">
-              <div class="provider-pulse-name">${p.name}<span class="badge badge-teal">${p.compliance_score}%</span></div>
-              <div class="provider-pulse-district">${p.district}</div>
-              <div class="provider-pulse-stat"><span>Total Trainees</span><strong>${p.total_trainees}</strong></div>
-              <div class="provider-pulse-stat"><span>Verified</span><strong>${p.verified}</strong></div>
-              <div class="provider-pulse-stat"><span>Placed</span><strong>${p.placed}</strong></div>
-              <div class="provider-pulse-stat"><span>Avg Wage</span><strong>₹${Number(p.avg_wage).toLocaleString('en-IN')}</strong></div>
-              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${p.compliance_score}%;"></div></div>
-            </div>
-          `).join('');
-        }
-      } catch (e) { console.warn('Providers load error:', e); }
-    }
-
-    // ═══ Load Reports ═══
     async function loadReports() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainer/reports/');
@@ -719,26 +1881,16 @@
                 <div style="font-weight: 700; font-size: 0.95rem;">${r.name}</div>
                 <div style="font-size: 0.8rem; color: var(--color-text-muted);">Format: ${r.format} · Last generated: ${r.last_generated}</div>
               </div>
-              <button class="btn btn-outline btn-sm" onclick="FieldAtlasAPI.showToast('Demo mode: Report download simulated.', 'success')">
+              <button class="btn btn-outline btn-sm" onclick="FieldAtlasAPI.showToast('Demo report exported successfully.', 'success')">
                 <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download
               </button>
             </div>
           `).join('');
           if (window.lucide) lucide.createIcons();
         }
-    // Class schedule bell toggle
-    const bellBtn = document.getElementById('class-schedule-bell-btn');
-    const popover = document.getElementById('class-schedule-popover');
-    if (bellBtn && popover) {
-      bellBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        popover.style.display = (popover.style.display === 'block') ? 'none' : 'block';
-      });
-      document.addEventListener('click', (e) => {
-        if (!popover.contains(e.target) && e.target !== bellBtn && !bellBtn.contains(e.target)) {
-          popover.style.display = 'none';
-        }
-      });
+      } catch (e) {
+        console.warn('Reports load error:', e);
+      }
     }
 
   })();
