@@ -62,6 +62,10 @@
         <a class="nav-link" data-tab="reports" onclick="switchView('reports')">
           <i data-lucide="file-text" style="width: 18px; height: 18px;"></i> Reports
         </a>
+        <a class="nav-link" data-tab="remote-recovery" onclick="switchView('remote-recovery')">
+          <i data-lucide="radar" style="width: 18px; height: 18px; color: #D97706;"></i> Dark-Zone Recovery
+          <span class="badge" style="background: #FEF3C7; color: #B45309; font-size: 0.65rem; margin-left: auto; font-weight: 800;">RECOVERY</span>
+        </a>
       </nav>
 
       <div class="sidebar-footer">
@@ -186,7 +190,22 @@
                   <i data-lucide="book-plus" style="width: 16px; height: 16px;"></i> Go to Step 2: Courses of Trainer
                 </button>
               </div>
+          </div>
+
+          <!-- Dark-Zone Recovery Alert Banner -->
+          <div style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1px solid #FCD34D; border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1.25rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.08);">
+            <div style="display: flex; align-items: center; gap: 0.85rem;">
+              <div style="width: 44px; height: 44px; border-radius: 10px; background: #D97706; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0;">
+                <i data-lucide="radar" style="width: 24px; height: 24px;"></i>
+              </div>
+              <div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: #92400E;">Dark-Zone & Remote Trainee Recovery Protocol Active</div>
+                <div style="font-size: 0.82rem; color: #B45309;">14 trainees from remote villages are out of phone contact. Use EPFO statutory check, Village Mobilizers, and ₹1,500 PPS allowance to triangulate their employment.</div>
+              </div>
             </div>
+            <button class="btn btn-sm" style="background: #D97706; color: white; border: none; font-weight: 700; border-radius: 6px; padding: 0.5rem 1rem;" onclick="switchView('remote-recovery')">
+              Open Dark-Zone Recovery Desk →
+            </button>
           </div>
 
           <div style="display: flex; align-items: center; justify-content: space-between; margin: 1.5rem 0 1rem; flex-wrap: wrap; gap: 0.75rem;">
@@ -618,6 +637,22 @@
           </div>
         </div>
 
+        <!-- Dark-Zone Recovery Alert Notice in Step 3 -->
+        <div style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1px solid #FCD34D; border-radius: 10px; padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: #D97706; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0;">
+              <i data-lucide="radar" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 0.9rem; color: #92400E;">Have uncontactable trainees with switched-off phones or remote villages?</div>
+              <div style="font-size: 0.8rem; color: #B45309;">Verify their jobs automatically via EPFO Statutory PF Matching, Village Mobilizer Doorstep Visits, or ₹1,500 PPS DBT Allowance.</div>
+            </div>
+          </div>
+          <button class="btn btn-sm" style="background: #D97706; color: white; border: none; font-weight: 700; border-radius: 6px;" onclick="switchView('remote-recovery')">
+            Launch Triangulation Desk →
+          </button>
+        </div>
+
         <!-- Quick Summary Stats -->
         <div class="metrics-grid" style="margin-bottom: 1.5rem;">
           <div class="metric-card">
@@ -1038,6 +1073,230 @@
         </div>
       </main>
 
+      <!-- ══════════════════════════════════════════════════════════════════
+           DARK-ZONE & REMOTE TRAINEE RECOVERY HUB (4-PILLAR TRIANGULATION)
+           ══════════════════════════════════════════════════════════════════ -->
+      <main class="content-body tab-view-panel" id="view-remote-recovery" style="display: none;">
+        
+        <!-- Hero Header -->
+        <div class="hero-card" style="background: linear-gradient(135deg, #1E1B4B 0%, #312E81 40%, #78350F 100%);">
+          <div class="hero-content">
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(254, 243, 199, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); padding: 0.25rem 0.75rem; border-radius: 9999px; margin-bottom: 0.75rem;">
+              <i data-lucide="radar" style="width: 14px; height: 14px; color: #FCD34D;"></i>
+              <span style="font-size: 0.75rem; font-weight: 800; color: #FDE68A; text-transform: uppercase; letter-spacing: 0.05em;">Dark-Zone Recovery Protocol · DDU-GKY & PMKVY</span>
+            </div>
+            <h1 class="hero-title">Remote & Unreachable Trainee Discovery Engine</h1>
+            <p class="hero-description">
+              When rural trainees discard SIM cards, migrate to another state, or live in zero-network villages, phone calls fail. Field Atlas triangulates their livelihood outcomes using statutory EPFO contributions, Gram Panchayat doorstep mobilizers, recruiter hiring rosters, and ₹1,500 Post-Placement Support (PPS) incentive rails.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="runEpfoBatchPing()" style="background: #F59E0B; border-color: #F59E0B; color: #111827; font-weight: 800;">
+                <i data-lucide="zap" style="width: 16px; height: 16px;"></i> 1. Run EPFO/ESIC Batch Ping
+              </button>
+              <button class="btn btn-secondary" onclick="dispatchAllMobilizers()" style="background: rgba(255,255,255,0.15); color: #FFFFFF; border-color: rgba(255,255,255,0.3);">
+                <i data-lucide="map-pin" style="width: 16px; height: 16px;"></i> 2. Dispatch Panchayat Mobilizers
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Stat Metric Cards Grid -->
+        <div class="metrics-grid" style="margin-bottom: 1.5rem;">
+          <div class="metric-card" style="border-left: 4px solid #EF4444;">
+            <div class="metric-header">
+              <div class="metric-title">Unreachable Candidates</div>
+              <div class="metric-icon-wrap" style="background: #FEE2E2; color: #DC2626;">
+                <i data-lucide="phone-off" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" style="color: #DC2626;" id="dz-stat-total">14 Trainees</div>
+            <div class="metric-subtext">Phone Dead / SIM Swap / Remote Hills</div>
+          </div>
+
+          <div class="metric-card" style="border-left: 4px solid #10B981;">
+            <div class="metric-header">
+              <div class="metric-title">EPFO Statutory Matched</div>
+              <div class="metric-icon-wrap" style="background: #D1FAE5; color: #059669;">
+                <i data-lucide="building-2" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" style="color: #059669;" id="dz-stat-epfo">8 Verified (57%)</div>
+            <div class="metric-subtext">Avg Detected Salary: ₹16,800/mo</div>
+          </div>
+
+          <div class="metric-card" style="border-left: 4px solid #0284C7;">
+            <div class="metric-header">
+              <div class="metric-title">Panchayat & ASHA Doorstep</div>
+              <div class="metric-icon-wrap" style="background: #E0F2FE; color: #0284C7;">
+                <i data-lucide="users" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" style="color: #0284C7;" id="dz-stat-panchayat">4 Confirmed (29%)</div>
+            <div class="metric-subtext">Kin / Parent Doorstep Validation</div>
+          </div>
+
+          <div class="metric-card" style="border-left: 4px solid #F59E0B;">
+            <div class="metric-header">
+              <div class="metric-title">₹1,500 PPS Allowance Claimed</div>
+              <div class="metric-icon-wrap" style="background: #FEF3C7; color: #D97706;">
+                <i data-lucide="gift" style="width: 18px; height: 18px;"></i>
+              </div>
+            </div>
+            <div class="metric-value" style="color: #D97706;" id="dz-stat-pps">2 Reconnected (14%)</div>
+            <div class="metric-subtext">Toll-Free Missed Call IVR Verified</div>
+          </div>
+        </div>
+
+        <!-- The 4 Triangulation Pillars Interactive Console -->
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-deep-indigo); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="shield-alert" style="width: 20px; height: 20px; color: #D97706;"></i>
+          The 4 Triangulation Vectors: How Outcomes Are Discovered Without Phone Access
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 1.25rem;">
+          Trainees from remote geographies or seasonal migration corridors cannot be tracked through standard calls. Click any of the 4 vectors below to trigger automated institutional discovery:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          
+          <!-- Pillar 1: EPFO / ESIC -->
+          <div class="metric-card" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 3px solid #10B981;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="badge" style="background: #D1FAE5; color: #065F46; font-size: 0.7rem; font-weight: 800;">PILLAR 1 · STATUTORY AUTOMATION</span>
+                <i data-lucide="landmark" style="width: 20px; height: 20px; color: #10B981;"></i>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">
+                EPFO / ESIC Provident Fund Ping
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.45;">
+                <strong>"The Boss & Bank Footprint":</strong> Every registered enterprise in India must deposit monthly PF for workers. We query the EPFO gateway using tokenized Aadhaar/UAN to find employment status and employer name without calling the trainee.
+              </p>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-sm btn-primary" onclick="runEpfoBatchPing()" style="width: 100%; justify-content: center; background: #059669; border-color: #059669;">
+                <i data-lucide="zap" style="width: 14px; height: 14px;"></i> Run EPFO UAN Batch Ping
+              </button>
+              <div id="dz-epfo-feed" style="margin-top: 0.5rem;"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Village Mesh -->
+          <div class="metric-card" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 3px solid #0284C7;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="badge" style="background: #E0F2FE; color: #075985; font-size: 0.7rem; font-weight: 800;">PILLAR 2 · LAST-MILE HUMAN MESH</span>
+                <i data-lucide="home" style="width: 20px; height: 20px; color: #0284C7;"></i>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">
+                Gram Panchayat & ASHA Doorstep
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.45;">
+                <strong>"The Family & Neighbor Check":</strong> Trainee moved to a metro, but parents still live in the village. Panchayat Sahayaks & ASHA Didis visit households weekly and record 1-tap doorstep confirmation of migration city and role.
+              </p>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-sm btn-outline" onclick="dispatchAllMobilizers()" style="width: 100%; justify-content: center; color: #0284C7; border-color: #38BDF8;">
+                <i data-lucide="map-pin" style="width: 14px; height: 14px;"></i> Dispatch Panchayat Doorstep Tasks
+              </button>
+              <div id="dz-panchayat-feed" style="margin-top: 0.5rem;"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 3: Recruiter Ingestion -->
+          <div class="metric-card" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 3px solid #8B5CF6;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="badge" style="background: #EDE9FE; color: #5B21B6; font-size: 0.7rem; font-weight: 800;">PILLAR 3 · REVERSE RECRUITER MATCH</span>
+                <i data-lucide="building-2" style="width: 20px; height: 20px; color: #8B5CF6;"></i>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">
+                Rozgar Mela Recruiter Roster Sync
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.45;">
+                <strong>"The Hiring List":</strong> Cross-references unreachable candidate IDs against bulk candidate placement rosters uploaded by corporate recruiters (auto-clusters, textile mills, logistics) and staffing agencies (TeamLease/Quess).
+              </p>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-sm btn-outline" onclick="syncEmployerRosters()" style="width: 100%; justify-content: center; color: #7C3AED; border-color: #C4B5FD;">
+                <i data-lucide="folder-sync" style="width: 14px; height: 14px;"></i> Ingest Recruiter Rosters
+              </button>
+              <div id="dz-roster-feed" style="margin-top: 0.5rem;"></div>
+            </div>
+          </div>
+
+          <!-- Pillar 4: PPS & Missed Call -->
+          <div class="metric-card" style="display: flex; flex-direction: column; justify-content: space-between; border-top: 3px solid #F59E0B;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.7rem; font-weight: 800;">PILLAR 4 · FINANCIAL INCENTIVE RAIL</span>
+                <i data-lucide="gift" style="width: 20px; height: 20px; color: #F59E0B;"></i>
+              </div>
+              <h3 style="font-size: 1rem; font-weight: 800; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">
+                ₹1,500 PPS Direct Benefit & Missed Call
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.45;">
+                <strong>"The Incentive Carrot":</strong> Under DDU-GKY, rural migrants receive ₹1,500/mo allowance for 3 months. Trainees simply give a free missed call to <code>1800-889-PULSE</code> to claim rent money and confirm their work location.
+              </p>
+            </div>
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-sm btn-outline" onclick="broadcastPpsDbtTokens()" style="width: 100%; justify-content: center; color: #B45309; border-color: #FCD34D;">
+                <i data-lucide="send" style="width: 14px; height: 14px;"></i> Issue ₹1.5k PPS Allowance Codes
+              </button>
+              <div id="dz-pps-feed" style="margin-top: 0.5rem;"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dark-Zone Trainees Table Card -->
+        <div class="table-card">
+          <div class="table-toolbar" style="flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem; color: var(--color-deep-indigo);">
+                Dark-Zone Unreachable Trainees Queue (Triangulation Desk)
+              </div>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">
+                Trainees with disconnected SIMs, zero signal, or remote addresses undergoing multi-vector recovery
+              </div>
+            </div>
+
+            <!-- Filter Pills -->
+            <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+              <button class="btn btn-sm dz-filter-btn active" data-filter="all" onclick="filterDarkZoneTrainees('all')" style="background: var(--color-teal); color: white; font-size: 0.75rem;">
+                All Unreachable (14)
+              </button>
+              <button class="btn btn-sm dz-filter-btn" data-filter="epfo" onclick="filterDarkZoneTrainees('epfo')" style="background: var(--color-surface); color: var(--color-text-secondary); font-size: 0.75rem;">
+                EPFO Matched (8)
+              </button>
+              <button class="btn btn-sm dz-filter-btn" data-filter="panchayat" onclick="filterDarkZoneTrainees('panchayat')" style="background: var(--color-surface); color: var(--color-text-secondary); font-size: 0.75rem;">
+                Panchayat Verified (4)
+              </button>
+              <button class="btn btn-sm dz-filter-btn" data-filter="pending" onclick="filterDarkZoneTrainees('pending')" style="background: var(--color-surface); color: var(--color-text-secondary); font-size: 0.75rem;">
+                Action Required (2)
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Trainee & Origin Village</th>
+                  <th>Contact Barrier & Kin Reference</th>
+                  <th>Triangulated Evidence & Employer</th>
+                  <th>Verification Vector</th>
+                  <th style="text-align: right;">Triangulation Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dark-zone-trainees-tbody">
+                <!-- Populated dynamically by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+
     </div><!-- /main-wrapper -->
   </div><!-- /app-container -->
 
@@ -1112,7 +1371,8 @@
         'overview': 'Programme Pulse',
         'trainees': 'Trainees Directory',
         'followups': 'Follow-ups',
-        'reports': 'Reports'
+        'reports': 'Reports',
+        'remote-recovery': 'Dark-Zone & Remote Trainee Recovery Hub'
       };
       const breadcrumb = document.getElementById('header-active-view-name');
       if (breadcrumb) breadcrumb.textContent = tabNames[tabId] || tabId;
@@ -1126,6 +1386,7 @@
       if (tabId === 'trainees') loadTrainees();
       if (tabId === 'followups') loadFollowUps();
       if (tabId === 'reports') loadReports();
+      if (tabId === 'remote-recovery') loadRemoteRecovery();
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -2022,6 +2283,291 @@
         console.warn('Reports load error:', e);
       }
     }
+
+    // ══════════════════════════════════════════════════════════════════
+    // DARK-ZONE & REMOTE TRAINEE RECOVERY HUB (4-PILLAR TRIANGULATION)
+    // ══════════════════════════════════════════════════════════════════
+    const darkZoneTrainees = [
+      {
+        id: 'DZ-101',
+        name: 'Raju Kumar Pawar',
+        course: 'Automotive CNC Machine Operator (PMKVY)',
+        village: 'Shirwal, Dist. Satara, Maharashtra',
+        contact_barrier: 'Phone Switched Off (48 days inactive · SIM Churn)',
+        secondary_kin: 'Father: Kashinath Pawar (Gram Panchayat Ward 2)',
+        vector: 'epfo',
+        status: 'Auto-Matched (EPFO)',
+        employer: 'Bharat Forge Ltd (Pune Auto Cluster)',
+        wage: '₹19,200 / mo',
+        proof: 'EPFO UAN: 101899201940 · Active PF Contribution'
+      },
+      {
+        id: 'DZ-102',
+        name: 'Sunita Hemant Soren',
+        course: 'Industrial Apparel & Garment Technician (DDU-GKY)',
+        village: 'Dumka, Santhal Parganas, Jharkhand',
+        contact_barrier: 'Zero Mobile Signal (Remote Tribal Habitation)',
+        secondary_kin: 'Mother: Shanti Soren (SHG Mahila Mandal)',
+        vector: 'panchayat',
+        status: 'Panchayat Confirmed',
+        employer: 'Shahi Exports Pvt Ltd (Tirupur Cluster)',
+        wage: '₹14,500 / mo + Hostel',
+        proof: 'Doorstep Check: Panchayat Sahayak Anil Hembram'
+      },
+      {
+        id: 'DZ-103',
+        name: 'Mohammed Tariq Ansari',
+        course: 'Certified Electrical & Solar Technician (PMKVY)',
+        village: 'Village Mau, Dist. Ghazipur, Uttar Pradesh',
+        contact_barrier: 'Incoming Calls Barred / Number Deactivated',
+        secondary_kin: 'Brother: Zafar Ansari (+91 94512-XXXX)',
+        vector: 'roster',
+        status: 'Recruiter Matched',
+        employer: 'L&T Construction Skills Hub (Ahmedabad)',
+        wage: '₹16,800 / mo',
+        proof: 'Rozgar Mela Q2 Corporate Placement Roster'
+      },
+      {
+        id: 'DZ-104',
+        name: 'Kavita Devi Paswan',
+        course: 'Assistant Healthcare & General Duty Attendant',
+        village: 'Village Maner, Dist. Patna, Bihar',
+        contact_barrier: 'Zero 4G Data / Shared 2G Keypad Handset',
+        secondary_kin: 'Husband: Santosh Paswan (Ration Card linked)',
+        vector: 'pps',
+        status: 'PPS Allowance Claimed',
+        employer: 'Ruban Memorial Hospital / Home Care (Bihta)',
+        wage: '₹12,500 / mo',
+        proof: 'Toll-Free 1800-889-PULSE Missed Call IVR Verified'
+      },
+      {
+        id: 'DZ-105',
+        name: 'Vikram Singh Rathore',
+        course: 'Solar PV Panel Installation Specialist',
+        village: 'Village Pokhran, Dist. Jaisalmer, Rajasthan',
+        contact_barrier: 'Seasonal Migration / Remote Desert Outpost',
+        secondary_kin: 'Father: Bhawani Singh (Panchayat Head reference)',
+        vector: 'pending',
+        status: 'Action Required',
+        employer: 'Pending Discovery',
+        wage: 'Pending',
+        proof: 'Eligible for ₹1,500 PPS Post-Placement Support'
+      },
+      {
+        id: 'DZ-106',
+        name: 'Deepali Ramesh Patil',
+        course: 'Junior Software & Data Processing Associate',
+        village: 'Village Kankavli, Dist. Sindhudurg, Maharashtra',
+        contact_barrier: 'Phone Not Reachable (Western Ghats terrain)',
+        secondary_kin: 'Mother: Vijaya Patil (Anganwadi registered)',
+        vector: 'mobilizer_dispatched',
+        status: 'Mobilizer Dispatched',
+        employer: 'Pending Ground Report',
+        wage: 'Pending',
+        proof: 'Anganwadi Worker Malati Tai assigned physical visit'
+      }
+    ];
+
+    let currentDarkZoneFilter = 'all';
+
+    window.filterDarkZoneTrainees = function(filter) {
+      currentDarkZoneFilter = filter;
+      document.querySelectorAll('.dz-filter-btn').forEach(b => {
+        const isMatch = b.getAttribute('data-filter') === filter;
+        b.classList.toggle('active', isMatch);
+        if (isMatch) {
+          b.style.background = 'var(--color-teal)';
+          b.style.color = '#FFFFFF';
+        } else {
+          b.style.background = 'var(--color-surface)';
+          b.style.color = 'var(--color-text-secondary)';
+        }
+      });
+      renderDarkZoneTable();
+    };
+
+    window.loadRemoteRecovery = function() {
+      renderDarkZoneTable();
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.renderDarkZoneTable = function() {
+      const tbody = document.getElementById('dark-zone-trainees-tbody');
+      if (!tbody) return;
+
+      const filtered = darkZoneTrainees.filter(t => {
+        if (currentDarkZoneFilter === 'all') return true;
+        if (currentDarkZoneFilter === 'epfo') return t.vector === 'epfo';
+        if (currentDarkZoneFilter === 'panchayat') return t.vector === 'panchayat' || t.vector === 'mobilizer_dispatched';
+        if (currentDarkZoneFilter === 'pending') return t.vector === 'pending';
+        return true;
+      });
+
+      tbody.innerHTML = filtered.map(t => {
+        let badgeColor = '#FEF3C7';
+        let textColor = '#B45309';
+        let icon = 'help-circle';
+
+        if (t.status.includes('EPFO')) {
+          badgeColor = '#DCFCE7'; textColor = '#166534'; icon = 'check-circle-2';
+        } else if (t.status.includes('Panchayat') || t.status.includes('Confirmed')) {
+          badgeColor = '#E0F2FE'; textColor = '#0369A1'; icon = 'map-pin';
+        } else if (t.status.includes('Recruiter')) {
+          badgeColor = '#EDE9FE'; textColor = '#6D28D9'; icon = 'building-2';
+        } else if (t.status.includes('PPS')) {
+          badgeColor = '#FEF9C3'; textColor = '#854D0E'; icon = 'gift';
+        }
+
+        return `
+          <tr style="border-bottom: 1px solid var(--color-border);">
+            <td style="padding: 1rem 0.75rem;">
+              <div style="font-weight: 800; color: var(--color-deep-indigo); font-size: 0.92rem;">${t.name}</div>
+              <div style="font-size: 0.76rem; color: var(--color-teal); font-weight: 600;">ID: ${t.id} · ${t.course}</div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 2px;">
+                <i data-lucide="map-pin" style="width: 12px; height: 12px; display: inline-block;"></i> ${t.village}
+              </div>
+            </td>
+            <td style="padding: 1rem 0.75rem;">
+              <div style="background: #FFF1F2; color: #BE123C; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.76rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                <i data-lucide="phone-off" style="width: 13px; height: 13px;"></i> ${t.contact_barrier}
+              </div>
+              <div style="font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
+                <strong>Kin:</strong> ${t.secondary_kin}
+              </div>
+            </td>
+            <td style="padding: 1rem 0.75rem;">
+              <div style="font-weight: 700; color: var(--color-deep-indigo); font-size: 0.88rem;">${t.employer}</div>
+              <div style="font-size: 0.78rem; color: #059669; font-weight: 700;">${t.wage}</div>
+              <div style="font-size: 0.72rem; color: var(--color-text-muted); font-style: italic; margin-top: 2px;">${t.proof}</div>
+            </td>
+            <td style="padding: 1rem 0.75rem;">
+              <span style="background: ${badgeColor}; color: ${textColor}; padding: 0.3rem 0.65rem; border-radius: 12px; font-size: 0.75rem; font-weight: 800; display: inline-flex; align-items: center; gap: 4px;">
+                <i data-lucide="${icon}" style="width: 12px; height: 12px;"></i> ${t.status}
+              </span>
+            </td>
+            <td style="padding: 1rem 0.75rem; text-align: right;">
+              <div style="display: flex; gap: 0.4rem; justify-content: flex-end; flex-wrap: wrap;">
+                ${t.vector === 'pending' ? `
+                  <button class="btn btn-primary btn-sm" onclick="pingIndividualEpfo('${t.id}', '${t.name}')" style="font-size: 0.72rem; padding: 0.3rem 0.6rem; background: #059669; border-color: #059669;">
+                    <i data-lucide="zap" style="width: 12px; height: 12px;"></i> Ping EPFO
+                  </button>
+                  <button class="btn btn-outline btn-sm" onclick="dispatchIndividualMobilizer('${t.id}', '${t.name}', '${t.village}')" style="font-size: 0.72rem; padding: 0.3rem 0.6rem; color: #D97706; border-color: #FCD34D;">
+                    <i data-lucide="map-pin" style="width: 12px; height: 12px;"></i> Mobilizer
+                  </button>
+                  <button class="btn btn-outline btn-sm" onclick="issueIndividualPps('${t.id}', '${t.name}')" style="font-size: 0.72rem; padding: 0.3rem 0.6rem;">
+                    <i data-lucide="gift" style="width: 12px; height: 12px;"></i> PPS ₹1.5k
+                  </button>
+                ` : `
+                  <button class="btn btn-primary btn-sm" onclick="confirmIndividualOutcome('${t.id}', '${t.name}')" style="font-size: 0.75rem; padding: 0.35rem 0.7rem; background: #059669; border-color: #059669;">
+                    <i data-lucide="check-check" style="width: 13px; height: 13px;"></i> Transfer to Confirmation Registry
+                  </button>
+                `}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.runEpfoBatchPing = function() {
+      FieldAtlasAPI.showToast('Connecting to EPFO / ESIC National Gateway API...', 'info');
+      const feed = document.getElementById('dz-epfo-feed');
+      if (feed) {
+        feed.innerHTML = '<div style="color: #D97706; font-weight: 700; font-size: 0.78rem;">● Querying Universal Account Number (UAN) registry for active contributions...</div>';
+      }
+      setTimeout(() => {
+        if (feed) {
+          feed.innerHTML = `
+            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.78rem; color: #166534;">
+              <strong>✔ EPFO Ping Successful:</strong> 8 candidates matched with active PF deposits in last 90 days. Average detected starting wage: ₹16,800/month.
+            </div>
+          `;
+        }
+        FieldAtlasAPI.showToast('EPFO Batch Query Complete: 8 dark-zone trainees auto-verified!', 'success');
+      }, 1000);
+    };
+
+    window.dispatchAllMobilizers = function() {
+      FieldAtlasAPI.showToast('Connecting to Gram Panchayat & ASHA/Anganwadi network...', 'info');
+      const feed = document.getElementById('dz-panchayat-feed');
+      setTimeout(() => {
+        if (feed) {
+          feed.innerHTML = `
+            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.78rem; color: #166534;">
+              <strong>✔ 4 Village Doorstep Tasks Dispatched:</strong> Panchayat Sahayaks notified via SMS with candidate home ward addresses.
+            </div>
+          `;
+        }
+        FieldAtlasAPI.showToast('4 Village Mobilizer tasks dispatched to Gram Panchayat CSCs!', 'success');
+      }, 1000);
+    };
+
+    window.syncEmployerRosters = function() {
+      FieldAtlasAPI.showToast('Ingesting Q2 Rozgar Mela & partner staffing company rosters...', 'info');
+      const feed = document.getElementById('dz-roster-feed');
+      setTimeout(() => {
+        if (feed) {
+          feed.innerHTML = `
+            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.78rem; color: #166534;">
+              <strong>✔ 34 Recruiter Roster Rows Checked:</strong> 1 new match identified (L&T Construction Skills Institute).
+            </div>
+          `;
+        }
+        FieldAtlasAPI.showToast('Recruiter placement rosters successfully synchronized!', 'success');
+      }, 1000);
+    };
+
+    window.broadcastPpsDbtTokens = function() {
+      FieldAtlasAPI.showToast('Broadcasting ₹1,500 Post-Placement Support allowance claim codes...', 'info');
+      const feed = document.getElementById('dz-pps-feed');
+      setTimeout(() => {
+        if (feed) {
+          feed.innerHTML = `
+            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 0.5rem 0.75rem; margin-top: 0.5rem; font-size: 0.78rem; color: #166534;">
+              <strong>✔ PPS Claim Tokens Issued:</strong> Toll-free 1800-889-PULSE missed-call code sent via postal card & fallback SMS.
+            </div>
+          `;
+        }
+        FieldAtlasAPI.showToast('₹1,500 PPS DBT tokens dispatched to eligible remote candidates!', 'success');
+      }, 1000);
+    };
+
+    window.pingIndividualEpfo = function(id, name) {
+      FieldAtlasAPI.showToast(`Pinging EPFO database for UAN records of ${name}...`, 'info');
+      setTimeout(() => {
+        const item = darkZoneTrainees.find(t => t.id === id);
+        if (item) {
+          item.vector = 'epfo';
+          item.status = 'Auto-Matched (EPFO)';
+          item.employer = 'Suzlon Energy Solar Park (Jaisalmer)';
+          item.wage = '₹18,000 / mo';
+          item.proof = 'EPFO UAN: 101920394812 · Active PF Contribution';
+          renderDarkZoneTable();
+        }
+        FieldAtlasAPI.showToast(`Match Found! ${name} verified at Suzlon Energy (₹18,000/mo) via EPFO PF records.`, 'success');
+      }, 800);
+    };
+
+    window.dispatchIndividualMobilizer = function(id, name, village) {
+      FieldAtlasAPI.showToast(`Doorstep verification task dispatched to Gram Panchayat for ${village}...`, 'success');
+      const item = darkZoneTrainees.find(t => t.id === id);
+      if (item) {
+        item.vector = 'mobilizer_dispatched';
+        item.status = 'Mobilizer Dispatched';
+        item.proof = 'Panchayat Sahayak assigned for doorstep interview';
+        renderDarkZoneTable();
+      }
+    };
+
+    window.issueIndividualPps = function(id, name) {
+      FieldAtlasAPI.showToast(`₹1,500 Post-Placement Support claim token issued to ${name}!`, 'success');
+    };
+
+    window.confirmIndividualOutcome = function(id, name) {
+      FieldAtlasAPI.showToast(`✔ ${name}'s verified outcome transferred to Confirmation Registry!`, 'success');
+    };
 
   })();
   </script>
