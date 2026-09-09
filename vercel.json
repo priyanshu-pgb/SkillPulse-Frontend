@@ -10,7 +10,9 @@
     { "source": "/trainer", "destination": "/trainer-dashboard.html" },
     { "source": "/trainee", "destination": "/trainee-dashboard.html" },
     { "source": "/profile", "destination": "/profile.html" },
-    { "source": "/certificate/verify/:token", "destination": "/certificate-verify.html?token=:token" }
+    { "source": "/certificate/verify/:token", "destination": "/certificate-verify.html?token=:token" },
+    { "source": "/employer/verify/:token", "destination": "/employer-verify.html?token=:token" },
+    { "source": "/employer-verify", "destination": "/employer-verify.html" }
   ],
   "redirects": [
     { "source": "/trainer/", "destination": "/trainer", "permanent": false },

@@ -620,10 +620,10 @@
             <!-- Placement Form -->
             <form id="placement-outcome-form">
               
-              <!-- Question 1: Personal & Contact Information -->
+              <!-- Question 1: Personal & Contact Information (with Alternate Contact) -->
               <div class="gform-question-card">
                 <div class="gform-question-title">
-                  1. Trainee Identity & Registered Contact Information <span class="gform-required-star">*</span>
+                  1. Trainee Identity & Contact Resilience <span class="gform-required-star">*</span>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
                   <div>
@@ -631,7 +631,7 @@
                     <input type="text" class="gform-input" id="gform-name" value="Priya Patel" required>
                   </div>
                   <div>
-                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Contact Phone Number</label>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Primary Mobile Phone</label>
                     <input type="tel" class="gform-input" id="gform-phone" value="9833456789" required>
                   </div>
                   <div>
@@ -642,89 +642,166 @@
                     <label style="font-size: 0.75rem; color: var(--color-text-muted);">Field Atlas ID</label>
                     <input type="text" class="gform-input" id="gform-id" value="FA-24-0182" readonly style="background: var(--color-parchment);">
                   </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Alternate Phone (Parent / Sibling / Mobilizer)</label>
+                    <input type="tel" class="gform-input" id="gform-alt-phone" placeholder="+91 98200 44556" value="9820044556">
+                  </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Secondary Contact Person & Relation</label>
+                    <input type="text" class="gform-input" id="gform-sec-contact" placeholder="e.g. Ramesh Patel (Father)" value="Ramesh Patel (Father)">
+                  </div>
                 </div>
               </div>
 
-              <!-- Question 2: Enrolled Government Scheme -->
+              <!-- Question 2: Livelihood Status Selector -->
               <div class="gform-question-card">
                 <div class="gform-question-title">
-                  2. Which Government Scheme were you enrolled in for this placement offer? <span class="gform-required-star">*</span>
+                  2. Current Post-Training Livelihood Status <span class="gform-required-star">*</span>
                 </div>
                 <p style="font-size: 0.78rem; color: var(--color-text-secondary); margin-bottom: 0.75rem;">
-                  Select the funded government initiative under which your training or apprenticeship was sponsored:
+                  Select your current status so the registry can capture relevant placement signals, apprenticeship terms, or diagnostics:
                 </p>
-                <select class="gform-input" id="gform-scheme" required>
-                  <option value="PMKVY 4.0 (Full Stack Web Development)" selected>PMKVY 4.0 — Pradhan Mantri Kaushal Vikas Yojana (MSDE)</option>
-                  <option value="DDU-GKY (Data Analytics & Cloud Systems)">DDU-GKY — Deen Dayal Upadhyaya Grameen Kaushalya Yojana (MoRD)</option>
-                  <option value="SWAYAM / NPTEL (Applied AI & Python)">SWAYAM / NPTEL — Ministry of Education</option>
-                  <option value="FutureSkills PRIME (Cloud Architecture)">FutureSkills PRIME — MeitY & NASSCOM</option>
-                  <option value="PM Vishwakarma (Digital Craftsmanship)">PM Vishwakarma Scheme — Ministry of MSME</option>
-                  <option value="NIELIT (IoT & Embedded Systems)">NIELIT Certified Course — National Institute of Electronics</option>
+                <select class="gform-input" id="gform-status" onchange="toggleLivelihoodSections(this.value)" required>
+                  <option value="employed" selected>1. Employed in Organization / Corporate Enterprise</option>
+                  <option value="apprenticeship">2. Apprenticeship / NAPS / NATS Scheme</option>
+                  <option value="self_employed">3. Self-Employed / Own Business / Micro-Enterprise</option>
+                  <option value="unemployed">4. Actively Seeking Employment (Unplaced)</option>
+                  <option value="continuing_education">5. Continuing Higher Education / Training</option>
                 </select>
               </div>
 
-              <!-- Question 3: Employer / Organization Details -->
-              <div class="gform-question-card">
-                <div class="gform-question-title">
-                  3. Employer / Company Name <span class="gform-required-star">*</span>
+              <!-- Section A: Employed / Apprentice Details -->
+              <div id="section-employed-fields">
+                <div class="gform-question-card">
+                  <div class="gform-question-title">
+                    3. Employer & Position Details <span class="gform-required-star">*</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Employer / Company Name</label>
+                      <input type="text" class="gform-input" id="gform-employer" value="Tata Consultancy Services">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Job Designation / Role</label>
+                      <input type="text" class="gform-input" id="gform-role" value="Junior Web Developer">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Employer HR Contact Email (for 1-click verification)</label>
+                      <input type="email" class="gform-input" id="gform-hr-email" placeholder="hr@company.com" value="hr@tcs-careers.in">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Employer HR Phone Number</label>
+                      <input type="tel" class="gform-input" id="gform-hr-phone" placeholder="+91 20 6601 2000" value="02066012000">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Monthly Gross Compensation / Stipend (₹ INR)</label>
+                      <input type="number" class="gform-input" id="gform-wage" value="22000" min="5000">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Apprenticeship Contract ID (if NAPS / NATS)</label>
+                      <input type="text" class="gform-input" id="gform-appr-id" placeholder="e.g. NAPS-MAH-2026-9812">
+                    </div>
+                  </div>
                 </div>
-                <input type="text" class="gform-input" id="gform-employer" placeholder="e.g. Tata Consultancy Services, Infosys, Wipro..." value="Tata Consultancy Services" required>
+
+                <!-- Training Relevance -->
+                <div class="gform-question-card">
+                  <div class="gform-question-title">
+                    4. Relevance of Training to Current Job <span class="gform-required-star">*</span>
+                  </div>
+                  <p style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
+                    How closely does your daily job work align with the course curriculum you completed?
+                  </p>
+                  <select class="gform-input" id="gform-relevance">
+                    <option value="directly_related" selected>Directly Related (Daily tasks directly use course tools & syllabus)</option>
+                    <option value="partially_related">Partially Related (Some overlap with course fundamentals)</option>
+                    <option value="unrelated">Unrelated (Different domain or generic non-technical tasks)</option>
+                  </select>
+                </div>
               </div>
 
-              <!-- Question 4: Job Designation & Role -->
-              <div class="gform-question-card">
-                <div class="gform-question-title">
-                  4. Job Role / Designation Offered <span class="gform-required-star">*</span>
+              <!-- Section B: Self-Employed Details -->
+              <div id="section-self-employed-fields" style="display: none;">
+                <div class="gform-question-card">
+                  <div class="gform-question-title">
+                    3. Self-Employment & Enterprise Outcomes <span class="gform-required-star">*</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Enterprise / Business / Shop Name</label>
+                      <input type="text" class="gform-input" id="gform-enterprise" placeholder="e.g. Patel Digital & Hardware Solutions">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Udyam MSME Registration ID (Optional)</label>
+                      <input type="text" class="gform-input" id="gform-udyam" placeholder="UDYAM-MH-12-0012345">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Monthly Net Profit (₹ INR)</label>
+                      <input type="number" class="gform-input" id="gform-profit" placeholder="e.g. 25000">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.75rem; color: var(--color-text-muted);">Additional Workers Employed (Nano-Jobs Generated)</label>
+                      <input type="number" class="gform-input" id="gform-workers" value="0" min="0">
+                    </div>
+                  </div>
                 </div>
-                <input type="text" class="gform-input" id="gform-role" placeholder="e.g. Junior Web Developer, Full Stack Associate..." value="Junior Web Developer" required>
               </div>
 
-              <!-- Question 5: Salary & Compensation -->
-              <div class="gform-question-card">
-                <div class="gform-question-title">
-                  5. Monthly Gross Salary / Stipend Received (₹ INR) <span class="gform-required-star">*</span>
-                </div>
-                <p style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
-                  Enter monthly in-hand wage or stipend in Indian Rupees:
-                </p>
-                <div style="position: relative;">
-                  <span style="position: absolute; left: 12px; top: 11px; font-weight: 700; color: var(--color-teal);">₹</span>
-                  <input type="number" class="gform-input" id="gform-wage" style="padding-left: 28px;" value="22000" min="5000" max="250000" required>
+              <!-- Section C: Unplaced / Seeking Work Diagnostics -->
+              <div id="section-unplaced-fields" style="display: none;">
+                <div class="gform-question-card">
+                  <div class="gform-question-title">
+                    3. Reason for Non-Placement & Transition Feedback <span class="gform-required-star">*</span>
+                  </div>
+                  <p style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
+                    Your feedback helps training centers upgrade curricula, address skill gaps, and coordinate targeted corporate interview drives.
+                  </p>
+                  <div style="margin-bottom: 0.75rem;">
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Primary Reason for Non-Placement:</label>
+                    <select class="gform-input" id="gform-np-reason">
+                      <option value="skill_mismatch">Skill mismatch with industry vacancy requirements</option>
+                      <option value="no_local_demand">No local job demand or nearby industry cluster</option>
+                      <option value="location_migration">Location or migration barrier (cannot relocate to metro)</option>
+                      <option value="wage_expectations">Offered salary below minimum expectation / living cost</option>
+                      <option value="family_social">Family or social constraints</option>
+                      <option value="continuing_education">Pursuing higher academic degree or further training</option>
+                      <option value="health_personal">Health or personal circumstances</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Key Skill Gap Identified during Interviews / Assessments:</label>
+                    <select class="gform-input" id="gform-skill-gap">
+                      <option value="practical_tools">Practical Hands-on Tools, Frameworks & Live Projects</option>
+                      <option value="communication_english">Professional Spoken English & Client Communication</option>
+                      <option value="domain_theory">Core Technical Domain Knowledge & Engineering Concepts</option>
+                      <option value="interview_prep">Interview Preparedness, Aptitude Tests & Coding Rounds</option>
+                      <option value="digital_literacy">Digital Literacy & Workplace Computer Software</option>
+                      <option value="none">No significant skill gap / Only awaiting recruitment drives</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
-              <!-- Question 6: Job Location & Joining Date -->
+              <!-- Work Location & Date -->
               <div class="gform-question-card">
                 <div class="gform-question-title">
-                  6. Work Location & Joining Date <span class="gform-required-star">*</span>
+                  5. Current Location & Scheme Linkage
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                   <div>
-                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">City / District</label>
-                    <input type="text" class="gform-input" id="gform-location" value="Pune, Maharashtra" required>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Working City / District</label>
+                    <input type="text" class="gform-input" id="gform-location" value="Pune, Maharashtra">
                   </div>
                   <div>
-                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Date of Joining</label>
-                    <input type="date" class="gform-input" id="gform-joining-date" value="2026-07-01" required>
+                    <label style="font-size: 0.75rem; color: var(--color-text-muted);">Enrolled Government Scheme</label>
+                    <select class="gform-input" id="gform-scheme">
+                      <option value="PMKVY 4.0 (Full Stack Web Development)" selected>PMKVY 4.0 — MSDE</option>
+                      <option value="DDU-GKY (Data Analytics & Cloud Systems)">DDU-GKY — MoRD</option>
+                      <option value="SWAYAM / NPTEL (Applied AI & Python)">SWAYAM / NPTEL — Ministry of Education</option>
+                      <option value="FutureSkills PRIME (Cloud Architecture)">FutureSkills PRIME — MeitY & NASSCOM</option>
+                      <option value="PM Vishwakarma (Digital Craftsmanship)">PM Vishwakarma Scheme — MSME</option>
+                    </select>
                   </div>
-                </div>
-              </div>
-
-              <!-- Question 7: Employment Nature -->
-              <div class="gform-question-card">
-                <div class="gform-question-title">
-                  7. Employment Nature & Terms <span class="gform-required-star">*</span>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.88rem;">
-                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                    <input type="radio" name="emp-type" value="Full-time Regular" checked> Full-time Regular Employment
-                  </label>
-                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                    <input type="radio" name="emp-type" value="Apprenticeship (NAPS / NATS)"> National Apprenticeship Promotion Scheme (NAPS)
-                  </label>
-                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                    <input type="radio" name="emp-type" value="Remote / Hybrid"> Remote / Hybrid Software Engineer
-                  </label>
                 </div>
               </div>
 
@@ -745,10 +822,25 @@
                 <i data-lucide="check-circle-2" style="width: 32px; height: 32px;"></i>
               </div>
               <h2 style="font-size: 1.4rem; color: var(--color-deep-indigo); margin-bottom: 0.5rem;">Your response has been recorded.</h2>
-              <p style="color: var(--color-text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem;">
-                Thank you for reporting your employment outcome! Your placement at <strong id="confirm-employer-name">Tata Consultancy Services</strong> under the <strong id="confirm-scheme-name">PMKVY 4.0</strong> scheme has been forwarded to your trainer and recorded in your Field Atlas timeline.
+              <p style="color: var(--color-text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1rem;">
+                Thank you for reporting your outcome! Your details under the <strong id="confirm-scheme-name">PMKVY 4.0</strong> scheme have been saved to your timeline.
               </p>
-              <div style="display: flex; gap: 0.75rem; justify-content: center;">
+              
+              <!-- 1-Click Employer Verification Link Box -->
+              <div id="confirm-hr-link-box" style="display: none; background: #ECFDF5; border: 1px solid #10B981; border-radius: 8px; padding: 1rem; margin: 1rem auto; max-width: 500px; text-align: left;">
+                <div style="font-size: 0.8rem; font-weight: 700; color: #065F46; margin-bottom: 0.25rem;">
+                  1-Click HR Verification Link Generated
+                </div>
+                <div style="font-size: 0.75rem; color: #047857; margin-bottom: 0.5rem;">
+                  Share this secure tokenized link with your HR manager or employer to have your placement verified instantly without them needing to sign in:
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input type="text" id="confirm-hr-link-input" readonly style="flex: 1; font-family: var(--font-mono); font-size: 0.75rem; padding: 0.4rem; border: 1px solid #A7F3D0; border-radius: 4px; background: white;">
+                  <button type="button" class="btn btn-primary btn-sm" onclick="copyConfirmHrLink()" style="background: #059669; border: none; font-size: 0.75rem;">Copy Link</button>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem;">
                 <button class="btn btn-primary btn-sm" onclick="scrollToSection('section-dashboard')">
                   Return to Top Dashboard
                 </button>
@@ -1659,7 +1751,43 @@
       }, 400);
     };
 
-    // ════════════ STEP 6: PLACEMENT SURVEY (GOOGLE FORM STYLE) ════════════
+    // ════════════ STEP 6: PLACEMENT SURVEY (LIVELIHOOD & DIAGNOSTICS) ════════════
+    window.toggleLivelihoodSections = function(status) {
+      const employedSec = document.getElementById('section-employed-fields');
+      const selfSec = document.getElementById('section-self-employed-fields');
+      const unplacedSec = document.getElementById('section-unplaced-fields');
+
+      if (employedSec) employedSec.style.display = 'none';
+      if (selfSec) selfSec.style.display = 'none';
+      if (unplacedSec) unplacedSec.style.display = 'none';
+
+      if (status === 'employed' || status === 'apprenticeship') {
+        if (employedSec) employedSec.style.display = 'block';
+      } else if (status === 'self_employed') {
+        if (selfSec) selfSec.style.display = 'block';
+      } else if (status === 'unemployed' || status === 'continuing_education') {
+        if (unplacedSec) unplacedSec.style.display = 'block';
+      }
+    };
+
+    window.copyConfirmHrLink = function() {
+      const input = document.getElementById('confirm-hr-link-input');
+      if (!input || !input.value) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(input.value).then(() => {
+          FieldAtlasAPI.showToast('1-Click HR Verification Link copied to clipboard!', 'success');
+        }).catch(() => {
+          input.select();
+          document.execCommand('copy');
+          FieldAtlasAPI.showToast('1-Click HR Verification Link copied to clipboard!', 'success');
+        });
+      } else {
+        input.select();
+        document.execCommand('copy');
+        FieldAtlasAPI.showToast('1-Click HR Verification Link copied to clipboard!', 'success');
+      }
+    };
+
     function attachPlacementFormListener() {
       const form = document.getElementById('placement-outcome-form');
       if (!form) return;
@@ -1667,31 +1795,75 @@
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const employer = document.getElementById('gform-employer').value.trim();
-        const role = document.getElementById('gform-role').value.trim();
-        const scheme = document.getElementById('gform-scheme').value;
-        const wage = document.getElementById('gform-wage').value;
-        const location = document.getElementById('gform-location').value.trim();
-        const joiningDate = document.getElementById('gform-joining-date').value;
-        const empType = document.querySelector('input[name="emp-type"]:checked')?.value || 'Full-time Regular';
+        const status = document.getElementById('gform-status')?.value || 'employed';
+        const employer = document.getElementById('gform-employer')?.value.trim() || '';
+        const role = document.getElementById('gform-role')?.value.trim() || '';
+        const hrEmail = document.getElementById('gform-hr-email')?.value.trim() || '';
+        const hrPhone = document.getElementById('gform-hr-phone')?.value.trim() || '';
+        const wage = document.getElementById('gform-wage')?.value || null;
+        const apprId = document.getElementById('gform-appr-id')?.value.trim() || '';
+        const relevance = document.getElementById('gform-relevance')?.value || 'directly_related';
+
+        const enterprise = document.getElementById('gform-enterprise')?.value.trim() || '';
+        const udyam = document.getElementById('gform-udyam')?.value.trim() || '';
+        const profit = document.getElementById('gform-profit')?.value || null;
+        const workers = document.getElementById('gform-workers')?.value || 0;
+
+        const npReason = document.getElementById('gform-np-reason')?.value || null;
+        const skillGap = document.getElementById('gform-skill-gap')?.value || null;
+
+        const location = document.getElementById('gform-location')?.value.trim() || '';
+        const scheme = document.getElementById('gform-scheme')?.value || 'PMKVY 4.0';
+        const altPhone = document.getElementById('gform-alt-phone')?.value.trim() || '';
+        const secContact = document.getElementById('gform-sec-contact')?.value.trim() || '';
+        const email = document.getElementById('gform-email')?.value.trim() || '';
+        const fieldId = document.getElementById('gform-id')?.value.trim() || '';
+
+        const payload = {
+          email: email,
+          field_atlas_id: fieldId,
+          employment_status: status,
+          employer_name: employer,
+          role: role,
+          employer_contact_email: hrEmail,
+          employer_contact_phone: hrPhone,
+          wage: wage ? parseFloat(wage) : null,
+          apprenticeship_contract_id: apprId,
+          training_relevance: relevance,
+          enterprise_name: enterprise,
+          udyam_registration_number: udyam,
+          monthly_net_profit: profit ? parseFloat(profit) : null,
+          workers_employed: workers ? parseInt(workers, 10) : 0,
+          non_placement_reason: (status === 'unemployed' || status === 'continuing_education') ? npReason : null,
+          skill_gap: (status === 'unemployed' || status === 'continuing_education') ? skillGap : null,
+          work_location: location,
+          scheme_enrolled: scheme,
+          alternate_phone_number: altPhone,
+          secondary_contact_name: secContact
+        };
 
         try {
-          await FieldAtlasAPI.post('/api/trainee/placement-submit/', {
-            employer_name: employer,
-            role: role,
-            scheme_enrolled: scheme,
-            wage: wage,
-            work_location: location,
-            start_date: joiningDate,
-            employment_type: empType
-          });
+          const resp = await FieldAtlasAPI.post('/api/trainee/placement-submit/', payload);
 
           // Show Google Form confirmation card
           form.style.display = 'none';
           const confirmCard = document.getElementById('gform-confirmation-card');
-          document.getElementById('confirm-employer-name').textContent = employer;
-          document.getElementById('confirm-scheme-name').textContent = scheme;
+          const dispName = employer || enterprise || (status === 'self_employed' ? 'Self-Employed Venture' : 'Livelihood Outcome');
+          const confirmEmpEl = document.getElementById('confirm-employer-name');
+          const confirmSchemeEl = document.getElementById('confirm-scheme-name');
+          if (confirmEmpEl) confirmEmpEl.textContent = dispName;
+          if (confirmSchemeEl) confirmSchemeEl.textContent = scheme;
           if (confirmCard) confirmCard.style.display = 'block';
+
+          // Show 1-Click HR Link if token generated
+          const token = resp.employer_verification_token || (resp.placement && resp.placement.employer_verification_token);
+          const hrLinkBox = document.getElementById('confirm-hr-link-box');
+          const hrLinkInput = document.getElementById('confirm-hr-link-input');
+          if (token && hrLinkBox && hrLinkInput) {
+            const verifyUrl = `${window.location.origin}/employer/verify/${token}/`;
+            hrLinkInput.value = verifyUrl;
+            hrLinkBox.style.display = 'block';
+          }
 
           // Update Dashboard Placement Card
           const pCard = document.getElementById('trainee-placement-card');
@@ -1699,16 +1871,22 @@
           if (pCard) {
             pCard.style.display = 'flex';
             if (pEmpty) pEmpty.style.display = 'none';
-            document.getElementById('placement-employer').textContent = employer;
-            document.getElementById('placement-role').textContent = role;
-            document.getElementById('placement-wage').textContent = '₹' + Number(wage).toLocaleString('en-IN') + '/month';
-            document.getElementById('placement-status').textContent = 'SUBMITTED';
+            const placeEmp = document.getElementById('placement-employer');
+            const placeRole = document.getElementById('placement-role');
+            const placeWage = document.getElementById('placement-wage');
+            const placeStatus = document.getElementById('placement-status');
+
+            if (placeEmp) placeEmp.textContent = dispName;
+            if (placeRole) placeRole.textContent = role || (status === 'self_employed' ? 'Founder / Owner' : 'Participant');
+            const finalWage = wage || profit || 0;
+            if (placeWage) placeWage.textContent = '₹' + Number(finalWage).toLocaleString('en-IN') + '/month';
+            if (placeStatus) placeStatus.textContent = 'SUBMITTED (PENDING VERIFICATION)';
           }
 
-          FieldAtlasAPI.showToast('Placement response successfully recorded in Field Atlas!', 'success');
+          FieldAtlasAPI.showToast('Placement response & diagnostics successfully recorded in Field Atlas!', 'success');
           if (window.lucide) lucide.createIcons();
         } catch (err) {
-          FieldAtlasAPI.showToast('Failed to submit placement survey.', 'error');
+          FieldAtlasAPI.showToast('Failed to submit placement survey. Please try again.', 'error');
         }
       });
     }
