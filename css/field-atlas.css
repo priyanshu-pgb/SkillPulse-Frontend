@@ -1,48 +1,57 @@
 /*
- * FIELD ATLAS — SKILLING OUTCOMES PLATFORM
- * Core Design Tokens, Typography, Layout, and Component Styles
- * Aesthetic: Civic Cartography (Deep Indigo, Field Teal, Ochre, Coral, Parchment)
+ * ══════════════════════════════════════════════════════════════════════════
+ * BHARAT SKILLPULSE — NATIONAL SKILLING OUTCOMES PLATFORM
+ * Ministry of Skill Development & Entrepreneurship (MSDE / NCVET)
+ * Design Aesthetic: Sovereign Institutional Authority & Google Antigravity Physics
+ * ══════════════════════════════════════════════════════════════════════════
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
 :root {
-  /* Brand Color Palette */
-  --color-deep-indigo: #1E2749;
-  --color-teal: #0E8176;
-  --color-teal-light: #E0F2F1;
-  --color-indigo-blue: #49618B;
-  --color-ochre: #D69541;
-  --color-ochre-light: #FEF3E2;
-  --color-coral: #D56F58;
-  --color-coral-light: #FDECE9;
+  /* Sovereign National Brand Color Palette */
+  --color-deep-indigo: #0B192C;
+  --color-teal: #0A7E74;
+  --color-teal-light: #E6F6F4;
+  --color-indigo-blue: #1E3E62;
+  --color-ochre: #D97706;
+  --color-ochre-light: #FEF3C7;
+  --color-coral: #E11D48;
+  --color-coral-light: #FFE4E6;
+  --color-saffron: #FF9933;
+  --color-ashok-navy: #000080;
   
   /* Neutral & Surface Palette */
-  --color-parchment: #F8F9FA;
+  --color-parchment: #F8FAFC;
   --color-surface: #FFFFFF;
   --color-surface-hover: #F1F5F9;
   --color-border: #E2E8F0;
   --color-border-subtle: #EDF2F7;
-  --color-text-primary: #1E2749;
-  --color-text-secondary: #49618B;
+  --color-text-primary: #0B192C;
+  --color-text-secondary: #334155;
   --color-text-muted: #64748B;
   --color-text-inverse: #FFFFFF;
 
   /* Status Tokens */
-  --status-verified: #0E8176;
-  --status-pending: #D69541;
-  --status-disputed: #D56F58;
-  --status-active: #0E8176;
+  --status-verified: #0A7E74;
+  --status-pending: #D97706;
+  --status-disputed: #E11D48;
+  --status-active: #0A7E74;
   --status-withdrawn: #64748B;
 
-  /* Typography */
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Authoritative Sovereign Typography (No Generic AI Fonts) */
+  --font-sans: 'Outfit', 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Outfit', 'Sora', sans-serif;
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-mono: 'Space Grotesk', 'JetBrains Mono', monospace;
+  --font-tech: 'Space Grotesk', monospace;
 
   /* Spatial & Elevation Tokens */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-full: 9999px;
-  --shadow-sm: 0 1px 2px 0 rgba(30, 39, 73, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(11, 25, 44, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(30, 39, 73, 0.07), 0 2px 4px -2px rgba(30, 39, 73, 0.05);
   --shadow-lg: 0 10px 15px -3px rgba(30, 39, 73, 0.08), 0 4px 6px -4px rgba(30, 39, 73, 0.04);
   --shadow-popover: 0 20px 25px -5px rgba(30, 39, 73, 0.1), 0 8px 10px -6px rgba(30, 39, 73, 0.05);
@@ -2986,4 +2995,322 @@ p {
   background: var(--color-surface-hover);
   color: var(--color-deep-indigo);
   border: 1px solid var(--color-border);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SOVEREIGN GOVERNMENT (GOI) PORTAL & GOOGLE ANTIGRAVITY STYLES
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+/* Sovereign Top Tricolor & Utility Ribbon */
+.sovereign-gov-ribbon {
+  position: relative;
+  z-index: 9999;
+  background: #0B192C;
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gov-ribbon-tricolor {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%);
+}
+
+.gov-ribbon-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0.4rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.gov-ribbon-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.gov-emblem-mini {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+}
+
+.gov-ribbon-text {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.gov-title-hi {
+  font-weight: 700;
+  color: #F8FAFC;
+  font-family: var(--font-heading);
+}
+
+.gov-sep {
+  color: #64748B;
+}
+
+.gov-dept {
+  color: #CBD5E1;
+  font-weight: 500;
+}
+
+.gov-ribbon-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.gov-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: rgba(10, 126, 116, 0.25);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  font-size: 0.72rem;
+  color: #34D399;
+}
+
+.gov-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: govPulse 1.8s infinite;
+}
+
+@keyframes govPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.25); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.gov-live-text strong {
+  color: #FFFFFF;
+  font-family: var(--font-tech);
+  font-weight: 700;
+}
+
+.gov-pill-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #E2E8F0;
+  padding: 0.22rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.gov-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.active-zero-g {
+  background: linear-gradient(135deg, #FF9933, #D97706) !important;
+  color: #FFFFFF !important;
+  border-color: #FDE68A !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.7) !important;
+}
+
+.gov-a11y-font-group {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gov-a11y-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  color: #CBD5E1;
+  padding: 0.22rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.gov-a11y-btn:last-child {
+  border-right: none;
+}
+
+.gov-a11y-btn:hover,
+.gov-a11y-btn.active {
+  background: rgba(255, 255, 255, 0.28);
+  color: #FFFFFF;
+}
+
+.gov-screen-reader-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  color: #CBD5E1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Sovereign Bharat Tag */
+.sovereign-bharat-tag {
+  display: inline-block;
+  font-family: var(--font-tech);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0.12rem 0.45rem;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #FF9933 0%, #D97706 100%);
+  color: #FFFFFF;
+  vertical-align: middle;
+  box-shadow: 0 1px 5px rgba(217, 119, 6, 0.4);
+  margin-left: 0.4rem;
+}
+
+/* Sovereign Trust Strip */
+.sovereign-trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(11, 25, 44, 0.03);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.sovereign-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sovereign-trust-item svg,
+.sovereign-trust-item i {
+  color: var(--color-teal);
+}
+
+/* Antigravity Canvas Layer */
+.antigravity-canvas-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+/* Antigravity Cursor Aura */
+.antigravity-cursor-aura {
+  position: fixed;
+  top: -225px;
+  left: -225px;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle, rgba(10, 126, 116, 0.14) 0%, rgba(217, 119, 6, 0.06) 40%, transparent 70%);
+  filter: blur(24px);
+  will-change: transform;
+}
+
+/* 3D Holographic Card Glare */
+.ag-card-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
+}
+
+/* Zero-G Floating Keyframe Mode */
+.antigravity-zero-g-active .feature-card,
+.antigravity-zero-g-active .stat-item,
+.antigravity-zero-g-active .summary-kpi-card,
+.antigravity-zero-g-active .course-card {
+  animation: zeroGFloat 6s ease-in-out infinite alternate;
+}
+
+.antigravity-zero-g-active .feature-card:nth-child(2n),
+.antigravity-zero-g-active .summary-kpi-card:nth-child(2n) {
+  animation-duration: 7.5s;
+  animation-delay: -1.5s;
+}
+
+.antigravity-zero-g-active .feature-card:nth-child(3n),
+.antigravity-zero-g-active .course-card:nth-child(3n) {
+  animation-duration: 5.2s;
+  animation-delay: -3s;
+}
+
+@keyframes zeroGFloat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.4deg); }
+  100% { transform: translateY(3px) rotate(-0.3deg); }
+}
+
+/* Government High Contrast Mode (Accessibility Standard) */
+body.gov-high-contrast {
+  background-color: #000000 !important;
+  color: #FFFF00 !important;
+}
+
+body.gov-high-contrast * {
+  background-color: #000000 !important;
+  color: #FFFF00 !important;
+  border-color: #FFFF00 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+body.gov-high-contrast a,
+body.gov-high-contrast button,
+body.gov-high-contrast .nav-link,
+body.gov-high-contrast h1,
+body.gov-high-contrast h2,
+body.gov-high-contrast h3,
+body.gov-high-contrast h4 {
+  color: #FFFF00 !important;
+}
+
+body.gov-high-contrast .sovereign-gov-ribbon {
+  background-color: #000000 !important;
+  border-bottom: 2px solid #FFFF00 !important;
 }
