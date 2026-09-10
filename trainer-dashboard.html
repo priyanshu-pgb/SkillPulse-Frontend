@@ -12,8 +12,8 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/field-atlas.css?v=2.4.0">
-  <link rel="stylesheet" href="css/responsive.css?v=2.4.0">
+  <link rel="stylesheet" href="css/field-atlas.css?v=2.5.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.5.0">
   <link rel="stylesheet" href="css/watermark.css">
   <!-- Modern Typography (Outfit + Plus Jakarta Sans + JetBrains Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1672,9 +1672,9 @@
   <!-- Scripts -->
   <script src="js/config.js"></script>
   <script src="js/mock-auth.js"></script>
-  <script src="js/mock-data.js?v=2.4.0"></script>
-  <script src="js/api.js?v=2.4.0"></script>
-  <script src="js/i18n.js?v=2.4.0"></script>
+  <script src="js/mock-data.js?v=2.5.0"></script>
+  <script src="js/api.js?v=2.5.0"></script>
+  <script src="js/i18n.js?v=2.5.0"></script>
   <script src="js/notifications.js"></script>
   <script src="js/auth.js"></script>
 
@@ -1722,17 +1722,27 @@
       const breadcrumb = document.getElementById('header-active-view-name');
       if (breadcrumb) breadcrumb.textContent = tabNames[tabId] || tabId;
 
-      // Trigger respective loader
-      if (tabId === 'step1-dashboard') loadGovtCoursesCatalog();
-      if (tabId === 'step2-courses') loadOldCourses();
-      if (tabId === 'step3-confirmation') loadConfirmationRegistry();
-      if (tabId === 'step4-qualification') loadTrainerQualification();
-      if (tabId === 'overview') loadOverview();
-      if (tabId === 'trainees') loadTrainees();
-      if (tabId === 'followups') loadFollowUps();
-      if (tabId === 'reports') loadReports();
-      if (tabId === 'remote-recovery') loadRemoteRecovery();
-      if (tabId === 'feedback') loadFeedbackAnalytics();
+      // Close mobile drawer if open
+      const sb = document.getElementById('sidebar');
+      const mb = document.getElementById('mobile-backdrop');
+      if (sb) sb.classList.remove('open');
+      if (mb) mb.classList.remove('active');
+
+      // Trigger respective loader safely
+      try {
+        if (tabId === 'step1-dashboard') loadGovtCoursesCatalog();
+        if (tabId === 'step2-courses') loadOldCourses();
+        if (tabId === 'step3-confirmation') loadConfirmationRegistry();
+        if (tabId === 'step4-qualification') loadTrainerQualification();
+        if (tabId === 'overview') loadOverview();
+        if (tabId === 'trainees') loadTrainees();
+        if (tabId === 'followups') loadFollowUps();
+        if (tabId === 'reports') loadReports();
+        if (tabId === 'remote-recovery') loadRemoteRecovery();
+        if (tabId === 'feedback') loadFeedbackAnalytics();
+      } catch (err) {
+        console.warn('Error loading tab content for ' + tabId + ':', err);
+      }
 
       if (window.FieldAtlasI18N) {
         setTimeout(() => FieldAtlasI18N.translatePage(), 60);
@@ -2030,7 +2040,7 @@
     window.handleSchemeChange = function(schemeId) {
       const schemeUrls = {
         'pmkvy-4-fsw': 'https://www.skillindiadigital.gov.in',
-        'ddu-gky-data': 'https://kaushalpanjee.nic.in',
+        'ddu-gky-data': 'https://www.skillindiadigital.gov.in',
         'swayam-ai-ml': 'https://swayam.gov.in',
         'futureskills-prime': 'https://www.skillindiadigital.gov.in',
         'pm-vishwakarma': 'https://pmvishwakarma.gov.in',
@@ -2494,6 +2504,10 @@
       // Charts
       const ctx1 = document.getElementById('chart-monthly-outcomes');
       if (typeof Chart !== 'undefined' && ctx1 && data.monthly_outcomes) {
+        try {
+          const existing1 = Chart.getChart(ctx1);
+          if (existing1) existing1.destroy();
+        } catch (e) {}
         new Chart(ctx1, {
           type: 'bar',
           data: {
@@ -2509,6 +2523,10 @@
 
       const ctx2 = document.getElementById('chart-sector-dist');
       if (typeof Chart !== 'undefined' && ctx2 && data.sector_distribution) {
+        try {
+          const existing2 = Chart.getChart(ctx2);
+          if (existing2) existing2.destroy();
+        } catch (e) {}
         new Chart(ctx2, {
           type: 'doughnut',
           data: {
@@ -2755,6 +2773,20 @@
       updateOutreachSimulator();
     };
 
+    window.downloadReportFile = function(reportName, format) {
+      const csvData = "Report: " + reportName + "\nGenerated: " + new Date().toISOString() + "\nSource: SkillPulse NCVET Training Registry\n\nTrainee ID,Name,Course,Stage,Status,Wage,Employer\nTR-2026-001,Pooja Sharma,Full Stack Web Development,Placed,Verified,22000,Infosys BPM Ltd\nTR-2026-002,Rahul Verma,Data Analytics,Placed,Verified,18500,Tata Consultancy Services\nTR-2026-003,Sunita Soren,Automotive CNC Operator,Placed,Verified,19200,Bharat Forge Ltd\nTR-2026-004,Amit Patel,Cloud Architecture,Certified,Active,,AWS Partner Network\n";
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = (reportName.toLowerCase().replace(/[^a-z0-9]+/g, '_') || 'report') + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      FieldAtlasAPI.showToast(`✔ "${reportName}" downloaded successfully!`, 'success');
+    };
+
     async function loadReports() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainer/reports/');
@@ -2766,7 +2798,7 @@
                 <div style="font-weight: 700; font-size: 0.95rem;">${r.name}</div>
                 <div style="font-size: 0.8rem; color: var(--color-text-muted);">Format: ${r.format} · Last generated: ${r.last_generated}</div>
               </div>
-              <button class="btn btn-outline btn-sm" onclick="FieldAtlasAPI.showToast('Demo report exported successfully.', 'success')">
+              <button class="btn btn-outline btn-sm" onclick="downloadReportFile('${r.name}', '${r.format}')">
                 <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download
               </button>
             </div>
