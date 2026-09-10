@@ -427,7 +427,7 @@
   };
 
   // ─── Expose helpers globally ──────────────────────────────────────────────
-  window.SkillPulseMockAuth = {
+  const AuthMockObj = {
     getSession,
     saveSession,
     clearSession,

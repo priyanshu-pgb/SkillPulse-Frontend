@@ -185,4 +185,5 @@ const SkillPulseAPI = (function() {
 
 // Attach globally
 window.SkillPulseAPI = SkillPulseAPI;
+window.FieldAtlasAPI = SkillPulseAPI;
 

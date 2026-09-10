@@ -189,3 +189,6 @@ window.FIELD_ATLAS_CONFIG = (function() {
 document.addEventListener('DOMContentLoaded', function() {
   window.SkillPulseTheme.init();
 });
+
+window.FIELD_ATLAS_CONFIG = window.SKILLPULSE_CONFIG || window.FIELD_ATLAS_CONFIG || {};
+window.SKILLPULSE_CONFIG = window.FIELD_ATLAS_CONFIG;

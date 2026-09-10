@@ -531,7 +531,7 @@ Reply:
       id: 'tc-01',
       title: 'Full Stack Web Development & Python Cloud (Batch 2026-A)',
       govt_scheme: 'PMKVY 4.0 (MSDE)',
-      official_url: 'https://www.pmkvyofficial.org',
+      official_url: 'https://www.skillindiadigital.gov.in',
       course_code: 'PMKVY-4.0-FSW-A1',
       enrolled_count: 48,
       attendance_rate: 92.4,
@@ -545,7 +545,7 @@ Reply:
       id: 'tc-02',
       title: 'Data Analytics & Business Intelligence (Batch 2025-B)',
       govt_scheme: 'DDU-GKY (MoRD)',
-      official_url: 'https://ddugky.gov.in',
+      official_url: 'https://kaushalpanjee.nic.in',
       course_code: 'DDU-GKY-DA-B2',
       enrolled_count: 36,
       attendance_rate: 89.2,
@@ -559,7 +559,7 @@ Reply:
       id: 'tc-03',
       title: 'Cloud Architecture & DevOps Engineering (Batch 2026-Q1)',
       govt_scheme: 'FutureSkills PRIME (MeitY)',
-      official_url: 'https://futureskillsprime.in',
+      official_url: 'https://www.skillindiadigital.gov.in',
       course_code: 'FSP-CLOUD-Q1',
       enrolled_count: 40,
       attendance_rate: 94.0,
@@ -656,7 +656,7 @@ Reply:
       stipend_info: '100% Free Govt Subsidy + Direct Assessment Grant',
       certification: 'NSDC & NCVET Accredited Level 5 Certificate',
       eligibility: '12th Pass / Graduate / Diploma',
-      official_url: 'https://www.pmkvyofficial.org',
+      official_url: 'https://www.skillindiadigital.gov.in',
       portal_url: 'https://www.skillindiadigital.gov.in',
       badge_color: 'var(--color-teal)',
       description: 'Comprehensive Indian national vocational standard qualification in modern frontend architecture, Django REST Framework, relational databases, and containerized deployment.',
@@ -672,8 +672,8 @@ Reply:
       stipend_info: '100% Govt Funded with Free Hostel & Boarding Support',
       certification: 'National Vocational Training Council Certification',
       eligibility: '10th / 12th Pass Rural Youth (15-35 yrs)',
-      official_url: 'https://ddugky.gov.in',
-      portal_url: 'https://ddugky.gov.in',
+      official_url: 'https://kaushalpanjee.nic.in',
+      portal_url: 'https://kaushalpanjee.nic.in',
       badge_color: 'var(--color-ochre)',
       description: 'Rural skilling initiative providing practical instruction in PowerBI, SQL querying, data cleaning pipelines, and entry-level enterprise analytics.',
     },
@@ -704,8 +704,8 @@ Reply:
       stipend_info: 'Govt Incentive Cashback on Certification Completion',
       certification: 'NASSCOM Industry Gold Credential',
       eligibility: 'Graduates in Engineering / Science / BCA',
-      official_url: 'https://futureskillsprime.in',
-      portal_url: 'https://futureskillsprime.in',
+      official_url: 'https://www.skillindiadigital.gov.in',
+      portal_url: 'https://www.skillindiadigital.gov.in',
       badge_color: 'var(--color-coral)',
       description: 'Enterprise-grade curriculum focused on AWS/Azure infrastructure, Docker containers, Kubernetes orchestration, and CI/CD automated release pipelines.',
     },
@@ -752,8 +752,8 @@ Reply:
       stipend_info: 'Subsidized Fee for SC/ST/Women Candidates',
       certification: 'NIELIT National Qualification Register (NQR) Level 4',
       eligibility: 'ITI / Diploma / B.Sc / B.Tech',
-      official_url: 'https://nielit.gov.in',
-      portal_url: 'https://nielit.gov.in',
+      official_url: 'https://nptel.ac.in',
+      portal_url: 'https://nptel.ac.in',
       badge_color: 'var(--color-teal)',
       description: 'Microcontroller programming, sensor telemetry, Arduino/ESP32 firmware, and MQTT industrial cloud communications.',
     },
@@ -769,7 +769,7 @@ Reply:
       ministry: 'Ministry of Skill Development & Entrepreneurship (MSDE)',
       enrollment_id: 'FA-PMKVY-2026-98124',
       trainer: 'Vikram Malhotra',
-      official_scheme_url: 'https://www.pmkvyofficial.org',
+      official_scheme_url: 'https://www.skillindiadigital.gov.in',
       portal_url: 'https://www.skillindiadigital.gov.in',
       guidelines_url: 'https://www.msde.gov.in/en/schemes-initiatives/schemes-initiatives-msde/pradhan-mantri-kaushal-vikas-yojana-pmkvy',
       course_completion_status: 'yes', // 'yes' or 'in_progress'
@@ -792,8 +792,8 @@ Reply:
       ministry: 'Ministry of Rural Development (MoRD)',
       enrollment_id: 'FA-DDU-2026-44021',
       trainer: 'Sunita Rao',
-      official_scheme_url: 'https://ddugky.gov.in',
-      portal_url: 'https://ddugky.gov.in',
+      official_scheme_url: 'https://kaushalpanjee.nic.in',
+      portal_url: 'https://kaushalpanjee.nic.in',
       guidelines_url: 'https://rural.gov.in',
       course_completion_status: 'in_progress',
       completion_percentage: 67,
@@ -1080,7 +1080,7 @@ Reply:
       const password = (body.trainer_password || body.password || '').trim();
       const courseTitle = (body.course_title || body.title || '').trim();
       const govtScheme = (body.govt_scheme || body.scheme_name || 'PMKVY 4.0 (MSDE)').trim();
-      const officialUrl = (body.official_url || 'https://www.pmkvyofficial.org').trim();
+      const officialUrl = (body.official_url || 'https://www.skillindiadigital.gov.in').trim();
 
       if (!trainerId) {
         return mockResponse({ error: 'Trainer Unique ID is required. Complete Step 4 (Trainer Qualification) to generate your verified ID.' }, 400);

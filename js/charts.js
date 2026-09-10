@@ -318,3 +318,4 @@ const SkillPulseCharts = (function() {
 
 // Attach globally
 window.SkillPulseCharts = SkillPulseCharts;
+window.FieldAtlasCharts = SkillPulseCharts;

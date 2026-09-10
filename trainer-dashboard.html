@@ -12,8 +12,8 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/field-atlas.css?v=2.2.0">
-  <link rel="stylesheet" href="css/responsive.css?v=2.2.0">
+  <link rel="stylesheet" href="css/field-atlas.css?v=2.3.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.3.0">
   <link rel="stylesheet" href="css/watermark.css">
   <!-- Modern Typography (Outfit + Plus Jakarta Sans + JetBrains Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -564,7 +564,7 @@
 
                 <div class="form-group">
                   <label class="form-label" for="new-course-official-url">Official Scheme Portal URL (Verified)</label>
-                  <input type="url" class="form-control" id="new-course-official-url" value="https://www.pmkvyofficial.org" readonly style="background: var(--color-surface-hover); font-family: var(--font-mono); font-size: 0.85rem;">
+                  <input type="url" class="form-control" id="new-course-official-url" value="https://www.skillindiadigital.gov.in" readonly style="background: var(--color-surface-hover); font-family: var(--font-mono); font-size: 0.85rem;">
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1;">
@@ -1672,9 +1672,9 @@
   <!-- Scripts -->
   <script src="js/config.js"></script>
   <script src="js/mock-auth.js"></script>
-  <script src="js/mock-data.js?v=2.2.0"></script>
-  <script src="js/api.js?v=2.2.0"></script>
-  <script src="js/i18n.js?v=2.2.0"></script>
+  <script src="js/mock-data.js?v=2.3.0"></script>
+  <script src="js/api.js?v=2.3.0"></script>
+  <script src="js/i18n.js?v=2.3.0"></script>
   <script src="js/notifications.js"></script>
   <script src="js/auth.js"></script>
 
@@ -1682,7 +1682,13 @@
   (function() {
     'use strict';
 
-    // ═══ Global State ═══
+    const FieldAtlasAPI = window.SkillPulseAPI || window.FieldAtlasAPI;
+    const SkillPulseAPI = window.SkillPulseAPI || window.FieldAtlasAPI;
+    const FieldAtlasMockAuth = window.SkillPulseMockAuth || window.FieldAtlasMockAuth;
+    const FieldAtlasCache = window.SkillPulseCache || window.FieldAtlasCache;
+    const FieldAtlasI18N = window.SkillPulseI18N || window.FieldAtlasI18N;
+    const FieldAtlasCharts = window.SkillPulseCharts || window.FieldAtlasCharts;
+
     let currentAnalyticsCourseId = 'pmkvy-4-fsw';
     let allConfirmationTrainees = [];
     let activeConfirmationFilter = 'all';
@@ -2023,13 +2029,13 @@
 
     window.handleSchemeChange = function(schemeId) {
       const schemeUrls = {
-        'pmkvy-4-fsw': 'https://www.pmkvyofficial.org',
-        'ddu-gky-data': 'https://ddugky.gov.in',
+        'pmkvy-4-fsw': 'https://www.skillindiadigital.gov.in',
+        'ddu-gky-data': 'https://kaushalpanjee.nic.in',
         'swayam-ai-ml': 'https://swayam.gov.in',
-        'futureskills-prime': 'https://futureskillsprime.in',
+        'futureskills-prime': 'https://www.skillindiadigital.gov.in',
         'pm-vishwakarma': 'https://pmvishwakarma.gov.in',
         'naps-apprentice-prog': 'https://www.apprenticeshipindia.gov.in',
-        'nielit-iot': 'https://nielit.gov.in'
+        'nielit-iot': 'https://nptel.ac.in'
       };
       const urlInput = document.getElementById('new-course-official-url');
       if (urlInput) urlInput.value = schemeUrls[schemeId] || 'https://www.skillindiadigital.gov.in';
@@ -2487,7 +2493,7 @@
 
       // Charts
       const ctx1 = document.getElementById('chart-monthly-outcomes');
-      if (ctx1 && data.monthly_outcomes) {
+      if (typeof Chart !== 'undefined' && ctx1 && data.monthly_outcomes) {
         new Chart(ctx1, {
           type: 'bar',
           data: {
@@ -2502,7 +2508,7 @@
       }
 
       const ctx2 = document.getElementById('chart-sector-dist');
-      if (ctx2 && data.sector_distribution) {
+      if (typeof Chart !== 'undefined' && ctx2 && data.sector_distribution) {
         new Chart(ctx2, {
           type: 'doughnut',
           data: {
