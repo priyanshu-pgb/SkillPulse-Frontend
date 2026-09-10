@@ -48,6 +48,10 @@
         <a class="nav-link" data-tab="step4-qualification" onclick="switchView('step4-qualification')">
           <i data-lucide="award" style="width: 18px; height: 18px;"></i> 4. Trainer Qualification
         </a>
+        <a class="nav-link" data-tab="feedback" onclick="switchView('feedback')" data-i18n="nav_feedback">
+          <i data-lucide="star" style="width: 18px; height: 18px; color: #F59E0B;"></i> Feedback & Ratings
+          <span class="badge" style="background: #FEF3C7; color: #B45309; font-size: 0.65rem; margin-left: auto; font-weight: 800;">⭐ 4.8</span>
+        </a>
 
         <div class="nav-group-label">Analytics & Operations</div>
         <a class="nav-link" data-tab="overview" onclick="switchView('overview')">
@@ -153,6 +157,7 @@
             <select class="lang-select" aria-label="Choose Language">
               <option value="en">English</option>
               <option value="hi">हिन्दी (Hindi)</option>
+              <option value="or">ଓଡ଼ିଆ (Odia)</option>
               <option value="mr">मराठी (Marathi)</option>
               <option value="bn">বাংলা (Bengali)</option>
               <option value="ta">தமிழ் (Tamil)</option>
@@ -1297,6 +1302,320 @@
 
       </main>
 
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           NEW SECTION: STUDENT FEEDBACK & RATINGS (PICTORIAL & DIAGNOSTIC)
+           ══════════════════════════════════════════════════════════════════ -->
+      <main class="content-body tab-view-panel" id="view-feedback" style="display: none; padding-bottom: 5rem;">
+        
+        <!-- Header Banner -->
+        <div class="hero-card" style="background: linear-gradient(135deg, #1E2749 0%, #173B5C 60%, #0E8176 100%); margin-bottom: 1.75rem;">
+          <div class="hero-content">
+            <span class="eyebrow" style="color: #6EE7B7; display: flex; align-items: center; gap: 0.4rem;" data-i18n="feedback_section_title">
+              <i data-lucide="star" style="width: 14px; height: 14px; color: #F59E0B;"></i> STUDENT VOICE & RATINGS INTELLIGENCE
+            </span>
+            <h2 class="hero-title" style="color: #FFFFFF; font-size: 1.75rem; margin-top: 0.35rem;" data-i18n="feedback_section_title">
+              Student Feedback & Teaching Ratings
+            </h2>
+            <p class="hero-desc" style="color: rgba(255, 255, 255, 0.85); font-size: 0.9rem;" data-i18n="feedback_section_sub">
+              Visual ratings on trainer behavior, class clarity, doubt resolution, and comparative course diagnostics.
+            </p>
+          </div>
+          <div class="hero-actions" style="display: flex; gap: 0.65rem; align-items: center;">
+            <button class="btn btn-outline" onclick="loadFeedbackAnalytics()" style="background: rgba(255, 255, 255, 0.15); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.3);">
+              <i data-lucide="refresh-cw" style="width: 15px; height: 15px;"></i> Refresh Ratings
+            </button>
+          </div>
+        </div>
+
+        <!-- 4-Card Pictorial Scoreboard Grid -->
+        <div class="feedback-kpi-grid">
+          
+          <!-- Card 1: Overall Score -->
+          <div class="feedback-kpi-card">
+            <div>
+              <div class="kpi-top-row">
+                <span class="kpi-icon-badge">⭐</span>
+                <span class="kpi-mood-badge">😍 96.2% Positive</span>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary);" data-i18n="kpi_overall_score">
+                Overall Trainer Score
+              </div>
+              <div class="kpi-score-display" style="margin-top: 0.25rem;">
+                <span id="fb-overall-score">4.8</span><span class="kpi-score-max">/ 5.0</span>
+              </div>
+              <div class="kpi-stars-row">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                <span style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-muted); margin-left: 0.35rem;">(348 reviews)</span>
+              </div>
+            </div>
+            <div class="kpi-meter-bar">
+              <div class="kpi-meter-fill" style="width: 96%;"></div>
+            </div>
+          </div>
+
+          <!-- Card 2: Behavior & Attitude -->
+          <div class="feedback-kpi-card kpi-purple">
+            <div>
+              <div class="kpi-top-row">
+                <span class="kpi-icon-badge">🤝</span>
+                <span class="kpi-mood-badge" style="background: #F3E8FF; color: #6B21A8; border-color: #D8B4FE;">👍 98% Thumbs Up</span>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary);" data-i18n="kpi_behavior_label">
+                Behavior & Respect
+              </div>
+              <div class="kpi-score-display" style="margin-top: 0.25rem;">
+                <span id="fb-behavior-score">4.9</span><span class="kpi-score-max">/ 5.0</span>
+              </div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.2rem;">
+                <span>⏰ Punctual on Time</span>
+                <span>🧘 Very Patient with Beginners</span>
+                <span>🤝 Listens with Respect</span>
+              </div>
+            </div>
+            <div class="kpi-meter-bar">
+              <div class="kpi-meter-fill" style="width: 98%; background: linear-gradient(90deg, #8B5CF6, #6366F1);"></div>
+            </div>
+          </div>
+
+          <!-- Card 3: Classes & Teaching Quality -->
+          <div class="feedback-kpi-card kpi-blue">
+            <div>
+              <div class="kpi-top-row">
+                <span class="kpi-icon-badge">🧑‍🏫</span>
+                <span class="kpi-mood-badge" style="background: #EFF6FF; color: #1E40AF; border-color: #BFDBFE;">👍 94% Thumbs Up</span>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary);" data-i18n="kpi_teaching_label">
+                Class & Teaching Quality
+              </div>
+              <div class="kpi-score-display" style="margin-top: 0.25rem;">
+                <span id="fb-classes-score">4.7</span><span class="kpi-score-max">/ 5.0</span>
+              </div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.2rem;">
+                <span>🗣️ Clear Loud Voice</span>
+                <span>💬 Simple Language Used</span>
+                <span>📚 Practical Daily Tasks</span>
+              </div>
+            </div>
+            <div class="kpi-meter-bar">
+              <div class="kpi-meter-fill" style="width: 94%; background: linear-gradient(90deg, #3B82F6, #2563EB);"></div>
+            </div>
+          </div>
+
+          <!-- Card 4: Doubt Clearing & Support -->
+          <div class="feedback-kpi-card kpi-amber">
+            <div>
+              <div class="kpi-top-row">
+                <span class="kpi-icon-badge">❓</span>
+                <span class="kpi-mood-badge" style="background: #FFFBEB; color: #92400E; border-color: #FDE68A;">👍 96% Thumbs Up</span>
+              </div>
+              <div style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary);" data-i18n="kpi_doubts_label">
+                Doubt Clearing & Help
+              </div>
+              <div class="kpi-score-display" style="margin-top: 0.25rem;">
+                <span id="fb-doubts-score">4.8</span><span class="kpi-score-max">/ 5.0</span>
+              </div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.2rem;">
+                <span>🪜 Step-by-Step Explanations</span>
+                <span>💡 Answers Every Student Question</span>
+                <span>😊 Never Frustrated or Angry</span>
+              </div>
+            </div>
+            <div class="kpi-meter-bar">
+              <div class="kpi-meter-fill" style="width: 96%; background: linear-gradient(90deg, #F59E0B, #D97706);"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ═════ COURSE COMPARISON: HIGHEST VS LOWEST RATED & WHY ═════ -->
+        <div style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+          <h3 style="margin: 0; font-size: 1.15rem; color: var(--color-deep-indigo); display: flex; align-items: center; gap: 0.5rem;">
+            <span>📊</span> Course Satisfaction Diagnostics · What Works vs What Needs Action
+          </h3>
+          <span style="font-size: 0.8rem; color: var(--color-text-muted);">NCVET & PMKVY 4.0 Quality Benchmark</span>
+        </div>
+
+        <div class="course-comparison-grid">
+          
+          <!-- TOP RATED COURSE -->
+          <div class="top-course-card">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem;">
+              <div>
+                <span class="badge" style="background: #DCFCE7; color: #15803D; font-weight: 800; font-size: 0.7rem; margin-bottom: 0.35rem;" data-i18n="top_course_badge">
+                  🏆 TOP PERFORMER
+                </span>
+                <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0.2rem 0;">
+                  Full Stack Software Associate
+                </h4>
+                <div style="font-size: 0.78rem; color: var(--color-text-muted); font-family: var(--font-mono);">
+                  NSDC-IT-FS-06 · 24 Weeks · 46 Trainees
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 1.75rem; font-weight: 800; color: #15803D; line-height: 1;">
+                  ⭐ 4.9
+                </div>
+                <div style="font-size: 0.72rem; color: var(--color-text-muted); font-weight: 600; margin-top: 0.2rem;">
+                  142 Student Reviews
+                </div>
+              </div>
+            </div>
+
+            <div style="margin: 1rem 0;">
+              <div style="font-size: 0.8rem; font-weight: 700; color: #166534; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">
+                Why Students Love This Course (Praise Tags):
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+                <span class="praise-pill">💻 Lots of Practical Labs (96% 👍)</span>
+                <span class="praise-pill">🚀 Industry Live Projects (94% 👍)</span>
+                <span class="praise-pill">🗣️ Clear & Patient Explanations (98% 👍)</span>
+                <span class="praise-pill">💼 Placement Mock Interviews (91% 👍)</span>
+              </div>
+            </div>
+
+            <!-- Trainee Testimonial Quote -->
+            <div style="background: #FFFFFF; border: 1px solid #BBF7D0; border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-top: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: #10B981; color: #FFFFFF; font-size: 0.7rem; font-weight: 800; display: flex; align-items: center; justify-content: center;">
+                  PP
+                </div>
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-deep-indigo);">Priya Patel</span>
+                <span class="badge badge-teal" style="font-size: 0.65rem; padding: 0.15rem 0.4rem;">Placed at TCS</span>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin: 0; font-style: italic;">
+                "Arjun sir explains complex Django & REST APIs so easily. The practical lab exercises helped me clear my TCS technical interview! Always polite and patient."
+              </p>
+            </div>
+          </div>
+
+          <!-- NEEDS ATTENTION COURSE -->
+          <div class="needs-attention-card">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem;">
+              <div>
+                <span class="badge" style="background: #FEE2E2; color: #B91C1C; font-weight: 800; font-size: 0.7rem; margin-bottom: 0.35rem;" data-i18n="needs_attention_badge">
+                  ⚠️ NEEDS ACTION & COURSE DIAGNOSTICS
+                </span>
+                <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0.2rem 0;">
+                  Micro Irrigation & Precision Farmer
+                </h4>
+                <div style="font-size: 0.78rem; color: var(--color-text-muted); font-family: var(--font-mono);">
+                  ASCI-AGR-MI-05 · 8 Weeks · 42 Trainees
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 1.75rem; font-weight: 800; color: #DC2626; line-height: 1;">
+                  ⭐ 3.2
+                </div>
+                <div style="font-size: 0.72rem; color: var(--color-text-muted); font-weight: 600; margin-top: 0.2rem;">
+                  65 Student Reviews
+                </div>
+              </div>
+            </div>
+
+            <!-- Pictorial Why Breakdown -->
+            <div style="margin: 1rem 0;">
+              <div style="font-size: 0.8rem; font-weight: 700; color: #B91C1C; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.65rem;" data-i18n="why_diagnostics_title">
+                Why Students Struggled (Diagnostics Breakdown):
+              </div>
+              
+              <div class="diagnostic-meter-row">
+                <div class="diagnostic-meter-label">
+                  <span>🏎️ Pacing Too Fast for Rural Beginners</span>
+                  <span style="color: #DC2626; font-weight: 700;">44% of complaints</span>
+                </div>
+                <div class="diagnostic-meter-track">
+                  <div class="diagnostic-meter-fill" style="width: 44%;"></div>
+                </div>
+              </div>
+
+              <div class="diagnostic-meter-row">
+                <div class="diagnostic-meter-label">
+                  <span>🖥️ Need More Field / Pump Practice Hours</span>
+                  <span style="color: #DC2626; font-weight: 700;">36% of complaints</span>
+                </div>
+                <div class="diagnostic-meter-track">
+                  <div class="diagnostic-meter-fill" style="width: 36%;"></div>
+                </div>
+              </div>
+
+              <div class="diagnostic-meter-row">
+                <div class="diagnostic-meter-label">
+                  <span>⏳ Less Time for Doubt Resolution</span>
+                  <span style="color: #DC2626; font-weight: 700;">28% of complaints</span>
+                </div>
+                <div class="diagnostic-meter-track">
+                  <div class="diagnostic-meter-fill" style="width: 28%;"></div>
+                </div>
+              </div>
+
+              <div class="diagnostic-meter-row">
+                <div class="diagnostic-meter-label">
+                  <span>📖 Need Simpler Notes in Odia & Hindi</span>
+                  <span style="color: #DC2626; font-weight: 700;">22% of complaints</span>
+                </div>
+                <div class="diagnostic-meter-track">
+                  <div class="diagnostic-meter-fill" style="width: 22%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Plan Box -->
+            <div style="background: #FFFFFF; border: 1px solid #FCD34D; border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-top: 0.75rem;">
+              <div style="font-size: 0.8rem; font-weight: 700; color: #92400E; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
+                <span>💡</span> Recommended Trainer Action Checklist:
+              </div>
+              <div style="font-size: 0.78rem; color: var(--color-text-secondary); display: flex; flex-direction: column; gap: 0.25rem;">
+                <div>✔ <strong>Buffer Time:</strong> Reserve last 15 minutes of each session exclusively for doubt clearing.</div>
+                <div>✔ <strong>Adjust Pace:</strong> Slow down pacing on automated sensor & solenoid valve modules.</div>
+                <div>✔ <strong>Bilingual Aid:</strong> Distribute Odia & Hindi pictorial quick-reference flashcards.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ═════ TRAINEE FEEDBACK & REVIEWS FEED ═════ -->
+        <div class="table-card" style="padding: 1.5rem; border-radius: var(--radius-lg); background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
+          
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3 style="margin: 0; font-size: 1.15rem; color: var(--color-deep-indigo); display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="message-square" style="width: 18px; height: 18px; color: var(--color-teal);"></i>
+                Trainee Reviews & Student Opinions
+              </h3>
+              <p style="margin: 0.2rem 0 0; font-size: 0.82rem; color: var(--color-text-muted);">
+                Transparent student ratings submitted post-course completion
+              </p>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <div style="display: flex; gap: 0.35rem;" id="review-sentiment-filters">
+                <button class="btn btn-sm review-filter-btn active" data-sentiment="all" onclick="filterReviews('all')" style="background: var(--color-teal); color: #FFFFFF; font-size: 0.78rem; font-weight: 700;">
+                  All (348)
+                </button>
+                <button class="btn btn-sm review-filter-btn" data-sentiment="loved" onclick="filterReviews('loved')" style="background: var(--color-surface); border: 1px solid var(--color-border); font-size: 0.78rem; font-weight: 600;">
+                  😍 Loved it (312)
+                </button>
+                <button class="btn btn-sm review-filter-btn" data-sentiment="good" onclick="filterReviews('good')" style="background: var(--color-surface); border: 1px solid var(--color-border); font-size: 0.78rem; font-weight: 600;">
+                  😊 Good (24)
+                </button>
+                <button class="btn btn-sm review-filter-btn" data-sentiment="needs_help" onclick="filterReviews('needs_help')" style="background: var(--color-surface); border: 1px solid var(--color-border); font-size: 0.78rem; font-weight: 600;">
+                  😟 Needs Help (12)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviews Feed Container -->
+          <div id="trainer-reviews-feed" class="reviews-feed-container">
+            <!-- Dynamically populated by JS -->
+          </div>
+
+        </div>
+
+      </main>
+
     </div><!-- /main-wrapper -->
   </div><!-- /app-container -->
 
@@ -1318,6 +1637,10 @@
       <a class="bottom-nav-item" data-tab="step4-qualification" onclick="switchView('step4-qualification')">
         <i data-lucide="award" style="width: 20px; height: 20px;"></i>
         <span>4. Qualify</span>
+      </a>
+      <a class="bottom-nav-item" data-tab="feedback" onclick="switchView('feedback')">
+        <i data-lucide="star" style="width: 20px; height: 20px; color: #F59E0B;"></i>
+        <span data-i18n="nav_feedback">Feedback</span>
       </a>
       <a class="bottom-nav-item" data-tab="overview" onclick="switchView('overview')">
         <i data-lucide="activity" style="width: 20px; height: 20px;"></i>
@@ -1372,7 +1695,8 @@
         'trainees': 'Trainees Directory',
         'followups': 'Follow-ups',
         'reports': 'Reports',
-        'remote-recovery': 'Dark-Zone & Remote Trainee Recovery Hub'
+        'remote-recovery': 'Dark-Zone & Remote Trainee Recovery Hub',
+        'feedback': 'Student Feedback & Ratings'
       };
       const breadcrumb = document.getElementById('header-active-view-name');
       if (breadcrumb) breadcrumb.textContent = tabNames[tabId] || tabId;
@@ -1387,6 +1711,7 @@
       if (tabId === 'followups') loadFollowUps();
       if (tabId === 'reports') loadReports();
       if (tabId === 'remote-recovery') loadRemoteRecovery();
+      if (tabId === 'feedback') loadFeedbackAnalytics();
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -2567,6 +2892,124 @@
 
     window.confirmIndividualOutcome = function(id, name) {
       FieldAtlasAPI.showToast(`✔ ${name}'s verified outcome transferred to Confirmation Registry!`, 'success');
+    };
+
+
+    // ═══ Feedback & Student Ratings Controller ═══
+    let allFeedbackReviews = [];
+
+    window.loadFeedbackAnalytics = async function() {
+      try {
+        const res = await FieldAtlasAPI.get('/api/feedback/trainer/analytics/');
+        if (res) {
+          if (document.getElementById('fb-overall-score')) {
+            document.getElementById('fb-overall-score').textContent = res.overall_rating || '4.8';
+          }
+          if (document.getElementById('fb-behavior-score') && res.criteria && res.criteria.behavior) {
+            document.getElementById('fb-behavior-score').textContent = res.criteria.behavior.score || '4.9';
+          }
+          if (document.getElementById('fb-classes-score') && res.criteria && res.criteria.classes) {
+            document.getElementById('fb-classes-score').textContent = res.criteria.classes.score || '4.7';
+          }
+          if (document.getElementById('fb-doubts-score') && res.criteria && res.criteria.doubt_clearing) {
+            document.getElementById('fb-doubts-score').textContent = res.criteria.doubt_clearing.score || '4.8';
+          }
+          allFeedbackReviews = res.reviews || [];
+          renderFeedbackReviews(allFeedbackReviews);
+        }
+      } catch (err) {
+        console.error('Error loading feedback analytics:', err);
+      }
+      if (window.FieldAtlasI18N) FieldAtlasI18N.translatePage();
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.renderFeedbackReviews = function(reviews) {
+      const feed = document.getElementById('trainer-reviews-feed');
+      if (!feed) return;
+
+      if (!reviews || reviews.length === 0) {
+        feed.innerHTML = `
+          <div style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
+            No reviews matching the selected filter.
+          </div>
+        `;
+        return;
+      }
+
+      feed.innerHTML = reviews.map(r => {
+        const tagsHtml = (r.tags || []).map(t => `<span class="praise-pill" style="font-size: 0.75rem; padding: 0.2rem 0.55rem;">${t}</span>`).join('');
+        return `
+          <div class="single-review-card">
+            <div class="review-card-top">
+              <div class="review-author-wrap">
+                <div class="review-author-avatar">${r.avatar_init || (r.trainee_name ? r.trainee_name.slice(0, 2).toUpperCase() : 'ST')}</div>
+                <div>
+                  <div style="font-weight: 700; color: var(--color-deep-indigo); font-size: 0.9rem;">
+                    ${r.trainee_name}
+                  </div>
+                  <div style="font-size: 0.75rem; color: var(--color-text-muted);">
+                    ${r.course_title} · ${r.created_at || 'Recent'}
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span class="kpi-mood-badge">${r.mood || '😍 Loved it'}</span>
+                <span style="font-size: 1.1rem; font-weight: 800; color: #F59E0B;">⭐ ${r.overall_score || '5.0'}</span>
+              </div>
+            </div>
+
+            <div class="review-criterion-pills">
+              <span class="criterion-pill">🤝 Behavior: ${r.behavior || 5}/5 ★</span>
+              <span class="criterion-pill">🧑‍🏫 Teaching: ${r.classes || r.teaching || 5}/5 ★</span>
+              <span class="criterion-pill">❓ Doubts: ${r.doubts || 5}/5 ★</span>
+            </div>
+
+            <div style="margin: 0.5rem 0;">
+              ${tagsHtml}
+            </div>
+
+            <p style="margin: 0.5rem 0 0.75rem; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.45;">
+              "${r.opinion || 'Great teacher and excellent course.'}"
+            </p>
+
+            <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+              <button class="btn btn-outline btn-sm" onclick="acknowledgeReview(${r.id})" style="font-size: 0.75rem; padding: 0.25rem 0.65rem;">
+                <i data-lucide="heart" style="width: 13px; height: 13px; margin-right: 4px; color: #E11D48;"></i> Acknowledge & Thank
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.filterReviews = function(sentiment) {
+      document.querySelectorAll('.review-filter-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-sentiment') === sentiment);
+        if (b.getAttribute('data-sentiment') === sentiment) {
+          b.style.background = 'var(--color-teal)';
+          b.style.color = '#FFFFFF';
+        } else {
+          b.style.background = 'var(--color-surface)';
+          b.style.color = 'var(--color-text-primary)';
+        }
+      });
+
+      if (sentiment === 'all') {
+        renderFeedbackReviews(allFeedbackReviews);
+      } else if (sentiment === 'loved') {
+        renderFeedbackReviews(allFeedbackReviews.filter(r => (r.overall_score >= 4.5 || (r.mood && r.mood.includes('Loved')))));
+      } else if (sentiment === 'good') {
+        renderFeedbackReviews(allFeedbackReviews.filter(r => (r.overall_score >= 3.5 && r.overall_score < 4.5)));
+      } else if (sentiment === 'needs_help') {
+        renderFeedbackReviews(allFeedbackReviews.filter(r => (r.overall_score < 3.5 || (r.mood && (r.mood.includes('Average') || r.mood.includes('Help'))))));
+      }
+    };
+
+    window.acknowledgeReview = function(id) {
+      FieldAtlasAPI.showToast('✔ Review acknowledged! A personalized thank you notification was dispatched to the trainee.', 'success');
     };
 
   })();

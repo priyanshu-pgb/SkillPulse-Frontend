@@ -1221,6 +1221,195 @@
       });
     },
 
+    // ─── Feedback & Student Ratings Endpoints ──────────────────────────────
+    '/api/feedback/trainer/analytics/': () => {
+      const stored = JSON.parse(localStorage.getItem('fa_submitted_feedbacks') || '[]');
+      const defaultReviews = [
+        {
+          id: 101,
+          trainee_name: 'Priya Patel',
+          avatar_init: 'PP',
+          course_title: 'Full Stack Software Associate',
+          course_code: 'NSDC-IT-FS-06',
+          overall_score: 5.0,
+          behavior: 5,
+          classes: 5,
+          doubts: 5,
+          mood: '😍 Loved it',
+          tags: ['🗣️ Clear Explanations', '🧘 Very Patient', '💡 Cleared Doubts', '💻 Great Practical Labs', '💼 Job Ready'],
+          opinion: 'Arjun sir explains complex Django & REST APIs so easily. The practical lab exercises helped me clear my TCS interview! Always respectful and polite.',
+          created_at: '2 hours ago'
+        },
+        {
+          id: 102,
+          trainee_name: 'Rahul Kumar',
+          avatar_init: 'RK',
+          course_title: 'Full Stack Software Associate',
+          course_code: 'NSDC-IT-FS-06',
+          overall_score: 4.8,
+          behavior: 5,
+          classes: 5,
+          doubts: 4,
+          mood: '😍 Loved it',
+          tags: ['💻 Great Practical Labs', '⏰ Always on Time', '💼 Job Ready'],
+          opinion: 'Excellent teaching style with real world examples. Hands-on projects are very helpful for freshers.',
+          created_at: 'Yesterday'
+        },
+        {
+          id: 103,
+          trainee_name: 'Savitri Deuri',
+          avatar_init: 'SD',
+          course_title: 'Micro Irrigation & Precision Farmer',
+          course_code: 'ASCI-AGR-MI-05',
+          overall_score: 3.0,
+          behavior: 4,
+          classes: 3,
+          doubts: 3,
+          mood: '😐 Average',
+          tags: ['🏎️ Taught Too Fast', '🖥️ Need More Lab Time', '📖 Need Odia/Hindi Notes'],
+          opinion: 'The trainer is very knowledgeable, but the sensor calibration module went too fast. We need simpler notes in Odia so we can practice in our village fields.',
+          created_at: '3 days ago'
+        },
+        {
+          id: 104,
+          trainee_name: 'Manish Verma',
+          avatar_init: 'MV',
+          course_title: 'Solar PV Installer (Suryamitra)',
+          course_code: 'PMKVY-4.0-SOL-01',
+          overall_score: 4.6,
+          behavior: 5,
+          classes: 4,
+          doubts: 5,
+          mood: '😊 Good',
+          tags: ['🧘 Very Patient', '💡 Cleared Doubts', '⏰ Always on Time'],
+          opinion: 'Great practical safety sessions on solar array mounting. Teacher stays back after class to answer all questions.',
+          created_at: '4 days ago'
+        }
+      ];
+
+      const allReviews = [...stored, ...defaultReviews];
+      return mockResponse({
+        success: true,
+        overall_rating: 4.8,
+        total_reviews: 348 + stored.length,
+        satisfaction_rate: 96.2,
+        criteria: {
+          behavior: { score: 4.9, thumbs_up_pct: 98, label: 'Punctual, patient, respectful' },
+          classes: { score: 4.7, thumbs_up_pct: 94, label: 'Clear voice, structured curriculum' },
+          doubt_clearing: { score: 4.8, thumbs_up_pct: 96, label: 'Patient, answers all questions' }
+        },
+        top_course: {
+          title: 'Full Stack Software Associate',
+          course_code: 'NSDC-IT-FS-06',
+          category: 'IT-ITeS / Web Tech',
+          rating: 4.9,
+          total_reviews: 142,
+          positive_pct: 97.4,
+          badge: '🏆 TOP PERFORMER',
+          why_praise_tags: [
+            { icon: '💻', text: 'Lots of Practical Labs', pct: 96 },
+            { icon: '🚀', text: 'Industry Live Projects', pct: 94 },
+            { icon: '🗣️', text: 'Clear & Friendly Teaching', pct: 98 },
+            { icon: '💼', text: 'Placement Interview Prep', pct: 91 }
+          ],
+          highlight_quote: 'Arjun sir explains complex concepts step-by-step. Practical lab exercises are top-notch!'
+        },
+        needs_attention_course: {
+          title: 'Micro Irrigation & Precision Farmer',
+          course_code: 'ASCI-AGR-MI-05',
+          category: 'Agriculture & Allied',
+          rating: 3.2,
+          total_reviews: 65,
+          negative_pct: 38.5,
+          badge: '⚠️ NEEDS ACTION',
+          why_diagnostics: [
+            { reason: 'Taught too fast for beginners', pct: 44, icon: '🏎️' },
+            { reason: 'Need more hands-on machine hours', pct: 36, icon: '🖥️' },
+            { reason: 'Wanted more time for doubt resolution', pct: 28, icon: '⏳' },
+            { reason: 'Need simpler notes in Odia & Hindi', pct: 22, icon: '📖' }
+          ],
+          action_checklist: [
+            'Add 15-minute daily doubt buffer before closing class',
+            'Slow down pacing on automated valve calibration module',
+            'Distribute pictorial bilingual handouts (Odia/Hindi)'
+          ]
+        },
+        reviews: allReviews
+      });
+    },
+
+    '/api/feedback/trainee/my-feedback/': () => {
+      const stored = JSON.parse(localStorage.getItem('fa_submitted_feedbacks') || '[]');
+      return mockResponse({
+        trainee_name: 'Priya Patel',
+        submitted_history: stored,
+        eligible_courses: [
+          {
+            id: 1,
+            title: 'Full Stack Web Development (PMKVY 4.0)',
+            course_code: 'NSDC-IT-FS-06',
+            trainer_name: 'Arjun Sharma',
+            trainer_id: 1,
+            status: 'Completed (100%)',
+            already_rated: stored.some(s => s.course_id === 1)
+          },
+          {
+            id: 2,
+            title: 'SWAYAM: Data Science & AI Literacy',
+            course_code: 'SWAYAM-AI-02',
+            trainer_name: 'Dr. Vikram Sen',
+            trainer_id: 2,
+            status: 'Completed (100%)',
+            already_rated: stored.some(s => s.course_id === 2)
+          }
+        ]
+      });
+    },
+
+    '/api/feedback/submit/': (opts) => {
+      let body = {};
+      try {
+        body = typeof opts.body === 'string' ? JSON.parse(opts.body) : (opts.body || {});
+      } catch (e) {}
+
+      const behavior = Number(body.trainer_behavior_rating) || 5;
+      const teaching = Number(body.trainer_teaching_rating) || 5;
+      const doubts = Number(body.trainer_doubt_clearing_rating) || 5;
+      const practical = Number(body.course_practical_rating) || 5;
+      const content = Number(body.course_content_rating) || 5;
+      const overall = Number(((behavior + teaching + doubts + practical + content) / 5).toFixed(1));
+
+      const newFeedback = {
+        id: Date.now(),
+        course_id: Number(body.course_id) || 1,
+        course_title: body.course_title || 'Full Stack Web Development (PMKVY 4.0)',
+        course_code: body.course_code || 'NSDC-IT-FS-06',
+        trainer_name: body.trainer_name || 'Arjun Sharma',
+        trainee_name: 'Priya Patel',
+        avatar_init: 'PP',
+        overall_score: overall,
+        behavior: behavior,
+        teaching: teaching,
+        doubts: doubts,
+        practical: practical,
+        content: content,
+        mood: overall >= 4.5 ? '😍 Loved it' : overall >= 3.5 ? '😊 Good' : overall >= 2.5 ? '😐 Average' : '😟 Needs Help',
+        tags: Array.isArray(body.feedback_tags) ? body.feedback_tags : (typeof body.feedback_tags === 'string' ? JSON.parse(body.feedback_tags || '[]') : []),
+        opinion: body.opinion_text || 'Very nice teaching and helpful teacher.',
+        created_at: 'Just now'
+      };
+
+      const existing = JSON.parse(localStorage.getItem('fa_submitted_feedbacks') || '[]');
+      existing.unshift(newFeedback);
+      localStorage.setItem('fa_submitted_feedbacks', JSON.stringify(existing));
+
+      return mockResponse({
+        success: true,
+        message: 'Thank you! Your feedback has been submitted successfully to your Trainer and NSDC.',
+        feedback: newFeedback
+      });
+    },
+
     // Catch-all for any trainee/trainer sub-endpoints
     '/api/trainee/': () => mockResponse({ message: 'OK' }),
     '/api/trainer/': () => mockResponse({ message: 'OK' }),
