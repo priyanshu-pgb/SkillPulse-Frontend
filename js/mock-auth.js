@@ -1,13 +1,13 @@
 /**
- * FIELD ATLAS — MOCK AUTHENTICATION & IDENTITY LAYER
+ * SKILLPULSE — MOCK AUTHENTICATION & IDENTITY LAYER
  * ----------------------------------------------------
  * Provides client-side auth, Aadhaar validation, session caching, and profile management.
  * All API calls for auth (/api/auth/*) and profile (/api/profile/*) are intercepted locally.
  *
  * Demo Credentials (Password: Atlas@2026! for all):
- *   trainer@fieldatlas.in  or  FA-TR-1001  → Trainer role
- *   trainee@fieldatlas.in  or  FA-24-0182  → Trainee role
- *   admin@fieldatlas.in    or  FA-AD-0001  → Admin role
+ *   trainer@skillpulse.in  or  FA-TR-1001  → Trainer role
+ *   trainee@skillpulse.in  or  FA-24-0182  → Trainee role
+ *   admin@skillpulse.in    or  FA-AD-0001  → Admin role
  *   OR any registered Aadhaar Card Number (12 digits) / Registered Mobile Number
  */
 
@@ -19,7 +19,7 @@
     {
       id: 1,
       field_atlas_id: 'FA-TR-1001',
-      email: 'trainer@fieldatlas.in',
+      email: 'trainer@skillpulse.in',
       full_name: 'Arjun Sharma',
       aadhaar_name: 'Arjun Sharma',
       aadhaar_number: '2345 6789 0123',
@@ -38,7 +38,7 @@
     {
       id: 2,
       field_atlas_id: 'FA-24-0182',
-      email: 'trainee@fieldatlas.in',
+      email: 'trainee@skillpulse.in',
       full_name: 'Priya Patel',
       aadhaar_name: 'Priya Patel',
       aadhaar_number: '8765 4321 0987',
@@ -57,14 +57,14 @@
     {
       id: 3,
       field_atlas_id: 'FA-AD-0001',
-      email: 'admin@fieldatlas.in',
+      email: 'admin@skillpulse.in',
       full_name: 'Admin User',
       aadhaar_name: 'Admin User',
       aadhaar_number: '1122 3344 5566',
       phone_number: '9811002233',
       role: 'admin',
       password: 'Atlas@2026!',
-      provider: 'Field Atlas HQ',
+      provider: 'SkillPulse HQ',
       district: 'New Delhi',
       state: 'Delhi',
       is_verified: true,
@@ -116,16 +116,16 @@
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
     } catch (e) {}
 
-    // Synchronize into window.FieldAtlasCache
-    if (window.FieldAtlasCache) {
-      window.FieldAtlasCache.set('user_session', sessionData);
+    // Synchronize into window.SkillPulseCache
+    if (window.SkillPulseCache) {
+      window.SkillPulseCache.set('user_session', sessionData);
     }
   }
 
   function getSession() {
     try {
-      if (window.FieldAtlasCache) {
-        const cached = window.FieldAtlasCache.get('user_session');
+      if (window.SkillPulseCache) {
+        const cached = window.SkillPulseCache.get('user_session');
         if (cached) return cached;
       }
       const sessionRaw = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
@@ -139,13 +139,13 @@
     try {
       localStorage.removeItem(SESSION_KEY);
       sessionStorage.removeItem(SESSION_KEY);
-      if (window.FieldAtlasCache) {
-        window.FieldAtlasCache.remove('user_session');
+      if (window.SkillPulseCache) {
+        window.SkillPulseCache.remove('user_session');
       }
     } catch (e) {}
   }
 
-  // ─── Find user by Aadhaar, Phone, Email, or Field Atlas ID ───────────────
+  // ─── Find user by Aadhaar, Phone, Email, or SkillPulse ID ───────────────
   function findUser(identifier) {
     const rawId = (identifier || '').trim();
     const cleanDigits = rawId.replace(/\D/g, '');
@@ -157,7 +157,7 @@
       // 1. Match Email
       if (u.email && u.email.toLowerCase() === lowerId) return true;
 
-      // 2. Match Field Atlas ID
+      // 2. Match SkillPulse ID
       if (u.field_atlas_id && u.field_atlas_id.toLowerCase() === lowerId) return true;
 
       // 3. Match Aadhaar Number (12 digits)
@@ -248,7 +248,7 @@
       const generatedId = (role === 'trainer' ? 'FA-TR-' : 'FA-26-') + Math.floor(Math.random() * 9000 + 1000);
       const email = (body.email && body.email.includes('@')) 
         ? body.email.trim() 
-        : `aadhaar_${rawAadhaar.slice(-4)}@fieldatlas.in`;
+        : `aadhaar_${rawAadhaar.slice(-4)}@skillpulse.in`;
 
       const newUser = {
         id: Date.now(),
@@ -305,8 +305,8 @@
     '/api/i18n/set-language/': async (body) => {
       const lang = (body && body.language) || 'en';
       localStorage.setItem('field_atlas_lang', lang);
-      if (window.FieldAtlasCache) {
-        window.FieldAtlasCache.set('preferred_language', lang);
+      if (window.SkillPulseCache) {
+        window.SkillPulseCache.set('preferred_language', lang);
       }
       const session = getSession();
       if (session) {
@@ -427,7 +427,7 @@
   };
 
   // ─── Expose helpers globally ──────────────────────────────────────────────
-  window.FieldAtlasMockAuth = {
+  window.SkillPulseMockAuth = {
     getSession,
     saveSession,
     clearSession,
@@ -435,6 +435,6 @@
     isLoggedIn: () => !!getSession(),
   };
 
-  console.info('[FieldAtlas] Mock auth layer active with Aadhaar and Session Cache.');
+  console.info('[SkillPulse] Mock auth layer active with Aadhaar and Session Cache.');
 })();
 

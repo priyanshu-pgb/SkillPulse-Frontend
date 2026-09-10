@@ -1,5 +1,5 @@
 /*
- * FIELD ATLAS — SKILLING OUTCOMES PLATFORM
+ * SKILLPULSE — SKILLING OUTCOMES PLATFORM
  * Core Design Tokens, Typography, Layout, and Component Styles
  * Aesthetic: Civic Cartography (Deep Indigo, Field Teal, Ochre, Coral, Parchment)
  */
@@ -2986,4 +2986,254 @@ p {
   background: var(--color-surface-hover);
   color: var(--color-deep-indigo);
   border: 1px solid var(--color-border);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   SKILLPULSE HIGH-CONTRAST DARK MODE & EDITORIAL TYPOGRAPHY UPGRADE
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, .stat-item h3, .metric-value, .brand-text, .hero-title, .landing-brand-text {
+  font-family: var(--font-heading) !important;
+  letter-spacing: -0.025em;
+}
+
+/* ─── Stats Bar Fix (Light & Dark Mode) ─── */
+.stats-bar {
+  background: #0B1120 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3rem 1.5rem;
+}
+.stats-bar .stat-item h3 {
+  color: #38BDF8 !important;
+  font-size: 2.25rem;
+  font-weight: 800;
+}
+.stats-bar .stat-item p {
+  color: #94A3B8 !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Dark Mode Landing Page Components ─── */
+[data-theme="dark"] .landing-nav,
+html.dark .landing-nav {
+  background: rgba(11, 15, 25, 0.94) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .landing-brand-text,
+html.dark .landing-brand-text {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .landing-hero,
+html.dark .landing-hero {
+  background: linear-gradient(180deg, #0B0F19 0%, #0F172A 100%) !important;
+}
+
+[data-theme="dark"] .landing-hero h1,
+html.dark .landing-hero h1 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .landing-hero p,
+html.dark .landing-hero p {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .features-section,
+html.dark .features-section {
+  background: #0B0F19 !important;
+}
+
+[data-theme="dark"] .section-header h2,
+html.dark .section-header h2 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .section-header p,
+html.dark .section-header p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .feature-card,
+html.dark .feature-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .feature-card h3,
+html.dark .feature-card h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .feature-card p,
+html.dark .feature-card p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .how-section,
+html.dark .how-section {
+  background: #0E1526 !important;
+}
+
+[data-theme="dark"] .how-step h4,
+html.dark .how-step h4 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .how-step p,
+html.dark .how-step p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .landing-footer,
+html.dark .landing-footer {
+  background: #080C14 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .landing-footer p,
+html.dark .landing-footer p {
+  color: #94A3B8 !important;
+}
+
+/* ─── Dark Mode Follow-Up Queue & Simulator ─── */
+[data-theme="dark"] .followup-queue-card,
+[data-theme="dark"] .simulator-card,
+html.dark .followup-queue-card,
+html.dark .simulator-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .queue-header h3,
+html.dark .queue-header h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .queue-item,
+html.dark .queue-item {
+  background: #1A2438 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .queue-item:hover,
+html.dark .queue-item:hover {
+  background: #22304A !important;
+}
+
+[data-theme="dark"] .queue-item.selected,
+html.dark .queue-item.selected {
+  background: rgba(20, 184, 166, 0.15) !important;
+  border-color: #14B8A6 !important;
+}
+
+[data-theme="dark"] .queue-item strong,
+html.dark .queue-item strong {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .phone-preview-shell,
+html.dark .phone-preview-shell {
+  background: #0B0F19 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .message-bubble,
+html.dark .message-bubble {
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+  border: 1px solid #334155 !important;
+}
+
+[data-theme="dark"] .simulator-tab-btn,
+html.dark .simulator-tab-btn {
+  background: transparent !important;
+  color: #94A3B8 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .simulator-tab-btn.active,
+html.dark .simulator-tab-btn.active {
+  background: #1E293B !important;
+  color: #38BDF8 !important;
+  border-color: #38BDF8 !important;
+}
+
+/* ─── Dark Mode Tables & Data Views ─── */
+[data-theme="dark"] .table-card,
+html.dark .table-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .data-table,
+html.dark .data-table {
+  background: #131B2E !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .data-table th,
+html.dark .data-table th {
+  background: #0E1526 !important;
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .data-table td,
+html.dark .data-table td {
+  border-bottom: 1px solid #1E293B !important;
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .data-table td strong,
+html.dark .data-table td strong {
+  color: #F8FAFC !important;
+}
+
+/* ─── Dark Mode Feedback Reviews & Cards ─── */
+[data-theme="dark"] .single-review-card,
+html.dark .single-review-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .single-review-card p,
+html.dark .single-review-card p {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .single-review-card .review-author-wrap div div,
+html.dark .single-review-card .review-author-wrap div div {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .criterion-pill,
+html.dark .criterion-pill {
+  background: #1E293B !important;
+  color: #94A3B8 !important;
+  border: 1px solid #334155 !important;
+}
+
+/* Brand Logo Styling */
+.brand-logo-svg {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(14, 129, 118, 0.3);
 }

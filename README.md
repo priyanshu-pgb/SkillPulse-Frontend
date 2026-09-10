@@ -20,7 +20,7 @@ A production-grade, responsive skilling outcomes and field operations web client
 ```text
 SkillPulse-Frontend/
 ├── index.html                   # Entry point with smart auth-based routing
-├── login.html                   # Sign in with email or Field Atlas ID
+├── login.html                   # Sign in with email or SkillPulse ID
 ├── register.html                # Self-registration with email OTP validation
 ├── verify-otp.html              # 6-digit cryptographic email OTP verification
 ├── forgot-password.html         # Password recovery screen
@@ -85,8 +85,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Default Demo Credentials
 
-| Role | Email | Field Atlas ID | Password |
+| Role | Email | SkillPulse ID | Password |
 | :--- | :--- | :--- | :--- |
-| **Trainer** | `trainer@fieldatlas.in` | `FA-TR-1001` | `Atlas@2026!` |
-| **Trainee** | `trainee@fieldatlas.in` | `FA-24-0182` | `Atlas@2026!` |
-| **Admin** | `admin@fieldatlas.in` | `FA-AD-0001` | `Atlas@2026!` |
+| **Trainer** | `trainer@skillpulse.in` | `FA-TR-1001` | `Atlas@2026!` |
+| **Trainee** | `trainee@skillpulse.in` | `FA-24-0182` | `Atlas@2026!` |
+| **Admin** | `admin@skillpulse.in` | `FA-AD-0001` | `Atlas@2026!` |

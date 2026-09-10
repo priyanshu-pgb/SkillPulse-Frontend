@@ -1,5 +1,5 @@
 /*
- * FIELD ATLAS — EDITABLE PROFILE CONTROLLER
+ * SKILLPULSE — EDITABLE PROFILE CONTROLLER
  * Manages user profile fields updating, profile avatar upload, password change,
  * and loading of enrolled or instructed vocational courses
  */
@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
   async function loadUserProfile() {
     let u = null;
     try {
-      const res = await FieldAtlasAPI.get('/api/profile/');
+      const res = await SkillPulseAPI.get('/api/profile/');
       if (res && res.user) u = res.user;
     } catch (err) {}
 
     if (!u) {
-      u = (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.getSession()) ||
-          (window.FieldAtlasCache && window.FieldAtlasCache.get('user_session')) || {};
+      u = (window.SkillPulseMockAuth && window.SkillPulseMockAuth.getSession()) ||
+          (window.SkillPulseCache && window.SkillPulseCache.get('user_session')) || {};
     }
 
     const nameInput = document.getElementById('profile-name');
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       if (role === 'trainee') {
-        const enrollments = await FieldAtlasAPI.get('/api/trainee/me/enrollments/');
+        const enrollments = await SkillPulseAPI.get('/api/trainee/me/enrollments/');
         if (!enrollments || enrollments.length === 0) {
           container.innerHTML = '<div style="color: var(--color-text-muted); font-size: 0.85rem; text-align: center; padding: 1rem;">No course enrollments on record.</div>';
           return;
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
           `;
         }).join('');
       } else {
-        const courses = await FieldAtlasAPI.get('/api/courses/');
+        const courses = await SkillPulseAPI.get('/api/courses/');
         if (!courses || courses.length === 0) {
           container.innerHTML = '<div style="color: var(--color-text-muted); font-size: 0.85rem; text-align: center; padding: 1rem;">No courses created under this instructor account.</div>';
           return;
@@ -173,15 +173,15 @@ document.addEventListener('DOMContentLoaded', function() {
       if (providerEl && !providerEl.disabled) payload.provider = providerEl.value.trim();
 
       // Immediately synchronize into compulsory session cache
-      if (window.FieldAtlasMockAuth) {
-        const s = window.FieldAtlasMockAuth.getSession() || {};
+      if (window.SkillPulseMockAuth) {
+        const s = window.SkillPulseMockAuth.getSession() || {};
         Object.assign(s, payload);
-        window.FieldAtlasMockAuth.saveSession(s);
+        window.SkillPulseMockAuth.saveSession(s);
       }
-      if (window.FieldAtlasCache) {
-        const s = window.FieldAtlasCache.get('user_session') || {};
+      if (window.SkillPulseCache) {
+        const s = window.SkillPulseCache.get('user_session') || {};
         Object.assign(s, payload);
-        window.FieldAtlasCache.set('user_session', s);
+        window.SkillPulseCache.set('user_session', s);
       }
 
       // Update sidebar name immediately
@@ -191,15 +191,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       try {
-        const res = await FieldAtlasAPI.patch('/api/profile/', payload);
-        FieldAtlasAPI.showToast(res.message || 'Profile updated successfully!', 'success');
+        const res = await SkillPulseAPI.patch('/api/profile/', payload);
+        SkillPulseAPI.showToast(res.message || 'Profile updated successfully!', 'success');
 
         // Apply updated language if changed
-        if (payload.preferred_language && window.FieldAtlasI18N) {
-          FieldAtlasI18N.setLanguage(payload.preferred_language, false);
+        if (payload.preferred_language && window.SkillPulseI18N) {
+          SkillPulseI18N.setLanguage(payload.preferred_language, false);
         }
       } catch (err) {
-        FieldAtlasAPI.showToast('Profile saved locally in session cache.', 'success');
+        SkillPulseAPI.showToast('Profile saved locally in session cache.', 'success');
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
@@ -232,26 +232,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // 3. Immediately update compulsory session cache memory
-        if (window.FieldAtlasMockAuth) {
-          const s = window.FieldAtlasMockAuth.getSession() || {};
+        if (window.SkillPulseMockAuth) {
+          const s = window.SkillPulseMockAuth.getSession() || {};
           s.profile_picture = photoDataUrl;
           s.profile_photo_url = photoDataUrl;
-          window.FieldAtlasMockAuth.saveSession(s);
+          window.SkillPulseMockAuth.saveSession(s);
         }
-        if (window.FieldAtlasCache) {
-          const s = window.FieldAtlasCache.get('user_session') || {};
+        if (window.SkillPulseCache) {
+          const s = window.SkillPulseCache.get('user_session') || {};
           s.profile_picture = photoDataUrl;
           s.profile_photo_url = photoDataUrl;
-          window.FieldAtlasCache.set('user_session', s);
+          window.SkillPulseCache.set('user_session', s);
         }
 
-        FieldAtlasAPI.showToast('Profile photo updated successfully!', 'success');
+        SkillPulseAPI.showToast('Profile photo updated successfully!', 'success');
 
         // 4. Asynchronously push to backend
         try {
           const formData = new FormData();
           formData.append('profile_photo', file);
-          await FieldAtlasAPI.post('/api/profile/photo/', formData, { silent: true });
+          await SkillPulseAPI.post('/api/profile/photo/', formData, { silent: true });
         } catch (backendErr) {
           // Offline / mock mode — preserved in memory session cache
         }
@@ -271,16 +271,16 @@ document.addEventListener('DOMContentLoaded', function() {
       const confirmPassword = document.getElementById('confirm-password').value;
 
       if (newPassword !== confirmPassword) {
-        FieldAtlasAPI.showToast('New passwords do not match.', 'error');
+        SkillPulseAPI.showToast('New passwords do not match.', 'error');
         return;
       }
 
       try {
-        const res = await FieldAtlasAPI.post('/api/auth/change-password/', {
+        const res = await SkillPulseAPI.post('/api/auth/change-password/', {
           current_password: currentPassword,
           new_password: newPassword
         });
-        FieldAtlasAPI.showToast(res.message || 'Password changed successfully!', 'success');
+        SkillPulseAPI.showToast(res.message || 'Password changed successfully!', 'success');
         passwordForm.reset();
       } catch (err) {}
     });

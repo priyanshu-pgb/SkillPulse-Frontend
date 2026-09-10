@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Trainer Dashboard — Field Atlas SkillPulse</title>
-  <meta name="description" content="Field Atlas Trainer Dashboard — Government Courses, Student Attendance & Retention, Course Placement Efficiency, Trainee Confirmation & Outreach, and Trainer Qualification.">
+  <title>Trainer Dashboard — SkillPulse SkillPulse</title>
+  <meta name="description" content="SkillPulse Trainer Dashboard — Government Courses, Student Attendance & Retention, Course Placement Efficiency, Trainee Confirmation & Outreach, and Trainer Qualification.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="css/field-atlas.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/watermark.css">
+  <!-- Modern Typography (Outfit + Plus Jakarta Sans + JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app-container">
@@ -24,10 +28,21 @@
       <div class="sidebar-header">
         <a href="/" class="brand-badge">
           <div class="brand-logo-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" class="brand-logo-svg" style="width: 24px; height: 24px;">
+  <defs>
+    <linearGradient id="spBrandGrad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E8176"/>
+      <stop offset="0.5" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#spBrandGrad)"/>
+  <path d="M6 16.5H10.5L13 10L17 22L19.5 14L21.5 16.5H26" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="17" cy="6.8" r="1.8" fill="#FDE047"/>
+</svg>
           </div>
           <div class="brand-text-wrap">
-            <span class="brand-title">Field Atlas</span>
+            <span class="brand-title">SkillPulse</span>
             <span class="brand-subtitle">SkillPulse Trainer</span>
           </div>
         </a>
@@ -368,7 +383,7 @@
                 <thead>
                   <tr>
                     <th>Trainee Name</th>
-                    <th>Field Atlas ID</th>
+                    <th>SkillPulse ID</th>
                     <th>Attendance %</th>
                     <th>Sessions</th>
                     <th>Watch Time Retention</th>
@@ -1092,7 +1107,7 @@
             </div>
             <h1 class="hero-title">Remote & Unreachable Trainee Discovery Engine</h1>
             <p class="hero-description">
-              When rural trainees discard SIM cards, migrate to another state, or live in zero-network villages, phone calls fail. Field Atlas triangulates their livelihood outcomes using statutory EPFO contributions, Gram Panchayat doorstep mobilizers, recruiter hiring rosters, and ₹1,500 Post-Placement Support (PPS) incentive rails.
+              When rural trainees discard SIM cards, migrate to another state, or live in zero-network villages, phone calls fail. SkillPulse triangulates their livelihood outcomes using statutory EPFO contributions, Gram Panchayat doorstep mobilizers, recruiter hiring rosters, and ₹1,500 Post-Placement Support (PPS) incentive rails.
             </p>
             <div class="hero-actions">
               <button class="btn btn-primary" onclick="runEpfoBatchPing()" style="background: #F59E0B; border-color: #F59E0B; color: #111827; font-weight: 800;">
@@ -1713,6 +1728,10 @@
       if (tabId === 'remote-recovery') loadRemoteRecovery();
       if (tabId === 'feedback') loadFeedbackAnalytics();
 
+      if (window.FieldAtlasI18N) {
+        setTimeout(() => FieldAtlasI18N.translatePage(), 60);
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -2154,7 +2173,7 @@
                     </span>
                   </div>
                   <div style="font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
-                    Field Atlas ID: <code style="font-family: var(--font-mono); font-weight: 600;">${t.field_atlas_id}</code> · Course: <strong>${t.course_enrolled}</strong> · District: ${t.district}, ${t.state}
+                    SkillPulse ID: <code style="font-family: var(--font-mono); font-weight: 600;">${t.field_atlas_id}</code> · Course: <strong>${t.course_enrolled}</strong> · District: ${t.district}, ${t.state}
                   </div>
                 </div>
 
@@ -2209,7 +2228,7 @@
           `;
         } else {
           // ─── IF NO: Unplaced Trainee (Display Contact Details, Direct Call & WhatsApp Outreach) ───
-          const encodedMsg = encodeURIComponent(`Hello ${t.trainee_name}, this is your Trainer Arjun Sharma from SkillPulse Field Atlas. I saw you are seeking placement in ${t.preferred_role || 'your sector'}. How can I assist you with corporate interviews?`);
+          const encodedMsg = encodeURIComponent(`Hello ${t.trainee_name}, this is your Trainer Arjun Sharma from SkillPulse SkillPulse. I saw you are seeking placement in ${t.preferred_role || 'your sector'}. How can I assist you with corporate interviews?`);
           const whatsappUrl = `https://wa.me/91${t.phone}?text=${encodedMsg}`;
           const telUrl = `tel:+91${t.phone}`;
 
@@ -2224,7 +2243,7 @@
                     </span>
                   </div>
                   <div style="font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.25rem;">
-                    Field Atlas ID: <code style="font-family: var(--font-mono); font-weight: 600;">${t.field_atlas_id}</code> · Course: <strong>${t.course_enrolled}</strong> · District: ${t.district}, ${t.state}
+                    SkillPulse ID: <code style="font-family: var(--font-mono); font-weight: 600;">${t.field_atlas_id}</code> · Course: <strong>${t.course_enrolled}</strong> · District: ${t.district}, ${t.state}
                   </div>
                 </div>
 
@@ -2353,7 +2372,7 @@
     };
 
     window.scheduleMentorship = function(traineeId, traineeName) {
-      FieldAtlasAPI.showToast(`1-on-1 Mentorship session invitation sent to ${traineeName} via SMS and Field Atlas.`, 'success');
+      FieldAtlasAPI.showToast(`1-on-1 Mentorship session invitation sent to ${traineeName} via SMS and SkillPulse.`, 'success');
     };
 
     // ══════════════════════════════════════════════════════════════════
@@ -2565,26 +2584,170 @@
       } catch (e) { console.warn('Trainees load error:', e); }
     }
 
-    async function loadFollowUps() {
+    let allFollowUps = [];
+    let selectedFollowUpId = 1;
+    let activeChannel = 'whatsapp';
+
+    window.loadFollowUps = async function() {
       try {
         const data = await FieldAtlasAPI.get('/api/trainer/follow-ups/');
-        const list = document.getElementById('followup-queue-list');
+        allFollowUps = (data && data.queue) ? data.queue : [];
         const countBadge = document.getElementById('followup-count');
-        if (countBadge) countBadge.textContent = (data.total || 0) + ' pending';
-        if (list && data.queue) {
-          list.innerHTML = data.queue.map(f => `
-            <div class="queue-item" onclick="FieldAtlasAPI.showToast('Follow up selected for ${f.trainee_name}', 'success')">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-                <strong style="font-size: 0.9rem;">${f.trainee_name}</strong>
-                <span class="badge ${f.priority === 'high' ? 'badge-coral' : 'badge-neutral'}">${f.priority}</span>
-              </div>
-              <div style="font-size: 0.825rem; color: var(--color-text-secondary);">${f.message}</div>
-              <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.35rem;">${f.days_pending} days pending · ${f.channel}</div>
-            </div>
-          `).join('');
+        if (countBadge) {
+          const pendingCount = allFollowUps.filter(f => f.status !== 'resolved').length;
+          countBadge.textContent = pendingCount + ' pending';
+        }
+        
+        renderFollowUpList();
+        setupFollowUpTabs();
+
+        if (allFollowUps.length > 0) {
+          selectFollowUp(allFollowUps[0].id);
         }
       } catch (e) { console.warn('Follow-ups load error:', e); }
-    }
+    };
+
+    window.renderFollowUpList = function() {
+      const list = document.getElementById('followup-queue-list');
+      if (!list) return;
+      list.innerHTML = allFollowUps.map(f => {
+        const isSelected = (f.id === selectedFollowUpId);
+        let badgeColor = 'badge-neutral';
+        if (f.priority === 'urgent') badgeColor = 'badge-coral';
+        else if (f.priority === 'high') badgeColor = 'badge-ochre';
+        else if (f.priority === 'normal') badgeColor = 'badge-teal';
+        
+        const isResolved = (f.status === 'resolved');
+
+        return `
+          <div class="queue-item ${isSelected ? 'selected' : ''} ${isResolved ? 'resolved-item' : ''}" onclick="selectFollowUp(${f.id})" style="cursor: pointer; transition: all 0.2s ease; border-radius: 8px; padding: 0.85rem; margin-bottom: 0.6rem; border: 1px solid ${isSelected ? 'var(--color-teal)' : 'var(--color-border)'}; background: ${isSelected ? 'rgba(20, 184, 166, 0.08)' : 'var(--color-surface)'};">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <strong style="font-size: 0.95rem; color: var(--color-deep-indigo);">${f.trainee_name}</strong>
+              <div style="display: flex; gap: 0.35rem; align-items: center;">
+                <span class="badge ${badgeColor}" style="text-transform: capitalize; font-size: 0.7rem;">${f.priority || 'Normal'}</span>
+                ${isResolved ? '<span class="badge badge-teal" style="font-size: 0.7rem;">✓ Resolved</span>' : ''}
+              </div>
+            </div>
+            <div style="font-size: 0.825rem; color: var(--color-text-secondary); margin-bottom: 0.3rem;">${f.message || f.trainer_notes || ''}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-text-muted);">
+              <span>${f.days_pending || 1} days pending · ${f.channel || 'WhatsApp'}</span>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem;">${f.trainee_unified_id || ''}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.setupFollowUpTabs = function() {
+      const tabs = document.querySelectorAll('.simulator-tab-btn');
+      tabs.forEach(btn => {
+        btn.onclick = function() {
+          tabs.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          activeChannel = this.getAttribute('data-channel') || 'whatsapp';
+          updateOutreachSimulator();
+        };
+      });
+    };
+
+    window.selectFollowUp = function(id) {
+      selectedFollowUpId = id;
+      renderFollowUpList();
+      updateOutreachSimulator();
+    };
+
+    window.updateOutreachSimulator = function() {
+      const bubble = document.getElementById('simulator-message');
+      const actions = document.getElementById('simulator-actions');
+      const item = allFollowUps.find(f => f.id === selectedFollowUpId);
+      if (!item) return;
+
+      if (actions) {
+        actions.style.display = 'flex';
+        actions.style.gap = '0.5rem';
+        actions.style.marginTop = '1rem';
+        actions.innerHTML = `
+          <button class="btn btn-primary btn-sm" onclick="sendOutreachMessage(${item.id})">
+            ${activeChannel === 'whatsapp' ? '💬 Send WhatsApp' : activeChannel === 'sms' ? '📲 Send SMS' : '📞 Log Call Outcome'}
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="markFollowUpResolved(${item.id})">
+            ${item.status === 'resolved' ? '✓ Reopen Follow-Up' : '✓ Mark Resolved'}
+          </button>
+        `;
+      }
+
+      if (!bubble) return;
+
+      if (activeChannel === 'whatsapp') {
+        const text = (item.whatsapp_msg || item.message).replace(/\\n/g, '<br>');
+        bubble.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(0,0,0,0.06);">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem;">WA</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem; color: #1E293B;">${item.trainee_name} · WhatsApp Verified</div>
+              <div style="font-size: 0.7rem; color: #64748B;">${item.trainee_course} (${item.trainee_district})</div>
+            </div>
+          </div>
+          <div style="line-height: 1.5; font-size: 0.875rem; color: #1E293B; white-space: pre-line;">${item.whatsapp_msg || item.message}</div>
+          <div style="margin-top: 0.75rem; font-size: 0.7rem; color: #64748B; text-align: right;">Automated Gateway · Sent via SkillPulse</div>
+        `;
+      } else if (activeChannel === 'sms') {
+        bubble.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(0,0,0,0.06);">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #0284C7; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem;">SMS</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem; color: #1E293B;">Header: [VM-SKLPUL]</div>
+              <div style="font-size: 0.7rem; color: #64748B;">Recipient: ${item.trainee_name} (${item.trainee_unified_id})</div>
+            </div>
+          </div>
+          <div style="line-height: 1.5; font-size: 0.85rem; font-family: var(--font-mono); color: #0F172A; background: rgba(0,0,0,0.03); padding: 0.65rem; border-radius: 6px;">
+            ${item.sms_msg || item.message}
+          </div>
+          <div style="margin-top: 0.5rem; font-size: 0.7rem; color: #64748B;">DLT Template ID: 14071689912044 · Free Govt SMS</div>
+        `;
+      } else {
+        const callScript = (item.call_script || '').replace(/\\n/g, '<br>');
+        bubble.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(0,0,0,0.06);">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #D97706; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem;">TEL</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem; color: #1E293B;">Telephonic Outreach: ${item.trainee_name}</div>
+              <div style="font-size: 0.7rem; color: #64748B;">Registered Candidate: ${item.trainee_course} · ${item.trainee_district}</div>
+            </div>
+          </div>
+          <div style="line-height: 1.55; font-size: 0.85rem; color: #0F172A; white-space: pre-line;">
+            ${item.call_script || ''}
+          </div>
+        `;
+      }
+
+      if (window.FieldAtlasI18N) FieldAtlasI18N.translatePage();
+    };
+
+    window.sendOutreachMessage = function(id) {
+      const item = allFollowUps.find(f => f.id === id);
+      if (!item) return;
+      const channelLabel = activeChannel === 'whatsapp' ? 'WhatsApp' : activeChannel === 'sms' ? 'SMS' : 'Tele-Call';
+      FieldAtlasAPI.showToast(`✔ ${channelLabel} outreach successfully dispatched to ${item.trainee_name}!`, 'success');
+      item.status = 'sent';
+      renderFollowUpList();
+      updateOutreachSimulator();
+    };
+
+    window.markFollowUpResolved = function(id) {
+      const item = allFollowUps.find(f => f.id === id);
+      if (!item) return;
+      item.status = (item.status === 'resolved') ? 'pending' : 'resolved';
+      FieldAtlasAPI.showToast(`Candidate follow-up ${item.status === 'resolved' ? 'marked as resolved' : 'reopened'}.`, 'success');
+      
+      const countBadge = document.getElementById('followup-count');
+      if (countBadge) {
+        const pendingCount = allFollowUps.filter(f => f.status !== 'resolved').length;
+        countBadge.textContent = pendingCount + ' pending';
+      }
+      renderFollowUpList();
+      updateOutreachSimulator();
+    };
 
     async function loadReports() {
       try {

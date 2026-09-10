@@ -1,6 +1,6 @@
 /**
- * FIELD ATLAS — MOCK DATA LAYER
- * Intercepts all non-auth API calls and returns realistic dummy data.
+ * SKILLPULSE — MOCK DATA LAYER
+ * Comprehensive offline-first mock data matching Django backend schemas
  * No backend required — the entire app runs fully client-side.
  *
  * MUST be loaded AFTER mock-auth.js (which patches window.fetch first).
@@ -80,13 +80,129 @@
     per_page: 20,
   };
 
-  // ─── Follow-Up Queue (Outreach Channels: WhatsApp, SMS, Tele-Call) ────────
+      // ─── Follow-Up Queue (Outreach Channels: WhatsApp, SMS, Tele-Call) ────────
   const TRAINER_FOLLOWUPS = {
     queue: [
-      { id: 1, trainee_name: 'Sunita Soren', trainee_unified_id: 'PMKVY-GDA-2026-33910', trainee_course: 'General Duty Assistant', trainee_district: 'Ranchi', trainee_consent: 'active', milestone: '90_day_retention', attempts: 2, status: 'needs_assistance', is_overdue: true, is_due_today: false, next_contact_date: '2026-09-07', trainer_notes: 'Learner reported shift timing issues. Requires 3-month retention check.' },
-      { id: 2, trainee_name: 'Rajesh Kumar Verma', trainee_unified_id: 'PMKVY-4.0-ND-2026-88219', trainee_course: 'Solar PV Installer', trainee_district: 'Varanasi', trainee_consent: 'active', milestone: '30_day_verification', attempts: 1, status: 'pending', is_overdue: false, is_due_today: true, next_contact_date: '2026-09-06', trainer_notes: 'Verify 1st month salary slip upload with employer NISE Solar Corp.' },
-      { id: 3, trainee_name: 'Suresh Chandran', trainee_unified_id: 'DGT-CTS-2025-77102', trainee_course: 'CNC Machine Operator', trainee_district: 'Belagavi', trainee_consent: 'active', milestone: 'placement_check', attempts: 0, status: 'pending', is_overdue: false, is_due_today: true, next_contact_date: '2026-09-06', trainer_notes: 'Confirm joining date at Kirloskar Systems Belagavi unit.' },
-      { id: 4, trainee_name: 'Vikram Singh Rathore', trainee_unified_id: 'NCVET-AGR-2026-44109', trainee_course: 'Micro Irrigation Specialist', trainee_district: 'Jaipur', trainee_consent: 'active', milestone: 'retention_check', attempts: 3, status: 'sent', is_overdue: false, is_due_today: false, next_contact_date: '2026-09-12', trainer_notes: 'Outreach dispatched via WhatsApp. Awaiting self-employment verification.' },
+      {
+        id: 1,
+        trainee_name: 'Sunita Soren',
+        trainee_unified_id: 'PMKVY-GDA-2026-33910',
+        trainee_course: 'General Duty Assistant',
+        trainee_district: 'Ranchi, Jharkhand',
+        trainee_consent: 'active',
+        milestone: '90_day_retention',
+        priority: 'urgent',
+        status: 'needs_assistance',
+        is_overdue: true,
+        is_due_today: false,
+        days_pending: 4,
+        channel: 'WhatsApp',
+        attempts: 2,
+        next_contact_date: '2026-09-07',
+        message: 'Shift timing conflict flagged; requires 90-day retention outreach.',
+        trainer_notes: 'Learner reported night shift commute difficulty. Confirming current employer retention.',
+        whatsapp_msg: `👋 Namaste Sunita ji, this is SkillPulse verifying your work placement for General Duty Assistant in Ranchi. Could you please confirm if your current shifts are going well?
+
+Reply:
+1️⃣ for Working & Settled
+2️⃣ for Need Assistance with Shift Timing
+3️⃣ for Changed Employer`,
+        sms_msg: '[SKILLPULSE GOVT DLT] Namaste Sunita Soren. Skill India check-in for course General Duty Assistant. Reply 1 if Employed, 2 if Seeking Shift Change, 3 if Need Help. Free Toll-free SMS.',
+        call_script: `📞 TELE-OUTREACH CALL SCRIPT
+1. Opening: "Namaste Sunita ji, I am calling from SkillPulse on behalf of your General Duty Assistant training centre in Ranchi."
+2. Verification: "We see you joined the local healthcare centre. Are you currently working your scheduled shifts? Is your monthly wage deposited on time?"
+3. Action: If retained, click "Mark Resolved". If support needed, schedule counselor visit.`
+      },
+      {
+        id: 2,
+        trainee_name: 'Rajesh Kumar Verma',
+        trainee_unified_id: 'PMKVY-4.0-ND-2026-88219',
+        trainee_course: 'Solar PV Installer',
+        trainee_district: 'Varanasi, UP',
+        trainee_consent: 'active',
+        milestone: '30_day_verification',
+        priority: 'high',
+        status: 'pending',
+        is_overdue: false,
+        is_due_today: true,
+        days_pending: 2,
+        channel: 'SMS',
+        attempts: 1,
+        next_contact_date: '2026-09-06',
+        message: '30-Day First Salary Slip & Employment Verification pending.',
+        trainer_notes: 'Verify 1st month salary slip upload with employer NISE Solar Corp.',
+        whatsapp_msg: `👋 Namaste Rajesh ji, congratulations on your placement at NISE Solar Corp from SkillPulse! Please upload or reply with your 1st month salary voucher to verify your statutory PMKVY placement incentive.
+
+Reply:
+1️⃣ Voucher uploaded
+2️⃣ Need help uploading
+3️⃣ Salary pending from employer`,
+        sms_msg: '[SKILLPULSE GOVT DLT] Namaste Rajesh Kumar Verma. PMKVY Solar PV Installer verification. Have you received your 1st month salary? Reply 1 for Yes, 2 for Salary Pending. Free Toll-free SMS.',
+        call_script: `📞 TELE-OUTREACH CALL SCRIPT
+1. Opening: "Namaste Rajesh ji, calling from SkillPulse regarding your Solar PV Installer certification in Varanasi."
+2. Verification: "Have you joined NISE Solar Corp? Was your starting wage ₹21,500 credited to your bank account?"
+3. Action: Validate EPFO UAN submission and mark outcome as verified.`
+      },
+      {
+        id: 3,
+        trainee_name: 'Suresh Chandran',
+        trainee_unified_id: 'DGT-CTS-2025-77102',
+        trainee_course: 'CNC Machine Operator',
+        trainee_district: 'Belagavi, Karnataka',
+        trainee_consent: 'active',
+        milestone: 'placement_check',
+        priority: 'normal',
+        status: 'pending',
+        is_overdue: false,
+        is_due_today: true,
+        days_pending: 1,
+        channel: 'Call Script',
+        attempts: 0,
+        next_contact_date: '2026-09-06',
+        message: 'Joining date confirmation at Kirloskar Systems manufacturing unit.',
+        trainer_notes: 'Confirm joining date at Kirloskar Systems Belagavi unit.',
+        whatsapp_msg: `👋 Namaste Suresh ji, greeting from SkillPulse! Your offer letter for CNC Machine Operator with Kirloskar Systems was processed. Please confirm your date of reporting at the Belagavi unit.
+
+Reply:
+1️⃣ Joined on schedule
+2️⃣ Joining next week
+3️⃣ Offer declined`,
+        sms_msg: '[SKILLPULSE GOVT DLT] Namaste Suresh Chandran. DGT CTS Placement Check. Please confirm joining at Kirloskar Systems. Reply 1 for Joined, 2 for Joining Soon. Free SMS.',
+        call_script: `📞 TELE-OUTREACH CALL SCRIPT
+1. Opening: "Namaste Suresh ji, calling from Advanced Training Institute Belagavi via SkillPulse."
+2. Verification: "Did you complete onboarding at Kirloskar Systems? Do you have your employee ID card and ESIC card ready?"
+3. Action: Update stage to "Placed" and log confirmation date.`
+      },
+      {
+        id: 4,
+        trainee_name: 'Vikram Singh Rathore',
+        trainee_unified_id: 'NCVET-AGR-2026-44109',
+        trainee_course: 'Micro Irrigation Specialist',
+        trainee_district: 'Jaipur, Rajasthan',
+        trainee_consent: 'active',
+        milestone: 'retention_check',
+        priority: 'high',
+        status: 'sent',
+        is_overdue: false,
+        is_due_today: false,
+        days_pending: 5,
+        channel: 'WhatsApp',
+        attempts: 3,
+        next_contact_date: '2026-09-12',
+        message: 'Self-employment proof check; 3 outreach attempts sent.',
+        trainer_notes: 'Outreach dispatched via WhatsApp. Awaiting self-employment verification.',
+        whatsapp_msg: `👋 Namaste Vikram ji, SkillPulse follow-up on your Micro Irrigation enterprise in Jaipur. Please tap below to confirm your active farmer client installations this quarter.
+
+Reply:
+1️⃣ Operating active enterprise
+2️⃣ Seeking government subsidy loan
+3️⃣ Looking for salaried placement`,
+        sms_msg: '[SKILLPULSE GOVT DLT] Namaste Vikram Singh Rathore. ASCI Skill Certification check-in. Are you active in agricultural irrigation services? Reply 1 for Yes, 2 for Need Support. Free SMS.',
+        call_script: `📞 TELE-OUTREACH CALL SCRIPT
+1. Opening: "Namaste Vikram ji, calling from SkillPulse regarding your Agriculture Skill Council certification in Jaipur."
+2. Verification: "Are you providing drip irrigation installation to local farmers? Are you generating monthly income above ₹15,000?"
+3. Action: Record self-employment business outcome and issue verified badge.`
+      }
     ],
     total: 4,
   };
@@ -149,7 +265,7 @@
         stream_url: 'https://meet.google.com/xyz-skill-pulse'
       },
       students: [
-        { id: 't1', name: 'Priya Patel', field_atlas_id: 'FA-24-0182', email: 'trainee@fieldatlas.in', phone: '+91 9833456789', attendance_rate: 92.3, classes_attended: 24, total_classes: 26, watch_time_pct: 94.0, quiz_score: 92, quiz_completed: true, is_watching_live: true, last_active: 'Today 10:15 AM' },
+        { id: 't1', name: 'Priya Patel', field_atlas_id: 'FA-24-0182', email: 'trainee@skillpulse.in', phone: '+91 9833456789', attendance_rate: 92.3, classes_attended: 24, total_classes: 26, watch_time_pct: 94.0, quiz_score: 92, quiz_completed: true, is_watching_live: true, last_active: 'Today 10:15 AM' },
         { id: 't2', name: 'Rajesh Kumar Verma', field_atlas_id: 'PMKVY-4.0-ND-2026-88219', email: 'rajesh.verma@pmkvy-portal.in', phone: '+91 9820123456', attendance_rate: 96.2, classes_attended: 25, total_classes: 26, watch_time_pct: 91.5, quiz_score: 88, quiz_completed: true, is_watching_live: true, last_active: 'Today 11:20 AM' },
         { id: 't3', name: 'Ananya Deshmukh', field_atlas_id: 'NCVET-EV-2026-99401', email: 'ananya.d@asdc-skill.in', phone: '+91 9845678901', attendance_rate: 88.5, classes_attended: 23, total_classes: 26, watch_time_pct: 82.0, quiz_score: 85, quiz_completed: true, is_watching_live: false, last_active: 'Yesterday' },
         { id: 't4', name: 'Suresh Chandran', field_atlas_id: 'DGT-CTS-2025-77102', email: 'suresh.c@dgt-ati.gov.in', phone: '+91 9834567890', attendance_rate: 92.3, classes_attended: 24, total_classes: 26, watch_time_pct: 89.0, quiz_score: 90, quiz_completed: true, is_watching_live: true, last_active: 'Today 09:40 AM' },
@@ -222,7 +338,7 @@
       field_atlas_id: 'FA-24-0182',
       course_enrolled: 'Full Stack Web Development (PMKVY 4.0)',
       phone: '9833456789',
-      email: 'trainee@fieldatlas.in',
+      email: 'trainee@skillpulse.in',
       district: 'Pune',
       state: 'Maharashtra',
       aadhaar_name: 'Priya Patel',
@@ -743,7 +859,7 @@
     trainee: {
       name: 'Priya Patel',
       unified_id: 'FA-24-0182',
-      email: 'trainee@fieldatlas.in',
+      email: 'trainee@skillpulse.in',
       phone: '+91 98765 43210',
       course: 'Full Stack Web Development',
       provider: 'National Skill Development Corporation',
@@ -824,7 +940,7 @@
       scheme_enrolled: 'PMKVY 4.0: Full Stack Web Development',
       location: 'Pune, Maharashtra',
       contact_phone: '+91 98765 43210',
-      contact_email: 'trainee@fieldatlas.in',
+      contact_email: 'trainee@skillpulse.in',
     },
     upcoming_actions: [
       { label: 'Submit 90-day check-in', due: '2026-10-01', type: 'checkin' },
@@ -877,10 +993,10 @@
     return {
       id: 1,
       full_name: 'Demo User',
-      email: 'demo@fieldatlas.in',
+      email: 'demo@skillpulse.in',
       role: 'trainer',
       field_atlas_id: 'FA-DEMO-0001',
-      provider: 'Field Atlas',
+      provider: 'SkillPulse',
       district: 'Mumbai',
     };
   }
@@ -894,8 +1010,8 @@
   }
 
   function getActiveSession() {
-    return (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.getSession()) ||
-           (window.FieldAtlasCache && window.FieldAtlasCache.get('user_session')) || null;
+    return (window.SkillPulseMockAuth && window.SkillPulseMockAuth.getSession()) ||
+           (window.SkillPulseCache && window.SkillPulseCache.get('user_session')) || null;
   }
 
   // ─── Data Endpoint Handlers ──────────────────────────────────────────────
@@ -1105,7 +1221,7 @@
         id: 2,
         field_atlas_id: 'FA-24-0182',
         full_name: 'Priya Patel',
-        email: 'trainee@fieldatlas.in',
+        email: 'trainee@skillpulse.in',
         phone_number: '9833456789',
         role: 'trainee',
         district: 'Pune',
@@ -1119,7 +1235,7 @@
         id: 2,
         field_atlas_id: 'FA-24-0182',
         full_name: 'Priya Patel',
-        email: 'trainee@fieldatlas.in',
+        email: 'trainee@skillpulse.in',
         phone_number: '9833456789',
         role: 'trainee',
         district: 'Pune',
@@ -1180,8 +1296,8 @@
       const session = getActiveSession();
       if (session) {
         session.password_updated_at = new Date().toISOString();
-        if (window.FieldAtlasMockAuth && window.FieldAtlasMockAuth.updateSession) {
-          window.FieldAtlasMockAuth.updateSession(session);
+        if (window.SkillPulseMockAuth && window.SkillPulseMockAuth.updateSession) {
+          window.SkillPulseMockAuth.updateSession(session);
         }
       }
 
@@ -1451,5 +1567,7 @@
     return _prevFetch(input, options);
   };
 
-  console.info('[FieldAtlas] Mock data layer active. All dashboard data is simulated.');
+  console.info('[SkillPulse] Mock data layer active. All dashboard data is simulated.');
 })();
+
+window.SkillPulseMockData = window.FieldAtlasMockData;

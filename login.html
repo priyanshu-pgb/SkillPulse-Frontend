@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Sign In — Field Atlas</title>
+  <title>Sign In — SkillPulse</title>
   
   <!-- Modern Typography: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +16,10 @@
   <!-- Core Application Stylesheets -->
   <link rel="stylesheet" href="css/field-atlas.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <!-- Modern Typography (Outfit + Plus Jakarta Sans + JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: var(--color-parchment); position: relative;">
@@ -49,9 +53,20 @@
       <!-- Brand Header with Glass Effect -->
       <div class="glass-panel" style="text-align: center; margin-bottom: 1.5rem; padding: 1.25rem; border-radius: var(--radius-lg);">
         <div style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-teal), #18A89B); border-radius: var(--radius-lg); color: white; margin-bottom: 0.5rem; box-shadow: 0 4px 10px rgba(14, 129, 118, 0.3);">
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" class="brand-logo-svg" style="width: 24px; height: 24px;">
+  <defs>
+    <linearGradient id="spBrandGrad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E8176"/>
+      <stop offset="0.5" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#spBrandGrad)"/>
+  <path d="M6 16.5H10.5L13 10L17 22L19.5 14L21.5 16.5H26" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="17" cy="6.8" r="1.8" fill="#FDE047"/>
+</svg>
         </div>
-        <h1 style="font-size: 1.7rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em;">Field Atlas</h1>
+        <h1 style="font-size: 1.7rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em;">SkillPulse</h1>
         <p style="font-size: 0.825rem; color: var(--color-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;" data-i18n="workspace">Good Outcomes / National Workspace</p>
       </div>
 
@@ -62,7 +77,7 @@
 
         <form id="login-form">
           <div class="form-group">
-            <label class="form-label" for="login-identifier">Aadhaar Number / Mobile / Field Atlas ID / Email</label>
+            <label class="form-label" for="login-identifier">Aadhaar Number / Mobile / SkillPulse ID / Email</label>
             <input type="text" id="login-identifier" class="form-control" placeholder="12-digit Aadhaar, 10-digit Mobile, ID or Email" required autocomplete="username">
           </div>
 
@@ -95,9 +110,9 @@
           <i data-lucide="key" style="width: 14px; height: 14px;"></i> Quick Demo Credentials (Password: Atlas@2026!)
         </div>
         <div style="display: flex; flex-direction: column; gap: 0.35rem; color: var(--color-deep-indigo);">
-          <div><strong>Trainee:</strong> <code>8765 4321 0987</code> (or mobile: <code>9833456789</code> / <code>FA-24-0182</code>)</div>
-          <div><strong>Trainer:</strong> <code>2345 6789 0123</code> (or mobile: <code>9820123456</code> / <code>FA-TR-1001</code>)</div>
-          <div><strong>Admin:</strong> <code>1122 3344 5566</code> (or <code>admin@fieldatlas.in</code>)</div>
+          <div><strong>Trainee:</strong> <code>8765 4321 0987</code> (or mobile: <code>9833456789</code> / <code>SP-24-0182</code>)</div>
+          <div><strong>Trainer:</strong> <code>2345 6789 0123</code> (or mobile: <code>9820123456</code> / <code>SP-TR-1001</code>)</div>
+          <div><strong>Admin:</strong> <code>1122 3344 5566</code> (or <code>admin@skillpulse.in</code>)</div>
         </div>
         <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
           <button type="button" class="btn btn-sm btn-outline" onclick="fillDemo('trainee')" style="flex: 1; font-size: 0.75rem;">
@@ -131,10 +146,10 @@
       const idInput = document.getElementById('login-identifier');
       const passInput = document.getElementById('login-password');
       if (role === 'trainer') {
-        idInput.value = 'trainer@fieldatlas.in';
+        idInput.value = 'trainer@skillpulse.in';
         passInput.value = 'Atlas@2026!';
       } else {
-        idInput.value = 'trainee@fieldatlas.in';
+        idInput.value = 'trainee@skillpulse.in';
         passInput.value = 'Atlas@2026!';
       }
       FieldAtlasAPI.showToast(`Logged in credentials filled for ${role.toUpperCase()}. Submitting...`, 'success');

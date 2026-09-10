@@ -1,5 +1,5 @@
 /**
- * FIELD ATLAS / SKILLPULSE — CLIENT CONFIGURATION, THEME & SESSION CACHE
+ * SKILLPULSE / SKILLPULSE — CLIENT CONFIGURATION, THEME & SESSION CACHE
  * Configures the backend REST API base URL, dark/light theme, and compulsory session memory cache.
  */
 
@@ -19,7 +19,7 @@
 })();
 
 // ─── Theme Controller ──────────────────────────────────────────────────────────
-window.FieldAtlasTheme = (function() {
+window.SkillPulseTheme = (function() {
   'use strict';
 
   function getTheme() {
@@ -87,7 +87,7 @@ window.FieldAtlasTheme = (function() {
 })();
 
 // ─── Compulsory Session Memory Cache ───────────────────────────────────────────
-window.FieldAtlasCache = (function() {
+window.SkillPulseCache = (function() {
   'use strict';
   const CACHE_PREFIX = 'fa_session_cache_';
 
@@ -187,5 +187,5 @@ window.FIELD_ATLAS_CONFIG = (function() {
 
 // Automatically bind theme toggle on DOM ready
 document.addEventListener('DOMContentLoaded', function() {
-  window.FieldAtlasTheme.init();
+  window.SkillPulseTheme.init();
 });

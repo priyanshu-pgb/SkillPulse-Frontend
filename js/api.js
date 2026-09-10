@@ -1,9 +1,9 @@
 /*
- * FIELD ATLAS — REST API CLIENT & UI UTILITIES
+ * SKILLPULSE — REST API CLIENT & UI UTILITIES
  * Pure Vanilla JavaScript module for API interaction, CSRF token management, modals, and toasts
  */
 
-const FieldAtlasAPI = (function() {
+const SkillPulseAPI = (function() {
   'use strict';
 
   // Extracts the Django CSRF token from the browser cookie store
@@ -184,5 +184,5 @@ const FieldAtlasAPI = (function() {
 })();
 
 // Attach globally
-window.FieldAtlasAPI = FieldAtlasAPI;
+window.SkillPulseAPI = SkillPulseAPI;
 

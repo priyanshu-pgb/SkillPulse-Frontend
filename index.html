@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>SkillPulse — Skilling Outcomes Intelligence Platform</title>
-  <meta name="description" content="SkillPulse by Field Atlas — India's consent-aware skilling outcomes intelligence platform. Track verified placements, skill certifications, and employment outcomes.">
+  <meta name="description" content="SkillPulse by SkillPulse — India's consent-aware skilling outcomes intelligence platform. Track verified placements, skill certifications, and employment outcomes.">
 
-  <!-- Modern Typography -->
+    <!-- Modern Typography (Outfit + Plus Jakarta Sans + JetBrains Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -207,8 +207,10 @@
 
     /* Stats Bar */
     .stats-bar {
-      background: var(--color-deep-indigo);
+      background: #0B1120 !important;
       padding: 3rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .stats-bar-inner {
       max-width: 1100px;
@@ -221,12 +223,13 @@
     .stat-item h3 {
       font-size: 2.25rem;
       font-weight: 800;
-      color: #FFFFFF;
+      color: #38BDF8 !important;
       margin-bottom: 0.35rem;
+      font-family: var(--font-heading, 'Outfit', sans-serif);
     }
     .stat-item p {
       font-size: 0.85rem;
-      color: #94A3B8;
+      color: #94A3B8 !important;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -462,7 +465,65 @@
       .landing-hero h1 { font-size: 1.85rem; }
       .stats-bar-inner { grid-template-columns: 1fr; }
       .how-steps { grid-template-columns: 1fr; }
-      .landing-nav-inner { padding: 0.75rem 1rem; }
+    /* ─── Dark Mode Landing Theme Overrides ─── */
+    [data-theme="dark"] .landing-nav,
+    html.dark .landing-nav {
+      background: rgba(11, 15, 25, 0.94) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    [data-theme="dark"] .landing-brand-text,
+    html.dark .landing-brand-text {
+      color: #F8FAFC !important;
+    }
+    [data-theme="dark"] .landing-hero,
+    html.dark .landing-hero {
+      background: linear-gradient(180deg, #0B0F19 0%, #0F172A 100%) !important;
+    }
+    [data-theme="dark"] .landing-hero h1,
+    html.dark .landing-hero h1 {
+      color: #F8FAFC !important;
+    }
+    [data-theme="dark"] .landing-hero p,
+    html.dark .landing-hero p {
+      color: #CBD5E1 !important;
+    }
+    [data-theme="dark"] .features-section,
+    html.dark .features-section {
+      background: #0B0F19 !important;
+    }
+    [data-theme="dark"] .feature-card,
+    html.dark .feature-card {
+      background: #131B2E !important;
+      border-color: #2A364F !important;
+    }
+    [data-theme="dark"] .feature-card h3,
+    html.dark .feature-card h3 {
+      color: #F8FAFC !important;
+    }
+    [data-theme="dark"] .feature-card p,
+    html.dark .feature-card p {
+      color: #94A3B8 !important;
+    }
+    [data-theme="dark"] .how-section,
+    html.dark .how-section {
+      background: #0E1526 !important;
+    }
+    [data-theme="dark"] .how-step h4,
+    html.dark .how-step h4 {
+      color: #F8FAFC !important;
+    }
+    [data-theme="dark"] .how-step p,
+    html.dark .how-step p {
+      color: #94A3B8 !important;
+    }
+    [data-theme="dark"] .landing-footer,
+    html.dark .landing-footer {
+      background: #080C14 !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    [data-theme="dark"] .landing-footer p,
+    html.dark .landing-footer p {
+      color: #94A3B8 !important;
     }
   </style>
 </head>
@@ -473,7 +534,18 @@
     <div class="landing-nav-inner">
       <a href="/" class="landing-brand">
         <div class="landing-brand-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" class="brand-logo-svg" style="width: 24px; height: 24px;">
+  <defs>
+    <linearGradient id="spBrandGrad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E8176"/>
+      <stop offset="0.5" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#spBrandGrad)"/>
+  <path d="M6 16.5H10.5L13 10L17 22L19.5 14L21.5 16.5H26" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="17" cy="6.8" r="1.8" fill="#FDE047"/>
+</svg>
         </div>
         <span class="landing-brand-text">SkillPulse</span>
       </a>
@@ -648,18 +720,18 @@
       <div class="demo-cards">
         <div class="demo-card">
           <div class="demo-card-role">Trainer</div>
-          <div class="demo-card-email">trainer@fieldatlas.in</div>
-          <div class="demo-card-id">FA-TR-1001</div>
+          <div class="demo-card-email">trainer@skillpulse.in</div>
+          <div class="demo-card-id">SP-TR-1001</div>
         </div>
         <div class="demo-card">
           <div class="demo-card-role">Trainee</div>
-          <div class="demo-card-email">trainee@fieldatlas.in</div>
-          <div class="demo-card-id">FA-24-0182</div>
+          <div class="demo-card-email">trainee@skillpulse.in</div>
+          <div class="demo-card-id">SP-24-0182</div>
         </div>
         <div class="demo-card">
           <div class="demo-card-role">Admin</div>
-          <div class="demo-card-email">admin@fieldatlas.in</div>
-          <div class="demo-card-id">FA-AD-0001</div>
+          <div class="demo-card-email">admin@skillpulse.in</div>
+          <div class="demo-card-id">SP-AD-0001</div>
         </div>
       </div>
       <p class="demo-password">Password for all accounts: <code>Atlas@2026!</code></p>
@@ -677,7 +749,7 @@
       Consent-aware by design · No raw Aadhaar stored · Built for India's National Skill Ecosystem
     </p>
     <p style="margin-top: 0.5rem; font-size: 0.8rem;">
-      &copy; 2026 <a href="#">Field Atlas</a> — SkillPulse Platform
+      &copy; 2026 <a href="#">SkillPulse</a> — SkillPulse Platform
     </p>
   </footer>
 

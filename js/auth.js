@@ -1,5 +1,5 @@
 /*
- * FIELD ATLAS — AUTHENTICATION & OTP CONTROLLER
+ * SKILLPULSE — AUTHENTICATION & OTP CONTROLLER
  * Handles user login, registration, email OTP dispatch & verification, password reset, and logout
  */
 
@@ -21,18 +21,18 @@ document.addEventListener('DOMContentLoaded', function() {
       const rememberMe = document.getElementById('login-remember') ? document.getElementById('login-remember').checked : false;
 
       try {
-        const response = await FieldAtlasAPI.post('/api/auth/login/', {
+        const response = await SkillPulseAPI.post('/api/auth/login/', {
           identifier: identifier,
           password: password,
           remember_me: rememberMe
         });
 
         // Store into compulsory session memory cache
-        if (window.FieldAtlasCache) {
-          FieldAtlasCache.set('user_session', response);
+        if (window.SkillPulseCache) {
+          SkillPulseCache.set('user_session', response);
         }
 
-        FieldAtlasAPI.showToast('Login successful! Redirecting...', 'success');
+        SkillPulseAPI.showToast('Login successful! Redirecting...', 'success');
         setTimeout(() => {
           window.location.href = response.redirect_url || '/';
         }, 600);
@@ -91,21 +91,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const otpCode = document.getElementById('reg-otp') ? document.getElementById('reg-otp').value.trim() : '';
 
       if (rawAadhaar && rawAadhaar.length !== 12) {
-        FieldAtlasAPI.showToast('Please enter a valid 12-digit Aadhaar Card Number.', 'warning');
+        SkillPulseAPI.showToast('Please enter a valid 12-digit Aadhaar Card Number.', 'warning');
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
         return;
       }
 
       if (rawPhone && rawPhone.length < 10) {
-        FieldAtlasAPI.showToast('Please enter a valid 10-digit registered Aadhaar mobile number.', 'warning');
+        SkillPulseAPI.showToast('Please enter a valid 10-digit registered Aadhaar mobile number.', 'warning');
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
         return;
       }
 
       try {
-        const response = await FieldAtlasAPI.post('/api/auth/register/', {
+        const response = await SkillPulseAPI.post('/api/auth/register/', {
           full_name: fullName,
           aadhaar_name: fullName,
           aadhaar_number: rawAadhaar,
@@ -119,11 +119,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Store into compulsory session memory cache
-        if (window.FieldAtlasCache) {
-          FieldAtlasCache.set('user_session', response);
+        if (window.SkillPulseCache) {
+          SkillPulseCache.set('user_session', response);
         }
 
-        FieldAtlasAPI.showToast('Account registered successfully with Aadhaar! Redirecting...', 'success');
+        SkillPulseAPI.showToast('Account registered successfully with Aadhaar! Redirecting...', 'success');
         setTimeout(() => {
           window.location.href = response.redirect_url || '/';
         }, 600);
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     sendOtpBtn.addEventListener('click', async function() {
       const emailInput = document.getElementById('reg-email') || document.getElementById('otp-email');
       if (!emailInput || !emailInput.value) {
-        FieldAtlasAPI.showToast('Please enter your email address first.', 'warning');
+        SkillPulseAPI.showToast('Please enter your email address first.', 'warning');
         return;
       }
 
@@ -150,8 +150,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       try {
         const purpose = sendOtpBtn.getAttribute('data-purpose') || 'registration';
-        const res = await FieldAtlasAPI.post('/api/auth/send-otp/', { email: email, purpose: purpose });
-        FieldAtlasAPI.showToast(res.message || 'Verification code dispatched to your email!', 'success');
+        const res = await SkillPulseAPI.post('/api/auth/send-otp/', { email: email, purpose: purpose });
+        SkillPulseAPI.showToast(res.message || 'Verification code dispatched to your email!', 'success');
 
         // Start 60-second cooldown timer
         let countdown = 60;
@@ -180,8 +180,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const code = document.getElementById('otp-code').value.trim();
 
       try {
-        await FieldAtlasAPI.post('/api/auth/verify-otp/', { email: email, code: code });
-        FieldAtlasAPI.showToast('Verification successful! You may now sign in.', 'success');
+        await SkillPulseAPI.post('/api/auth/verify-otp/', { email: email, code: code });
+        SkillPulseAPI.showToast('Verification successful! You may now sign in.', 'success');
         setTimeout(() => {
           window.location.href = '/login/';
         }, 800);
@@ -199,12 +199,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const newPassword = document.getElementById('reset-new-password').value;
 
       try {
-        const res = await FieldAtlasAPI.post('/api/auth/password-reset/', {
+        const res = await SkillPulseAPI.post('/api/auth/password-reset/', {
           email: email,
           code: code,
           new_password: newPassword
         });
-        FieldAtlasAPI.showToast(res.message || 'Password reset successful! Please log in.', 'success');
+        SkillPulseAPI.showToast(res.message || 'Password reset successful! Please log in.', 'success');
         setTimeout(() => {
           window.location.href = '/login/';
         }, 1000);
@@ -217,8 +217,8 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', async function(e) {
       e.preventDefault();
       try {
-        await FieldAtlasAPI.post('/api/auth/logout/');
-        FieldAtlasAPI.showToast('Signed out successfully.', 'success');
+        await SkillPulseAPI.post('/api/auth/logout/');
+        SkillPulseAPI.showToast('Signed out successfully.', 'success');
         setTimeout(() => {
           window.location.href = '/login/';
         }, 400);
