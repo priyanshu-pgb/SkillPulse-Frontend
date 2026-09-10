@@ -12,8 +12,8 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <link rel="stylesheet" href="css/field-atlas.css?v=2.5.0">
-  <link rel="stylesheet" href="css/responsive.css?v=2.5.0">
+  <link rel="stylesheet" href="css/field-atlas.css?v=2.6.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.6.0">
   <link rel="stylesheet" href="css/watermark.css">
 
   <style>
@@ -81,25 +81,38 @@
 
     <!-- ═══════════════ SIDEBAR ═══════════════ -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <a href="/" class="brand-badge">
-          <div class="brand-logo-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" class="brand-logo-svg" style="width: 24px; height: 24px;">
+      <div class="sidebar-header" style="padding: 1.25rem 1.15rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <a href="/" class="brand-badge" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+          <div style="flex-shrink: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 135" class="ashoka-emblem-svg" style="height: 46px; width: auto;" aria-label="State Emblem of India">
   <defs>
-    <linearGradient id="spBrandGrad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0E8176"/>
-      <stop offset="0.5" stop-color="#14B8A6"/>
-      <stop offset="1" stop-color="#06B6D4"/>
+    <linearGradient id="emblemGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C59B27"/>
+      <stop offset="50%" stop-color="#E5C158"/>
+      <stop offset="100%" stop-color="#9A7718"/>
     </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="8" fill="url(#spBrandGrad)"/>
-  <path d="M6 16.5H10.5L13 10L17 22L19.5 14L21.5 16.5H26" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="17" cy="6.8" r="1.8" fill="#FDE047"/>
+  <path d="M50 12 C44 12 40 16 40 22 C37 20 33 22 33 26 C33 30 36 32 37 36 C36 40 38 44 42 46 C44 50 48 52 50 53 C52 52 56 50 58 46 C62 44 64 40 63 36 C64 32 67 30 67 26 C67 22 63 20 60 22 C60 16 56 12 50 12 Z" fill="url(#emblemGoldGrad)"/>
+  <path d="M37 24 C33 24 28 27 28 32 C26 31 22 34 23 38 C23 42 26 44 26 48 C24 51 26 55 29 57 C31 60 35 62 38 63 C36 58 35 53 36 48 C34 45 35 41 37 38 Z" fill="url(#emblemGoldGrad)" opacity="0.95"/>
+  <path d="M63 24 C67 24 72 27 72 32 C74 31 78 34 77 38 C77 42 74 44 74 48 C76 51 74 55 71 57 C69 60 65 62 62 63 C64 58 65 53 64 48 C66 45 65 41 63 38 Z" fill="url(#emblemGoldGrad)" opacity="0.95"/>
+  <circle cx="43" cy="20" r="2.5" fill="#78590E"/>
+  <circle cx="57" cy="20" r="2.5" fill="#78590E"/>
+  <path d="M46 32 Q50 35 54 32" stroke="#78590E" stroke-width="1.5" fill="none"/>
+  <path d="M48 27 L52 27 L50 30 Z" fill="#78590E"/>
+  <rect x="15" y="65" width="70" height="12" rx="3" fill="url(#emblemGoldGrad)"/>
+  <circle cx="50" cy="71" r="5" fill="#002B49" stroke="#FFFFFF" stroke-width="0.8"/>
+  <circle cx="50" cy="71" r="1.2" fill="#FFFFFF"/>
+  <path d="M26 69 Q30 67 33 69 Q31 73 28 73 Z" fill="#002B49"/>
+  <path d="M67 69 Q70 67 74 69 Q72 73 69 73 Z" fill="#002B49"/>
+  <path d="M20 79 C30 85 70 85 80 79 L84 89 C70 94 30 94 16 89 Z" fill="url(#emblemGoldGrad)"/>
+  <text x="50" y="108" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="10.5" font-weight="900" text-anchor="middle" class="emblem-motto" fill="#FFFFFF" letter-spacing="1.5">सत्यमेव जयते</text>
+  <text x="50" y="122" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700" text-anchor="middle" class="emblem-country" fill="#94A3B8" letter-spacing="0.8">GOVT OF INDIA</text>
 </svg>
           </div>
-          <div class="brand-text-wrap">
-            <span class="brand-title">SkillPulse</span>
-            <span class="brand-subtitle">Trainee Portal</span>
+          <div class="brand-text-wrap" style="display: flex; flex-direction: column;">
+            <span class="brand-title" style="font-size: 1.2rem; font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em;">SkillPulse</span>
+            <span style="font-size: 0.7rem; color: #F26A21; font-weight: 700; letter-spacing: 0.02em;">कौशल भारत - कुशल भारत</span>
+            <span style="font-size: 0.65rem; color: #94A3B8;">MSDE Government of India</span>
           </div>
         </a>
       </div>
@@ -151,6 +164,42 @@
 
     <!-- ═══════════════ MAIN WRAPPER ═══════════════ -->
     <div class="main-wrapper">
+
+    <!-- ═══════════════ OFFICIAL GOVERNMENT OF INDIA UTILITY STRIP ═══════════════ -->
+    <div class="gov-tricolor-strip"></div>
+    <div class="gov-top-bar">
+      <div class="gov-flag-title">
+        <span class="gov-flag-icon" aria-hidden="true">🇮🇳</span>
+        <span>भारत सरकार | Government of India</span>
+        <span class="gov-ministry-title">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship</span>
+      </div>
+      <div class="gov-top-controls">
+        <!-- Accessibility Text Resizer -->
+        <div class="font-resizer-wrap" title="Accessibility Text Sizing">
+          <button type="button" class="font-resizer-btn" data-action="decrease" title="Decrease Font Size" aria-label="Decrease text size">A-</button>
+          <button type="button" class="font-resizer-btn active" data-action="normal" title="Normal Font Size" aria-label="Normal text size">A</button>
+          <button type="button" class="font-resizer-btn" data-action="increase" title="Increase Font Size" aria-label="Increase text size">A+</button>
+        </div>
+        <!-- Language Selector Dropdown -->
+        <div class="lang-selector-wrap" style="margin: 0;">
+          <select class="lang-select" aria-label="Choose Language" style="border: 1px solid var(--color-border); background: var(--color-surface); padding: 0.2rem 1.6rem 0.2rem 0.6rem; font-size: 0.76rem; border-radius: 4px; color: var(--color-text-primary);">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="or">ଓଡ଼ିଆ (Odia)</option>
+            <option value="mr">मराठी (Marathi)</option>
+            <option value="bn">বাংলা (Bengali)</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+          </select>
+        </div>
+        <!-- Theme Toggle -->
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme" style="padding: 0.25rem 0.6rem; font-size: 0.76rem; border-radius: 4px; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary);">
+          <span class="theme-icon">☀️</span>
+          <span class="theme-text">Light</span>
+        </button>
+      </div>
+    </div>
+
       <header class="top-header glass-header">
         <div class="header-left" style="display: flex; align-items: center; gap: 0.75rem;">
           <button class="mobile-drawer-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
@@ -186,6 +235,7 @@
             <i data-lucide="home" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
             <span id="header-active-view-name">Trainee Full Journey</span>
           </div>
+          <a href="https://www.skillindiadigital.gov.in/home" target="_blank" rel="noopener" class="badge sidh-badge-saffron" style="text-decoration: none; padding: 0.3rem 0.65rem; display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.74rem;"><i data-lucide="external-link" style="width: 13px; height: 13px;"></i> Skill India Digital Hub</a>
         </div>
 
         <div class="header-right" style="display: flex; align-items: center; gap: 0.65rem;">
@@ -843,7 +893,7 @@
               </div>
               <h2 style="font-size: 1.4rem; color: var(--color-deep-indigo); margin-bottom: 0.5rem;">Your response has been recorded.</h2>
               <p style="color: var(--color-text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1rem;">
-                Thank you for reporting your outcome! Your details under the <strong id="confirm-scheme-name">PMKVY 4.0</strong> scheme have been saved to your timeline.
+                Thank you for reporting your outcome! Your details under the <strong id="confirm-scheme-name">PMKVY 4.0</strong> scheme with <strong id="confirm-employer-name">Organization</strong> have been saved to your timeline.
               </p>
               
               <!-- 1-Click Employer Verification Link Box -->
@@ -1169,6 +1219,23 @@
           </div>
         </section>
 
+      
+      <!-- ═══════════════ OFFICIAL GOVERNMENT FOOTER (GIGW COMPLIANT) ═══════════════ -->
+      <footer class="gov-footer">
+        <div class="gov-footer-links">
+          <a href="https://www.india.gov.in" target="_blank" rel="noopener">National Portal of India (india.gov.in)</a>
+          <a href="https://www.msde.gov.in" target="_blank" rel="noopener">Ministry of Skill Development & Entrepreneurship</a>
+          <a href="https://www.skillindiadigital.gov.in/home" target="_blank" rel="noopener">Skill India Digital Hub</a>
+          <a href="https://ncvet.gov.in" target="_blank" rel="noopener">NCVET</a>
+          <a href="https://nsdcindia.org" target="_blank" rel="noopener">NSDC</a>
+          <a href="https://digitalindia.gov.in" target="_blank" rel="noopener">Digital India</a>
+        </div>
+        <div class="gov-footer-disclaimer">
+          <p style="margin-bottom: 0.4rem; font-weight: 700; color: #CBD5E1;">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship (MSDE), Government of India</p>
+          <p style="margin: 0; font-size: 0.72rem; color: #94A3B8;">SkillPulse — Skilling Outcomes & Employment Analytics Portal. Designed and maintained in accordance with Guidelines for Indian Government Websites (GIGW) & Digital Personal Data Protection Act.</p>
+        </div>
+      </footer>
+
       </main>
     </div>
   </div>
@@ -1338,9 +1405,9 @@
   <!-- Core Scripts -->
   <script src="js/config.js"></script>
   <script src="js/mock-auth.js"></script>
-  <script src="js/mock-data.js?v=2.5.0"></script>
-  <script src="js/api.js?v=2.5.0"></script>
-  <script src="js/i18n.js?v=2.5.0"></script>
+  <script src="js/mock-data.js?v=2.6.0"></script>
+  <script src="js/api.js?v=2.6.0"></script>
+  <script src="js/i18n.js?v=2.6.0"></script>
   <script src="js/notifications.js"></script>
   <script src="js/auth.js"></script>
 
