@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Trainer Dashboard — SkillPulse SkillPulse</title>
+  <title>Trainer Dashboard — SkillPulse</title>
   <meta name="description" content="SkillPulse Trainer Dashboard — Government Courses, Student Attendance & Retention, Course Placement Efficiency, Trainee Confirmation & Outreach, and Trainer Qualification.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2228,7 +2228,7 @@
           `;
         } else {
           // ─── IF NO: Unplaced Trainee (Display Contact Details, Direct Call & WhatsApp Outreach) ───
-          const encodedMsg = encodeURIComponent(`Hello ${t.trainee_name}, this is your Trainer Arjun Sharma from SkillPulse SkillPulse. I saw you are seeking placement in ${t.preferred_role || 'your sector'}. How can I assist you with corporate interviews?`);
+          const encodedMsg = encodeURIComponent(`Hello ${t.trainee_name}, this is your Trainer Arjun Sharma from SkillPulse. I saw you are seeking placement in ${t.preferred_role || 'your sector'}. How can I assist you with corporate interviews?`);
           const whatsappUrl = `https://wa.me/91${t.phone}?text=${encodedMsg}`;
           const telUrl = `tel:+91${t.phone}`;
 
