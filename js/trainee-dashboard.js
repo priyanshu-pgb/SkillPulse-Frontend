@@ -714,6 +714,7 @@ document.addEventListener('DOMContentLoaded', function() {
       category: 'IT-ITeS & FutureSkills',
       domain: 'cloud-devops',
       scheme: 'PMKVY 4.0 / MeitY',
+      officialUrl: 'https://www.skillindiadigital.gov.in',
       icon: '☁️',
       color: '#0D7E55',
       matchScore: 98,
@@ -771,6 +772,7 @@ document.addEventListener('DOMContentLoaded', function() {
       category: 'IT-ITeS & Software Engineering',
       domain: 'fullstack-microservices',
       scheme: 'DGT / NCVET Level 6 Specialization',
+      officialUrl: 'https://dgt.gov.in',
       icon: '💻',
       color: '#2563EB',
       matchScore: 97,
@@ -828,6 +830,7 @@ document.addEventListener('DOMContentLoaded', function() {
       category: 'Higher Education & Deep Tech',
       domain: 'ai-data',
       scheme: 'SWAYAM / NPTEL / IIT Madras',
+      officialUrl: 'https://swayam.gov.in',
       icon: '🧠',
       color: '#4F46E5',
       matchScore: 95,
@@ -885,6 +888,7 @@ document.addEventListener('DOMContentLoaded', function() {
       category: 'IT-ITeS & FutureSkills',
       domain: 'mobile-react',
       scheme: 'FutureSkills Prime / NASSCOM',
+      officialUrl: 'https://futureskillsprime.in',
       icon: '📱',
       color: '#0284C7',
       matchScore: 93,
@@ -942,6 +946,7 @@ document.addEventListener('DOMContentLoaded', function() {
       category: 'Green Skills & Clean Energy',
       domain: 'green-energy',
       scheme: 'Skill Council for Green Jobs / MSDE',
+      officialUrl: 'https://msde.gov.in',
       icon: '⚡',
       color: '#059669',
       matchScore: 92,
@@ -999,6 +1004,7 @@ document.addEventListener('DOMContentLoaded', function() {
       category: 'Emerging Technologies',
       domain: 'cyber-defense',
       scheme: 'C-DAC / MeitY / ISEA',
+      officialUrl: 'https://www.cdac.in',
       icon: '🛡️',
       color: '#E11D48',
       matchScore: 89,
@@ -1128,7 +1134,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!track) return;
 
     const createCardHTML = (c) => `
-      <div class="ai-course-marquee-card ${c.id === activeAICourseKey ? 'selected' : ''}" data-course-id="${c.id}" onclick="window.selectAICourse('${c.id}')">
+      <div class="ai-course-marquee-card ${c.id === activeAICourseKey ? 'selected' : ''}" data-course-id="${c.id}" onclick="window.selectAICourse('${c.id}')" style="cursor: pointer;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
           <span class="ai-match-pill" style="background: linear-gradient(135deg, ${c.color} 0%, #1A2238 100%);">✨ ${c.matchScore}% AI Match</span>
           <span class="ai-scheme-pill">${c.scheme.split('/')[0].trim()}</span>
@@ -1150,9 +1156,12 @@ document.addEventListener('DOMContentLoaded', function() {
             <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹${(c.avgSalaryNum/1000).toFixed(0)}k/mo 💰</div>
           </div>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: ${c.color}; font-weight: 700;">
-          <span>Inspect 3-Step AI Analysis</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+          <span style="font-size: 0.75rem; color: ${c.color}; font-weight: 700;">Inspect Analysis ↓</span>
+          <a href="${c.officialUrl || '#'}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"
+             style="font-size: 0.72rem; font-weight: 700; color: #FFFFFF; background: ${c.color}; padding: 0.2rem 0.55rem; border-radius: 5px; text-decoration: none; white-space: nowrap;">
+            Portal ↗
+          </a>
         </div>
       </div>
     `;
@@ -1346,13 +1355,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Selects an AI course and updates active view
   window.selectAICourse = function(courseKey) {
     renderAICourseData(courseKey);
-    const panel = document.getElementById('section-ai-advisor');
-    if (panel) {
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll directly to the 3-step analysis tabs (not the top of the section)
+    const anchor = document.getElementById('ai-step-tabs-anchor');
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     const api = window.SkillPulseAPI || window.FieldAtlasAPI;
     if (api && typeof api.showToast === 'function') {
-      api.showToast(`AI Analysis & Feasibility loaded for: ${aiCoursesDB[courseKey]?.title || courseKey}`, 'info');
+      api.showToast(`✅ Loaded: ${aiCoursesDB[courseKey]?.title || courseKey} — see 3-Step Analysis below`, 'success');
     }
   };
 
