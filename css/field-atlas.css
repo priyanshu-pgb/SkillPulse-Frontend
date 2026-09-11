@@ -3588,3 +3588,447 @@ html.dark .ashoka-emblem-svg text {
 html.dark .sidh-brand-title {
   color: #F8FAFC !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   INFINITE MOVING MARQUEE (PARTNERS, FEATURES, MINISTRIES)
+   ══════════════════════════════════════════════════════════════════ */
+.sp-marquee-section {
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.sp-marquee-section.compact {
+  padding: 0.75rem 0;
+}
+
+.sp-marquee-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding: 0 1rem;
+}
+
+.sp-marquee-header .sp-marquee-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(14, 129, 118, 0.1);
+  color: var(--color-teal);
+  border: 1px solid rgba(14, 129, 118, 0.2);
+  margin-bottom: 0.4rem;
+}
+
+.sp-marquee-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-deep-indigo);
+  margin: 0;
+}
+
+.sp-marquee-header p {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin: 0.25rem 0 0;
+}
+
+.sp-marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  display: flex;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  user-select: none;
+}
+
+.sp-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.15rem;
+  will-change: transform;
+  padding: 0.4rem 0;
+}
+
+.sp-marquee-track-left {
+  animation: spMarqueeScrollLeft 38s linear infinite;
+}
+
+.sp-marquee-track-right {
+  animation: spMarqueeScrollRight 42s linear infinite;
+}
+
+.sp-marquee-track-fast {
+  animation-duration: 28s;
+}
+
+.sp-marquee-track-slow {
+  animation-duration: 54s;
+}
+
+/* Pause smoothly on hover so user can easily read and click */
+.sp-marquee-wrapper:hover .sp-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes spMarqueeScrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spMarqueeScrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Individual Card in Marquee - Ministry / Partner / Feature Card */
+.sp-partner-card,
+.sp-feature-marquee-card {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-border, #E2E8F0);
+  border-radius: 12px;
+  padding: 0.7rem 1.15rem;
+  box-shadow: 0 2px 8px rgba(0, 43, 73, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.sp-partner-card:hover,
+.sp-feature-marquee-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-teal, #0E8176);
+  box-shadow: 0 6px 18px rgba(14, 129, 118, 0.14);
+}
+
+.sp-partner-card .partner-logo-box,
+.sp-feature-marquee-card .feature-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 800;
+  font-size: 1rem;
+  background: var(--color-parchment);
+}
+
+.sp-partner-card .partner-details,
+.sp-feature-marquee-card .feature-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.sp-partner-card .partner-name,
+.sp-feature-marquee-card .feature-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-deep-indigo);
+  letter-spacing: -0.01em;
+}
+
+.sp-partner-card .partner-sub,
+.sp-feature-marquee-card .feature-sub {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+}
+
+.feature-badge-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Embedded Ashoka Insignia for Ministry Cards */
+.sp-ministry-emblem {
+  height: 32px;
+  width: auto;
+}
+
+/* Trainee & Trainer Portal Specific Banner Overrides */
+.portal-feature-banner {
+  background: linear-gradient(180deg, rgba(14, 129, 118, 0.05) 0%, rgba(30, 39, 73, 0.02) 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.85rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.portal-feature-banner .sp-feature-marquee-card {
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 0.55rem 0.95rem;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .sp-partner-card,
+[data-theme="dark"] .sp-feature-marquee-card,
+html.dark .sp-partner-card,
+html.dark .sp-feature-marquee-card {
+  background: #131B2E !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .sp-partner-card:hover,
+[data-theme="dark"] .sp-feature-marquee-card:hover,
+html.dark .sp-partner-card:hover,
+html.dark .sp-feature-marquee-card:hover {
+  border-color: #14B8A6 !important;
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.22) !important;
+}
+
+[data-theme="dark"] .sp-partner-card .partner-name,
+[data-theme="dark"] .sp-feature-marquee-card .feature-title,
+html.dark .sp-partner-card .partner-name,
+html.dark .sp-feature-marquee-card .feature-title {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .sp-marquee-header h3,
+html.dark .sp-marquee-header h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .sp-partner-card .partner-sub,
+[data-theme="dark"] .sp-feature-marquee-card .feature-sub,
+html.dark .sp-partner-card .partner-sub,
+html.dark .sp-feature-marquee-card .feature-sub {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .sp-partner-card .partner-logo-box,
+[data-theme="dark"] .sp-feature-marquee-card .feature-icon-box,
+html.dark .sp-partner-card .partner-logo-box,
+html.dark .sp-feature-marquee-card .feature-icon-box {
+  background: #1E293B !important;
+}
+
+[data-theme="dark"] .portal-feature-banner,
+html.dark .portal-feature-banner {
+  background: rgba(19, 27, 46, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-marquee-track-left,
+  .sp-marquee-track-right {
+    animation: none !important;
+    overflow-x: auto;
+  }
+}
+
+/* ══════ AI-POWERED 3-STEP COURSE INTELLIGENCE STYLES ══════ */
+.ai-advisor-panel {
+  background: var(--color-surface);
+  border: 1.5px solid rgba(13, 126, 85, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 43, 73, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.ai-advisor-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0D7E55, #10B981, #06B6D4, #F26A21, #0D7E55);
+  background-size: 300% 100%;
+  animation: aiGlowShift 8s linear infinite;
+}
+@keyframes aiGlowShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.ai-marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 1.25rem 0 1.5rem;
+  padding: 0.5rem 0;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+}
+.ai-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  will-change: transform;
+  animation: aiMarqueeScroll 38s linear infinite;
+}
+.ai-marquee-wrapper:hover .ai-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes aiMarqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ai-course-marquee-card {
+  min-width: 325px;
+  max-width: 345px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.15rem;
+  box-shadow: 0 4px 16px rgba(0, 43, 73, 0.06);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+[data-theme="dark"] .ai-course-marquee-card,
+html.dark .ai-course-marquee-card {
+  background: #131B2E;
+  border-color: #2A364F;
+}
+.ai-course-marquee-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: #0D7E55;
+  box-shadow: 0 10px 28px rgba(13, 126, 85, 0.2);
+}
+.ai-course-marquee-card.selected {
+  border-color: #0D7E55;
+  background: rgba(13, 126, 85, 0.05);
+  box-shadow: 0 0 0 2px rgba(13, 126, 85, 0.35);
+}
+.ai-match-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: linear-gradient(135deg, #0D7E55 0%, #10B981 100%);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.28rem 0.65rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+.ai-scheme-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #F26A21;
+  background: #FFF4ED;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(242, 106, 33, 0.2);
+}
+[data-theme="dark"] .ai-scheme-pill,
+html.dark .ai-scheme-pill {
+  background: rgba(242, 106, 33, 0.15);
+}
+.ai-step-tab-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 0.85rem 1.15rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ai-step-tab-btn:hover {
+  background: var(--color-surface-hover);
+  border-color: #0D7E55;
+}
+.ai-step-tab-btn.active {
+  background: linear-gradient(135deg, #002B49 0%, #0D7E55 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(13, 126, 85, 0.3);
+}
+.ai-step-tab-btn.active .ai-step-num {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+.ai-step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.ai-pictorial-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.ai-gauge-circle {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+.ai-gauge-bg {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 8;
+}
+.ai-gauge-bar {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ai-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: aiPulse 2s infinite;
+}
+@keyframes aiPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+

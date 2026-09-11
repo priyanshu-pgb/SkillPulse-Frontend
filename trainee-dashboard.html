@@ -70,6 +70,188 @@
       box-shadow: 0 4px 12px rgba(14, 129, 118, 0.4);
       color: #FFFFFF !important;
     }
+    /* ══════ AI-POWERED 3-STEP COURSE INTELLIGENCE STYLES ══════ */
+    .ai-advisor-panel {
+      background: var(--color-surface);
+      border: 1.5px solid rgba(13, 126, 85, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-bottom: 2.25rem;
+      box-shadow: 0 8px 30px rgba(0, 43, 73, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .ai-advisor-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0D7E55, #10B981, #06B6D4, #F26A21, #0D7E55);
+      background-size: 300% 100%;
+      animation: aiGlowShift 8s linear infinite;
+    }
+    @keyframes aiGlowShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .ai-marquee-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      margin: 1.25rem 0 1.5rem;
+      padding: 0.5rem 0;
+      mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    }
+    .ai-marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 1.25rem;
+      will-change: transform;
+      animation: aiMarqueeScroll 38s linear infinite;
+    }
+    .ai-marquee-wrapper:hover .ai-marquee-track {
+      animation-play-state: paused;
+    }
+    @keyframes aiMarqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ai-course-marquee-card {
+      min-width: 325px;
+      max-width: 345px;
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: 14px;
+      padding: 1.15rem;
+      box-shadow: 0 4px 16px rgba(0, 43, 73, 0.06);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    [data-theme="dark"] .ai-course-marquee-card,
+    html.dark .ai-course-marquee-card {
+      background: #131B2E;
+      border-color: #2A364F;
+    }
+    .ai-course-marquee-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: #0D7E55;
+      box-shadow: 0 10px 28px rgba(13, 126, 85, 0.2);
+    }
+    .ai-course-marquee-card.selected {
+      border-color: #0D7E55;
+      background: rgba(13, 126, 85, 0.05);
+      box-shadow: 0 0 0 2px rgba(13, 126, 85, 0.35);
+    }
+    .ai-match-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: linear-gradient(135deg, #0D7E55 0%, #10B981 100%);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.28rem 0.65rem;
+      border-radius: 9999px;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+    }
+    .ai-scheme-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #F26A21;
+      background: #FFF4ED;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid rgba(242, 106, 33, 0.2);
+    }
+    [data-theme="dark"] .ai-scheme-pill,
+    html.dark .ai-scheme-pill {
+      background: rgba(242, 106, 33, 0.15);
+    }
+    .ai-step-tab-btn {
+      flex: 1;
+      min-width: 160px;
+      padding: 0.85rem 1.15rem;
+      border-radius: 12px;
+      border: 1.5px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text-secondary);
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .ai-step-tab-btn:hover {
+      background: var(--color-surface-hover);
+      border-color: #0D7E55;
+    }
+    .ai-step-tab-btn.active {
+      background: linear-gradient(135deg, #002B49 0%, #0D7E55 100%);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(13, 126, 85, 0.3);
+    }
+    .ai-step-tab-btn.active .ai-step-num {
+      background: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+    .ai-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-border);
+      color: var(--color-text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+    .ai-pictorial-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .ai-gauge-circle {
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+    .ai-gauge-bg {
+      fill: none;
+      stroke: var(--color-border);
+      stroke-width: 8;
+    }
+    .ai-gauge-bar {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ai-pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: aiPulse 2s infinite;
+    }
+    @keyframes aiPulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
   </style>
   <!-- Modern Typography (Outfit + Plus Jakarta Sans + JetBrains Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,35 +266,12 @@
       <div class="sidebar-header" style="padding: 1.25rem 1.15rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
         <a href="/" class="brand-badge" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
           <div style="flex-shrink: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 135" class="ashoka-emblem-svg" style="height: 46px; width: auto;" aria-label="State Emblem of India">
-  <defs>
-    <linearGradient id="emblemGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#C59B27"/>
-      <stop offset="50%" stop-color="#E5C158"/>
-      <stop offset="100%" stop-color="#9A7718"/>
-    </linearGradient>
-  </defs>
-  <path d="M50 12 C44 12 40 16 40 22 C37 20 33 22 33 26 C33 30 36 32 37 36 C36 40 38 44 42 46 C44 50 48 52 50 53 C52 52 56 50 58 46 C62 44 64 40 63 36 C64 32 67 30 67 26 C67 22 63 20 60 22 C60 16 56 12 50 12 Z" fill="url(#emblemGoldGrad)"/>
-  <path d="M37 24 C33 24 28 27 28 32 C26 31 22 34 23 38 C23 42 26 44 26 48 C24 51 26 55 29 57 C31 60 35 62 38 63 C36 58 35 53 36 48 C34 45 35 41 37 38 Z" fill="url(#emblemGoldGrad)" opacity="0.95"/>
-  <path d="M63 24 C67 24 72 27 72 32 C74 31 78 34 77 38 C77 42 74 44 74 48 C76 51 74 55 71 57 C69 60 65 62 62 63 C64 58 65 53 64 48 C66 45 65 41 63 38 Z" fill="url(#emblemGoldGrad)" opacity="0.95"/>
-  <circle cx="43" cy="20" r="2.5" fill="#78590E"/>
-  <circle cx="57" cy="20" r="2.5" fill="#78590E"/>
-  <path d="M46 32 Q50 35 54 32" stroke="#78590E" stroke-width="1.5" fill="none"/>
-  <path d="M48 27 L52 27 L50 30 Z" fill="#78590E"/>
-  <rect x="15" y="65" width="70" height="12" rx="3" fill="url(#emblemGoldGrad)"/>
-  <circle cx="50" cy="71" r="5" fill="#002B49" stroke="#FFFFFF" stroke-width="0.8"/>
-  <circle cx="50" cy="71" r="1.2" fill="#FFFFFF"/>
-  <path d="M26 69 Q30 67 33 69 Q31 73 28 73 Z" fill="#002B49"/>
-  <path d="M67 69 Q70 67 74 69 Q72 73 69 73 Z" fill="#002B49"/>
-  <path d="M20 79 C30 85 70 85 80 79 L84 89 C70 94 30 94 16 89 Z" fill="url(#emblemGoldGrad)"/>
-  <text x="50" y="108" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="10.5" font-weight="900" text-anchor="middle" class="emblem-motto" fill="#FFFFFF" letter-spacing="1.5">सत्यमेव जयते</text>
-  
-</svg>
+            <div style="width: 46px; height: 46px; background: linear-gradient(135deg, #0D7E55, #18A89B); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.3rem; box-shadow: 0 2px 8px rgba(14,129,118,0.3);">SP</div>
           </div>
           <div class="brand-text-wrap" style="display: flex; flex-direction: column;">
             <span class="brand-title" style="font-size: 1.2rem; font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em;">SkillPulse</span>
-            <span style="font-size: 0.7rem; color: #F26A21; font-weight: 700; letter-spacing: 0.02em;">कौशल भारत - कुशल भारत</span>
-            <span style="font-size: 0.65rem; color: #94A3B8;">Ministry of Skill Development & Entrepreneurship</span>
+            <span style="font-size: 0.7rem; color: #F26A21; font-weight: 700; letter-spacing: 0.02em;">Skilling Outcomes Intelligence</span>
+            <span style="font-size: 0.65rem; color: #94A3B8;">Built by Team Synkro</span>
           </div>
         </a>
       </div>
@@ -121,6 +280,10 @@
         <div class="nav-group-label">Quick Jump to Sections</div>
         <a class="nav-link active" data-nav-target="section-dashboard" id="nav-item-dashboard">
           <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> 1. Dashboard & Streak
+        </a>
+        <a class="nav-link" data-nav-target="section-ai-advisor" id="nav-item-ai-advisor" style="background: linear-gradient(135deg, rgba(13,126,85,0.1), rgba(0,43,73,0.1)); border-left: 3px solid #10B981;">
+          <i data-lucide="sparkles" style="width: 18px; height: 18px; color: #10B981;"></i>
+          <span style="font-weight: 700; color: var(--color-teal);">✨ AI Course Advisor</span>
         </a>
         <a class="nav-link" data-nav-target="section-govt-courses" id="nav-item-govt-courses">
           <i data-lucide="landmark" style="width: 18px; height: 18px;"></i> 2. Government Courses
@@ -165,77 +328,11 @@
     <!-- ═══════════════ MAIN WRAPPER ═══════════════ -->
     <div class="main-wrapper">
 
-    <!-- ═══════════════ OFFICIAL SKILL INDIA UTILITY STRIP ═══════════════ -->
-    <div class="gov-tricolor-strip"></div>
-    <div class="gov-top-bar">
-      <div class="gov-flag-title">
-        <span class="gov-flag-icon" aria-hidden="true">🇮🇳</span>
-        
-        <span class="gov-ministry-title">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship</span>
-      </div>
-      <div class="gov-top-controls">
-        <!-- Accessibility Text Resizer -->
-        <div class="font-resizer-wrap" title="Accessibility Text Sizing">
-          <button type="button" class="font-resizer-btn" data-action="decrease" title="Decrease Font Size" aria-label="Decrease text size">A-</button>
-          <button type="button" class="font-resizer-btn active" data-action="normal" title="Normal Font Size" aria-label="Normal text size">A</button>
-          <button type="button" class="font-resizer-btn" data-action="increase" title="Increase Font Size" aria-label="Increase text size">A+</button>
-        </div>
-        <!-- Language Selector Dropdown -->
-        <div class="lang-selector-wrap" style="margin: 0;">
-          <select class="lang-select" aria-label="Choose Language" style="border: 1px solid var(--color-border); background: var(--color-surface); padding: 0.2rem 1.6rem 0.2rem 0.6rem; font-size: 0.76rem; border-radius: 4px; color: var(--color-text-primary);">
-            <option value="en">English</option>
-            <option value="hi">हिन्दी (Hindi)</option>
-            <option value="or">ଓଡ଼ିଆ (Odia)</option>
-            <option value="mr">मराठी (Marathi)</option>
-            <option value="bn">বাংলা (Bengali)</option>
-            <option value="ta">தமிழ் (Tamil)</option>
-            <option value="te">తెలుగు (Telugu)</option>
-          </select>
-        </div>
-        <!-- Theme Toggle -->
-        <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme" style="padding: 0.25rem 0.6rem; font-size: 0.76rem; border-radius: 4px; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary);">
-          <span class="theme-icon">☀️</span>
-          <span class="theme-text">Light</span>
-        </button>
-      </div>
-    </div>
-
-      <header class="top-header glass-header">
-        <div class="header-left" style="display: flex; align-items: center; gap: 0.75rem;">
-          <button class="mobile-drawer-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
-            <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
-          </button>
-
-          <!-- ═════ STEP 1: TOP-LEFT NOTIFICATION BELL FOR TRAINER CLASSES ═════ -->
-          <div style="position: relative;">
-            <button class="notif-bell-btn" id="class-schedule-bell-btn" aria-label="Class Timings & Notifications" title="Classes & Notifications">
-              <i data-lucide="bell" style="width: 18px; height: 18px;"></i>
-              <span class="notif-bell-badge" id="class-schedule-badge">3</span>
-            </button>
-
-            <!-- Popover Drawer for Classes Timing & Available Classes from Trainer -->
-            <div class="class-schedule-popover" id="class-schedule-popover">
-              <div class="popover-header">
-                <h4>
-                  <i data-lucide="calendar" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
-                  Trainer Class Schedule
-                </h4>
-                <span class="badge badge-teal" style="font-size: 0.68rem;" id="classes-count-badge">3 SESSIONS</span>
-              </div>
-              <div id="trainer-classes-popover-list" style="max-height: 380px; overflow-y: auto;">
-                <!-- Rendered dynamically by JS -->
-              </div>
-              <div style="padding: 0.65rem 1rem; background: var(--color-surface); border-top: 1px solid var(--color-border-subtle); text-align: center;">
-                <span style="font-size: 0.75rem; color: var(--color-text-muted);">Synced live with Trainer Portal · NSDC</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="header-breadcrumb">
+  <div class="header-breadcrumb">
             <i data-lucide="home" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
             <span id="header-active-view-name">Trainee Full Journey</span>
           </div>
-          <a href="https://www.skillindiadigital.gov.in/home" target="_blank" rel="noopener" class="badge sidh-badge-saffron" style="text-decoration: none; padding: 0.3rem 0.65rem; display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.74rem;"><i data-lucide="external-link" style="width: 13px; height: 13px;"></i> Skill India Digital Hub</a>
+          
         </div>
 
         <div class="header-right" style="display: flex; align-items: center; gap: 0.65rem;">
@@ -265,6 +362,31 @@
 
       <!-- ════════════ ALL 5 SECTIONS ON THE SAME PAGE (SEQUENTIAL FLOW) ════════════ -->
       <main class="content-body" style="padding-bottom: 5rem;">
+
+        <!-- ═══════════ TRAINEE FEATURES MARQUEE BANNER ═══════════ -->
+        <div class="portal-feature-banner">
+          <div class="sp-marquee-wrapper">
+            <div class="sp-marquee-track sp-marquee-track-left sp-marquee-track-fast">
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#E6F4EA;color:#0D7E55;"><i data-lucide="flame" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Daily Login Streak</span><span class="feature-sub">Gamified Engagement</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FFF7ED;color:#F26A21;"><i data-lucide="landmark" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Government Courses</span><span class="feature-sub">PMKVY · DDU-GKY · NSDC</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#EEF2FF;color:#4F46E5;"><i data-lucide="book-open" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Learning Record</span><span class="feature-sub">Module-wise Progress</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#ECFDF5;color:#059669;"><i data-lucide="award" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Digital Certificates</span><span class="feature-sub">QR Verified · Shareable</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FFF1F2;color:#E11D48;"><i data-lucide="briefcase" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Placement Tracking</span><span class="feature-sub">Employer Verified</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FEF3C7;color:#D97706;"><i data-lucide="star" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Feedback &amp; Ratings</span><span class="feature-sub">Rate Your Training</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#F0F9FF;color:#0284C7;"><i data-lucide="calendar-check" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Attendance Tracker</span><span class="feature-sub">Biometric Verified</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FDF4FF;color:#A855F7;"><i data-lucide="globe" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">11 Languages</span><span class="feature-sub">Full Localization</span></div></div>
+              <!-- duplicate for seamless loop -->
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#E6F4EA;color:#0D7E55;"><i data-lucide="flame" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Daily Login Streak</span><span class="feature-sub">Gamified Engagement</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FFF7ED;color:#F26A21;"><i data-lucide="landmark" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Government Courses</span><span class="feature-sub">PMKVY · DDU-GKY · NSDC</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#EEF2FF;color:#4F46E5;"><i data-lucide="book-open" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Learning Record</span><span class="feature-sub">Module-wise Progress</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#ECFDF5;color:#059669;"><i data-lucide="award" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Digital Certificates</span><span class="feature-sub">QR Verified · Shareable</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FFF1F2;color:#E11D48;"><i data-lucide="briefcase" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Placement Tracking</span><span class="feature-sub">Employer Verified</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FEF3C7;color:#D97706;"><i data-lucide="star" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Feedback &amp; Ratings</span><span class="feature-sub">Rate Your Training</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#F0F9FF;color:#0284C7;"><i data-lucide="calendar-check" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">Attendance Tracker</span><span class="feature-sub">Biometric Verified</span></div></div>
+              <div class="sp-feature-marquee-card"><div class="feature-icon-box" style="background:#FDF4FF;color:#A855F7;"><i data-lucide="globe" style="width:18px;height:18px;"></i></div><div class="feature-details"><span class="feature-title">11 Languages</span><span class="feature-sub">Full Localization</span></div></div>
+            </div>
+          </div>
+        </div>
 
         <!-- ════════════ SECTION 1: DASHBOARD & STREAK (STEP 2) ════════════ -->
         <section id="section-dashboard" class="trainee-section-block">
@@ -418,6 +540,590 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
               Placement Form ↓
             </button>
+          </div>
+        </section>
+
+        <!-- ════════════ AI-POWERED 3-STEP COURSE INTELLIGENCE & RECOMMENDATIONS ════════════ -->
+        <section id="section-ai-advisor" class="trainee-section-block">
+          <div class="ai-advisor-panel">
+            
+            <!-- Header Row -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+                  <span class="ai-match-pill" style="font-size: 0.75rem;">
+                    <span class="ai-pulse-dot"></span>
+                    <span>AI-POWERED CAREER ADVISOR</span>
+                  </span>
+                  <span style="font-size: 0.72rem; font-weight: 800; color: var(--color-teal); text-transform: uppercase; letter-spacing: 0.08em;">3-STEP INTELLIGENCE ENGINE</span>
+                </div>
+                <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0 0 0.25rem;">
+                  AI Course Intelligence: Analysis, Feasibility & Recommendations
+                </h2>
+                <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0; max-width: 720px;">
+                  Harnessing real-time labor market analytics & your personal learning streak:
+                  <strong>Step 1 Course Analysis</strong> · <strong>Step 2 Feasibility Score</strong> · <strong>Step 3 Tailored Course Suggestions</strong>.
+                </p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <label for="ai-course-selector" style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-muted);">Active Course:</label>
+                <select id="ai-course-selector" class="form-control" style="font-size: 0.82rem; padding: 0.4rem 0.8rem; min-width: 240px;" onchange="window.selectAICourse(this.value)">
+                  <option value="cloud-devops">☁️ Cloud Native DevOps & Microservices (98% Match)</option>
+                  <option value="ai-data">🧠 AI & Data Intelligence with Python (95% Match)</option>
+                  <option value="mobile-react">📱 Cross-Platform Mobile Apps (93% Match)</option>
+                  <option value="cyber-defense">🛡️ Cyber Defense & Network Security (89% Match)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ══════ EYE-CATCHING COURSE SUGGESTIONS MARQUEE ══════ -->
+            <div style="margin-top: 1rem; margin-bottom: 0.25rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+                <span style="font-size: 0.78rem; font-weight: 800; color: var(--color-deep-indigo); text-transform: uppercase; letter-spacing: 0.06em; display: flex; align-items: center; gap: 0.4rem;">
+                  <span>🔥 AI Recommended Courses For You</span>
+                  <span style="font-size: 0.7rem; font-weight: 600; color: var(--color-text-muted); text-transform: none;">(Scrolls continuously · Hover to pause · Click to inspect)</span>
+                </span>
+                <span class="ai-scheme-pill" style="font-size: 0.68rem;">LIVE MARKET DATA</span>
+              </div>
+
+              <div class="ai-marquee-wrapper">
+                <div class="ai-marquee-track" id="ai-course-marquee-track">
+                  
+                  <!-- Card 1: Cloud DevOps -->
+                  <div class="ai-course-marquee-card selected" data-course-id="cloud-devops" onclick="window.selectAICourse('cloud-devops')">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill">✨ 98% AI Match</span>
+                      <span class="ai-scheme-pill">PMKVY 4.0</span>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: var(--color-deep-indigo); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span style="font-size: 1.25rem;">☁️</span> Cloud Native DevOps & Microservices
+                    </div>
+                    <!-- Pictorial Row -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: rgba(0,43,73,0.03); padding: 0.5rem 0.6rem; border-radius: 8px; margin-bottom: 0.6rem;">
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 1: Demand</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0D7E55;">96/100 🔥</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 2: Feasibility</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0284C7;">94% ⚡ (6h/w)</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 3: Wage</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹38k/mo 💰</div>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-teal); font-weight: 700;">
+                      <span>Inspect 3-Step AI Analysis</span>
+                      <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                    </div>
+                  </div>
+
+                  <!-- Card 2: AI & Data -->
+                  <div class="ai-course-marquee-card" data-course-id="ai-data" onclick="window.selectAICourse('ai-data')">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill" style="background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);">✨ 95% AI Match</span>
+                      <span class="ai-scheme-pill">SWAYAM / NPTEL</span>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: var(--color-deep-indigo); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span style="font-size: 1.25rem;">🧠</span> AI & Data Intelligence with Python
+                    </div>
+                    <!-- Pictorial Row -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: rgba(0,43,73,0.03); padding: 0.5rem 0.6rem; border-radius: 8px; margin-bottom: 0.6rem;">
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 1: Demand</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0D7E55;">98/100 🔥</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 2: Feasibility</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0284C7;">91% ⚡ (7h/w)</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 3: Wage</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹42k/mo 💰</div>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #4F46E5; font-weight: 700;">
+                      <span>Inspect 3-Step AI Analysis</span>
+                      <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                    </div>
+                  </div>
+
+                  <!-- Card 3: Mobile React Native -->
+                  <div class="ai-course-marquee-card" data-course-id="mobile-react" onclick="window.selectAICourse('mobile-react')">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill" style="background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);">✨ 93% AI Match</span>
+                      <span class="ai-scheme-pill">FutureSkills</span>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: var(--color-deep-indigo); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span style="font-size: 1.25rem;">📱</span> Cross-Platform Mobile Development
+                    </div>
+                    <!-- Pictorial Row -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: rgba(0,43,73,0.03); padding: 0.5rem 0.6rem; border-radius: 8px; margin-bottom: 0.6rem;">
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 1: Demand</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0D7E55;">91/100 🔥</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 2: Feasibility</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0284C7;">97% ⚡ (5h/w)</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 3: Wage</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹34k/mo 💰</div>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #0284C7; font-weight: 700;">
+                      <span>Inspect 3-Step AI Analysis</span>
+                      <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                    </div>
+                  </div>
+
+                  <!-- Card 4: Cyber Defense -->
+                  <div class="ai-course-marquee-card" data-course-id="cyber-defense" onclick="window.selectAICourse('cyber-defense')">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill" style="background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%);">✨ 89% AI Match</span>
+                      <span class="ai-scheme-pill">C-DAC / MeitY</span>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: var(--color-deep-indigo); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span style="font-size: 1.25rem;">🛡️</span> Cyber Defense & Network Security
+                    </div>
+                    <!-- Pictorial Row -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: rgba(0,43,73,0.03); padding: 0.5rem 0.6rem; border-radius: 8px; margin-bottom: 0.6rem;">
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 1: Demand</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0D7E55;">97/100 🔥</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 2: Feasibility</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0284C7;">88% ⚡ (8h/w)</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 3: Wage</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹45k/mo 💰</div>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #E11D48; font-weight: 700;">
+                      <span>Inspect 3-Step AI Analysis</span>
+                      <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                    </div>
+                  </div>
+
+                  <!-- DUPLICATE FOR SEAMLESS MARQUEE LOOP -->
+                  <div class="ai-course-marquee-card" data-course-id="cloud-devops" onclick="window.selectAICourse('cloud-devops')">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill">✨ 98% AI Match</span>
+                      <span class="ai-scheme-pill">PMKVY 4.0</span>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: var(--color-deep-indigo); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span style="font-size: 1.25rem;">☁️</span> Cloud Native DevOps & Microservices
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: rgba(0,43,73,0.03); padding: 0.5rem 0.6rem; border-radius: 8px; margin-bottom: 0.6rem;">
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 1: Demand</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0D7E55;">96/100 🔥</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 2: Feasibility</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0284C7;">94% ⚡ (6h/w)</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 3: Wage</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹38k/mo 💰</div>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--color-teal); font-weight: 700;">
+                      <span>Inspect 3-Step AI Analysis</span>
+                      <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                    </div>
+                  </div>
+
+                  <div class="ai-course-marquee-card" data-course-id="ai-data" onclick="window.selectAICourse('ai-data')">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill" style="background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);">✨ 95% AI Match</span>
+                      <span class="ai-scheme-pill">SWAYAM / NPTEL</span>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.95rem; color: var(--color-deep-indigo); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span style="font-size: 1.25rem;">🧠</span> AI & Data Intelligence with Python
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: rgba(0,43,73,0.03); padding: 0.5rem 0.6rem; border-radius: 8px; margin-bottom: 0.6rem;">
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 1: Demand</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0D7E55;">98/100 🔥</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 2: Feasibility</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #0284C7;">91% ⚡ (7h/w)</div>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 3: Wage</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹42k/mo 💰</div>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #4F46E5; font-weight: 700;">
+                      <span>Inspect 3-Step AI Analysis</span>
+                      <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- ══════ 3-STEP INTERACTIVE PICTORIAL NAVIGATION TABS ══════ -->
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+              <button type="button" class="ai-step-tab-btn active" id="tab-ai-step-1" onclick="window.switchAIStep(1)">
+                <span class="ai-step-num">1</span>
+                <span>Step 1: Course Analysis</span>
+                <i data-lucide="bar-chart-2" style="width: 16px; height: 16px;"></i>
+              </button>
+              <button type="button" class="ai-step-tab-btn" id="tab-ai-step-2" onclick="window.switchAIStep(2)">
+                <span class="ai-step-num">2</span>
+                <span>Step 2: Course Feasibility</span>
+                <i data-lucide="gauge" style="width: 16px; height: 16px;"></i>
+              </button>
+              <button type="button" class="ai-step-tab-btn" id="tab-ai-step-3" onclick="window.switchAIStep(3)">
+                <span class="ai-step-num">3</span>
+                <span>Step 3: Trainee Suggestions</span>
+                <i data-lucide="sparkles" style="width: 16px; height: 16px;"></i>
+              </button>
+            </div>
+
+            <!-- ══════════════════════════════════════════════ -->
+            <!-- STEP 1: COURSE ANALYSIS (PICTORIAL)            -->
+            <!-- ══════════════════════════════════════════════ -->
+            <div id="ai-step-content-1" class="ai-step-view" style="display: block;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem;">
+                
+                <!-- Left: Market Demand & Industry Growth Pictorial Gauge -->
+                <div class="ai-pictorial-card">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <div>
+                      <div style="font-size: 0.72rem; font-weight: 800; color: var(--color-teal); text-transform: uppercase;">Step 1.1 · Market Traction</div>
+                      <strong style="font-size: 1rem; color: var(--color-deep-indigo);">Industry Demand & Growth Index</strong>
+                    </div>
+                    <span class="badge badge-teal" id="ai-analysis-demand-badge">HIGH DEMAND 🔥</span>
+                  </div>
+
+                  <!-- Radial Semi-Gauge SVG -->
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 1.25rem; padding: 0.5rem 0;">
+                    <div style="position: relative; width: 100px; height: 100px;">
+                      <svg width="100" height="100" viewBox="0 0 100 100">
+                        <circle class="ai-gauge-bg" cx="50" cy="50" r="40"></circle>
+                        <circle id="ai-demand-gauge-circle" class="ai-gauge-circle ai-gauge-bar" cx="50" cy="50" r="40" stroke="url(#emeraldGradient)" stroke-dasharray="251.2" stroke-dashoffset="10"></circle>
+                        <defs>
+                          <linearGradient id="emeraldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0D7E55"></stop>
+                            <stop offset="100%" stop-color="#10B981"></stop>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <span style="font-size: 1.4rem; font-weight: 800; color: var(--color-deep-indigo);" id="ai-analysis-demand-score">96</span>
+                        <span style="font-size: 0.65rem; color: var(--color-text-muted); text-transform: uppercase;">/ 100</span>
+                      </div>
+                    </div>
+                    <div style="flex: 1;">
+                      <div style="margin-bottom: 0.5rem;">
+                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">Active National Openings:</div>
+                        <strong style="font-size: 1.1rem; color: var(--color-deep-indigo);" id="ai-analysis-openings">2,840+ Vacancies</strong>
+                      </div>
+                      <div>
+                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">Annual Hiring Growth:</div>
+                        <strong style="font-size: 1rem; color: #10B981;" id="ai-analysis-growth">+34% YoY Growth</strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); font-size: 0.78rem; color: var(--color-text-secondary); display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="award" style="width: 16px; height: 16px; color: #F26A21;"></i>
+                    <span id="ai-analysis-accreditation">Accreditation: PMKVY 4.0 / NCVET Level 6 Standard</span>
+                  </div>
+                </div>
+
+                <!-- Right: Competency & Skill Mastery Radar (Pictorial Progress Bars) -->
+                <div class="ai-pictorial-card">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div>
+                      <div style="font-size: 0.72rem; font-weight: 800; color: var(--color-teal); text-transform: uppercase;">Step 1.2 · Skill Architecture</div>
+                      <strong style="font-size: 1rem; color: var(--color-deep-indigo);">Core Competencies Acquired</strong>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--color-text-muted);">Curriculum Depth</span>
+                  </div>
+
+                  <div id="ai-analysis-skills-container" style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <!-- Rendered by JS -->
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Curriculum Architecture Milestones Flow (Pictorial Pipeline) -->
+              <div class="ai-pictorial-card" style="margin-bottom: 0.5rem;">
+                <div style="font-size: 0.72rem; font-weight: 800; color: var(--color-teal); text-transform: uppercase; margin-bottom: 0.2rem;">Step 1.3 · Learning Progression Map</div>
+                <strong style="font-size: 1rem; color: var(--color-deep-indigo); display: block; margin-bottom: 0.85rem;">Course Milestone Architecture</strong>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.75rem;" id="ai-analysis-milestones-container">
+                  <!-- Rendered by JS -->
+                </div>
+
+                <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                  <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted);">Verified Industry Tech Stack:</span>
+                  <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;" id="ai-analysis-tech-badges">
+                    <!-- Tech badges by JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════ -->
+            <!-- STEP 2: COURSE FEASIBILITY (PICTORIAL)         -->
+            <!-- ══════════════════════════════════════════════ -->
+            <div id="ai-step-content-2" class="ai-step-view" style="display: none;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem;">
+
+                <!-- Feasibility Compatibility Ring Meter -->
+                <div class="ai-pictorial-card">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div>
+                      <div style="font-size: 0.72rem; font-weight: 800; color: #0284C7; text-transform: uppercase;">Step 2.1 · Compatibility Gauge</div>
+                      <strong style="font-size: 1rem; color: var(--color-deep-indigo);">Personal Feasibility Score</strong>
+                    </div>
+                    <span class="badge" style="background: #E0F2FE; color: #0369A1; font-weight: 800;">HIGH FIT</span>
+                  </div>
+
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 1.25rem; padding: 0.6rem 0;">
+                    <div style="position: relative; width: 110px; height: 110px;">
+                      <svg width="110" height="110" viewBox="0 0 100 100">
+                        <circle class="ai-gauge-bg" cx="50" cy="50" r="40"></circle>
+                        <circle id="ai-feasibility-gauge-circle" class="ai-gauge-circle ai-gauge-bar" cx="50" cy="50" r="40" stroke="url(#cyanGradient)" stroke-dasharray="251.2" stroke-dashoffset="15"></circle>
+                        <defs>
+                          <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0284C7"></stop>
+                            <stop offset="100%" stop-color="#06B6D4"></stop>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <span style="font-size: 1.5rem; font-weight: 800; color: #0284C7;" id="ai-feasibility-score-val">94%</span>
+                        <span style="font-size: 0.65rem; color: var(--color-text-muted); text-transform: uppercase;">Feasible</span>
+                      </div>
+                    </div>
+                    <div style="flex: 1;">
+                      <div style="font-size: 0.85rem; font-weight: 700; color: var(--color-deep-indigo); line-height: 1.3;" id="ai-feasibility-verdict">
+                        Optimal match with zero study conflicts.
+                      </div>
+                      <div style="margin-top: 0.5rem; font-size: 0.78rem; color: var(--color-text-muted);">
+                        Completion Probability: <strong style="color: #0D7E55;" id="ai-completion-prob">96.4%</strong>
+                      </div>
+                      <div style="font-size: 0.78rem; color: var(--color-text-muted);">
+                        Attrition / Dropout Risk: <strong style="color: #10B981;" id="ai-dropout-risk">3.6% (Minimal)</strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Schedule Balance Bar -->
+                  <div style="background: rgba(2, 132, 199, 0.05); border: 1px solid rgba(2, 132, 199, 0.15); border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                      <span style="color: var(--color-text-muted);">Weekly Effort Commitment:</span>
+                      <strong style="color: #0284C7;" id="ai-effort-hours">6 Hours / Week</strong>
+                    </div>
+                    <div class="progress-bar-bg" style="height: 7px; background: rgba(2,132,199,0.15);">
+                      <div class="progress-bar-fill" style="width: 32%; background: linear-gradient(90deg, #0284C7, #06B6D4);"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+                      <span>Light</span>
+                      <span style="font-weight: 700; color: #0D7E55;">✓ Balanced (Zero Burnout)</span>
+                      <span>Heavy</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Prerequisite Readiness Assessment -->
+                <div class="ai-pictorial-card">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <div>
+                      <div style="font-size: 0.72rem; font-weight: 800; color: #0284C7; text-transform: uppercase;">Step 2.2 · Readiness Diagnostic</div>
+                      <strong style="font-size: 1rem; color: var(--color-deep-indigo);">Prerequisite Readiness Matrix</strong>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--color-text-muted);">Diagnostic Match</span>
+                  </div>
+
+                  <div id="ai-prerequisites-container" style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <!-- Rendered by JS -->
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Career ROI & Wage Growth Infographic -->
+              <div class="ai-pictorial-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+                  <div>
+                    <div style="font-size: 0.72rem; font-weight: 800; color: #0284C7; text-transform: uppercase;">Step 2.3 · Economic Mobility</div>
+                    <strong style="font-size: 1rem; color: var(--color-deep-indigo);">Projected Salary Uplift & Placement Velocity</strong>
+                  </div>
+                  <span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 800;" id="ai-roi-badge">+90% WAGE GROWTH</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: center;">
+                  <!-- Visual Salary Jump Bar -->
+                  <div style="background: rgba(0,43,73,0.02); border: 1px solid var(--color-border); border-radius: 10px; padding: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.35rem;">
+                      <span style="color: var(--color-text-muted);">Base Wage:</span>
+                      <strong style="color: var(--color-text-secondary);">₹20,000 / mo</strong>
+                    </div>
+                    <div class="progress-bar-bg" style="height: 10px; margin-bottom: 0.75rem;">
+                      <div class="progress-bar-fill" style="width: 45%; background: #94A3B8;"></div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.35rem;">
+                      <span style="color: var(--color-text-muted);">Post-Certification Projection:</span>
+                      <strong style="color: #0D7E55; font-size: 0.95rem;" id="ai-projected-salary-text">₹38,000 / mo</strong>
+                    </div>
+                    <div class="progress-bar-bg" style="height: 10px;">
+                      <div class="progress-bar-fill" style="width: 90%; background: linear-gradient(90deg, #0D7E55, #10B981);"></div>
+                    </div>
+                  </div>
+
+                  <!-- Placement Velocity Stats -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                    <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 0.75rem; text-align: center;">
+                      <div style="font-size: 0.7rem; color: #166534; font-weight: 700;">PLACEMENT RATE</div>
+                      <div style="font-size: 1.3rem; font-weight: 800; color: #15803D;" id="ai-placement-rate">92%</div>
+                      <div style="font-size: 0.65rem; color: #166534;">Within 75 Days</div>
+                    </div>
+                    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 0.75rem; text-align: center;">
+                      <div style="font-size: 0.7rem; color: #1E40AF; font-weight: 700;">DURATION</div>
+                      <div style="font-size: 1.3rem; font-weight: 800; color: #2563EB;" id="ai-duration-text">8 Wks</div>
+                      <div style="font-size: 0.65rem; color: #1E40AF;">Flexible Labs</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════ -->
+            <!-- STEP 3: COURSE SUGGESTION (PICTORIAL)          -->
+            <!-- ══════════════════════════════════════════════ -->
+            <div id="ai-step-content-3" class="ai-step-view" style="display: none;">
+              
+              <!-- Trainee Profile Alignment Header -->
+              <div style="background: linear-gradient(135deg, #002B49 0%, #0E8176 100%); border-radius: 12px; padding: 1rem 1.25rem; color: #FFFFFF; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+                <div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85;">Learner Profile Alignment</div>
+                  <div style="font-size: 1.1rem; font-weight: 800;">Top 3 Suggested Courses for Priya Patel</div>
+                  <div style="font-size: 0.8rem; opacity: 0.9;">Ranked by AI Feasibility, Prior Skill Retention, and Tier-1 Hiring Demand.</div>
+                </div>
+                <div>
+                  <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.75rem;">
+                    🎯 Tailored Recommendations
+                  </span>
+                </div>
+              </div>
+
+              <!-- 3 Recommended Course Cards Grid (Pictorial) -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;" id="ai-suggestions-cards-grid">
+                
+                <!-- Card 1: Cloud Native DevOps -->
+                <div class="ai-pictorial-card" style="border: 2px solid #0D7E55; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill">✨ 98% MATCH</span>
+                      <span class="badge" style="background: #DCFCE7; color: #166534; font-size: 0.68rem; font-weight: 800;">TOP ACCELERATOR</span>
+                    </div>
+                    <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0 0 0.35rem;">
+                      ☁️ Cloud Native DevOps & Microservices
+                    </h3>
+                    <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+                      PMKVY 4.0 · FutureSkills · 8 Weeks · 6 hrs/wk
+                    </div>
+
+                    <!-- Pictorial Badges -->
+                    <div style="background: rgba(0,43,73,0.03); border-radius: 8px; padding: 0.6rem; margin-bottom: 0.75rem; font-size: 0.75rem;">
+                      <div style="margin-bottom: 0.3rem;">⚡ <strong>Skill Bridge:</strong> Extends your Full Stack foundation directly into AWS & Docker.</div>
+                      <div style="margin-bottom: 0.3rem;">📈 <strong>Hiring Surge:</strong> 2,840+ open positions with ₹38,000/mo avg wage.</div>
+                      <div>🛡️ <strong>Zero Risk:</strong> 94% feasibility with comfortable 6 hrs/wk pace.</div>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                    <button type="button" class="btn btn-outline btn-sm" style="flex: 1; font-size: 0.78rem;" onclick="window.selectAICourse('cloud-devops'); window.switchAIStep(1);">
+                      Inspect Analysis
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" style="flex: 1; font-size: 0.78rem;" onclick="window.applyAICourse('cloud-devops')">
+                      🚀 1-Click Apply
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Card 2: AI & Data -->
+                <div class="ai-pictorial-card" style="border: 2px solid #4F46E5; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill" style="background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);">✨ 95% MATCH</span>
+                      <span class="badge" style="background: #EDE9FE; color: #5B21B6; font-size: 0.68rem; font-weight: 800;">TOP SALARY</span>
+                    </div>
+                    <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0 0 0.35rem;">
+                      🧠 AI & Data Intelligence with Python
+                    </h3>
+                    <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+                      SWAYAM / NPTEL · 10 Weeks · 7 hrs/wk
+                    </div>
+
+                    <!-- Pictorial Badges -->
+                    <div style="background: rgba(0,43,73,0.03); border-radius: 8px; padding: 0.6rem; margin-bottom: 0.75rem; font-size: 0.75rem;">
+                      <div style="margin-bottom: 0.3rem;">⚡ <strong>Skill Bridge:</strong> Translates programming logic into machine learning pipelines.</div>
+                      <div style="margin-bottom: 0.3rem;">📈 <strong>Hiring Surge:</strong> 3,450+ vacancies with ₹42,000/mo avg wage (+110% ROI).</div>
+                      <div>🛡️ <strong>Zero Risk:</strong> Math refresher included in Week 1 labs.</div>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                    <button type="button" class="btn btn-outline btn-sm" style="flex: 1; font-size: 0.78rem;" onclick="window.selectAICourse('ai-data'); window.switchAIStep(1);">
+                      Inspect Analysis
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" style="flex: 1; font-size: 0.78rem; background: #4F46E5;" onclick="window.applyAICourse('ai-data')">
+                      🚀 1-Click Apply
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Card 3: Mobile Apps -->
+                <div class="ai-pictorial-card" style="border: 2px solid #0284C7; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                      <span class="ai-match-pill" style="background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);">✨ 93% MATCH</span>
+                      <span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.68rem; font-weight: 800;">EASIEST PACE</span>
+                    </div>
+                    <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0 0 0.35rem;">
+                      📱 Cross-Platform Mobile App Development
+                    </h3>
+                    <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+                      FutureSkills Prime · 6 Weeks · 5 hrs/wk
+                    </div>
+
+                    <!-- Pictorial Badges -->
+                    <div style="background: rgba(0,43,73,0.03); border-radius: 8px; padding: 0.6rem; margin-bottom: 0.75rem; font-size: 0.75rem;">
+                      <div style="margin-bottom: 0.3rem;">⚡ <strong>Skill Bridge:</strong> 85% skill reuse directly from your JavaScript background.</div>
+                      <div style="margin-bottom: 0.3rem;">📈 <strong>Hiring Surge:</strong> High startup & SME demand with ₹34,000/mo avg wage.</div>
+                      <div>🛡️ <strong>Zero Risk:</strong> 97% feasibility with 5 hrs/week commitment.</div>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                    <button type="button" class="btn btn-outline btn-sm" style="flex: 1; font-size: 0.78rem;" onclick="window.selectAICourse('mobile-react'); window.switchAIStep(1);">
+                      Inspect Analysis
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" style="flex: 1; font-size: 0.78rem; background: #0284C7;" onclick="window.applyAICourse('mobile-react')">
+                      🚀 1-Click Apply
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -1220,21 +1926,19 @@
         </section>
 
       
-      <!-- ═══════════════ OFFICIAL GOVERNMENT FOOTER (GIGW COMPLIANT) ═══════════════ -->
       <footer class="gov-footer">
-        <div class="gov-footer-links">
-          <a href="https://www.india.gov.in" target="_blank" rel="noopener">National Portal of India (india.gov.in)</a>
-          <a href="https://www.msde.gov.in" target="_blank" rel="noopener">Ministry of Skill Development & Entrepreneurship</a>
-          <a href="https://www.skillindiadigital.gov.in/home" target="_blank" rel="noopener">Skill India Digital Hub</a>
-          <a href="https://ncvet.gov.in" target="_blank" rel="noopener">NCVET</a>
-          <a href="https://nsdcindia.org" target="_blank" rel="noopener">NSDC</a>
-          <a href="https://digitalindia.gov.in" target="_blank" rel="noopener">Digital India</a>
-        </div>
-        <div class="gov-footer-disclaimer">
-          <p style="margin-bottom: 0.4rem; font-weight: 700; color: #CBD5E1;">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship (MSDE)</p>
-          <p style="margin: 0; font-size: 0.72rem; color: #94A3B8;">SkillPulse — Skilling Outcomes & Employment Analytics Portal. Designed and maintained in accordance with Guidelines for Indian Government Websites (GIGW) & Digital Personal Data Protection Act.</p>
-        </div>
-      </footer>
+    <div class="gov-footer-links">
+      <a href="/">SkillPulse Home</a>
+      <a href="login.html">Sign In</a>
+      <a href="register.html">Sign Up</a>
+      <a href="https://github.com/priyanshu-pgb/SkillPulse-Backend" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://skill-pulse-employeetracker.vercel.app/" target="_blank" rel="noopener">Live Demo</a>
+    </div>
+    <div class="gov-footer-disclaimer">
+      <p style="margin-bottom: 0.4rem; font-weight: 700; color: #CBD5E1;">SkillPulse — Skilling Outcomes Intelligence Platform</p>
+      <p style="margin: 0; font-size: 0.72rem; color: #94A3B8;">Built by Team Synkro. A demo platform for tracking verified placements, skill certifications, and employment outcomes.</p>
+    </div>
+  </footer>
 
       </main>
     </div>
@@ -2544,6 +3248,406 @@
         setTimeout(() => FieldAtlasI18N.translatePage(), 60);
       }
     }
+
+    // ════════════════════════════════════════════════════════════
+    // AI-POWERED 3-STEP COURSE INTELLIGENCE ENGINE (PICTORIAL)
+    // ════════════════════════════════════════════════════════════
+    const aiCoursesDB = {
+      'cloud-devops': {
+        id: 'cloud-devops',
+        title: 'Cloud Native DevOps & Microservices',
+        category: 'IT-ITeS & FutureSkills',
+        scheme: 'PMKVY 4.0 / MeitY',
+        icon: '☁️',
+        color: '#0D7E55',
+        matchScore: 98,
+        matchReason: 'Seamlessly builds upon your Full Stack Web Development foundation with cloud infrastructure skills.',
+        avgSalary: '₹38,000 / month',
+        hiringDemand: '96/100 · High Surge 🔥',
+        openings: '2,840+ Active Vacancies',
+        growthRate: '+34% YoY Growth',
+        feasibilityScore: 94,
+        feasibilityText: 'Optimal match with zero study conflicts. Fits comfortably alongside current projects.',
+        weeklyHours: '6 Hours / Week',
+        durationWeeks: '8 Weeks',
+        completionProb: '96.4%',
+        dropoutRisk: '3.6% (Minimal)',
+        roiSalaryUplift: '+90% WAGE GROWTH',
+        accreditation: 'Accreditation: PMKVY 4.0 / NCVET Level 6 Standard',
+        analysis: {
+          demandScore: 96,
+          skills: [
+            { name: 'Containerization & Docker', level: 95, icon: 'box' },
+            { name: 'Kubernetes Cluster Orchestration', level: 90, icon: 'server' },
+            { name: 'CI/CD Pipelines (GitHub Actions)', level: 94, icon: 'git-branch' },
+            { name: 'AWS Cloud Architecture & IAM', level: 88, icon: 'cloud' },
+            { name: 'Prometheus & Grafana Observability', level: 86, icon: 'activity' }
+          ],
+          milestones: [
+            { step: '01', title: 'Containerization', desc: 'Dockerizing modern web apps' },
+            { step: '02', title: 'K8s Orchestration', desc: 'Cluster networking & storage' },
+            { step: '03', title: 'Automated CI/CD', desc: 'Continuous testing & deployment' },
+            { step: '04', title: 'Live Capstone', desc: 'Production verification on AWS' }
+          ],
+          techStack: ['Docker', 'Kubernetes', 'AWS', 'Python', 'GitHub Actions', 'Prometheus', 'Linux']
+        },
+        feasibility: {
+          prerequisites: [
+            { label: 'Web & Programming Logic', ready: 95, status: 'Mastered' },
+            { label: 'Command Line & Linux Basics', ready: 88, status: 'Ready' },
+            { label: 'Database & Networking Core', ready: 90, status: 'Mastered' },
+            { label: 'Cloud IAM & Security Principles', ready: 78, status: 'Bridged in Wk 1' }
+          ],
+          effortPercent: 32,
+          projectedSalary: '₹38,000 / mo',
+          salaryUpliftPct: '+90% Wage Growth',
+          placementRate: '92%',
+          duration: '8 Wks'
+        },
+        applyMotivation: 'I have successfully completed my Full Stack Web Development foundational modules and wish to specialize in Cloud Native DevOps to design resilient microservices pipelines.'
+      },
+      'ai-data': {
+        id: 'ai-data',
+        title: 'AI & Data Intelligence with Python',
+        category: 'Higher Education & Deep Tech',
+        scheme: 'SWAYAM / NPTEL / IIT Madras',
+        icon: '🧠',
+        color: '#4F46E5',
+        matchScore: 95,
+        matchReason: 'Leverages your JavaScript & logical skills to master predictive AI and machine learning workflows.',
+        avgSalary: '₹42,000 / month',
+        hiringDemand: '98/100 · Explosive Surge 🔥',
+        openings: '3,450+ Active Vacancies',
+        growthRate: '+46% YoY Growth',
+        feasibilityScore: 91,
+        feasibilityText: 'Highly feasible with progressive math & Python fundamentals integrated into the first 2 weeks.',
+        weeklyHours: '7 Hours / Week',
+        durationWeeks: '10 Weeks',
+        completionProb: '94.2%',
+        dropoutRisk: '5.8% (Low)',
+        roiSalaryUplift: '+110% WAGE GROWTH',
+        accreditation: 'Accreditation: SWAYAM / NPTEL Verified Credential',
+        analysis: {
+          demandScore: 98,
+          skills: [
+            { name: 'Python Data Science & Pandas', level: 96, icon: 'code' },
+            { name: 'Machine Learning Models (Scikit-Learn)', level: 92, icon: 'cpu' },
+            { name: 'Neural Networks & Deep Learning', level: 85, icon: 'network' },
+            { name: 'Data Visualization & BI Dashboards', level: 94, icon: 'bar-chart-2' },
+            { name: 'Prompt Engineering & LLM APIs', level: 90, icon: 'sparkles' }
+          ],
+          milestones: [
+            { step: '01', title: 'Data Wrangling', desc: 'Exploratory data analysis & cleanup' },
+            { step: '02', title: 'Predictive ML', desc: 'Regression & classification models' },
+            { step: '03', title: 'Deep Learning & LLMs', desc: 'Generative AI & API fine-tuning' },
+            { step: '04', title: 'Industry Capstone', desc: 'Predictive analytics pipeline' }
+          ],
+          techStack: ['Python', 'Pandas', 'NumPy', 'Scikit-Learn', 'TensorFlow', 'PostgreSQL', 'Streamlit']
+        },
+        feasibility: {
+          prerequisites: [
+            { label: 'Python & Syntax Logic', ready: 92, status: 'Ready' },
+            { label: 'Linear Algebra & Statistics', ready: 80, status: 'Refresher Included' },
+            { label: 'Data Structures & Algorithms', ready: 86, status: 'Ready' },
+            { label: 'SQL Querying Foundations', ready: 94, status: 'Mastered' }
+          ],
+          effortPercent: 38,
+          projectedSalary: '₹42,000 / mo',
+          salaryUpliftPct: '+110% Wage Growth',
+          placementRate: '94%',
+          duration: '10 Wks'
+        },
+        applyMotivation: 'I want to advance my development career into Artificial Intelligence and Data Science to build data-driven intelligent applications.'
+      },
+      'mobile-react': {
+        id: 'mobile-react',
+        title: 'Cross-Platform Mobile App Development',
+        category: 'IT-ITeS & FutureSkills',
+        scheme: 'FutureSkills Prime / NASSCOM',
+        icon: '📱',
+        color: '#0284C7',
+        matchScore: 93,
+        matchReason: 'Direct 1-to-1 transfer of your existing JavaScript and CSS skills into iOS and Android apps.',
+        avgSalary: '₹34,000 / month',
+        hiringDemand: '91/100 · High Demand 🔥',
+        openings: '2,120+ Active Vacancies',
+        growthRate: '+24% YoY Growth',
+        feasibilityScore: 97,
+        feasibilityText: 'Maximum feasibility! Reuses 85% of your existing Web Development knowledge base.',
+        weeklyHours: '5 Hours / Week',
+        durationWeeks: '6 Weeks',
+        completionProb: '98.1%',
+        dropoutRisk: '1.9% (Minimal)',
+        roiSalaryUplift: '+70% WAGE GROWTH',
+        accreditation: 'Accreditation: FutureSkills Prime / NASSCOM Gold Standard',
+        analysis: {
+          demandScore: 91,
+          skills: [
+            { name: 'React Native Architecture', level: 96, icon: 'smartphone' },
+            { name: 'State Management (Redux/Zustand)', level: 92, icon: 'layers' },
+            { name: 'Native Device APIs (Camera, GPS)', level: 88, icon: 'map-pin' },
+            { name: 'Offline Storage & SQLite', level: 85, icon: 'database' },
+            { name: 'App Store & Play Store Deploy', level: 90, icon: 'upload-cloud' }
+          ],
+          milestones: [
+            { step: '01', title: 'React Native Core', desc: 'Components & navigation layout' },
+            { step: '02', title: 'Device Hardware APIs', desc: 'Camera, geolocation & sensors' },
+            { step: '03', title: 'Offline-First Apps', desc: 'SQLite & local synchronization' },
+            { step: '04', title: 'App Store Deploy', desc: 'Building release bundles' }
+          ],
+          techStack: ['React Native', 'Expo', 'TypeScript', 'Redux', 'REST APIs', 'Firebase', 'Tailwind']
+        },
+        feasibility: {
+          prerequisites: [
+            { label: 'JavaScript ES6+ Core', ready: 98, status: 'Mastered' },
+            { label: 'CSS Flexbox & Layouts', ready: 95, status: 'Mastered' },
+            { label: 'REST API Consumption', ready: 96, status: 'Mastered' },
+            { label: 'Mobile UI/UX Conventions', ready: 82, status: 'Ready' }
+          ],
+          effortPercent: 26,
+          projectedSalary: '₹34,000 / mo',
+          salaryUpliftPct: '+70% Wage Growth',
+          placementRate: '90%',
+          duration: '6 Wks'
+        },
+        applyMotivation: 'I am eager to translate my frontend web development proficiency into building responsive cross-platform iOS and Android mobile solutions.'
+      },
+      'cyber-defense': {
+        id: 'cyber-defense',
+        title: 'Cyber Defense & Network Security',
+        category: 'Emerging Technologies',
+        scheme: 'C-DAC / MeitY / ISEA',
+        icon: '🛡️',
+        color: '#E11D48',
+        matchScore: 89,
+        matchReason: 'Adds mission-critical security auditing and defense capabilities to your development profile.',
+        avgSalary: '₹45,000 / month',
+        hiringDemand: '97/100 · Critical National Demand 🛡️',
+        openings: '3,100+ Active Vacancies',
+        growthRate: '+38% YoY Growth',
+        feasibilityScore: 88,
+        feasibilityText: 'Requires dedicated weekly hands-on laboratory exercises with virtual sandbox environments.',
+        weeklyHours: '8 Hours / Week',
+        durationWeeks: '12 Weeks',
+        completionProb: '91.5%',
+        dropoutRisk: '8.5% (Moderate Challenge)',
+        roiSalaryUplift: '+125% WAGE GROWTH',
+        accreditation: 'Accreditation: C-DAC / MeitY Government Certified',
+        analysis: {
+          demandScore: 97,
+          skills: [
+            { name: 'Ethical Hacking & Penetration Testing', level: 92, icon: 'shield-alert' },
+            { name: 'OWASP Top 10 Web Defense', level: 96, icon: 'lock' },
+            { name: 'Network Traffic Analysis (Wireshark)', level: 88, icon: 'activity' },
+            { name: 'Cloud Security Compliance & IAM', level: 86, icon: 'cloud-rain' },
+            { name: 'Incident Response & Forensics', level: 84, icon: 'file-search' }
+          ],
+          milestones: [
+            { step: '01', title: 'Network Defense Core', desc: 'Firewalls, VPNs & packet sniffing' },
+            { step: '02', title: 'App Security Audits', desc: 'Identifying & patching web flaws' },
+            { step: '03', title: 'Cloud Threat Defense', desc: 'Hardening cloud assets & IAM' },
+            { step: '04', title: 'Red/Blue Team CTF', desc: 'Simulated cyber defense drills' }
+          ],
+          techStack: ['Kali Linux', 'Wireshark', 'Burp Suite', 'Metasploit', 'Python', 'Nmap', 'Suricata']
+        },
+        feasibility: {
+          prerequisites: [
+            { label: 'Web Protocols (HTTP/HTTPS)', ready: 95, status: 'Mastered' },
+            { label: 'Linux OS Foundations', ready: 82, status: 'Ready' },
+            { label: 'TCP/IP & OSI Model', ready: 80, status: 'Refresher Included' },
+            { label: 'Scripting & Automation', ready: 88, status: 'Ready' }
+          ],
+          effortPercent: 44,
+          projectedSalary: '₹45,000 / mo',
+          salaryUpliftPct: '+125% Wage Growth',
+          placementRate: '95%',
+          duration: '12 Wks'
+        },
+        applyMotivation: 'I wish to build upon my application development foundation with specialized cyber defense and application security audit expertise.'
+      }
+    };
+
+    let activeAICourseKey = 'cloud-devops';
+
+    // Renders complete pictorial data for the selected course across all 3 steps
+    function renderAICourseData(courseKey) {
+      const c = aiCoursesDB[courseKey] || aiCoursesDB['cloud-devops'];
+      activeAICourseKey = c.id;
+
+      // Update dropdown selector
+      const selector = document.getElementById('ai-course-selector');
+      if (selector && selector.value !== c.id) {
+        selector.value = c.id;
+      }
+
+      // Highlight active card in marquee
+      const marqueeCards = document.querySelectorAll('.ai-course-marquee-card');
+      marqueeCards.forEach(card => {
+        if (card.getAttribute('data-course-id') === c.id) {
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
+        }
+      });
+
+      // ─── STEP 1: COURSE ANALYSIS ───
+      const demandScoreEl = document.getElementById('ai-analysis-demand-score');
+      if (demandScoreEl) demandScoreEl.textContent = c.analysis.demandScore;
+
+      const demandCircle = document.getElementById('ai-demand-gauge-circle');
+      if (demandCircle) {
+        const offset = 251.2 * (1 - c.analysis.demandScore / 100);
+        demandCircle.style.strokeDashoffset = offset;
+      }
+
+      const openingsEl = document.getElementById('ai-analysis-openings');
+      if (openingsEl) openingsEl.textContent = c.openings;
+
+      const growthEl = document.getElementById('ai-analysis-growth');
+      if (growthEl) growthEl.textContent = c.growthRate;
+
+      const accreditationEl = document.getElementById('ai-analysis-accreditation');
+      if (accreditationEl) accreditationEl.textContent = c.accreditation;
+
+      // Skills radar bars
+      const skillsContainer = document.getElementById('ai-analysis-skills-container');
+      if (skillsContainer) {
+        skillsContainer.innerHTML = c.analysis.skills.map(s => `
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.2rem;">
+              <span style="font-weight: 600; color: var(--color-deep-indigo);">${s.name}</span>
+              <strong style="color: var(--color-teal);">${s.level}%</strong>
+            </div>
+            <div class="progress-bar-bg" style="height: 6px;">
+              <div class="progress-bar-fill" style="width: ${s.level}%; background: linear-gradient(90deg, #0D7E55, #10B981);"></div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Milestones
+      const milestonesContainer = document.getElementById('ai-analysis-milestones-container');
+      if (milestonesContainer) {
+        milestonesContainer.innerHTML = c.analysis.milestones.map(m => `
+          <div style="background: rgba(0,43,73,0.03); border: 1px solid var(--color-border); border-radius: 8px; padding: 0.65rem 0.75rem;">
+            <span style="font-size: 0.68rem; font-weight: 800; color: #F26A21; text-transform: uppercase;">STAGE ${m.step}</span>
+            <div style="font-weight: 700; font-size: 0.82rem; color: var(--color-deep-indigo); margin: 0.15rem 0;">${m.title}</div>
+            <div style="font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.3;">${m.desc}</div>
+          </div>
+        `).join('');
+      }
+
+      // Tech Badges
+      const techBadgesContainer = document.getElementById('ai-analysis-tech-badges');
+      if (techBadgesContainer) {
+        techBadgesContainer.innerHTML = c.analysis.techStack.map(t => `
+          <span style="background: var(--color-surface); border: 1px solid var(--color-border); padding: 0.2rem 0.55rem; border-radius: 6px; font-size: 0.72rem; font-weight: 700; color: var(--color-text-secondary);">${t}</span>
+        `).join('');
+      }
+
+      // ─── STEP 2: COURSE FEASIBILITY ───
+      const feasScoreEl = document.getElementById('ai-feasibility-score-val');
+      if (feasScoreEl) feasScoreEl.textContent = c.feasibilityScore + '%';
+
+      const feasCircle = document.getElementById('ai-feasibility-gauge-circle');
+      if (feasCircle) {
+        const offset = 251.2 * (1 - c.feasibilityScore / 100);
+        feasCircle.style.strokeDashoffset = offset;
+      }
+
+      const feasVerdictEl = document.getElementById('ai-feasibility-verdict');
+      if (feasVerdictEl) feasVerdictEl.textContent = c.feasibilityText;
+
+      const compProbEl = document.getElementById('ai-completion-prob');
+      if (compProbEl) compProbEl.textContent = c.completionProb;
+
+      const dropRiskEl = document.getElementById('ai-dropout-risk');
+      if (dropRiskEl) dropRiskEl.textContent = c.dropoutRisk;
+
+      const effortHoursEl = document.getElementById('ai-effort-hours');
+      if (effortHoursEl) effortHoursEl.textContent = c.weeklyHours;
+
+      // Prerequisites Matrix
+      const prereqsContainer = document.getElementById('ai-prerequisites-container');
+      if (prereqsContainer) {
+        prereqsContainer.innerHTML = c.feasibility.prerequisites.map(p => `
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.2rem;">
+              <span style="font-weight: 600; color: var(--color-deep-indigo);">${p.label}</span>
+              <span style="font-size: 0.7rem; font-weight: 700; color: ${p.ready >= 90 ? '#15803D' : '#0369A1'};">${p.status} (${p.ready}%)</span>
+            </div>
+            <div class="progress-bar-bg" style="height: 6px;">
+              <div class="progress-bar-fill" style="width: ${p.ready}%; background: ${p.ready >= 90 ? 'linear-gradient(90deg, #10B981, #059669)' : 'linear-gradient(90deg, #0284C7, #06B6D4)'};"></div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const roiBadge = document.getElementById('ai-roi-badge');
+      if (roiBadge) roiBadge.textContent = c.roiSalaryUplift;
+
+      const projSalaryText = document.getElementById('ai-projected-salary-text');
+      if (projSalaryText) projSalaryText.textContent = c.feasibility.projectedSalary;
+
+      const placementRateEl = document.getElementById('ai-placement-rate');
+      if (placementRateEl) placementRateEl.textContent = c.feasibility.placementRate;
+
+      const durationTextEl = document.getElementById('ai-duration-text');
+      if (durationTextEl) durationTextEl.textContent = c.feasibility.duration;
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Selects an AI course and updates active view
+    window.selectAICourse = function(courseKey) {
+      renderAICourseData(courseKey);
+      // Smooth scroll to the 3-step tabs if clicked from the marquee
+      const panel = document.getElementById('section-ai-advisor');
+      if (panel) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      FieldAtlasAPI.showToast(`AI Analysis & Feasibility loaded for: ${aiCoursesDB[courseKey]?.title || courseKey}`, 'info');
+    };
+
+    // Switches between Step 1, Step 2, and Step 3 tabs
+    window.switchAIStep = function(stepNum) {
+      [1, 2, 3].forEach(num => {
+        const tab = document.getElementById(`tab-ai-step-${num}`);
+        const content = document.getElementById(`ai-step-content-${num}`);
+        if (tab && content) {
+          if (num === stepNum) {
+            tab.classList.add('active');
+            content.style.display = 'block';
+          } else {
+            tab.classList.remove('active');
+            content.style.display = 'none';
+          }
+        }
+      });
+      if (window.lucide) lucide.createIcons();
+    };
+
+    // 1-Click Apply from AI Advisor with pre-filled motivation
+    window.applyAICourse = function(courseKey) {
+      const c = aiCoursesDB[courseKey] || aiCoursesDB['cloud-devops'];
+      const modal = document.getElementById('modal-apply-course');
+      const titleEl = document.getElementById('apply-modal-course-title');
+      const motivationEl = document.getElementById('apply-motivation');
+
+      if (modal && titleEl && motivationEl) {
+        titleEl.textContent = `${c.title} (${c.scheme})`;
+        motivationEl.value = c.applyMotivation;
+        FieldAtlasAPI.openModal('modal-apply-course');
+        FieldAtlasAPI.showToast(`✨ Pre-filled application with AI-generated motivation for ${c.title}!`, 'success');
+      } else {
+        FieldAtlasAPI.showToast(`Application submitted with AI endorsement for: ${c.title}!`, 'success');
+      }
+    };
+
+    // Initial hydration of AI Advisor
+    setTimeout(() => {
+      renderAICourseData('cloud-devops');
+    }, 150);
 
   })();
   </script>
