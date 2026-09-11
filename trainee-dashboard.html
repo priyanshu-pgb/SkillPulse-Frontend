@@ -16,6 +16,13 @@
   <link rel="stylesheet" href="css/responsive.css?v=2.6.0">
   <link rel="stylesheet" href="css/watermark.css">
 
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
   <style>
     /* Trainee Continuous Single-Page Flow Styles */
     .trainee-section-block {
@@ -266,11 +273,11 @@
       <div class="sidebar-header" style="padding: 1.25rem 1.15rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
         <a href="/" class="brand-badge" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
           <div style="flex-shrink: 0;">
-            <div style="width: 46px; height: 46px; background: linear-gradient(135deg, #0D7E55, #18A89B); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.3rem; box-shadow: 0 2px 8px rgba(14,129,118,0.3);">SP</div>
+            <img src="images/skillpulse-icon.svg" alt="SkillPulse Logo" class="brand-logo-img" style="width: 44px; height: 44px; border-radius: 11px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.35);">
           </div>
           <div class="brand-text-wrap" style="display: flex; flex-direction: column;">
-            <span class="brand-title" style="font-size: 1.2rem; font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em;">SkillPulse</span>
-            <span style="font-size: 0.7rem; color: #F26A21; font-weight: 700; letter-spacing: 0.02em;">Skilling Outcomes Intelligence</span>
+            <span class="brand-title" style="font-size: 1.22rem; font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em;">Skill<span style="color: #38BDF8;">Pulse</span></span>
+            <span style="font-size: 0.68rem; color: #F26A21; font-weight: 800; letter-spacing: 0.04em;">SKILLING OUTCOMES INTELLIGENCE</span>
             <span style="font-size: 0.65rem; color: #94A3B8;">Built by Team Synkro</span>
           </div>
         </a>
@@ -572,14 +579,115 @@
               </div>
               <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                 <label for="ai-course-selector" style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-muted);">Active Course:</label>
-                <select id="ai-course-selector" class="form-control" style="font-size: 0.82rem; padding: 0.4rem 0.8rem; min-width: 240px;" onchange="window.selectAICourse(this.value)">
+                <select id="ai-course-selector" class="form-control" style="font-size: 0.82rem; padding: 0.4rem 0.8rem; min-width: 260px;" onchange="window.selectAICourse(this.value)">
                   <option value="cloud-devops">☁️ Cloud Native DevOps & Microservices (98% Match)</option>
+                  <option value="fullstack-microservices">💻 Enterprise Microservices & APIs (97% Match)</option>
                   <option value="ai-data">🧠 AI & Data Intelligence with Python (95% Match)</option>
                   <option value="mobile-react">📱 Cross-Platform Mobile Apps (93% Match)</option>
+                  <option value="green-energy">⚡ Green Energy Systems & EV IoT (92% Match)</option>
                   <option value="cyber-defense">🛡️ Cyber Defense & Network Security (89% Match)</option>
                 </select>
               </div>
             </div>
+
+            <!-- ══════ INTERACTIVE USER-SPECIFIC AI RECOMMENDATION GENERATOR ══════ -->
+            <div class="ai-recom-wizard-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="font-size: 1.25rem;">⚡</span>
+                  <div>
+                    <h3 style="margin: 0; font-size: 0.98rem; font-weight: 800; color: var(--color-deep-indigo);">
+                      Personalized AI Recommendation Generator
+                    </h3>
+                    <div style="font-size: 0.74rem; color: var(--color-text-secondary);">
+                      Tune your career ambition & weekly study commitment to generate real-time course affinity matches
+                    </div>
+                  </div>
+                </div>
+                <span class="badge badge-teal" style="font-size: 0.72rem; padding: 0.3rem 0.65rem;">
+                  ✨ MULTI-CRITERIA AI ALGORITHM
+                </span>
+              </div>
+
+              <div class="ai-recom-grid">
+                <!-- Field 1: Target Career Track -->
+                <div class="ai-recom-field">
+                  <label for="recom-target-domain">
+                    <span>Career Track Ambition</span>
+                    <span style="font-size: 0.68rem; color: var(--color-teal); font-weight: 700;">Skill Affinity</span>
+                  </label>
+                  <select id="recom-target-domain" class="form-control" style="font-size: 0.82rem; padding: 0.45rem 0.75rem;">
+                    <option value="all">🌟 All Tracks (AI Balanced Match)</option>
+                    <option value="cloud-devops">☁️ Cloud Native DevOps & Microservices</option>
+                    <option value="fullstack-microservices">💻 Enterprise Microservices & APIs</option>
+                    <option value="ai-data">🧠 Artificial Intelligence & Data Science</option>
+                    <option value="mobile-react">📱 Cross-Platform Mobile Apps</option>
+                    <option value="cyber-defense">🛡️ Cyber Defense & SecOps</option>
+                    <option value="green-energy">⚡ Green Energy Systems & EV IoT</option>
+                  </select>
+                </div>
+
+                <!-- Field 2: Weekly Study Budget Slider -->
+                <div class="ai-recom-field">
+                  <label for="recom-study-hours">
+                    <span>Weekly Study Budget</span>
+                    <span class="ai-recom-val-badge" id="recom-study-hours-val">7 hrs/wk</span>
+                  </label>
+                  <div class="ai-recom-range-wrap">
+                    <input type="range" id="recom-study-hours" min="3" max="20" value="7" step="1" oninput="document.getElementById('recom-study-hours-val').textContent = this.value + ' hrs/wk'">
+                  </div>
+                </div>
+
+                <!-- Field 3: Target Monthly Wage Ambition Slider -->
+                <div class="ai-recom-field">
+                  <label for="recom-target-wage">
+                    <span>Target Wage Ambition</span>
+                    <span class="ai-recom-val-badge" id="recom-target-wage-val">₹38,000 / mo</span>
+                  </label>
+                  <div class="ai-recom-range-wrap">
+                    <input type="range" id="recom-target-wage" min="25000" max="65000" value="38000" step="1000" oninput="document.getElementById('recom-target-wage-val').textContent = '₹' + Number(this.value).toLocaleString('en-IN') + ' / mo'">
+                  </div>
+                </div>
+
+                <!-- Field 4: Strategy Dropdown -->
+                <div class="ai-recom-field">
+                  <label for="recom-strategy">
+                    <span>Optimization Goal</span>
+                    <span style="font-size: 0.68rem; color: #0284C7; font-weight: 700;">Strategy</span>
+                  </label>
+                  <select id="recom-strategy" class="form-control" style="font-size: 0.82rem; padding: 0.45rem 0.75rem;">
+                    <option value="balanced">⚖️ Balanced (Affinity + Feasibility + ROI)</option>
+                    <option value="max-salary">💰 Maximize Wage ROI Uplift</option>
+                    <option value="high-feasibility">🛡️ Highest Feasibility (Zero Burnout)</option>
+                    <option value="market-demand">🔥 Market Demand Surge</option>
+                  </select>
+                </div>
+
+                <!-- Field 5: Action Button -->
+                <div class="ai-recom-field">
+                  <label>&nbsp;</label>
+                  <button type="button" id="btn-run-ai-recommender" class="btn-ai-run" onclick="window.runAICourseRecommendationEngine()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                    <span>Run AI Recommendation</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Context Diagnostic Strip -->
+              <div class="ai-recom-meta-strip">
+                <div>
+                  <strong>Learner Profile:</strong> Priya Patel · 
+                  <span>Attendance: <span style="color: #0D7E55; font-weight: 700;">94%</span></span> · 
+                  <span>Streak: <span style="color: #F26A21; font-weight: 700;">18 Days 🔥</span></span> · 
+                  <span>Base Wage: <span style="color: var(--color-deep-indigo); font-weight: 700;">₹20,000/mo</span></span>
+                </div>
+                <div id="ai-recommender-engine-badge" style="display: flex; align-items: center; gap: 0.35rem; color: #0E8176; font-weight: 700;">
+                  <span class="ai-pulse-dot"></span>
+                  <span>Algorithm Active: Multi-Factor Utility Model</span>
+                </div>
+              </div>
+            </div>
+
 
             <!-- ══════ EYE-CATCHING COURSE SUGGESTIONS MARQUEE ══════ -->
             <div style="margin-top: 1rem; margin-bottom: 0.25rem;">
@@ -3262,23 +3370,27 @@
         id: 'cloud-devops',
         title: 'Cloud Native DevOps & Microservices',
         category: 'IT-ITeS & FutureSkills',
+        domain: 'cloud-devops',
         scheme: 'PMKVY 4.0 / MeitY',
         icon: '☁️',
         color: '#0D7E55',
         matchScore: 98,
         matchReason: 'Seamlessly builds upon your Full Stack Web Development foundation with cloud infrastructure skills.',
         avgSalary: '₹38,000 / month',
+        avgSalaryNum: 38000,
         hiringDemand: '96/100 · High Surge 🔥',
         openings: '2,840+ Active Vacancies',
         growthRate: '+34% YoY Growth',
         feasibilityScore: 94,
         feasibilityText: 'Optimal match with zero study conflicts. Fits comfortably alongside current projects.',
         weeklyHours: '6 Hours / Week',
+        weeklyHoursNum: 6,
         durationWeeks: '8 Weeks',
         completionProb: '96.4%',
         dropoutRisk: '3.6% (Minimal)',
         roiSalaryUplift: '+90% WAGE GROWTH',
         accreditation: 'Accreditation: PMKVY 4.0 / NCVET Level 6 Standard',
+        affinityBase: 96,
         analysis: {
           demandScore: 96,
           skills: [
@@ -3311,27 +3423,88 @@
         },
         applyMotivation: 'I have successfully completed my Full Stack Web Development foundational modules and wish to specialize in Cloud Native DevOps to design resilient microservices pipelines.'
       },
+      'fullstack-microservices': {
+        id: 'fullstack-microservices',
+        title: 'Enterprise Microservices & Distributed Architectures',
+        category: 'IT-ITeS & Software Engineering',
+        domain: 'fullstack-microservices',
+        scheme: 'DGT / NCVET Level 6 Specialization',
+        icon: '💻',
+        color: '#2563EB',
+        matchScore: 97,
+        matchReason: 'Direct extension of your full stack foundations into high-throughput distributed microservices.',
+        avgSalary: '₹40,000 / month',
+        avgSalaryNum: 40000,
+        hiringDemand: '97/100 · Elite Enterprise Demand 🔥',
+        openings: '4,200+ Active Vacancies',
+        growthRate: '+42% YoY Growth',
+        feasibilityScore: 95,
+        feasibilityText: 'Maximum synergy! Reuses 90% of your existing backend and frontend programming concepts.',
+        weeklyHours: '6 Hours / Week',
+        weeklyHoursNum: 6,
+        durationWeeks: '8 Weeks',
+        completionProb: '97.8%',
+        dropoutRisk: '2.2% (Minimal)',
+        roiSalaryUplift: '+100% WAGE GROWTH',
+        accreditation: 'Accreditation: DGT / NCVET Level 6 Specialization',
+        affinityBase: 98,
+        analysis: {
+          demandScore: 97,
+          skills: [
+            { name: 'Microservices Decomposition & APIs', level: 96, icon: 'layers' },
+            { name: 'Event Streaming (Apache Kafka)', level: 91, icon: 'git-merge' },
+            { name: 'High-Concurrency Caching (Redis)', level: 93, icon: 'database' },
+            { name: 'API Gateway & JWT Security', level: 95, icon: 'shield' },
+            { name: 'Distributed Tracing & Resilience', level: 88, icon: 'activity' }
+          ],
+          milestones: [
+            { step: '01', title: 'Decomposition Patterns', desc: 'Splitting monoliths cleanly' },
+            { step: '02', title: 'Kafka Event Pipelines', desc: 'Asynchronous event streaming' },
+            { step: '03', title: 'Distributed DBs & Caching', desc: 'PostgreSQL & Redis clusters' },
+            { step: '04', title: 'Resilient Microservices', desc: 'Circuit breakers & Docker deploy' }
+          ],
+          techStack: ['Node.js', 'Go', 'Kafka', 'Redis', 'PostgreSQL', 'Docker', 'GraphQL', 'Express']
+        },
+        feasibility: {
+          prerequisites: [
+            { label: 'JavaScript / Node.js Core', ready: 98, status: 'Mastered' },
+            { label: 'Relational Database Design', ready: 94, status: 'Mastered' },
+            { label: 'REST API Best Practices', ready: 96, status: 'Mastered' },
+            { label: 'Docker Basics', ready: 85, status: 'Ready' }
+          ],
+          effortPercent: 34,
+          projectedSalary: '₹40,000 / mo',
+          salaryUpliftPct: '+100% Wage Growth',
+          placementRate: '93%',
+          duration: '8 Wks'
+        },
+        applyMotivation: 'I want to master high-scale enterprise microservices, event-driven architectures, and distributed systems.'
+      },
       'ai-data': {
         id: 'ai-data',
         title: 'AI & Data Intelligence with Python',
         category: 'Higher Education & Deep Tech',
+        domain: 'ai-data',
         scheme: 'SWAYAM / NPTEL / IIT Madras',
         icon: '🧠',
         color: '#4F46E5',
         matchScore: 95,
         matchReason: 'Leverages your JavaScript & logical skills to master predictive AI and machine learning workflows.',
         avgSalary: '₹42,000 / month',
+        avgSalaryNum: 42000,
         hiringDemand: '98/100 · Explosive Surge 🔥',
         openings: '3,450+ Active Vacancies',
         growthRate: '+46% YoY Growth',
         feasibilityScore: 91,
         feasibilityText: 'Highly feasible with progressive math & Python fundamentals integrated into the first 2 weeks.',
         weeklyHours: '7 Hours / Week',
+        weeklyHoursNum: 7,
         durationWeeks: '10 Weeks',
         completionProb: '94.2%',
         dropoutRisk: '5.8% (Low)',
         roiSalaryUplift: '+110% WAGE GROWTH',
         accreditation: 'Accreditation: SWAYAM / NPTEL Verified Credential',
+        affinityBase: 94,
         analysis: {
           demandScore: 98,
           skills: [
@@ -3368,23 +3541,27 @@
         id: 'mobile-react',
         title: 'Cross-Platform Mobile App Development',
         category: 'IT-ITeS & FutureSkills',
+        domain: 'mobile-react',
         scheme: 'FutureSkills Prime / NASSCOM',
         icon: '📱',
         color: '#0284C7',
         matchScore: 93,
         matchReason: 'Direct 1-to-1 transfer of your existing JavaScript and CSS skills into iOS and Android apps.',
         avgSalary: '₹34,000 / month',
+        avgSalaryNum: 34000,
         hiringDemand: '91/100 · High Demand 🔥',
         openings: '2,120+ Active Vacancies',
         growthRate: '+24% YoY Growth',
         feasibilityScore: 97,
         feasibilityText: 'Maximum feasibility! Reuses 85% of your existing Web Development knowledge base.',
         weeklyHours: '5 Hours / Week',
+        weeklyHoursNum: 5,
         durationWeeks: '6 Weeks',
         completionProb: '98.1%',
         dropoutRisk: '1.9% (Minimal)',
         roiSalaryUplift: '+70% WAGE GROWTH',
         accreditation: 'Accreditation: FutureSkills Prime / NASSCOM Gold Standard',
+        affinityBase: 95,
         analysis: {
           demandScore: 91,
           skills: [
@@ -3417,27 +3594,88 @@
         },
         applyMotivation: 'I am eager to translate my frontend web development proficiency into building responsive cross-platform iOS and Android mobile solutions.'
       },
+      'green-energy': {
+        id: 'green-energy',
+        title: 'Renewable Energy Systems & Smart Grid IoT',
+        category: 'Green Skills & Clean Energy',
+        domain: 'green-energy',
+        scheme: 'Skill Council for Green Jobs / MSDE',
+        icon: '⚡',
+        color: '#059669',
+        matchScore: 92,
+        matchReason: 'Combines IoT sensor analytics with high-growth national solar & smart grid mandates.',
+        avgSalary: '₹36,000 / month',
+        avgSalaryNum: 36000,
+        hiringDemand: '95/100 · Green Surge 🔥',
+        openings: '3,100+ Active Vacancies',
+        growthRate: '+36% YoY Growth',
+        feasibilityScore: 93,
+        feasibilityText: 'Practical hands-on solar PV telemetry and inverter safety protocols.',
+        weeklyHours: '5 Hours / Week',
+        weeklyHoursNum: 5,
+        durationWeeks: '8 Weeks',
+        completionProb: '96.2%',
+        dropoutRisk: '3.8% (Minimal)',
+        roiSalaryUplift: '+80% WAGE GROWTH',
+        accreditation: 'Accreditation: Skill Council for Green Jobs (SCGJ) / MSDE',
+        affinityBase: 88,
+        analysis: {
+          demandScore: 95,
+          skills: [
+            { name: 'Solar PV Array Design & Sizing', level: 94, icon: 'sun' },
+            { name: 'Smart Inverter Telemetry & SCADA', level: 90, icon: 'activity' },
+            { name: 'Battery Energy Storage Systems (BESS)', level: 88, icon: 'battery-charging' },
+            { name: 'Grid Interconnection Standards', level: 86, icon: 'zap' },
+            { name: 'Energy Auditing & Safety Codes', level: 92, icon: 'check-circle' }
+          ],
+          milestones: [
+            { step: '01', title: 'Solar PV Foundations', desc: 'Cell physics & electrical layouts' },
+            { step: '02', title: 'Smart Inverters & IoT', desc: 'Sensor telemetry & cloud tracking' },
+            { step: '03', title: 'BESS & Microgrids', desc: 'Storage sizing & peak-shaving' },
+            { step: '04', title: 'Field Commissioning', desc: 'Safety audit & grid signoff' }
+          ],
+          techStack: ['Solar CAD', 'SCADA', 'MQTT IoT', 'Inverters', 'BMS', 'Energy Metering', 'Python']
+        },
+        feasibility: {
+          prerequisites: [
+            { label: 'Electrical Principles & Circuits', ready: 92, status: 'Mastered' },
+            { label: 'IoT Sensor Telemetry', ready: 86, status: 'Ready' },
+            { label: 'Analytical Mathematics', ready: 84, status: 'Ready' },
+            { label: 'Safety Codes & Standards', ready: 90, status: 'Mastered' }
+          ],
+          effortPercent: 28,
+          projectedSalary: '₹36,000 / mo',
+          salaryUpliftPct: '+80% Wage Growth',
+          placementRate: '91%',
+          duration: '8 Wks'
+        },
+        applyMotivation: 'I want to build a rewarding career in clean tech, renewable energy systems, and smart grid automation.'
+      },
       'cyber-defense': {
         id: 'cyber-defense',
         title: 'Cyber Defense & Network Security',
         category: 'Emerging Technologies',
+        domain: 'cyber-defense',
         scheme: 'C-DAC / MeitY / ISEA',
         icon: '🛡️',
         color: '#E11D48',
         matchScore: 89,
         matchReason: 'Adds mission-critical security auditing and defense capabilities to your development profile.',
         avgSalary: '₹45,000 / month',
+        avgSalaryNum: 45000,
         hiringDemand: '97/100 · Critical National Demand 🛡️',
         openings: '3,100+ Active Vacancies',
         growthRate: '+38% YoY Growth',
         feasibilityScore: 88,
         feasibilityText: 'Requires dedicated weekly hands-on laboratory exercises with virtual sandbox environments.',
         weeklyHours: '8 Hours / Week',
+        weeklyHoursNum: 8,
         durationWeeks: '12 Weeks',
         completionProb: '91.5%',
         dropoutRisk: '8.5% (Moderate Challenge)',
         roiSalaryUplift: '+125% WAGE GROWTH',
         accreditation: 'Accreditation: C-DAC / MeitY Government Certified',
+        affinityBase: 88,
         analysis: {
           demandScore: 97,
           skills: [
@@ -3473,6 +3711,173 @@
     };
 
     let activeAICourseKey = 'cloud-devops';
+
+    // ════════════════════════════════════════════════════════════
+    // MULTI-CRITERIA AI RECOMMENDATION ALGORITHM ENGINE
+    // ════════════════════════════════════════════════════════════
+    function computeAICourseRecommendations(params) {
+      const targetDomain = params.targetDomain || 'all';
+      const studyHours = Number(params.studyHours) || 7;
+      const targetWage = Number(params.targetWage) || 38000;
+      const strategy = params.strategy || 'balanced';
+      const baselineWage = 20000;
+      const attendance = 94;
+      const streak = 18;
+
+      const scoredList = Object.values(aiCoursesDB).map(c => {
+        // 1. Skill Affinity
+        const isDomainMatch = (targetDomain === 'all') || (c.domain === targetDomain);
+        const domainMultiplier = isDomainMatch ? 1.0 : 0.74;
+        const affinity = c.affinityBase * domainMultiplier;
+
+        // 2. Feasibility
+        const timeRatio = Math.min(1.3, Math.max(0.45, studyHours / Math.max(1, c.weeklyHoursNum)));
+        const timeScore = Math.min(100, timeRatio * 82);
+        const commitmentScore = (attendance * 0.6) + Math.min(40, (streak / 14) * 40);
+        const feasibility = Math.round(Math.min(99, (timeScore * 0.55) + (commitmentScore * 0.45)));
+
+        // Completion & Dropout
+        const completionProb = Math.min(98.8, Math.max(72.0, (feasibility * 0.7) + (attendance * 0.2) + (streak * 0.3))).toFixed(1);
+        const dropoutRisk = Math.max(1.2, (100 - completionProb)).toFixed(1);
+
+        // 3. Wage ROI Uplift
+        const projectedSalary = c.avgSalaryNum;
+        const salaryUpliftPct = Math.round(((projectedSalary - baselineWage) / baselineWage) * 100);
+        const wageRatio = Math.min(1.5, projectedSalary / Math.max(1, targetWage));
+        const roiScore = Math.min(100, (salaryUpliftPct * 0.5) + (wageRatio * 50));
+
+        // 4. Market Demand
+        const marketScore = c.analysis.demandScore;
+
+        // Strategy Weights
+        let match = 0;
+        if (strategy === 'max-salary') {
+          match = (0.20 * affinity) + (0.20 * feasibility) + (0.45 * roiScore) + (0.15 * marketScore);
+        } else if (strategy === 'high-feasibility') {
+          match = (0.25 * affinity) + (0.50 * feasibility) + (0.10 * roiScore) + (0.15 * marketScore);
+        } else if (strategy === 'market-demand') {
+          match = (0.25 * affinity) + (0.20 * feasibility) + (0.15 * roiScore) + (0.40 * marketScore);
+        } else {
+          // balanced
+          match = (0.35 * affinity) + (0.30 * feasibility) + (0.20 * roiScore) + (0.15 * marketScore);
+        }
+
+        const finalMatch = Math.round(Math.min(99, Math.max(55, match)));
+
+        // Dynamic explainable AI rationale
+        const hoursComparison = studyHours >= c.weeklyHoursNum
+          ? `Fits comfortably within your ${studyHours} hrs/wk commitment (${c.weeklyHoursNum} hrs/wk required)`
+          : `Requires ${c.weeklyHoursNum} hrs/wk (${Math.abs(c.weeklyHoursNum - studyHours)}h above your current ${studyHours}h budget)`;
+
+        const rationale = `${finalMatch}% AI Match · ${hoursComparison} · High retention synergy with your ${attendance}% attendance consistency · Projected +${salaryUpliftPct}% wage jump to ₹${projectedSalary.toLocaleString('en-IN')}/mo.`;
+
+        // Update in-memory course copy
+        c.matchScore = finalMatch;
+        c.feasibilityScore = feasibility;
+        c.completionProb = `${completionProb}%`;
+        c.dropoutRisk = `${dropoutRisk}% (${dropoutRisk < 5 ? 'Minimal' : 'Low'})`;
+        c.matchReason = rationale;
+
+        return c;
+      });
+
+      // Sort descending by calculated match score
+      scoredList.sort((a, b) => b.matchScore - a.matchScore);
+      return scoredList;
+    }
+
+    // Dynamically re-renders the continuous marquee track cards in ranked order
+    function renderMarqueeCards(sortedList) {
+      const track = document.getElementById('ai-course-marquee-track');
+      if (!track) return;
+
+      const createCardHTML = (c) => `
+        <div class="ai-course-marquee-card ${c.id === activeAICourseKey ? 'selected' : ''}" data-course-id="${c.id}" onclick="window.selectAICourse('${c.id}')">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span class="ai-match-pill" style="background: linear-gradient(135deg, ${c.color} 0%, #1A2238 100%);">✨ ${c.matchScore}% AI Match</span>
+            <span class="ai-scheme-pill">${c.scheme.split('/')[0].trim()}</span>
+          </div>
+          <div style="font-weight: 800; font-size: 0.95rem; color: var(--color-deep-indigo); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;">
+            <span style="font-size: 1.25rem;">${c.icon}</span> <span>${c.title}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: rgba(0,43,73,0.03); padding: 0.5rem 0.6rem; border-radius: 8px; margin-bottom: 0.6rem;">
+            <div>
+              <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 1: Demand</div>
+              <div style="font-weight: 800; font-size: 0.82rem; color: #0D7E55;">${c.analysis.demandScore}/100 🔥</div>
+            </div>
+            <div>
+              <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 2: Feas.</div>
+              <div style="font-weight: 800; font-size: 0.82rem; color: #0284C7;">${c.feasibilityScore}% ⚡</div>
+            </div>
+            <div>
+              <div style="font-size: 0.68rem; color: var(--color-text-muted);">Step 3: Wage</div>
+              <div style="font-weight: 800; font-size: 0.82rem; color: #F26A21;">₹${(c.avgSalaryNum/1000).toFixed(0)}k/mo 💰</div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: ${c.color}; font-weight: 700;">
+            <span>Inspect 3-Step AI Analysis</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      `;
+
+      // Render items + duplicate for continuous marquee loop
+      const cardsHTML = sortedList.map(createCardHTML).join('');
+      track.innerHTML = cardsHTML + cardsHTML;
+    }
+
+    // Dynamically updates the dropdown selector options with updated match percentages
+    function renderCourseSelectorDropdown(sortedList) {
+      const selector = document.getElementById('ai-course-selector');
+      if (!selector) return;
+
+      selector.innerHTML = sortedList.map(c => `
+        <option value="${c.id}">${c.icon} ${c.title} (${c.matchScore}% Match)</option>
+      `).join('');
+
+      selector.value = activeAICourseKey;
+    }
+
+    // Dynamically updates Step 3 cards grid with the top 3 suggested courses
+    function renderStep3Suggestions(sortedList) {
+      const container = document.getElementById('ai-suggestions-cards-grid');
+      if (!container) return;
+
+      const topThree = sortedList.slice(0, 3);
+      const badgeLabels = ['TOP ACCELERATOR 🚀', 'HIGHEST SYNERGY ⚡', 'MAX ECONOMIC MOBILITY 💰'];
+
+      container.innerHTML = topThree.map((c, idx) => `
+        <div class="ai-pictorial-card" style="border: 2px solid ${c.color}; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="ai-match-pill" style="background: linear-gradient(135deg, ${c.color} 0%, #1A2238 100%);">✨ ${c.matchScore}% MATCH</span>
+              <span class="badge" style="background: rgba(13,126,85,0.12); color: ${c.color}; font-size: 0.68rem; font-weight: 800;">${badgeLabels[idx] || 'RECOMMENDED'}</span>
+            </div>
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--color-deep-indigo); margin: 0 0 0.35rem;">
+              ${c.icon} ${c.title}
+            </h3>
+            <div style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+              ${c.scheme} · ${c.durationWeeks} · ${c.weeklyHours}
+            </div>
+
+            <div style="background: rgba(0,43,73,0.03); border-radius: 8px; padding: 0.6rem; margin-bottom: 0.75rem; font-size: 0.75rem;">
+              <div style="margin-bottom: 0.3rem;">⚡ <strong>Skill Bridge:</strong> ${c.matchReason}</div>
+              <div style="margin-bottom: 0.3rem;">📈 <strong>Hiring Surge:</strong> ${c.openings} (${c.avgSalary}).</div>
+              <div>🛡️ <strong>Safety Factor:</strong> ${c.feasibilityScore}% feasibility with ${c.completionProb} expected completion rate.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+            <button type="button" class="btn btn-outline btn-sm" style="flex: 1; font-size: 0.78rem;" onclick="window.selectAICourse('${c.id}'); window.switchAIStep(1);">
+              Inspect Analysis
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" style="flex: 1; font-size: 0.78rem; background: ${c.color};" onclick="window.applyAICourse('${c.id}')">
+              🚀 1-Click Apply
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
 
     // Renders complete pictorial data for the selected course across all 3 steps
     function renderAICourseData(courseKey) {
@@ -3606,7 +4011,6 @@
     // Selects an AI course and updates active view
     window.selectAICourse = function(courseKey) {
       renderAICourseData(courseKey);
-      // Smooth scroll to the 3-step tabs if clicked from the marquee
       const panel = document.getElementById('section-ai-advisor');
       if (panel) {
         panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -3649,10 +4053,91 @@
       }
     };
 
+    // ════════════════════════════════════════════════════════════
+    // MAIN AI RECOMMENDER ENGINE TRIGGER
+    // ════════════════════════════════════════════════════════════
+    window.runAICourseRecommendationEngine = async function(isInitial = false) {
+      const domainEl = document.getElementById('recom-target-domain');
+      const hoursEl = document.getElementById('recom-study-hours');
+      const wageEl = document.getElementById('recom-target-wage');
+      const strategyEl = document.getElementById('recom-strategy');
+      const btn = document.getElementById('btn-run-ai-recommender');
+
+      const params = {
+        targetDomain: domainEl ? domainEl.value : 'all',
+        studyHours: hoursEl ? hoursEl.value : 7,
+        targetWage: wageEl ? wageEl.value : 38000,
+        strategy: strategyEl ? strategyEl.value : 'balanced'
+      };
+
+      if (btn) {
+        btn.disabled = true;
+        btn.style.opacity = '0.75';
+        btn.innerHTML = `<span class="ai-pulse-dot" style="background:#fff;"></span> Running AI Model...`;
+      }
+
+      let sortedList = null;
+
+      // Attempt backend API fetch if reachable
+      try {
+        const query = new URLSearchParams({
+          domain: params.targetDomain,
+          study_hours: params.studyHours,
+          target_wage: params.targetWage,
+          strategy: params.strategy
+        }).toString();
+
+        const backendData = await FieldAtlasAPI.get(`/api/trainee/ai-recommendations/?${query}`);
+        if (backendData && Array.isArray(backendData.recommendations) && backendData.recommendations.length > 0) {
+          // Merge backend calculated match scores into local db
+          backendData.recommendations.forEach(rec => {
+            if (aiCoursesDB[rec.id]) {
+              aiCoursesDB[rec.id].matchScore = rec.match_score;
+              aiCoursesDB[rec.id].feasibilityScore = rec.feasibility_score;
+              aiCoursesDB[rec.id].completionProb = rec.completion_prob;
+              aiCoursesDB[rec.id].dropoutRisk = rec.dropout_risk;
+              aiCoursesDB[rec.id].matchReason = rec.match_reason;
+            }
+          });
+          sortedList = Object.values(aiCoursesDB).sort((a, b) => b.matchScore - a.matchScore);
+        }
+      } catch (err) {
+        // Fallback gracefully to client-side multi-criteria utility algorithm
+      }
+
+      if (!sortedList) {
+        sortedList = computeAICourseRecommendations(params);
+      }
+
+      // Re-render UI components with new rankings
+      renderMarqueeCards(sortedList);
+      renderCourseSelectorDropdown(sortedList);
+      renderStep3Suggestions(sortedList);
+
+      // Select top recommendation
+      const topCourse = sortedList[0];
+      if (topCourse) {
+        renderAICourseData(topCourse.id);
+      }
+
+      if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          <span>Run AI Recommendation</span>
+        `;
+      }
+
+      if (!isInitial && window.FieldAtlasAPI && typeof FieldAtlasAPI.showToast === 'function') {
+        FieldAtlasAPI.showToast(`✨ AI Generated: Top Match is "${topCourse.title}" (${topCourse.matchScore}% Match)!`, 'success');
+      }
+    };
+
     // Initial hydration of AI Advisor
     setTimeout(() => {
-      renderAICourseData('cloud-devops');
-    }, 150);
+      window.runAICourseRecommendationEngine(true);
+    }, 120);
 
   })();
   </script>

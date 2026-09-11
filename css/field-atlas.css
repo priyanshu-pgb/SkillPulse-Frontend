@@ -3225,17 +3225,222 @@ html.dark .single-review-card .review-author-wrap div div {
 
 [data-theme="dark"] .criterion-pill,
 html.dark .criterion-pill {
+  background: rgba(11, 15, 25, 0.94) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .landing-brand-text,
+html.dark .landing-brand-text {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .landing-hero,
+html.dark .landing-hero {
+  background: linear-gradient(180deg, #0B0F19 0%, #0F172A 100%) !important;
+}
+
+[data-theme="dark"] .landing-hero h1,
+html.dark .landing-hero h1 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .landing-hero p,
+html.dark .landing-hero p {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .features-section,
+html.dark .features-section {
+  background: #0B0F19 !important;
+}
+
+[data-theme="dark"] .section-header h2,
+html.dark .section-header h2 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .section-header p,
+html.dark .section-header p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .feature-card,
+html.dark .feature-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .feature-card h3,
+html.dark .feature-card h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .feature-card p,
+html.dark .feature-card p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .how-section,
+html.dark .how-section {
+  background: #0E1526 !important;
+}
+
+[data-theme="dark"] .how-step h4,
+html.dark .how-step h4 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .how-step p,
+html.dark .how-step p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .landing-footer,
+html.dark .landing-footer {
+  background: #080C14 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .landing-footer p,
+html.dark .landing-footer p {
+  color: #94A3B8 !important;
+}
+
+/* ─── Dark Mode Follow-Up Queue & Simulator ─── */
+[data-theme="dark"] .followup-queue-card,
+[data-theme="dark"] .simulator-card,
+html.dark .followup-queue-card,
+html.dark .simulator-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .queue-header h3,
+html.dark .queue-header h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .queue-item,
+html.dark .queue-item {
+  background: #1A2438 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .queue-item:hover,
+html.dark .queue-item:hover {
+  background: #22304A !important;
+}
+
+[data-theme="dark"] .queue-item.selected,
+html.dark .queue-item.selected {
+  background: rgba(20, 184, 166, 0.15) !important;
+  border-color: #14B8A6 !important;
+}
+
+[data-theme="dark"] .queue-item strong,
+html.dark .queue-item strong {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .phone-preview-shell,
+html.dark .phone-preview-shell {
+  background: #0B0F19 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .message-bubble,
+html.dark .message-bubble {
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+  border: 1px solid #334155 !important;
+}
+
+[data-theme="dark"] .simulator-tab-btn,
+html.dark .simulator-tab-btn {
+  background: transparent !important;
+  color: #94A3B8 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .simulator-tab-btn.active,
+html.dark .simulator-tab-btn.active {
+  background: #1E293B !important;
+  color: #38BDF8 !important;
+  border-color: #38BDF8 !important;
+}
+
+/* ─── Dark Mode Tables & Data Views ─── */
+[data-theme="dark"] .table-card,
+html.dark .table-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .data-table,
+html.dark .data-table {
+  background: #131B2E !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .data-table th,
+html.dark .data-table th {
+  background: #0E1526 !important;
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .data-table td,
+html.dark .data-table td {
+  border-bottom: 1px solid #1E293B !important;
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .data-table td strong,
+html.dark .data-table td strong {
+  color: #F8FAFC !important;
+}
+
+/* ─── Dark Mode Feedback Reviews & Cards ─── */
+[data-theme="dark"] .single-review-card,
+html.dark .single-review-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .single-review-card p,
+html.dark .single-review-card p {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .single-review-card .review-author-wrap div div,
+html.dark .single-review-card .review-author-wrap div div {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .criterion-pill,
+html.dark .criterion-pill {
   background: #1E293B !important;
   color: #94A3B8 !important;
   border: 1px solid #334155 !important;
 }
 
 /* Brand Logo Styling */
-.brand-logo-svg {
+.brand-logo-svg,
+.brand-logo-img {
   display: inline-block;
   vertical-align: middle;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(14, 129, 118, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 43, 73, 0.22);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.brand-badge:hover .brand-logo-img,
+.brand-badge:hover .brand-logo-svg,
+.landing-brand:hover .brand-logo-img,
+.landing-brand:hover img {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(13, 126, 85, 0.35);
 }
 
 
@@ -4052,6 +4257,107 @@ html.dark .ai-scheme-pill {
     width: calc(100% - 260px) !important;
   }
 }
+
+/* ══════ INTERACTIVE AI COURSE RECOMMENDER WIZARD ══════ */
+.ai-recom-wizard-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 248, 0.8) 100%);
+  border: 1.5px solid rgba(13, 126, 85, 0.28);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  margin: 1rem 0 1.25rem 0;
+  box-shadow: 0 4px 18px rgba(0, 43, 73, 0.05);
+  position: relative;
+}
+[data-theme="dark"] .ai-recom-wizard-card,
+html.dark .ai-recom-wizard-card {
+  background: linear-gradient(135deg, rgba(26, 34, 56, 0.95) 0%, rgba(15, 33, 46, 0.85) 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.ai-recom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.1rem;
+  align-items: flex-end;
+}
+.ai-recom-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.ai-recom-field label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-deep-indigo);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+.ai-recom-range-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.ai-recom-range-wrap input[type="range"] {
+  flex: 1;
+  accent-color: #0D7E55;
+  cursor: pointer;
+}
+.ai-recom-val-badge {
+  background: #E6F4F1;
+  color: #0E8176;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  min-width: 84px;
+  text-align: center;
+  border: 1px solid rgba(14, 129, 118, 0.25);
+  font-family: 'JetBrains Mono', monospace;
+}
+[data-theme="dark"] .ai-recom-val-badge,
+html.dark .ai-recom-val-badge {
+  background: rgba(14, 129, 118, 0.2);
+  color: #34D399;
+}
+.btn-ai-run {
+  background: linear-gradient(135deg, #0D7E55 0%, #1A2238 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 0.84rem;
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(13, 126, 85, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+.btn-ai-run:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(13, 126, 85, 0.45);
+}
+.btn-ai-run:active {
+  transform: translateY(0);
+}
+.ai-recom-meta-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(13, 126, 85, 0.2);
+  font-size: 0.74rem;
+  color: var(--color-text-secondary);
+}
+
 
 
 

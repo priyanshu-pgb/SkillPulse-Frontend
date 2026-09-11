@@ -11,6 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -559,13 +566,13 @@
   <!-- ═══════════════ MAIN TOP NAVIGATION ═══════════════ -->
   <nav class="landing-nav glass-header" id="landing-nav" style="border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px);">
     <div class="landing-nav-inner" style="max-width: 1200px; margin: 0 auto; padding: 0.85rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
-      <a href="/" class="landing-brand" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+      <a href="/" class="landing-brand" style="display: flex; align-items: center; gap: 0.85rem; text-decoration: none;">
         <div style="flex-shrink: 0;">
-          <div style="width: 42px; height: 42px; background: linear-gradient(135deg, #0D7E55, #18A89B); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.25rem; box-shadow: 0 3px 10px rgba(13, 126, 85, 0.25);">SP</div>
+          <img src="images/skillpulse-icon.svg" alt="SkillPulse Logo" class="brand-logo-img" style="width: 44px; height: 44px; border-radius: 10px; display: block;">
         </div>
         <div style="display: flex; flex-direction: column;">
-          <span class="landing-brand-text" style="font-size: 1.25rem; font-weight: 800; color: var(--color-deep-indigo); line-height: 1.15; letter-spacing: -0.02em;">SkillPulse</span>
-          <span style="font-size: 0.7rem; color: #F26A21; font-weight: 700; line-height: 1.2;">Skilling Outcomes Intelligence</span>
+          <span class="landing-brand-text" style="font-size: 1.3rem; font-weight: 800; color: var(--color-deep-indigo); line-height: 1.15; letter-spacing: -0.02em;">Skill<span style="color: #0D7E55;">Pulse</span></span>
+          <span style="font-size: 0.68rem; color: #F26A21; font-weight: 800; line-height: 1.2; letter-spacing: 0.05em;">SKILLING OUTCOMES INTELLIGENCE</span>
         </div>
       </a>
 
@@ -832,7 +839,10 @@
       <a href="https://skill-pulse-employeetracker.vercel.app/" target="_blank" rel="noopener">Live Demo</a>
     </div>
     <div class="gov-footer-disclaimer">
-      <p style="margin-bottom: 0.4rem; font-weight: 700; color: #CBD5E1;">SkillPulse — Skilling Outcomes Intelligence Platform</p>
+      <div style="display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem; margin-bottom: 0.4rem;">
+        <img src="images/skillpulse-icon.svg" alt="SkillPulse Logo" style="width: 26px; height: 26px; border-radius: 6px; vertical-align: middle;">
+        <span style="font-weight: 700; color: #CBD5E1; font-size: 0.95rem;">SkillPulse — Skilling Outcomes Intelligence Platform</span>
+      </div>
       <p style="margin: 0; font-size: 0.72rem; color: #94A3B8;">Built by Team Synkro. A demo platform for tracking verified placements, skill certifications, and employment outcomes.</p>
     </div>
   </footer>
