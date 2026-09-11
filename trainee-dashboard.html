@@ -328,11 +328,16 @@
     <!-- ═══════════════ MAIN WRAPPER ═══════════════ -->
     <div class="main-wrapper">
 
-  <div class="header-breadcrumb">
+      <!-- ═══════════════ TOP HEADER ═══════════════ -->
+      <header class="top-header">
+        <div class="header-left">
+          <button type="button" class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+            <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+          </button>
+          <div class="header-breadcrumb">
             <i data-lucide="home" style="width: 16px; height: 16px; color: var(--color-teal);"></i>
             <span id="header-active-view-name">Trainee Full Journey</span>
           </div>
-          
         </div>
 
         <div class="header-right" style="display: flex; align-items: center; gap: 0.65rem;">

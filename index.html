@@ -529,7 +529,109 @@
 </head>
 <body>
 
-</div>
+  <!-- ═══════════════ TOP UTILITY BAR ═══════════════ -->
+  <div class="gov-top-bar" style="background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 0.4rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem;">
+    <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-secondary); font-weight: 600;">
+      <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+      <span>National Skilling Outcomes & Employment Intelligence Platform</span>
+    </div>
+    <div class="gov-top-controls" style="display: flex; align-items: center; gap: 0.75rem;">
+      <!-- Language Selector -->
+      <div class="lang-selector-wrap" style="margin: 0;">
+        <select class="lang-select" aria-label="Choose Language" style="border: 1px solid var(--color-border); background: var(--color-surface); padding: 0.2rem 1.6rem 0.2rem 0.6rem; font-size: 0.76rem; border-radius: 4px; color: var(--color-text-primary); cursor: pointer;">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="or">ଓଡ଼ିଆ (Odia)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+        </select>
+      </div>
+      <!-- Theme Toggle -->
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme" style="padding: 0.25rem 0.65rem; font-size: 0.76rem; border-radius: 4px; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); cursor: pointer;">
+        <span class="theme-icon">☀️</span>
+        <span class="theme-text">Light</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MAIN TOP NAVIGATION ═══════════════ -->
+  <nav class="landing-nav glass-header" id="landing-nav" style="border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px);">
+    <div class="landing-nav-inner" style="max-width: 1200px; margin: 0 auto; padding: 0.85rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+      <a href="/" class="landing-brand" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+        <div style="flex-shrink: 0;">
+          <div style="width: 42px; height: 42px; background: linear-gradient(135deg, #0D7E55, #18A89B); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.25rem; box-shadow: 0 3px 10px rgba(13, 126, 85, 0.25);">SP</div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <span class="landing-brand-text" style="font-size: 1.25rem; font-weight: 800; color: var(--color-deep-indigo); line-height: 1.15; letter-spacing: -0.02em;">SkillPulse</span>
+          <span style="font-size: 0.7rem; color: #F26A21; font-weight: 700; line-height: 1.2;">Skilling Outcomes Intelligence</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links & Direct Portals -->
+      <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+        <a href="#features" class="btn-ghost" style="color: var(--color-text-secondary); font-size: 0.88rem;">Features</a>
+        <a href="trainee" class="btn-ghost" style="color: var(--color-teal); font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+          <i data-lucide="graduation-cap" style="width: 16px; height: 16px;"></i> Trainee Portal
+        </a>
+        <a href="trainer" class="btn-ghost" style="color: var(--color-deep-indigo); font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+          <i data-lucide="layout-dashboard" style="width: 16px; height: 16px;"></i> Trainer Portal
+        </a>
+
+        <!-- PROMINENT SIGN IN & SIGN UP BUTTONS -->
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 0.5rem; border-left: 1px solid var(--color-border); padding-left: 0.85rem;">
+          <a href="login.html" class="btn-ghost" style="padding: 0.45rem 1rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; border: 1.5px solid var(--color-border); color: var(--color-deep-indigo); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+            <i data-lucide="log-in" style="width: 16px; height: 16px;"></i>
+            <span>Sign In</span>
+          </a>
+          <a href="register.html" class="btn-landing-primary" style="padding: 0.5rem 1.2rem; font-size: 0.88rem; font-weight: 700; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 4px 12px rgba(14, 129, 118, 0.3);">
+            <i data-lucide="user-plus" style="width: 16px; height: 16px;"></i>
+            <span>Sign Up</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ HERO SECTION ═══════════════ -->
+  <section class="landing-hero" style="padding: 5rem 1.5rem 4rem; text-align: center; position: relative;">
+    <div class="hero-inner" style="max-width: 860px; margin: 0 auto;">
+      <div class="hero-badge" style="margin-bottom: 1.25rem;">
+        <i data-lucide="sparkles" style="width: 15px; height: 15px; color: #10B981;"></i>
+        <span>AI-Powered Skilling Outcomes & Employment Intelligence</span>
+      </div>
+      <h1 style="font-size: 3.2rem; font-weight: 800; color: var(--color-deep-indigo); line-height: 1.15; margin-bottom: 1.2rem; letter-spacing: -0.02em;">
+        Track Real <span style="background: linear-gradient(135deg, #0D7E55, #18A89B); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Skilling Outcomes</span> That Matter
+      </h1>
+      <p style="font-size: 1.15rem; color: var(--color-text-secondary); line-height: 1.65; max-width: 680px; margin: 0 auto 2rem;">
+        India's verifiable platform for tracking learner progress, AI-driven course feasibility, QR-verified digital certificates, and employer-confirmed employment outcomes.
+      </p>
+
+      <!-- HERO PRIMARY CTA ACTIONS (WITH SIGN IN & SIGN UP) -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1rem;">
+        <a href="login.html" class="btn-landing-primary" style="padding: 0.85rem 1.8rem; font-size: 1rem; border-radius: 10px; text-decoration: none;">
+          <i data-lucide="log-in" style="width: 18px; height: 18px;"></i>
+          Sign In to Account
+        </a>
+        <a href="register.html" class="btn-landing-secondary" style="padding: 0.85rem 1.8rem; font-size: 1rem; border-radius: 10px; border: 2px solid #0D7E55; color: #0D7E55; font-weight: 700; text-decoration: none;">
+          <i data-lucide="user-plus" style="width: 18px; height: 18px;"></i>
+          Create Account (Sign Up)
+        </a>
+        <a href="trainee" class="btn-landing-secondary" style="padding: 0.85rem 1.5rem; font-size: 0.95rem; border-radius: 10px; text-decoration: none;">
+          <i data-lucide="graduation-cap" style="width: 18px; height: 18px; color: var(--color-teal);"></i>
+          Trainee Portal
+        </a>
+        <a href="trainer" class="btn-landing-secondary" style="padding: 0.85rem 1.5rem; font-size: 0.95rem; border-radius: 10px; text-decoration: none;">
+          <i data-lucide="layout-dashboard" style="width: 18px; height: 18px; color: var(--color-deep-indigo);"></i>
+          Trainer Portal
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PARTNERS MARQUEE ═══════════════ -->
+  <section class="sp-marquee-section" style="padding: 1.5rem 0; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
     <!-- Row 2: Industry Partners → scrolls RIGHT -->
     <div class="sp-marquee-wrapper">
       <div class="sp-marquee-track sp-marquee-track-right">
