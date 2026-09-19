@@ -671,9 +671,12 @@ const FieldAtlasI18N = (function() {
     ];
 
     document.querySelectorAll(targetSelectors.join(', ')).forEach(el => {
-      // Store original English text on first encounter
+      // Store original English text & HTML on first encounter
       if (!el.dataset.originalText) {
         el.dataset.originalText = el.textContent.trim();
+        if (el.children.length > 0) {
+          el.dataset.originalHtml = el.innerHTML;
+        }
       }
 
       const orig = el.dataset.originalText;
@@ -698,27 +701,15 @@ const FieldAtlasI18N = (function() {
         const translated = t(key);
         if (translated) {
           if (currentLang === 'en') {
-            // Restore original
-            if (el.children.length > 0) {
-              Array.from(el.childNodes).forEach(node => {
-                if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim().length > 0) {
-                  node.nodeValue = ' ' + orig + ' ';
-                }
-              });
+            // Restore clean original HTML/text
+            if (el.dataset.originalHtml) {
+              el.innerHTML = el.dataset.originalHtml;
             } else {
               el.textContent = orig;
             }
           } else {
             // Apply translation
-            if (el.children.length > 0) {
-              Array.from(el.childNodes).forEach(node => {
-                if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim().length > 0) {
-                  node.nodeValue = ' ' + translated.trim() + ' ';
-                }
-              });
-            } else {
-              el.textContent = translated;
-            }
+            el.textContent = translated;
           }
         }
       }
