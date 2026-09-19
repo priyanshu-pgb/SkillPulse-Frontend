@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Sign In — SkillPulse</title>
+  
+  <!-- Modern Typography: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Core Application Stylesheets -->
+  <link rel="stylesheet" href="css/field-atlas.css?v=2.6.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.6.0">
+  <!-- Modern Typography (Outfit + Plus Jakarta Sans + JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+</head>
+<body>
+
+  <!-- ═══════════════ OFFICIAL SKILL INDIA UTILITY STRIP ═══════════════ -->
+  <div class="gov-tricolor-strip"></div>
+  <div class="gov-top-bar">
+    <div class="gov-flag-title">
+      <span class="gov-flag-icon" aria-hidden="true">🇮🇳</span>
+      
+      <span class="gov-ministry-title">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship</span>
+    </div>
+    <div class="gov-top-controls">
+      <!-- Accessibility Text Resizer -->
+      <div class="font-resizer-wrap" title="Accessibility Text Sizing">
+        <button type="button" class="font-resizer-btn" data-action="decrease" title="Decrease Font Size" aria-label="Decrease text size">A-</button>
+        <button type="button" class="font-resizer-btn active" data-action="normal" title="Normal Font Size" aria-label="Normal text size">A</button>
+        <button type="button" class="font-resizer-btn" data-action="increase" title="Increase Font Size" aria-label="Increase text size">A+</button>
+      </div>
+      <!-- Language Selector Dropdown -->
+      <div class="lang-selector-wrap" style="margin: 0;">
+        <select class="lang-select" aria-label="Choose Language" style="border: 1px solid var(--color-border); background: var(--color-surface); padding: 0.2rem 1.6rem 0.2rem 0.6rem; font-size: 0.76rem; border-radius: 4px; color: var(--color-text-primary);">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="or">ଓଡ଼ିଆ (Odia)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+        </select>
+      </div>
+      <!-- Theme Toggle -->
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme" style="padding: 0.25rem 0.6rem; font-size: 0.76rem; border-radius: 4px; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary);">
+        <span class="theme-icon">☀️</span>
+        <span class="theme-text">Light</span>
+      </button>
+    </div>
+  </div>
+
+  <div style="min-height: calc(100vh - 160px); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; background-color: var(--color-parchment); position: relative;">
+    
+    <!-- Top Navigation Controls: Theme Toggle (☀️/🌙) & Language Selector -->
+    <div style="position: absolute; top: 1.25rem; right: 1.5rem; display: flex; align-items: center; gap: 0.65rem;" class="glass-pill">
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+        <span class="theme-icon">☀️</span>
+        <span class="theme-text">Light</span>
+      </button>
+      <div class="lang-selector-wrap" style="margin: 0;">
+        <select class="lang-select" aria-label="Choose Language" style="border: none; background: transparent; padding-right: 1.8rem; font-size: 0.85rem;">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+              <option value="or">ଓଡ଼ିଆ (Odia)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="gu">ગુજરાતી (Gujarati)</option>
+          <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+          <option value="ml">മലയാളം (Malayalam)</option>
+          <option value="ur">اردو (Urdu)</option>
+        </select>
+        <i data-lucide="globe" class="lang-icon" style="width: 14px; height: 14px;"></i>
+      </div>
+    </div>
+
+    <div style="max-width: 440px; width: 100%; margin-top: 1.5rem;">
+      <!-- Brand Header with Glass Effect -->
+      <div class="glass-panel sidh-card-accent-saffron" style="text-align: center; margin-bottom: 1.5rem; padding: 1.5rem 1.25rem; border-radius: var(--radius-lg);">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin-bottom: 0.85rem;">
+          <img src="images/skillpulse-icon.svg" alt="SkillPulse Logo" class="brand-logo-img" style="width: 52px; height: 52px; border-radius: 12px; box-shadow: 0 4px 14px rgba(0, 43, 73, 0.25);">
+          <div style="height: 38px; width: 1.5px; background: rgba(0, 43, 73, 0.15); border-radius: 1px;"></div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 135" class="ashoka-emblem-svg" style="height: 52px; width: auto;" aria-label="State Emblem of India">
+  <defs>
+    <linearGradient id="emblemGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C59B27"/>
+      <stop offset="50%" stop-color="#E5C158"/>
+      <stop offset="100%" stop-color="#9A7718"/>
+    </linearGradient>
+  </defs>
+  <path d="M50 12 C44 12 40 16 40 22 C37 20 33 22 33 26 C33 30 36 32 37 36 C36 40 38 44 42 46 C44 50 48 52 50 53 C52 52 56 50 58 46 C62 44 64 40 63 36 C64 32 67 30 67 26 C67 22 63 20 60 22 C60 16 56 12 50 12 Z" fill="url(#emblemGoldGrad)"/>
+  <path d="M37 24 C33 24 28 27 28 32 C26 31 22 34 23 38 C23 42 26 44 26 48 C24 51 26 55 29 57 C31 60 35 62 38 63 C36 58 35 53 36 48 C34 45 35 41 37 38 Z" fill="url(#emblemGoldGrad)" opacity="0.95"/>
+  <path d="M63 24 C67 24 72 27 72 32 C74 31 78 34 77 38 C77 42 74 44 74 48 C76 51 74 55 71 57 C69 60 65 62 62 63 C64 58 65 53 64 48 C66 45 65 41 63 38 Z" fill="url(#emblemGoldGrad)" opacity="0.95"/>
+  <circle cx="43" cy="20" r="2.5" fill="#78590E"/>
+  <circle cx="57" cy="20" r="2.5" fill="#78590E"/>
+  <path d="M46 32 Q50 35 54 32" stroke="#78590E" stroke-width="1.5" fill="none"/>
+  <path d="M48 27 L52 27 L50 30 Z" fill="#78590E"/>
+  <rect x="15" y="65" width="70" height="12" rx="3" fill="url(#emblemGoldGrad)"/>
+  <circle cx="50" cy="71" r="5" fill="#002B49" stroke="#FFFFFF" stroke-width="0.8"/>
+  <circle cx="50" cy="71" r="1.2" fill="#FFFFFF"/>
+  <path d="M26 69 Q30 67 33 69 Q31 73 28 73 Z" fill="#002B49"/>
+  <path d="M67 69 Q70 67 74 69 Q72 73 69 73 Z" fill="#002B49"/>
+  <path d="M20 79 C30 85 70 85 80 79 L84 89 C70 94 30 94 16 89 Z" fill="url(#emblemGoldGrad)"/>
+  <text x="50" y="108" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="10.5" font-weight="900" text-anchor="middle" class="emblem-motto" fill="#002B49" letter-spacing="1.5">सत्यमेव जयते</text>
+  
+</svg>
+        </div>
+        <h1 style="font-size: 1.65rem; font-weight: 800; color: var(--color-deep-indigo); letter-spacing: -0.02em; margin-bottom: 0.25rem;">Skill<span style="color: #0D7E55;">Pulse</span></h1>
+        <p style="font-size: 0.78rem; font-weight: 700; color: #F26A21; margin-bottom: 0.35rem;">कौशल भारत - कुशल भारत</p>
+        <p style="font-size: 0.75rem; color: var(--color-text-muted); margin: 0;">Ministry of Skill Development and Entrepreneurship</p>
+      </div>
+
+      <!-- Login Card with Glassmorphism -->
+      <div class="glass-card" style="border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; box-shadow: var(--shadow-lg);">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-deep-indigo); margin-bottom: 0.4rem;">Sign in to your account</h2>
+        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">Access verified skills outcome intelligence and citizen skilling credentials.</p>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-identifier">Aadhaar Number / Mobile / SkillPulse ID / Email</label>
+            <input type="text" id="login-identifier" class="form-control" placeholder="12-digit Aadhaar, 10-digit Mobile, ID or Email" required autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <label class="form-label" for="login-password" style="margin-bottom: 0;">Password</label>
+              <a href="forgot-password.html" style="font-size: 0.8rem; color: var(--color-teal); text-decoration: none; font-weight: 600;">Forgot password?</a>
+            </div>
+            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--color-text-secondary); cursor: pointer;">
+              <input type="checkbox" id="login-remember" style="accent-color: var(--color-teal); width: 16px; height: 16px;">
+              <span>Remember me for 14 days</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+        </form>
+
+        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.875rem; color: var(--color-text-secondary);">
+          Don't have an account? <a href="register.html" style="color: var(--color-teal); font-weight: 700; text-decoration: none;">Create account with Aadhaar</a>
+        </div>
+      </div>
+
+      <!-- Demo Credentials Helper Card -->
+      <div class="glass-panel" style="margin-top: 1.25rem; border: 1px dashed var(--color-teal); border-radius: var(--radius-md); padding: 1rem; font-size: 0.8rem;">
+        <div style="font-weight: 700; color: var(--color-teal); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.35rem;">
+          <i data-lucide="key" style="width: 14px; height: 14px;"></i> Quick Demo Credentials (Password: Atlas@2026!)
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.35rem; color: var(--color-deep-indigo);">
+          <div><strong>Trainee:</strong> <code>8765 4321 0987</code> (or mobile: <code>9833456789</code> / <code>SP-24-0182</code>)</div>
+          <div><strong>Trainer:</strong> <code>2345 6789 0123</code> (or mobile: <code>9820123456</code> / <code>SP-TR-1001</code>)</div>
+          <div><strong>Admin:</strong> <code>1122 3344 5566</code> (or <code>admin@skillpulse.in</code>)</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+          <button type="button" class="btn btn-sm btn-outline" onclick="fillDemo('trainee')" style="flex: 1; font-size: 0.75rem;">
+            ⚡ Auto-Fill Trainee
+          </button>
+          <button type="button" class="btn btn-sm btn-primary" onclick="fillDemo('trainer')" style="flex: 1; font-size: 0.75rem;">
+            ⚡ Auto-Fill Trainer
+          </button>
+        </div>
+      </div>
+
+      <!-- Privacy & Governance Badge -->
+      <div style="text-align: center; margin-top: 1.5rem; font-size: 0.75rem; color: var(--color-text-muted); display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+        <i data-lucide="shield-check" style="width: 14px; height: 14px; color: var(--color-teal);"></i>
+        <span data-i18n="privacy_note">Consent-aware by design · Encrypted session memory caching</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- Core JavaScript Libraries -->
+  <script src="js/config.js"></script>
+  <script src="js/mock-auth.js"></script>
+  <script src="js/api.js?v=2.6.0"></script>
+  <script src="js/i18n.js?v=2.6.0"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    window.fillDemo = function(role) {
+      const idInput = document.getElementById('login-identifier');
+      const passInput = document.getElementById('login-password');
+      if (role === 'trainer') {
+        idInput.value = 'trainer@skillpulse.in';
+        passInput.value = 'Atlas@2026!';
+      } else {
+        idInput.value = 'trainee@skillpulse.in';
+        passInput.value = 'Atlas@2026!';
+      }
+      FieldAtlasAPI.showToast(`Logged in credentials filled for ${role.toUpperCase()}. Submitting...`, 'success');
+      setTimeout(() => {
+        const form = document.getElementById('login-form');
+        if (form) form.requestSubmit ? form.requestSubmit() : form.submit();
+      }, 300);
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+
+  <!-- ═══════════════ OFFICIAL GOVERNMENT FOOTER (GIGW COMPLIANT) ═══════════════ -->
+  <footer class="gov-footer">
+    <div class="gov-footer-links">
+      <a href="https://www.india.gov.in" target="_blank" rel="noopener">National Portal of India (india.gov.in)</a>
+      <a href="https://www.msde.gov.in" target="_blank" rel="noopener">Ministry of Skill Development & Entrepreneurship</a>
+      <a href="https://www.skillindiadigital.gov.in/home" target="_blank" rel="noopener">Skill India Digital Hub</a>
+      <a href="https://ncvet.gov.in" target="_blank" rel="noopener">NCVET</a>
+      <a href="https://nsdcindia.org" target="_blank" rel="noopener">NSDC</a>
+      <a href="https://digitalindia.gov.in" target="_blank" rel="noopener">Digital India</a>
+    </div>
+    <div class="gov-footer-disclaimer">
+      <p style="margin-bottom: 0.4rem; font-weight: 700; color: #CBD5E1;">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship (MSDE)</p>
+      <p style="margin: 0; font-size: 0.72rem; color: #94A3B8;">SkillPulse — Skilling Outcomes & Employment Analytics Portal. Designed and maintained in accordance with Guidelines for Indian Government Websites (GIGW) & Digital Personal Data Protection Act.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
